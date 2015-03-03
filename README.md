@@ -14,3 +14,11 @@ Each property from Variable members are created like a Copy to several instance 
 
 **prototype**
 to share shared between all the instance
+
+
+## SINGLETON
+Based on a class that expose public method that **create a instance of its type if one doesn´t exist**.
+That mean we replace the behaviour of **new**. 
+
+**usefull**
+Is usefull when exactly one object is needed to coordenate patterns across the system.
