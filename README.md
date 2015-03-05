@@ -59,3 +59,20 @@ return{ publicMethod: privateMethod };
 If a private function refers ro a public function, 
 that public function can´t be overriden if a parch if necessary.
 This is because private function still reference private implementations.
+
+# OBSERVE PATTERN
+Based on a publisher and subscriber *(Pub/Sub)* objects.
+- **behavior of publisher**
+    - broadcast notifications when there is something to publish
+    - **publicar evento, handler / callback => [trigger]**
+
+    
+- **behavior of subscriber**
+    - register and recive notification of publisher
+    - subscribe and unsubscribe to publiser notifications
+    - **subscribirse a eventos => [on, live, eventListener]**
+    
+
+The old way is callling methods of other objects. 
+With observer pattern, the publisher (Dom object) of an an activity or task  (event) expose an interface (handler / callback),
+and the subscriber listen.
