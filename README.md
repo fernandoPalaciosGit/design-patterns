@@ -48,3 +48,14 @@ Acess dinamic public members (this), through new properties declaration ( after 
 Can´t access private members methods that are added to the object at a later point.
 Inhabiulity t create automated unit tests for private members
 Complex to fix bugs later.
+
+# REVEAL MODULE PATERN
+The only difference with the above, is that the private properties are revaled 
+like a new declaration in the public interface :
+```javascript
+return{ publicMethod: privateMethod };
+```
+**disadventages : only to functions, no member variables those can be overriden**
+If a private function refers ro a public function, 
+that public function can´t be overriden if a parch if necessary.
+This is because private function still reference private implementations.

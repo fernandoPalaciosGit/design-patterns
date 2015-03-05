@@ -15,11 +15,12 @@ var MyModule = ( function( w, undefined ) {
     this.func = myOtherMethod;
   }
   
-  // explicitly return public methods when this object is instantiated
+  // return public methods when this object is instantiated
   return {
+    // not possible to override
     SomeContructor : Construct,
     someAlertMethod : myMethod,
-    privateProp : prop
+    privateProp : prop // Possible to override
   };
   
 } )( window );
