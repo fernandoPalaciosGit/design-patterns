@@ -6,15 +6,15 @@ $(window.obj).on('channel', 'handler', this);
 $(window.obj).off('channel');
 
 // SAMPLE PUB/SUBS IMPLEMENTATION
-var publisher = {};
+var pubsub = {};
  
-( function observerInterface ( p ){
+( function observerInterface ( pb ){
     
     var channels = {},
         subUid = -1;
 
     // publish events apssing data 
-    p.publish = function ( channel, args ){
+    pb.publish = function ( channel, args ){
         var subscriber = channels[ channel ],
             // assign next las channel ID, if where tranking
             numChannel = subscriber ? subscriber.length : 0;
@@ -23,23 +23,23 @@ var publisher = {};
         if( numChannel === 0 ) return false;
 
         while( numChannel-- > 0 ){
-            subscriber[ numChannel ].func( channel, args );
+            channels[ channel ][ numChannel ].func( channel, args );
         }
 
         return this;
     };
 
     // subscribe events, to be executef when the channel/event is observed
-    p.subscribe = function( channel, handler ){
+    pb.subscribe = function( channel, handler ){
         var subscriber = channels[ channel ],
             tokenChannel = (++subUid).toString();
 
         // subscribe it, if theres no tracking yet
         if( !subscriber ){
-            subscriber = [];
+            channels[ channel ] = [];
         }
 
-        subscriber.push({
+        channels[ channel ].push({
             tokenChannel: tokenChannel, // token channel
             func: handler
         });
@@ -48,7 +48,7 @@ var publisher = {};
     };
 
     // unsubscribe from specific chennel, based on tokenized channel
-    p.unsubscribe = function( token ){
+    pb.unsubscribe = function( token ){
         for ( var subs in channels ) {
 
             if( channels.hasOwnProperty(subs) ){
@@ -56,11 +56,36 @@ var publisher = {};
                 var subscribers = channels[subs];
                 for (var i = 0, len = subscribers.length ; i < len; i++) {
                     if (subscribers[i].tokenChannel === token) {
-                        subscribers[i].split(i, 1);
+                        channels[subs].splice(i, 1);
                         return token;
                     }
                 }
             }
         }
     };
-}( publisher ) );
+}( pubsub ) );
+
+// TEST : publish and subscribe events
+var eventHandler = function( topic, data ){
+    console.log(topic, data);
+};
+
+// subscribe ~~ listen
+// once they have been notificated, functions are invoked
+var testSubsTokenChannel = pubsub.subscribe( "testSubscribe", eventHandler );
+
+
+// publish notifications about events
+pubsub.publish( "testSubscribe", "hello world" );
+pubsub.publish( "testSubscribe", ["test", "a", "b"] );
+pubsub.publish( "testSubscribe", [{
+    "color": "colorTest"
+}, {
+    "tets": "testing"
+}] );
+
+// unsubscribe if you no longet notfication about this action
+pubsub.unsubscribe( testSubsTokenChannel );
+
+// now tere is no publish action to testSubscribe
+pubsub.publish( "testSubscribe", "Nooooo failed." );
