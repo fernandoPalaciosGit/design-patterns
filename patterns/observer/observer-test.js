@@ -66,8 +66,8 @@ var pubsub = {};
 }( pubsub ) );
 
 // TEST : publish and subscribe events
-var eventHandler = function( topic, data ){
-    console.log(topic, data);
+var eventHandler = function( channel, data ){
+    console.log(channel, data);
 };
 
 // subscribe ~~ listen

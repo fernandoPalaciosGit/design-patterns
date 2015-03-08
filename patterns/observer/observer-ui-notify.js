@@ -1,3 +1,6 @@
+;( function( ps ){
+
+
 // there are stock stats and counter for updating from data model.
 // when the data model is updating, the grid and counter views make too
 
@@ -33,3 +36,5 @@ var dataSubscription = pubsub.subscribe("fetchDataModel", gridUpdate);
 
 // Now we are realized there is new stock
 pubsub.publish("fetchDataModel");
+
+}( pubsub || {} )); // Loose Augmentation
