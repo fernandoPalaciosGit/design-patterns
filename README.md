@@ -76,3 +76,11 @@ Based on a publisher and subscriber *(Pub/Sub)* objects.
 The old way is callling methods of other objects. 
 With observer pattern, the publisher (Dom object) of an an activity or task  (event) expose an interface (handler / callback),
 and the subscriber listen.
+
+
+#### OBSERVER IMPLEMENTATION INTO AJAX LOADER DATA
+Ajax single request : resultset once (end-behaviour)
+:   handle POST/request logic into a success callback
+
+By observers
+:   rewrite code multiple tomes

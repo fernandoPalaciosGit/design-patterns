@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flickr loader images by observer pattern</title>
+
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+    <script src="../vendors/cowboy-tiny.pubsub.js"></script>
+</head>
+<body>
+    <form action="" id="flickrSearch">
+        <input type="text" name="tag" id="queryImgName">
+        <input type="submit" value="search images">
+    </form>
+    
+    <ul id="lastQuery"></ul>
+    <div id="searchResults"></div>
+    
+
+    <script id="result-label-search" type="text/x-jquery-tmpl">
+        <li><a href="${link}">${title}</a></li>
+    </script>
+    
+    <script id="result-item-search" type="text/x-jquery-tmpl">
+        {{each(index, item) items}}
+            <li><img src="${item.media.m}"></img></li>
+        {{each}}
+    </script>
+
+    <script src="search-flckr-images.js"></script>
+</body>
+</html>
