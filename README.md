@@ -79,8 +79,18 @@ and the subscriber listen.
 
 
 #### OBSERVER IMPLEMENTATION INTO AJAX LOADER DATA
-Ajax single request : resultset once (end-behaviour)
-:   handle POST/request logic into a success callback
+- Ajax single request : resultset once (end-behaviour)
+    - handle POST/request logic into a success callback
 
-By observers
-:   rewrite code multiple tomes
+- By observers
+    - rewrite code multiple tomes
+
+#### MEDIATOR PATTERN
+one interface, and all the system interacction with among themselves throught its methods.
+Interfaz que sirve para comunicar partes de un sistema.
+We have a central point that promotes the interaction between modules (loooose coupling system).
+
+
+**implementation**
+Is a implementation of an bserver pattern
+A centralize controller of Pub/Subs event liseners (a central pomint of contact).

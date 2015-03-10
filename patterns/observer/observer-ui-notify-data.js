@@ -13,7 +13,7 @@ var grid = ( function(){
     };
 }());
 
-// Mediator : event subscribed for observer data - grid
+// Mediator : Unify event subscribed for observer data - grid
 var gridUpdate = function( channel, data ){
     grid.refreshData( data );
     grid.updateCounter( data.timeStamp );
