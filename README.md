@@ -94,3 +94,15 @@ We have a central point that promotes the interaction between modules (loooose c
 **implementation**
 Is a implementation of an bserver pattern
 A centralize controller of Pub/Subs event liseners (a central pomint of contact).
+
+#### PROTOTYPE PATTERN
+based on the ability of a Prototype constructor to create blueprints objects,
+that will reused to build (copy or extend) our application objects.
+
+Its a Bosst and Native Javascript core way to inheritance objects.
+
+// create a Object by reference, type from blueprint constructor and reference to properties of blueprint
+var refInstance = instance;
+
+// create a Copy object, type from blueprint constructor
+var copyInstance = Object.create( instance, {optionalDescriptorObject} );
