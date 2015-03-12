@@ -106,3 +106,11 @@ var refInstance = instance;
 
 // create a Copy object, type from blueprint constructor
 var copyInstance = Object.create( instance, {optionalDescriptorObject} );
+
+
+#### COMMAND PATTERN
+permite tener una interfaz abstracta llamada **execute, run**, la cual se encarga de ejecutar 
+los metodos del objeto.
+
+It is useful when we want to unify all methods under a single interface, 
+with the problem that would not be viable after manipulating instructions for each method separately.
