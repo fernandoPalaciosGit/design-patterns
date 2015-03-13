@@ -114,3 +114,15 @@ los metodos del objeto.
 
 It is useful when we want to unify all methods under a single interface, 
 with the problem that would not be viable after manipulating instructions for each method separately.
+
+
+#### FACTORY PATTERN -> Factory emethods
+nos permite ocultar el contructor del objeto creado
+a traves de la interfaxz podemos podemos definir la herencia de subclases (tipos de herencia)
+y configuracion de propiedades.
+- Util cuando la creacion de instancias ebns bastante complicada.
+- Util cuando generamos varias instancias para un para diferentes entornos
+- cuando trabaamos con pequeños ojetos que comparten propiedades.
+- Cuando tenemos Componentes (instancias como `propiedade sde clase) y van mutan,do de tipo a lo largo de la logica de la aplicacion
+(por ejemplo en la login page, podemos tener una factoria de login de terceros que represente un componente de LoginConstructor, y 
+que depediendo de la interaccion, esta valla mutando al tipo del vendor que halla elegido el user). 
