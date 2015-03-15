@@ -126,3 +126,14 @@ y configuracion de propiedades.
 - Cuando tenemos Componentes (instancias como `propiedade sde clase) y van mutan,do de tipo a lo largo de la logica de la aplicacion
 (por ejemplo en la login page, podemos tener una factoria de login de terceros que represente un componente de LoginConstructor, y 
 que depediendo de la interaccion, esta valla mutando al tipo del vendor que halla elegido el user). 
+
+
+#### MIXINS PATTERN -> way to inherit properties
+Mixins are clases thet provide functionality to be inherit by subclass.
+in this pattern we are inheriting the properties of the prototype scope, 
+means that instance of the recieving class are not passing *instanceof()* 
+from the properties mixin class.
+> JS does not support multiple inheritance.
+
+The old manner for doing inheritance is augment a constructor to expand methods from other constructor, 
+[native inheritance](https://github.com/fernandoPalaciosGit/osmani-design-patterns/blob/master/patterns/basic-inherit.js "extend inheritance inteance behaviour").
