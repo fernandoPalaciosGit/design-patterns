@@ -30,7 +30,9 @@ var augment = function( recivingClass, givingClass ){
     if( !!arguments[2] ){
         for (var i = 2, len = arguments.length ; i < len; i++) {
             methodNameInherit = arguments[i];
-            recivingClass.prototype[ methodNameInherit ] = givingClass.prototype[ methodNameInherit ];
+            if( !methodNameInherit.isprototypeOf(recivingClass) ){
+                recivingClass.prototype[ methodNameInherit ] = givingClass.prototype[ methodNameInherit ];
+            }
         }
 
     // provide all methos
