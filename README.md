@@ -137,3 +137,10 @@ from the properties mixin class.
 
 The old manner for doing inheritance is augment a constructor to expand methods from other constructor, 
 [native inheritance](https://github.com/fernandoPalaciosGit/osmani-design-patterns/blob/master/patterns/basic-inherit.js "extend inheritance inteance behaviour").
+
+
+#### DECORATOR
+Compose an object to whom much responsibility, 
+which would require a heritage of various types (subclasses), according to its implementation.
+Decorators are objects that expose new properties to our main object.
+Gradually these objects adds (decorate) new properties and methods to our main object.
