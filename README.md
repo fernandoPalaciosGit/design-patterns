@@ -144,3 +144,16 @@ Compose an object to whom much responsibility,
 which would require a heritage of various types (subclasses), according to its implementation.
 Decorators are objects that expose new properties to our main object.
 Gradually these objects adds (decorate) new properties and methods to our main object.
+
+
+#### DECORATOR WITH INTERFACES
+An interface is a set of abstract methods that extend and implement classes inherit.
+
+Una Interfaz, dentro de su implementacion, extiende las propiedades de uni tipo (de un constructor).
+Por los que al instanciar esta interfaz, extendemos el comportamiento de la anterior instancia.
+```javascript
+var instance = new ConstructorX
+instance = new ContructorXParticularInterface(instance);
+```
+the Decorator pattern is less relevant to JavaScript developers.
+In JavaScript the Extend (Basic inheritance) and Mixin patterns subsume the Decorator pattern.

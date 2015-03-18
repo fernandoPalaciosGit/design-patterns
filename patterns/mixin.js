@@ -48,8 +48,8 @@ var augment = function( recivingClass, givingClass ){
 };
 
 // INHERITANCE
-augment( Car, Vehicle, "chenageDistributor" );
 augment( Sport, Vehicle ); // Sports instance inherit all prototype properties from Vehcle
+augment( Car, Vehicle, "chenageDistributor" );
 
 var pegasus_21 = new Car({
     color : "yellow",
