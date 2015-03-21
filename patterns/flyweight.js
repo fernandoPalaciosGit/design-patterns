@@ -32,22 +32,42 @@ Book.prototype = {
     getTitle : function(){ return this.title; },
     getAuthor : function(){ return this.author; },
     getISBN : function(){ return this.ISBN; },
-    
-    // seters
-    updateCheckuptStatus : function( boookID, newStatus, checkoutDate, checkoutMember, newReturnDdate ){
-
-    },
-    extendCheckoutPeriod : function( boookID, newReturnDdate ){
-
-    },
-
-    // logic
-    isPastDue : function( boookID ){
-
-    }
+    availability : true,  
+    checkoutDate : new Date(),
+    checkoutMember : "",
+    dueReturnDdate : 0
 };
 // deviolver al prototipo de Book la referencia a su constructor (para que las instancias no pierdan su TYPE)
 Book.prototype.constructor = Book;
+
+// almacenar todos los datos extrinsecos enn un objeco con un singleton
+var BookRecordManager = (function(){
+    var bookRecordDatabase = {}; // intance singleton
+    return {
+        // interface singleton
+        addBookRecords : function(  ISBN, title, author, genere, pageCOunt, publisherID ){
+            var book = BookFactory.createBook(ISBN, title, author, genere, pageCOunt, publisherID);
+            bookRecordDatabase[ISBN] = BookFactory.getBookStored(ISBN);
+            return book;
+        },
+
+        // logic
+        updateCheckuptStatus : function( bookID, newStatus, checkoutDate, checkoutMember, newReturnDdate ){
+            var book = bookRecordDatabase[bookID];
+            book.availability = newStatus;
+            book.checkoutDate = checkoutDate; 
+            book.checkoutMember = checkoutMember;
+            book.dueReturnDdate = newReturnDdate;
+        },
+        extendCheckoutPeriod : function( bookID, newReturnDdate ){
+            bookRecordDatabase[bookID].dueReturnDdate = newReturnDdate;
+        },
+        isPastDue : function( bookID ){
+            var now = new Date();
+            return now.getTime() > Date.parse( bookRecordDatabase[bookID].dueReturnDdate );
+        }
+    };    
+}());
 
 // instanciamos nuestros libros a traves de una factoria para comprobar de que no repetimos instanciamos
 var BookFactory = (function(){
@@ -61,6 +81,10 @@ var BookFactory = (function(){
         };
 
     return {
+        getBookStored : function( ISBN ){
+            if( !ISBN || typeof ISBN != "number" || !existingBooks[ISBN] ) throw new Error("ISBN is not stored into our library");
+            return existingBooks[ISBN];
+        },
         createBook : function(  ISBN, title, author, genere, pageCOunt, publisherID  ){
             if( !ISBN || typeof ISBN != "number" ) throw new Error("ISBN are number unique references");
             var book = existingBooks[ISBN],
@@ -78,3 +102,10 @@ var BookFactory = (function(){
         }
     };
 }());
+
+
+/////////////
+// TESTING //
+/////////////
+var book1 = BookRecordManager.addBookRecords( 654343454, "title", "author", "genere", 502, "publisherID" );
+BookRecordManager.isPastDue( book1.getISBN() );
