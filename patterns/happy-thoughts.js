@@ -1,3 +1,5 @@
+// http://tobyho.com/2010/11/22/javascript-constructors-and/
+
 // Type constructor
 "use strict";
 var Person = function( name ){
@@ -74,3 +76,60 @@ nando.hasOwnProperty("handicap"); // true
 "surname" in nando; // true
 "pianoMark" in nando; // true
 "aviableInstance" in nando; // true
+
+
+
+/*se puede utilizar el metodo "apply" del prototipo de Funtion (Funtion.prototype.apply)
+en cualquier contructor para especificar (sobreescribir) la llamada al contexto "this"*/
+var Book = function( idBook ){
+    this.ISBN = idBook;
+};
+
+Book.prototype.toStringISBN = function(){ // Book -> Funtion -> Object 
+    return "That´s my book "+this.ISBN.toUpperCase();
+}
+
+var pesca = new Book("pesca");
+var caza = new Book("caza");
+
+pesca.toStringISBN();
+caza.toStringISBN.apply(pesca); // change contex
+
+
+////////////////////////////////////////////////////////////////
+// apply arguments are arguments within function constructors //
+////////////////////////////////////////////////////////////////
+
+var CalculateFuntions = function(params){
+    this.arrParams = params;
+}
+
+CalculateFuntions.prototype.max = function(){
+    return Math.max.apply(Math, arguments[0] );
+}
+
+var myGraph = new CalculateFuntions( [2, 72, 65, 1] );
+myGraph.max( myGraph.arrParams );
+
+
+
+///////////////////////////
+// OVERRIDING NEW METHOD //
+///////////////////////////
+Function.prototype.new = function(){
+    var args = arguments,
+        constructor = this,
+        Fake = function(){
+             constructor.apply(this, args); // "this" is the real constructor
+        }
+
+    Fake.prototype = constructor.prototype
+    Fake.prototype.constructor = constructor;
+    return new Fake; // return the constructor object
+}
+
+var Library = function( name ){
+    this.name = name;
+}
+var comecocos = Library.new( "comecocos" );
+comecocos instanceof Library; // true
