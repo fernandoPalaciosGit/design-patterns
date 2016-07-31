@@ -26,3 +26,9 @@ Las aplicaicones (sistemas de siftware) van mutando con el tiempo, aumentan los 
 Favorecera la mantenibilidad (se rigen por soluciones reiterativas, concretas, efectivas y sin riesgo), depuracion (mas sencillo encontrar errores) y durabilidad (al ser un sistema mas estable, ordenado, permitirá una mayor escalabilidad del sistema en el tiempo)
 
 Incrementan la experiencia profesional.
+
+
+####patron de diseño LAYER
+Es como una cadena de montaje, relegas la responsabilidad de inicializar capas de menor nivel a traves de componentes
+(injeccion de dependencias, en este caso seria la logica a traves de la pesentacion y la persistencia a traves de la logica).
+Todas las capas tienen la implementacion de @setLowerLayer, esto podria ser una interfez implementada.

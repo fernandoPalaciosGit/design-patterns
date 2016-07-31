@@ -7,7 +7,7 @@ public class LayerCar {
         this.LAYER_NAME = layerName;
     }
 
-    public void printCarAssets () {
+    public void printCarAssets() {
         System.out.println(this.LAYER_NAME);
     }
 }
