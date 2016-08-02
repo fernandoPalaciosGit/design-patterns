@@ -7,14 +7,14 @@ import main.patterns.layer.FabricCar;
 import java.time.LocalDate;
 import java.time.Month;
 
-public class CreateCar {
+public class CreateCarTest {
     private Thread thread = null;
     private Runnable tasks = () -> {
         this.shouldContructCarByPrinters();
     };
 
     public void runTasks() {
-        this.thread = new Thread(tasks, "Thread-CreateCar");
+        this.thread = new Thread(tasks, "Thread-CreateCarTest");
         this.thread.start();
     }
 
