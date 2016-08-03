@@ -3,3 +3,4 @@ target
 node_modules
 mocha-test/output
 npm-debug.log
+build

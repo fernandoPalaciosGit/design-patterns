@@ -1,0 +1,38 @@
+{
+  "extends": "eslint:recommended",
+  "rules": {
+    "camelcase": 1,
+    "curly": 2,
+    "brace-style": [2, "1tbs"],
+    "quotes": [2, "single"],
+    "semi": [2, "always"],
+    "space-infix-ops": 2,
+    "space-after-keywords": [2, "always"],
+    "dot-notation": 2,
+    "eqeqeq": [2, "smart"],
+    "yoda": 2,
+    "no-use-before-define": 2,
+    "no-redeclare": 2,
+    "no-inner-declarations": [2, "both"],
+    "no-unused-vars": [2, {
+      "vars": "all",
+      "args": "all"
+    }],
+    "no-floating-decimal": 2,
+    "no-spaced-func": 2,
+    "no-extra-parens": 1,
+    "no-warning-comments": [2, {
+      "terms": ["todo", "bug", "fixme", "xxx"],
+      "location": "anywhere"
+    }],
+    "no-underscore-dangle": [2, { "allow": ["_extend"] }],
+    "strict": 2
+  },
+  "globals": {
+  },
+  "env": {
+    "browser": true,
+    "jquery": true,
+    "node": true
+  }
+}

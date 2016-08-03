@@ -1,0 +1,28 @@
+{
+  "name": "design-patterns",
+  "version": "1.0.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fernandoPalaciosGit/design-patterns.git"
+  },
+  "dependencies": {
+    "lodash": "^4.14.1"
+  },
+  "devDependencies": {
+    "grunt-mocha": "^1.0.2",
+    "eslint-tap": "~1.1.0",
+    "grunt": "^1.0.1",
+    "grunt-browserify": "^5.0.0",
+    "grunt-concurrent": "~2.1.0",
+    "grunt-contrib-clean": "~0.7.0",
+    "grunt-contrib-jshint": "~0.11.3",
+    "grunt-eslint": "~17.3.1",
+    "grunt-jscs": "~2.4.0",
+    "grunt-newer": "~1.1.1",
+    "jshint-stylish": "~2.1.0",
+    "load-grunt-configs": "~0.4.3",
+    "load-grunt-tasks": "~3.3.0",
+    "time-grunt": "~1.2.2"
+  }
+}
