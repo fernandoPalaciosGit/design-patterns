@@ -1,3 +1,3 @@
 module.exports = {
-    devJs: ['<%= compileJs.dirDev %>']
+    devJs: '<%= compileJs.dirDev %>'
 };

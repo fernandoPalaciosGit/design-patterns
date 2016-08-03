@@ -1,4 +1,6 @@
 module.exports = function (grunt) {
+    'use strict';
+
     var loadTimer = require('time-grunt'),
         initTasks = require('load-grunt-tasks'),
         taskOptions = require('./grunt/options/taskOptions'),
@@ -8,5 +10,5 @@ module.exports = function (grunt) {
     loadTimer(grunt);
     initTasks(grunt, taskOptions);
     grunt.initConfig(loadPackages);
-    grunt.loadTasks('./grunt/tasks')
+    grunt.loadTasks('./grunt/tasks');
 };

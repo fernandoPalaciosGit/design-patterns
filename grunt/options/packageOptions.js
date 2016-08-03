@@ -12,19 +12,29 @@ var _ = require('lodash'),
         linterJs: [
             'Gruntfile.js',
             'grunt/**/*.js',
-            '<%= projectPaths.development.application %>/**/*.js',
-            '!<%= projectPaths.development.application %>/**/*.es6.js'
+            '<%= projectPaths.appOsmaniOreilly.application %>/**/*.js',
+            '<%= projectPaths.appPlatzy.application %>/**/*.js'
         ],
         compileJs: {
-            dirDev: '<%= projectPaths.development.publicDir %>/*'
+            dirDev: [
+                '<%= projectPaths.appOsmaniOreilly.publicDir %>/*',
+                '<%= projectPaths.appPlatzy.publicDir %>/*'
+            ]
         },
         projectPaths: {
-            development: {
+            appOsmaniOreilly: {
                 host: '127.0.0.1',
                 port: '80',
                 root: 'grunt-tasks-boilerplate',
-                publicDir: 'build',
-                application: 'application'
+                publicDir: 'build/osmani-oreilly',
+                application: 'osmani-oreilly'
+            },
+            appPlatzy: {
+                host: '127.0.0.1',
+                port: '80',
+                root: 'grunt-tasks-boilerplate',
+                publicDir: 'build/platzy',
+                application: 'platzy'
             }
         }
     };

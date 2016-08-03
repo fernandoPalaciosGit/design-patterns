@@ -1,8 +1,8 @@
 module.exports = {
     documentation: 'http://jshint.com/docs/options',
     options: {
-        jshintrc: '<%= projectPaths.gruntRuntimeConfig %>/.jshintrc',
+        jshintrc: '<%= gruntRuntimeConfig %>/.jshintrc',
         reporter: require('jshint-stylish')
     },
-    dev: '<%= projectPaths.linterJs %>'
+    dev: '<%= linterJs %>'
 };

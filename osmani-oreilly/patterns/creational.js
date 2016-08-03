@@ -1,23 +1,27 @@
+/*jshint proto:true*/
+
+'use strict';
+
 var newObject = Object.create(null);
 
 //////////////////////
 // ES3 : DOT SINTAX //
 //////////////////////
-newObject.someKey = "someValue";    //writte propperty
+newObject.someKey = 'someValue';    //writte propperty
 var propObject = newObject.someKey; // access to property
 
 //////////////////////////////////
 // ES3 : SQUARE BRACKETS SYNTAX //
 //////////////////////////////////
-newObject["someKey"] = "someValue";     //writte propperty
-var propObject = newObject["someKey"];  // access to property
+newObject['someKey'] = 'someValue';     //writte propperty
+var propObject = newObject['someKey'];  // access to property
 
 ////////////////////////////////////////////////
-// ES5 : property create by "data descriptor" //
+// ES5 : property create by 'data descriptor' //
 ////////////////////////////////////////////////
-Object.defineProperty( newObject, "someKey", {
+Object.defineProperty( newObject, 'someKey', {
      __proto__: null,   // no inherited properties // in order to ensure preserve these properties behaveour
-    value: "someValue", // property value
+    value: 'someValue', // property value
     configurable: true, // can change typeof && can delete from Object
     enaumerable: true,  // can show by iterate into Object
     writable: true      // can be modified
@@ -27,12 +31,12 @@ Object.defineProperty( newObject, "someKey", {
 // ES5 : Object define properties //
 ////////////////////////////////////
 Object.defineProperties(newObject, {
-    "someKey": {
-        value: "someValue",
+    'someKey': {
+        value: 'someValue',
         writable: true
     },
-    "anotherKey": {
-        value: "someValue",
+    'anotherKey': {
+        value: 'someValue',
         writable: false
     }
 });
@@ -47,8 +51,8 @@ Object.defineProperties(newObject, {
 var Developer = function( name ){
     this.name = name;
 
-    // create writable properties || "data property descriptor"
-    Object.defineProperty( this, "skills", {
+    // create writable properties || 'data property descriptor'
+    Object.defineProperty( this, 'skills', {
         value: [],
         configurable: true,
         enaumerable: true, 
@@ -56,7 +60,7 @@ var Developer = function( name ){
     });
   
     // create final properties
-    Object.defineProperty( this, "proyects", {
+    Object.defineProperty( this, 'proyects', {
          __proto__: null,
         value: [],
         configurable: false,

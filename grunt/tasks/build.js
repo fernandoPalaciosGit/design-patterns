@@ -9,10 +9,9 @@ module.exports = function (grunt) {
         .setDescription('Deployment Javascript.')
         .setTaskEvironment('dev')
         .setTasks([
-            'clean:devJs'
-            /*,
-            'concurrent:validator',
-            'concurrent:jsLinters',
+            'clean:devJs',
+            'concurrent:jsLinters'
+            /*
             'concurrent:jsCompile'*/
         ])
         .register();
