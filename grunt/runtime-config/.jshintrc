@@ -31,6 +31,8 @@
   "node": true,
   "jquery": true,
   "browser": true,
-  "globals": {
-  }
+  "mocha": true,
+  "predef": [
+    "chai"
+  ]
 }

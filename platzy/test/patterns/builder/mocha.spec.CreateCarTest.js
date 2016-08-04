@@ -1,3 +1,9 @@
+'use strict';
+
+/*globals CarDirector, OpelAstraBuilder, NissanCascaisBuilder*/
+var expect = chai.expect,
+    assert = chai.assert;
+
 describe('Car Builder pattern', function () {
     beforeEach(function () {
         this.director = new CarDirector();
@@ -16,6 +22,6 @@ describe('Car Builder pattern', function () {
     });
 
     it('should create a Nissan Cascais', function () {
-        assert.ok(true);
+        expect(true).to.be(true);
     });
 });

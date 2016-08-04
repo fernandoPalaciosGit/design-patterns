@@ -7,7 +7,6 @@ var newObject, configModule;
 /*** Create Empty Objects */
 newObject = {};
 newObject = Object.create(null);
-newObject = new Object();
 
 
 /*** Object literal Module notation */

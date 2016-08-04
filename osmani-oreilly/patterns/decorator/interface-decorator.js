@@ -1,24 +1,25 @@
+'use strict';
+
 // http://www.dofactory.com/javascript/decorator-design-pattern
 
-"use strict";
 var log = (function( w ){
     
-    var acumulateLog = "";
+    var acumulateLog ='';
     return {
         add: function( log ){
-            acumulateLog += (log+"\n");
+            acumulateLog += (log+'\n');
         },
         show : function(){
-            w.alert(acumulateLog); acumulateLog = ""; 
+            w.alert(acumulateLog); acumulateLog ='';
         }
     };
 }(window));
 
 // MAIN CONSTRUCTOR
 var User = function( name ){
-    this.name = name || "";
+    this.name = name ||'';
     this.say = function(){
-        log.add("User: "+this.name);
+        log.add('User: '+this.name);
     };
 };
 
@@ -31,16 +32,16 @@ var UserHomeland = function( user, street, city ){
 
     // overloading properties
     this.say = function(){
-        log.add("User: "+this.name+", "+this.street+", "+this.city);
+        log.add('User: ' + this.name + ', ' + this.street + ', ' + this.city);
     };
 };
 
 // TESTING
-var nando = new User("Fernando");
+var nando = new User('Fernando');
 nando.say();
 
 // decorate the simple instance, to omore complexible
-nando = new UserHomeland(nando, "Fiola", "Palma de Mallorca");
+nando = new UserHomeland(nando, 'Fiola', 'Palma de Mallorca');
 nando.say();
 
 log.show();

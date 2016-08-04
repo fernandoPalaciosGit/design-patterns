@@ -1,62 +1,78 @@
+'use strict';
+
 ///////////////////////////
 // MODULE SELF CONTAINED //
 ///////////////////////////
-var counterModule = (function(){ // clousure
+var counterModule = (function () { // clousure
     var _counter = 0;// cannot read outside module, only properties into clousure scope
-    
+
     return { // public interface
-        incrementCounter: function(){
+        incrementCounter: function () {
             _counter++;
         },
-        resetCounter: function(){
+        resetCounter: function () {
             _counter = 0;
         },
-        printCounter: function(){
-            return _counter;
+        printCounter: function () {
+            return console.log(_counter);
         }
     };
 }());
+counterModule.incrementCounter();
+counterModule.printCounter();
 
 ////////////////////////////////
 // MODULE WITH 'THIS' PATTERN //
 ////////////////////////////////
-var bascketModule = (function(){
+var bascketModule = (function () {
     var _bascket = [],
-        _isDefinedPrice = function( newBasket ){
-            return newBasket.hasOwnProperty("price");
+        _isDefinedPrice = function (newBasket) {
+            return newBasket.hasOwnProperty('price');
         };
 
     return {
-        bascketNames: function( name ){
-            return _bascket.filter(function(index, item) {
-                return item.itemName === name ;
-            }); 
+        bascketNames: function (name) {
+            return _bascket.filter(function (index, item) {
+                return item.itemName === name;
+            });
         },
-        addItem: function( newItem ){
+        addItem: function (newItem) {
             var item = newItem || {};
-            if( !_isDefinedPrice(item) ) throw {msg: "undefined price"};
-            _bascket.push(item);
+
+            if (_isDefinedPrice(item)) {
+                _bascket.push(item);
+
+            } else {
+                throw {msg: 'undefined price'};
+            }
         },
-        getItemsCount: function(){
+        getItemsCount: function () {
             return _bascket.length;
         },
-        getTotalPrice: function(){
-            var totalItem = this.getItemsCount()-1,
+        getTotalPrice: function () {
+            var totalItem = this.getItemsCount() - 1,
                 countPrize = 0;
-            while ( totalItem >= 0 ) {
+            while (totalItem >= 0) {
                 countPrize += _bascket[totalItem].price;
                 totalItem--;
             }
             return countPrize;
-        } 
-    }; 
+        }
+    };
 }());
 
-bascketModule.addItem({ itemName: "bread" }); // throw exception
-bascketModule.addItem({price: 25, itemName: "jam"});
+bascketModule.addItem({itemName: 'bread'}); // throw exception
+bascketModule.addItem({price: 25, itemName: 'jam'});
 
 // ERROR : cannot access private members from outsite
-bascketModule.getItemName = function( indexItem ){ return _bascket[indexItem].itemName; };
+bascketModule.getItemName = function (indexItem) {
+    /* jshint undef: false */
+    return _bascket[indexItem].itemName;
+};
 
 // CORRECT :  access public members
-bascketModule.newItemByName = function( name, price ){ if (!!this.bascketNames(name)) this.addItem({price: price, itemName: name}); };
+bascketModule.newItemByName = function (name, price) {
+    if (this.bascketNames(name).length > 0) {
+        this.addItem({price: price, itemName: name});
+    }
+};
