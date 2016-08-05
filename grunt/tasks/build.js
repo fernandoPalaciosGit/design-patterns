@@ -10,9 +10,8 @@ module.exports = function (grunt) {
         .setTaskEvironment('dev')
         .setTasks([
             'clean:devJs',
-            'concurrent:jsLinters'
-            /*
-            'concurrent:jsCompile'*/
+            'concurrent:jsLinters',
+            'concurrent:jsCompile'
         ])
         .register();
 };

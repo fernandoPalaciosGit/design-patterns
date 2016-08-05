@@ -1,7 +1,7 @@
 'use strict';
 
 var OpelAstraBuilder, NissanCascaisBuilder, CarBuilder,
-    createCar = require('Car'),
+    createCar = require('./Car'),
     _ = require('lodash');
 
 CarBuilder = function (options) {

@@ -1,6 +1,16 @@
 module.exports = {
     dev: {
-        src: ['../platzy/main/patterns/builder/*.js'],
-        dest: '../build/patterns.js'
+        files: [
+            {
+                expand: false,
+                src: '<%= projectPaths.appOsmaniOreilly.application %>/**/*.js',
+                dest: '<%= projectPaths.appOsmaniOreilly.publicDir %>/app.build.js'
+            },
+            {
+                expand: false,
+                src: '<%= projectPaths.appPlatzy.application %>/**/*.js',
+                dest: '<%= projectPaths.appPlatzy.publicDir %>/app.build.js'
+            }
+        ]
     }
 };

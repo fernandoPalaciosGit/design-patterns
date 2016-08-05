@@ -12,9 +12,14 @@ var _ = require('lodash'),
         linterJs: [
             'Gruntfile.js',
             'grunt/**/*.js',
-            '<%= projectPaths.appOsmaniOreilly.application %>/**/*.js',
-            '<%= projectPaths.appPlatzy.application %>/**/*.js'
+            '<%= buildJS.dirDev %>'
         ],
+        buildJS: {
+            dirDev: [
+                '<%= projectPaths.appOsmaniOreilly.application %>/**/*.js',
+                '<%= projectPaths.appPlatzy.application %>/**/*.js'
+            ]
+        },
         compileJs: {
             dirDev: [
                 '<%= projectPaths.appOsmaniOreilly.publicDir %>/*',
