@@ -10,7 +10,7 @@ module.exports = function (grunt) {
         .setTaskEvironment('dev')
         .setTasks([
             'mocha:dev',
-            'mocha:verifyOutput'
+            'verifyOutput'
         ])
         .register();
 };

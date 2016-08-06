@@ -16,19 +16,16 @@ _.assign(GruntTask.prototype, {
 
         return this;
     },
-
     setDescription: function (desc) {
         this.description = desc;
 
         return this;
     },
-
     setTasks: function (plugin) {
         this.tasks = plugin;
 
         return this;
     },
-
     setTaskEvironment: function (env) {
         this.environment = env;
 

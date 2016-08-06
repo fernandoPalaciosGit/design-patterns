@@ -17,23 +17,23 @@ var _ = require('lodash'),
         bundleJS: {
             dirDev: [
                 '<%= projectPaths.appOsmaniOreilly.application %>/**/*.js',
-                '<%= projectPaths.appPlatzy.application %>/**/*.js'
+                '<%= projectPaths.appPlatzi.application %>/**/*.js'
             ]
         },
         cleanBundleJs: {
             dirDev: [
                 '<%= projectPaths.appOsmaniOreilly.publicDir %>/*',
                 '<%= projectPaths.appOsmaniOreilly.test %>/*',
-                '<%= projectPaths.appPlatzy.publicDir %>/*',
-                '<%= projectPaths.appPlatzy.test %>/*'
+                '<%= projectPaths.appPlatzi.publicDir %>/*',
+                '<%= projectPaths.appPlatzi.test %>/*'
             ]
         },
         compileJs: {
             dirDev: [
                 '<%= projectPaths.appOsmaniOreilly.publicDir %>/*',
                 '<%= projectPaths.appOsmaniOreilly.test %>/*',
-                '<%= projectPaths.appPlatzy.publicDir %>/*',
-                '<%= projectPaths.appPlatzy.test %>/*',
+                '<%= projectPaths.appPlatzi.publicDir %>/*',
+                '<%= projectPaths.appPlatzi.test %>/*',
                 '<%= projectPaths.vendors.publicDir %>/*'
             ]
         },
@@ -46,13 +46,13 @@ var _ = require('lodash'),
                 test: 'build/mocha/osmani-oreilly',
                 application: 'osmani-oreilly'
             },
-            appPlatzy: {
+            appPlatzi: {
                 host: '127.0.0.1',
                 port: '80',
                 root: 'grunt-tasks-boilerplate',
-                publicDir: 'build/platzy',
-                test: 'build/mocha/platzy',
-                application: 'platzy'
+                publicDir: 'build/platzi',
+                test: 'build/mocha/platzi',
+                application: 'platzi'
             },
             vendors: {
                 publicDir: 'build/vendors'
