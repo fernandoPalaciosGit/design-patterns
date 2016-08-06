@@ -1,6 +1,6 @@
 target
 .idea
 node_modules
-mocha-test/output
 npm-debug.log
 build
+*/*.out

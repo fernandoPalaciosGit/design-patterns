@@ -1,7 +1,8 @@
 'use strict';
 
 /*globals CarDirector, OpelAstraBuilder, NissanCascaisBuilder*/
-var expect = chai.expect,
+var chai = require('chai'),
+    expect = chai.expect,
     assert = chai.assert;
 
 describe('Car Builder pattern', function () {

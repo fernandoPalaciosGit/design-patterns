@@ -33,6 +33,5 @@
   "browser": true,
   "mocha": true,
   "predef": [
-    "chai"
   ]
 }

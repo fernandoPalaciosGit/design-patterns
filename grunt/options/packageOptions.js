@@ -12,18 +12,29 @@ var _ = require('lodash'),
         linterJs: [
             'Gruntfile.js',
             'grunt/**/*.js',
-            '<%= buildJS.dirDev %>'
+            '<%= bundleJS.dirDev %>'
         ],
-        buildJS: {
+        bundleJS: {
             dirDev: [
                 '<%= projectPaths.appOsmaniOreilly.application %>/**/*.js',
                 '<%= projectPaths.appPlatzy.application %>/**/*.js'
             ]
         },
+        cleanBundleJs: {
+            dirDev: [
+                '<%= projectPaths.appOsmaniOreilly.publicDir %>/*',
+                '<%= projectPaths.appOsmaniOreilly.test %>/*',
+                '<%= projectPaths.appPlatzy.publicDir %>/*',
+                '<%= projectPaths.appPlatzy.test %>/*'
+            ]
+        },
         compileJs: {
             dirDev: [
                 '<%= projectPaths.appOsmaniOreilly.publicDir %>/*',
-                '<%= projectPaths.appPlatzy.publicDir %>/*'
+                '<%= projectPaths.appOsmaniOreilly.test %>/*',
+                '<%= projectPaths.appPlatzy.publicDir %>/*',
+                '<%= projectPaths.appPlatzy.test %>/*',
+                '<%= projectPaths.vendors.publicDir %>/*'
             ]
         },
         projectPaths: {
@@ -32,6 +43,7 @@ var _ = require('lodash'),
                 port: '80',
                 root: 'grunt-tasks-boilerplate',
                 publicDir: 'build/osmani-oreilly',
+                test: 'build/mocha/osmani-oreilly',
                 application: 'osmani-oreilly'
             },
             appPlatzy: {
@@ -39,7 +51,11 @@ var _ = require('lodash'),
                 port: '80',
                 root: 'grunt-tasks-boilerplate',
                 publicDir: 'build/platzy',
+                test: 'build/mocha/platzy',
                 application: 'platzy'
+            },
+            vendors: {
+                publicDir: 'build/vendors'
             }
         }
     };

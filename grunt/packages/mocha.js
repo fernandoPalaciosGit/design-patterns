@@ -4,8 +4,8 @@ var configuration, _ = require('lodash');
 
 configuration = {
     dev: {
-        src: ['../../platzy/test/**/*.html'],
-        dest: '../../mocha-output/spec.out',
+        src: ['mocha-test/test.html'],
+        dest: 'mocha-test/spec.out',
         options: {
             reporter: 'Spec'
         }
@@ -14,7 +14,7 @@ configuration = {
         var expected = ['spec', 'xunit'];
 
         expected.forEach(function (reporter) {
-            var output = '../../mocha-output/' + reporter + '.out';
+            var output = 'mocha-test/' + reporter + '.out';
 
             // simply check if the file is non-empty since verifying if the output is
             // correct based on the spec is kind of hard due to changing test running

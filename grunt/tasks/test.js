@@ -9,8 +9,8 @@ module.exports = function (grunt) {
         .setDescription('Unit test for biuld js modules with mocha.')
         .setTaskEvironment('dev')
         .setTasks([
-            'mocha:test',
-            'mocha:verifyOutput',
+            'mocha:dev',
+            'mocha:verifyOutput'
         ])
         .register();
 };
