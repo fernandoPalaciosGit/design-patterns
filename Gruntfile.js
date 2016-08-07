@@ -8,10 +8,7 @@ module.exports = function (grunt) {
         loadPackages = require('load-grunt-configs')(grunt, packageOptions);
 
     loadTimer(grunt);
-    // register npm tasks
     initTasks(grunt, taskOptions);
     grunt.initConfig(loadPackages);
-    // register new tasks
-    grunt.registerTask('verifyOutput', require('./grunt/packages/verifyOutput'));
     grunt.loadTasks('./grunt/tasks');
 };

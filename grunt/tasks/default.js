@@ -1,8 +1,7 @@
 module.exports = function (grunt) {
     'use strict';
 
-    var GruntTask = require('../GruntTask')(grunt),
-        task = new GruntTask();
+    var gruntTask = require('../GruntTask')(grunt);
 
-    task.register();
+    gruntTask.register();
 };

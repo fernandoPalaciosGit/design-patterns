@@ -2,11 +2,11 @@ module.exports = function (grunt) {
     'use strict';
 
     var path = require('path'),
-        GruntTask = require('../GruntTask')(grunt),
-        task = new GruntTask();
+        gruntTask = require('../GruntTask')(grunt);
 
-    task.setName(path.basename(module.filename, '.js'))
-        .setDescription('Deployment Javascript.')
+    gruntTask
+        .setName(path.basename(module.filename, '.js'))
+        .setDescription('Deployment bundles for Javascript.')
         .setTaskEvironment('dev')
         .setTasks([
             'clean:dev-js',

@@ -2,11 +2,11 @@ module.exports = function (grunt) {
     'use strict';
 
     var path = require('path'),
-        GruntTask = require('../GruntTask')(grunt),
-        task = new GruntTask();
+        gruntTask = require('../GruntTask')(grunt);
 
-    task.setName(path.basename(module.filename, '.js'))
-        .setDescription('Unit test for biuld js modules with mocha.')
+    gruntTask
+        .setName(path.basename(module.filename, '.js'))
+        .setDescription('Unit test for js modules with mocha.')
         .setTaskEvironment('dev')
         .setTasks([
             'mocha:dev',
