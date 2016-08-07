@@ -9,13 +9,13 @@ var GruntTask,
  * @param {Object} options - Object with initialized Constructor properties
  * @property {string} name - The title of task.
  * @property {string} description - What makes the task.
- * @property {Array|Function} tasks - TaskList will be run or specified callback task.
+ * @property {(Array|Function|null)} - TaskList will be run or specified callback task.
  * @property {string} environment - The author of the book.
  */
 GruntTask = function (options) {
-    this.name = options.name || 'default';
-    this.description = options.description || 'There is no ' + this.name + ' task.';
-    this.tasks = options.tasks;
+    this.name = options.name || 'Unknown title task.';
+    this.description = options.description || 'Unknown definition task.';
+    this.tasks = options.tasks || null;
     this.environment = this.setEnvironment(options.environment);
 };
 
@@ -53,9 +53,9 @@ _.assign(GruntTask.prototype, {
         } else if (_.isArray(this.tasks)) {
             grunt.task.run(this.tasks);
 
-        } else {
+        } else if (_.isNull(this.tasks)) {
             grunt.fail.fatal('Not valid task from object type: ' +
-                Object.prototype.toString.call(this.tasks), 3)
+                Object.prototype.toString.call(this.tasks), 3);
         }
     },
     register: function (grunt) {

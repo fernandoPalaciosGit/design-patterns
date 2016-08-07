@@ -1,7 +1,9 @@
 module.exports = {
     options: {
         run: true,
-        reporter: 'spec'
+        reporter: 'spec',
+        logErrors: true,
+        growlOnSuccess: false
     },
     dev: {
         src: [

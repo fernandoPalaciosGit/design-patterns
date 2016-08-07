@@ -12,8 +12,12 @@
 <!-- mocha -->
 <script src="../node_modules/grunt-mocha/node_modules/mocha/mocha.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
-    // This will be overridden by mocha-helper if you run with grunt
-    mocha.setup('bdd');
+    mocha.setup({
+        // The BDD interface provides describe() == context(), it() == specify(), before(), after(), beforeEach(), and afterEach()
+        ui: 'bdd',
+        ignoreLeaks: true,
+        asyncOnly: true
+    });
 </script>
 
 <!-- Include your lib of choice -->

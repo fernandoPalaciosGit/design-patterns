@@ -1,14 +1,13 @@
 'use strict';
 
 var verifyOutput, gruntTask,
-    _ = require('lodash'),
     path = require('path');
 
 verifyOutput = function (grunt) {
-    var expected = ['spec']; // 'xunit'
+    var expected = ['spec'/*, 'html'*/];
 
     expected.forEach(function (reporter) {
-        var output = './mocha-test/' + reporter + '.out';
+        var output = 'mocha-test/' + reporter + '.out';
 
         // simply check if the file is non-empty since verifying if the output is
         // correct based on the spec is kind of hard due to changing test running
