@@ -5,8 +5,8 @@ var chai = require('chai'),
     expect = chai.expect,
     assert = chai.assert;
 
-describe('Design Patterns', function () {
-    context('Builder with factory pattern', function () {
+describe('Design patterns', function () {
+    context('Builder with factory', function () {
         beforeEach(function () {
             this.director = new CarDirector();
             this.opelAstraBuilder = new OpelAstraBuilder();

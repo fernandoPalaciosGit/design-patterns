@@ -1,2 +1,7 @@
 'use strict';
-// todo: implement
+
+describe('Design patterns', function () {
+    context('Observer', function () {
+        it('Behaviour object pattern');
+    });
+});

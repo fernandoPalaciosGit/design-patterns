@@ -1,2 +1,7 @@
 'use strict';
-// todo: implement
+
+describe('Design patterns', function () {
+    context('Object constructor', function () {
+        it('Creational object pattern');
+    });
+});
