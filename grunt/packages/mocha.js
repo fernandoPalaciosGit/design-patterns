@@ -1,15 +1,15 @@
 module.exports = {
-    options: {
-        run: true,
-        reporter: 'spec',
-        logErrors: true,
-        growlOnSuccess: false
-    },
     dev: {
         src: [
-            'mocha-test/platzi.html'/*,
-            'mocha-test/osmani-oreilly.html'*/
+            'test/platzi.html',
+            'test/osmani-oreilly.html'
         ],
-        dest: 'mocha-test/spec.out'
+        dest: 'test/spec.out',
+        options: {
+            reporter: 'spec',
+            run: true,
+            logErrors: true,
+            log: true
+        }
     }
 };

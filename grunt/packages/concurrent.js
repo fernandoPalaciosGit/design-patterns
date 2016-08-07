@@ -9,14 +9,14 @@ module.exports = {
     },
     jsAppCompile: {
         tasks: [
-            'browserify:<%= taskEnvironment %>-app-vendors',
-            'browserify:<%= taskEnvironment %>-app'
+            'newer:browserify:<%= taskEnvironment %>-app-vendors',
+            'newer:browserify:<%= taskEnvironment %>-app'
         ]
     },
     jsTestCompile: {
         tasks: [
-            'browserify:<%= taskEnvironment %>-test-vendors',
-            'browserify:<%= taskEnvironment %>-test'
+            'newer:browserify:<%= taskEnvironment %>-test-vendors',
+            'newer:browserify:<%= taskEnvironment %>-test'
         ]
     }
 };
