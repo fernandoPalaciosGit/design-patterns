@@ -1,20 +1,22 @@
 'use strict';
 
 var CarDirector,
-    CarBuilder = require('./app.module.CarBuilder').getConstructorBuilder(),
+    isValidBuilder = require('./app.module.CarBuilder').isValidBuilder,
     _ = require('lodash');
 
-CarDirector = function () {};
+CarDirector = function () {
+};
 
-_.assign(CarDirector.prototype, {
+CarDirector.prototype = _.create({
+    constructor: CarDirector,
     createCar: function (builderCar) {
-        if (builderCar instanceof CarBuilder) {
+        if (isValidBuilder(builderCar)) {
             builderCar.assemble();
             builderCar.addAssets();
             return builderCar.getResultCar();
 
         } else {
-            throw new Error({msg: 'Error Car builder type'});
+            throw new TypeError('Invalid Car builder type.');
         }
     }
 });

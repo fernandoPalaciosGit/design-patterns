@@ -13,7 +13,8 @@ Car = function (options) {
     this.HP = options.HP;
 };
 
-_.assign(Car.prototype, {
+Car.prototype = _.create({
+    constructor: Car,
     printEquipmentAsset: function (printer, key) {
         return printer += _.join(['-', key, ':', this[key], '\n'], '\s');
     },
