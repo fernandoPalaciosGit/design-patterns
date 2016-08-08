@@ -33,5 +33,5 @@ _.assign(Car.prototype, {
 });
 
 module.exports = function (options) {
-    return new Car(options);
+    return new Car(options || {});
 };

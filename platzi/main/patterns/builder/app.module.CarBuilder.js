@@ -1,11 +1,11 @@
 'use strict';
 
-var OpelAstraBuilder, NissanCascaisBuilder, CarBuilder,
-    createCar = require('./Car'),
+var OpelAstra, NissanCascais, CarBuilder,
+    createCar = require('./app.module.Car'),
     _ = require('lodash');
 
 CarBuilder = function (options) {
-    this.car = createCar(options);
+    this.car = createCar(options || {});
 };
 
 _.assign(CarBuilder.prototype, {
@@ -14,11 +14,11 @@ _.assign(CarBuilder.prototype, {
     }
 });
 
-OpelAstraBuilder = function () {
+OpelAstra = function () {
     CarBuilder.apply(this, arguments);
 };
 
-_.assign(OpelAstraBuilder.prototype, {
+_.assign(OpelAstra.prototype, {
     assemble: function () {
         this.car.addBodyParts(2, 4, 'yellow pomello');
         this.car.addEngineParts('Rudolf Diésel', 1600, 120);
@@ -28,11 +28,11 @@ _.assign(OpelAstraBuilder.prototype, {
     }
 }, CarBuilder.prototype);
 
-NissanCascaisBuilder = function () {
+NissanCascais = function () {
     CarBuilder.apply(this, arguments);
 };
 
-_.assign(NissanCascaisBuilder.prototype, {
+_.assign(NissanCascais.prototype, {
     assemble: function () {
         this.car.addBodyParts(5, 5, 'green inferno');
         this.car.addEngineParts('atkinson biodiesel', 2100, 170);
@@ -42,5 +42,10 @@ _.assign(NissanCascaisBuilder.prototype, {
     }
 }, CarBuilder.prototype);
 
-module.exports = OpelAstraBuilder;
-module.exports = NissanCascaisBuilder;
+module.exports = {
+    opelAstra: OpelAstra,
+    nissanCascais: NissanCascais,
+    getConstructorBuilder: function () {
+        return CarBuilder.constructor;
+    }
+};

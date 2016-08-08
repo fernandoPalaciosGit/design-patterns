@@ -10,7 +10,7 @@ module.exports = {
     jsAppCompile: {
         tasks: [
             'newer:browserify:<%= taskEnvironment %>-app-vendors',
-            'newer:browserify:<%= taskEnvironment %>-app'
+            'newer:browserify:<%= taskEnvironment %>-app-widget'
         ]
     },
     jsTestCompile: {
