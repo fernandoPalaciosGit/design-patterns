@@ -16,7 +16,9 @@ Car = function (options) {
 Car.prototype = _.create({
     constructor: Car,
     printEquipmentAsset: function (printer, key) {
-        return printer += _.join(['-', key, ':', this[key], '\n'], '\s');
+        var msg  = !_.isString(printer) ? '' : printer;
+
+        return msg += _.join(['-', key, ':', this[key], '\n'], '\s');
     },
     printEquipmentList: function (printer) {
         return _.reduce(Object.getOwnPropertyNames(this), this.printEquipmentAsset, printer, this);
@@ -33,6 +35,4 @@ Car.prototype = _.create({
     }
 });
 
-module.exports = function (options) {
-    return new Car(options || {});
-};
+module.exports = Car;

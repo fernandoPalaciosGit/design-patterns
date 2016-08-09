@@ -4,7 +4,7 @@ var verifyOutput, gruntTask,
     path = require('path');
 
 verifyOutput = function (grunt) {
-    var expected = ['spec'/*, 'html'*/];
+    var expected = ['spec'/*, 'xunit'*/];
 
     expected.forEach(function (reporter) {
         var output = 'test/' + reporter + '.out';

@@ -1,15 +1,25 @@
 'use strict';
 
 var OpelAstra, NissanCascais, CarBuilder,
-    createCar = require('./app.module.Car'),
-    _ = require('lodash');
+    Car = require('./app.module.Car'),
+    _ = require('lodash'),
+    OPEL_ASTRA_PROPERTIES = {
+        body: [2, 4, 'yellow pomello'],
+        engine: ['Rudolf Diésel', 1600, 120],
+        abs: '120 secons'
+    },
+    NISSAN_CASCAIS_PROPERTIES = {
+        body: [5, 5, 'green inferno'],
+        engine: ['atkinson biodiesel', 2100, 170],
+        gps: '4G'
+    };
 
 /**
  * Builder prototype SuperClass
  * @constructor
  */
 CarBuilder = function (options) {
-    this.car = createCar(options || {});
+    this.car = new Car(options || {});
 };
 
 _.assign(CarBuilder.prototype, {
@@ -29,11 +39,11 @@ OpelAstra = function () {
 OpelAstra.prototype = _.create(CarBuilder.prototype, {
     constructor: OpelAstra,
     assemble: function () {
-        this.car.addBodyParts(2, 4, 'yellow pomello');
-        this.car.addEngineParts('Rudolf Diésel', 1600, 120);
+        this.car.addBodyParts.apply(this.car, OPEL_ASTRA_PROPERTIES.body);
+        this.car.addEngineParts.apply(this.car, OPEL_ASTRA_PROPERTIES.engine);
     },
     addAssets: function () {
-        this.car.abs = '120 secons';
+        this.car.abs = OPEL_ASTRA_PROPERTIES.abs;
     }
 });
 
@@ -49,14 +59,13 @@ NissanCascais = function () {
 NissanCascais.prototype = _.create(CarBuilder.prototype, {
     constructor: NissanCascais,
     assemble: function () {
-        this.car.addBodyParts(5, 5, 'green inferno');
-        this.car.addEngineParts('atkinson biodiesel', 2100, 170);
+        this.car.addBodyParts.apply(this.car, NISSAN_CASCAIS_PROPERTIES.body);
+        this.car.addEngineParts.apply(this.car, NISSAN_CASCAIS_PROPERTIES.engine);
     },
     addAssets: function () {
-        this.car.gps = '4G';
+        this.car.gps = NISSAN_CASCAIS_PROPERTIES.gps;
     }
 });
-
 
 module.exports = {
     opelAstra: OpelAstra,
