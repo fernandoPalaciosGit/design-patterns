@@ -14,11 +14,11 @@ verifyOutput = function (grunt) {
         // times and different ways to report this time in reporters.
         if (!grunt.file.read(output, 'utf8')) {
             grunt.fatal('Empty reporter output: ' + reporter);
-        }
+            grunt.file.delete(output);
 
-        // Clean-up
-        grunt.file.delete(output);
-        grunt.log.ok('Reporter output non-empty for: %s', reporter);
+        } else {
+            grunt.log.ok('Reporter output non-empty for: %s', reporter);
+        }
     });
 };
 
