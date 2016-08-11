@@ -1,16 +1,22 @@
+/*
+ * options.external: external modules that don't need to be constantly re-compiled
+ * options.require: expose dependencies with alias
+ */
 module.exports = {
+    'browserifyOptions': {
+        debug: false
+    },
     'dev-test-vendors': {
         options: {
-            debug: false,
             external: null,
-            require: ['chai']
+            require: ['chai', 'lodash']
         },
         src: ['.'],
         dest: '<%= projectPaths.vendors.publicDir%>/vendors.test.bundle.js'
     },
     'dev-test': {
         options: {
-            debug: true,
+            browserifyOptions: '<%= browserify.browserifyOptions %>',
             external: ['chai', 'lodash']
         },
         files: [
@@ -26,18 +32,15 @@ module.exports = {
     },
     'dev-app-vendors': {
         options: {
-            debug: false,
             external: null,
-            // expose dependencies with alias
             require: ['lodash']
         },
-        // External modules that don't need to be constantly re-compiled
         src: ['.'],
         dest: '<%= projectPaths.vendors.publicDir%>/vendors.app.bundle.js'
     },
     'dev-app-widget': {
         options: {
-            debug: true,
+            browserifyOptions: '<%= browserify.browserifyOptions %>',
             external: ['lodash']
         },
         files: [
