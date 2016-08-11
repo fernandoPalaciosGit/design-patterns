@@ -10,8 +10,7 @@
     "lodash": "^4.14.1"
   },
   "scripts": {
-    "build": "grunt build",
-    "test": "grunt test"
+    "test": "grunt build test"
   },
   "devDependencies": {
     "chai": "^3.5.0",
