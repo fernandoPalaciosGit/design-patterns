@@ -1,15 +1,21 @@
 'use strict';
 
-/*** declarete @constructor*/
-var Car = function (model, color) {
-    // instance properties
-    this.model = model;
-    this.year = new Date();
-    this.color = color;
-    this.getInfo = function () {
-        return this.model + ' ' + this.year;
-    };
+var Car, _ = require('lodash');
+
+Car = function (options) {
+    this.model = options.model;
+    this.year = options.date || new Date();
+    this.color = options.color;
 };
 
-var civic = new Car('Honda Civic', 'blue storm');
-civic.getInfo();
+Car.prototype = _.create({
+    constructor: Car,
+    getInfo: function () {
+        return [
+            this.model,
+            this.year.toUTCString()
+        ].join(', ');
+    }
+});
+
+module.exports = Car;
