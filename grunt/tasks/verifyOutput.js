@@ -14,7 +14,8 @@ verifyOutput = function (grunt) {
     var reporter = grunt.config.get('mocha.dev.dest');
 
     if (!grunt.file.read(reporter, 'utf8')) {
-        grunt.fatal('Empty reporter output: ' + reporter, 4);
+        grunt.fail.fatal('Empty reporter output: ' + reporter, 4);
+        grunt.file.delete(reporter);
 
     } else {
         grunt.log.ok('Reporter output non-empty for: %s', reporter);

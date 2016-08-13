@@ -13,10 +13,9 @@ Car = function (options) {
     this.HP = options.HP;
 };
 
-Car.prototype = _.create({
-    constructor: Car,
+_.assign(Car.prototype, {
     printEquipmentAsset: function (printer, key) {
-        var msg  = !_.isString(printer) ? '' : printer;
+        var msg = !_.isString(printer) ? '' : printer;
 
         return msg += _.join(['-', key, ':', this[key], '\n'], '\s');
     },
