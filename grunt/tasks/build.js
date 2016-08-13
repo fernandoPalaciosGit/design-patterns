@@ -7,7 +7,7 @@ module.exports = function (grunt) {
         newTask = _.partial(gruntTask, grunt);
 
     newTask()
-        .setName(utilsTask.getPath())
+        .setName(utilsTask.getPath(__filename))
         .setDescription('Deployment bundles for Javascript.')
         .setTaskEvironment('dev')
         .setTasks([

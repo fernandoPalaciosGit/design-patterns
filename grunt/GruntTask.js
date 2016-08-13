@@ -13,7 +13,7 @@ var GruntTask,
  * @property {string} environment - The author of the book.
  */
 GruntTask = function (options) {
-    this.name = options.name || 'Unknown title task.';
+    this.name = options.name || null;
     this.description = options.description || 'Unknown definition task.';
     this.tasks = options.tasks || null;
     this.environment = this.setEnvironment(options.environment);
@@ -46,22 +46,33 @@ _.assign(GruntTask.prototype, {
 
         return _.includes(valid, env) ? env : defaultEnvironment;
     },
+    verifyTask: function (grunt) {
+        try {
+            if (_.isNull(this.name)) {
+                throw new Error('Could not initialize grunt task without \'name\' property.');
+
+            } else if (_.isNull(this.tasks) || (!_.isFunction(this.tasks) & !_.isArray(this.tasks))) {
+                throw new Error('Not valid task from object type: ' +
+                    Object.prototype.toString.call(this.tasks));
+            }
+        } catch (error) {
+            grunt.fail.fatal(error.message, 3);
+        }
+    },
     callbackTask: function (grunt) {
+        grunt.log.writeln(this.description);
+
         if (_.isFunction(this.tasks)) {
             this.tasks(grunt);
 
         } else if (_.isArray(this.tasks)) {
             grunt.task.run(this.tasks);
-
-        } else if (_.isNull(this.tasks)) {
-            grunt.fail.fatal('Not valid task from object type: ' +
-                Object.prototype.toString.call(this.tasks), 3);
         }
     },
     register: function (grunt) {
+        this.verifyTask(grunt);
         grunt.registerTask(this.name, this.description, _.partial(function (grunt) {
             grunt.config.set('taskEnvironment', this.environment);
-            grunt.log.writeln(this.description);
             this.callbackTask(grunt);
         }.bind(this), grunt));
     }

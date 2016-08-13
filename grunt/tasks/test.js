@@ -7,7 +7,7 @@ module.exports = function (grunt) {
         newTask = _.partial(gruntTask, grunt);
 
     newTask()
-        .setName(utilsTask.getPath())
+        .setName(utilsTask.getPath(__filename))
         .setDescription('Unit test for js modules with mocha.')
         .setTaskEvironment('dev')
         .setTasks([

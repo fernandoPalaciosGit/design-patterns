@@ -2,8 +2,8 @@ var _ = require('lodash'),
     path = require('path');
 
 module.exports = {
-    getPath: function () {
-        return path.basename(module.parent.filename, '.js')
+    getPath: function (filename) {
+        return path.basename(filename, '.js')
     },
     getMochaReporter: function (grunt, reporter) {
         var validList = grunt.config.get('mochaReporter'),
