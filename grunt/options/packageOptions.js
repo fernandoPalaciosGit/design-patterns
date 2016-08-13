@@ -9,6 +9,11 @@ var _ = require('lodash'),
     options = {
         packageJson: '<% grunt.file.readJSON(\'package.json\') %>',
         gruntRuntimeConfig: 'grunt/runtime-config',
+        mochaReporter: [
+            'test/spec.out',
+            'test/html.out',
+            'test/xunit.out'
+        ],
         linterJs: [
             'Gruntfile.js',
             'grunt/**/*.js',

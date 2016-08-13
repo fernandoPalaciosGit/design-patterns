@@ -1,16 +1,19 @@
 module.exports = function (grunt) {
     'use strict';
 
-    var path = require('path'),
-        gruntTask = require('../GruntTask')(grunt);
+    var _ = require('lodash'),
+        utilsTask = require('../UtilsTask'),
+        gruntTask = require('../GruntTask'),
+        newTask = _.partial(gruntTask, grunt);
 
-    gruntTask
-        .setName(path.basename(module.filename, '.js'))
+    newTask()
+        .setName(utilsTask.getPath())
         .setDescription('Unit test for js modules with mocha.')
         .setTaskEvironment('dev')
         .setTasks([
-            'mocha:dev',
-            'verifyOutput'
+            'mocha:dev --reporter=spec',
+            'verifyOutput --force',
+            'clean:mocha'
         ])
         .register();
 };

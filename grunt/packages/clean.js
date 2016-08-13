@@ -1,4 +1,5 @@
 module.exports = {
     'dev-js': '<%= cleanBundleJs.dirDev %>',
-    'dev-mocha': '<%= mocha.dev.dest %>'
+    'mocha': '<%= mocha.dev.dest %>',
+    'coverage': ''//'<%= istanbul.dev.dest %>'
 };
