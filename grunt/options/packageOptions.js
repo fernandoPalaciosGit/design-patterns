@@ -14,6 +14,7 @@ var _ = require('lodash'),
             'test/html.out',
             'test/xunit.out'
         ],
+        coverageReporter: 'test/coverage',
         linterJs: [
             'Gruntfile.js',
             'grunt/**/*.js',

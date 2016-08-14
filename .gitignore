@@ -3,4 +3,5 @@ target
 node_modules
 npm-debug.log
 build
-*.out
+test/*.out
+test/coverage
