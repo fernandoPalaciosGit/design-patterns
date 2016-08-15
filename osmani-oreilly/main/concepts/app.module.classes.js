@@ -1,6 +1,8 @@
 'use strict';
 
-var Car, _ = require('lodash');
+var Car,
+    logger = require('./../utils/output').getLogger,
+    _ = require('lodash');
 
 Car = function (options) {
     this.model = options.model;
@@ -8,13 +10,9 @@ Car = function (options) {
     this.color = options.color;
 };
 
-Car.prototype = _.create({
-    constructor: Car,
+_.assign(Car.prototype, {
     getInfo: function () {
-        return [
-            this.model,
-            this.year.toUTCString()
-        ].join(', ');
+        return logger.printPropertyList(this);
     }
 });
 

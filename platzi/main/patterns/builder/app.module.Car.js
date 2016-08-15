@@ -14,14 +14,6 @@ Car = function (options) {
 };
 
 _.assign(Car.prototype, {
-    printEquipmentAsset: function (printer, key) {
-        var msg = !_.isString(printer) ? '' : printer;
-
-        return msg += _.join(['-', key, ':', this[key], '\n'], '\s');
-    },
-    printEquipmentList: function (printer) {
-        return _.reduce(Object.getOwnPropertyNames(this), this.printEquipmentAsset, printer, this);
-    },
     addBodyParts: function (doors, wheels, color) {
         this.doors = doors;
         this.wheels = wheels;

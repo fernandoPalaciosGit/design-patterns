@@ -7,8 +7,7 @@ var CarDirector,
 CarDirector = function () {
 };
 
-CarDirector.prototype = _.create({
-    constructor: CarDirector,
+_.assign(CarDirector.prototype, {
     createCar: function (builderCar) {
         if (isValidBuilder(builderCar)) {
             builderCar.assemble();
