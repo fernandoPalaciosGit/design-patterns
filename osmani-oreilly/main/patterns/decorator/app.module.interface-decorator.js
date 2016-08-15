@@ -1,47 +1,55 @@
 'use strict';
 
-// http://www.dofactory.com/javascript/decorator-design-pattern
+/**
+ * Provide dynamic responsibilities to an object
+ */
+var User, UserGeolocate,
+    _ = require('lodash'),
+    logger = require('./../../utils/output').getLogger;
 
-var log = (function( w ){
-    
-    var acumulateLog ='';
-    return {
-        add: function( log ){
-            acumulateLog += (log+'\n');
-        },
-        show : function(){
-            w.alert(acumulateLog); acumulateLog ='';
-        }
-    };
-}(window));
-
-// MAIN CONSTRUCTOR
-var User = function( name ){
-    this.name = name ||'';
-    this.say = function(){
-        log.add('User: '+this.name);
-    };
+// Prototype
+User = function (options) {
+    this.name = options.name;
 };
 
-// DECORATOR
-var UserHomeland = function( user, street, city ){
+_.assign(User.prototype, {
+    remember: function () {
+        logger.add('User: ' + this.name);
+    },
+    say: function () {
+        return logger.showLog();
+    }
+});
+
+
+// Decorator
+UserGeolocate = function (user, options) {
     // ensure that the interface maintains the properties
-    this.name = user.name;
-    this.street = street;
-    this.city = city;
+    if (user instanceof User) {
+        this.user = user;
+        this.name = this.user.name;
+        this.street = options.street;
+        this.city = options.city;
 
-    // overloading properties
-    this.say = function(){
-        log.add('User: ' + this.name + ', ' + this.street + ', ' + this.city);
-    };
+    } else {
+        throw new TypeError('User reference incorrect.');
+    }
 };
 
-// TESTING
-var nando = new User('Fernando');
-nando.say();
+_.assign(UserGeolocate.prototype, {
+    // overloading properties
+    remember: function () {
+        logger.add('User: ' + this.name + ', ' + this.street + ', ' + this.city);
+    },
+    say: function () {
+        return this.user.say();
+    }
+});
 
-// decorate the simple instance, to omore complexible
-nando = new UserHomeland(nando, 'Fiola', 'Palma de Mallorca');
-nando.say();
+module.exports.getUser = function (options) {
+    return new User(options || {});
+};
 
-log.show();
+module.exports.getUserGeolocated = function (user, options) {
+    return new UserGeolocate(user, options || {});
+};
