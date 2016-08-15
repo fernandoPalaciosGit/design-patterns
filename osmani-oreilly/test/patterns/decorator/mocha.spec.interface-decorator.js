@@ -6,12 +6,12 @@ describe('Design patterns', function () {
         expect = require('chai').expect,
         decorator = require('./../../../main/patterns/decorator/app.module.interface-decorator');
 
-    context('Decorator interface', function () {
+    context('decorator objects', function () {
         beforeEach(function () {
             user = decorator.getUser({name: 'Fernando'});
         });
 
-        it('decorator should extend properties from instance', function (next) {
+        it('should extend properties from instance', function (next) {
             expect(user).to.have.property('name', 'Fernando');
             user.remember();
             expect(user.say()).to.have.string('User: Fernando');
@@ -26,5 +26,9 @@ describe('Design patterns', function () {
             expect(_.partial(_.bind(decorator.getUserGeolocated, decorator), {})).to.throw(TypeError);
             next();
         });
+    });
+
+    context('decorator objects by interface', function () {
+
     });
 });

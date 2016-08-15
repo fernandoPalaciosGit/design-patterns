@@ -1,7 +1,7 @@
 'use strict';
 
 var Car,
-    logger = require('./../utils/output').getLogger,
+    logger = require('./../utils/Output').getLogger,
     _ = require('lodash');
 
 Car = function (options) {

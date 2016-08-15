@@ -5,7 +5,7 @@
  */
 var User, UserGeolocate,
     _ = require('lodash'),
-    logger = require('./../../utils/output').getLogger;
+    logger = require('./../../utils/Output').getLogger;
 
 // Prototype
 User = function (options) {
