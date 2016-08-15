@@ -1,9 +1,3 @@
-/*
- todo: Error Running "instrument" task
- Verifying property instrument.files exists in config...ERROR
- >> Unable to process task.
- Warning: Required      config property "instrument.files" missing. Use --force to continue.
- */
 module.exports = {
     instrument: {
         files: [
