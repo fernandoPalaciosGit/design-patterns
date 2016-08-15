@@ -2,7 +2,7 @@
 
 - Mocha test
 ```bash
-$npm run test
+$npm run unittest
 ```
 
 - istanbul coverage
