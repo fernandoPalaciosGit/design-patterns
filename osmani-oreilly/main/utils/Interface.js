@@ -5,11 +5,12 @@ var Interface,
 
 Interface = function (options) {
     this.name = options.name;
-    this.setMethods(options.methods);
+    this.ensureDecoratorMethods(options.methodsImplemented);
+    this.ensureDecoratorInterface(options.interfaceImplemented);
 };
 
-_.assign(Interface, {
-    setMethods: function (methods) {
+_.assign(Interface.prototype, {
+    ensureDecoratorMethods: function (methods) {
         var hasInvalidMethods = !_.isArray(methods) && _.some(methods, function (method) {
                 return !_.isString(method);
             });
@@ -22,15 +23,15 @@ _.assign(Interface, {
         }
     },
 
-    ensureImplements: function (instance) {
+    ensureDecoratorInterface: function (interfaceImplemented) {
         if (!_.isUndefined(this.methods) && !_.isEmpty(this.methods)) {
-            var invalidMethod = _.find(Object.getOwnPropertyNames(instance.prototype), _.bind(function (method) {
-                return !_.includes(this.methods, method) && !_.isFunction(instance[method]);
+            var invalidMethod = _.find(Object.getOwnPropertyNames(interfaceImplemented.prototype), _.bind(function (method) {
+                return !_.includes(this.methods, method) && !_.isFunction(interfaceImplemented.prototype[method]);
             }, this));
 
             if (!_.isEmpty(invalidMethod)) {
                 throw new Error('interface does not implement the ' + this.name + ' module.' +
-                    'Method ' + invalidMethod + ' was not found.');
+                    'Method ' + invalidMethod[0] + ' was not found.');
             }
 
         } else {
