@@ -5,3 +5,4 @@ npm-debug.log
 build
 test/*.out
 test/coverage
+bower_components

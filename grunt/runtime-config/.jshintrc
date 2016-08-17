@@ -29,7 +29,6 @@
   "noarg": true,
   "esnext": false,
   "node": true,
-  "jquery": true,
   "browser": true,
   "mocha": true,
   "predef": [

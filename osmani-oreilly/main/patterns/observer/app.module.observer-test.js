@@ -1,5 +1,7 @@
 'use strict';
 
+var $ = require('jquery');
+
 // PUBLISHER - BROADCASTING
 $(window.obj).trigger('channel', [{arg1: 1, arg2: 2}, 'arg3']);
 

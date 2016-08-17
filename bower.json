@@ -1,0 +1,18 @@
+{
+  "name": "design-patterns",
+  "description": "javascript design patterns examples",
+  "main": "",
+  "authors": [
+    "Fernando Palacios Landi <fernandopalacioslandi@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/fernandoPalaciosGit/design-patterns",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
