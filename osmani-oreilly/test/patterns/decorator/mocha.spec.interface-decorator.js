@@ -60,11 +60,11 @@ describe('Design patterns', function () {
         });
 
         it('should not access methods from object target, outside interface declaration', function (next) {
-            var mackBookMethodsList = _.pull(Object.getOwnPropertyNames(decoratorMac.getMackbookConstructor.prototype), 'constructor'),
+            var mackBookMethodsList = _.pull(_.keysIn(decoratorMac.getMackbookConstructor.prototype), 'constructor'),
                 mackBookProNotAccessMethodsList = _.pullAll(_.clone(mackBookMethodsList), nandoMacPro.interfaceMethods),
                 mackBookRetinaNotAccessMethodsList = _.pullAll(_.clone(mackBookMethodsList), nandoMackRetina.interfaceMethods),
-                docoratorMackBookProMethods = _.pull(Object.getOwnPropertyNames(nandoMacPro.constructor.prototype), 'constructor'),
-                docoratorMackBookRetinaMethods = _.pull(Object.getOwnPropertyNames(nandoMackRetina.constructor.prototype), 'constructor');
+                docoratorMackBookProMethods = _.pull(_.keysIn(nandoMacPro.constructor.prototype), 'constructor'),
+                docoratorMackBookRetinaMethods = _.pull(_.keysIn(nandoMackRetina.constructor.prototype), 'constructor');
 
             expect(docoratorMackBookProMethods).to.not.include.members(mackBookProNotAccessMethodsList);
             expect(nandoMacPro.duplicatePixelRatio).to.not.exist;

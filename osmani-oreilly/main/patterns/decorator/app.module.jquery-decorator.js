@@ -1,35 +1,62 @@
 'use strict';
 
-// leave 'default' properties into a untouched state
-// 'option' properties to extend functionaliti
-var decoratoApp = {
-    defaults: {
-        validate: true,
-        name: 'bar',
-        limit: 5,
-        welcome: function () {
-            console.log('welcome');
-        }
-    },
-    options: {
-        validate: false,
-        name: 'foo',
-        helloworld: function () {
-            console.log('hello');
-        }
-    },
-    settings: {},
-    printObj: function (obj) {
-        var arrObj = [];
+var Hero, TragicHero, AntiHero,
+    _ = require('lodash'),
+    $ = require('jquery'),
+    extendHero = function (HeroType, heroOptions) {
+        return $.extend(true, {}, new Hero(heroOptions || {}), HeroType);
+    };
 
-        Object.keys(obj).forEach(function (key) {
-            arrObj.push(key + ' : ' + this[key]);
-        }, obj);
+/**
+ * base type object
+ */
+Hero = function (options) {
+    this.name = options.name;
+    this.habilities = _.concat(options.habilities || [], ['superSmart']);
+};
 
-        return '{' + arrObj.join(', ') + '}';
+_.assign(Hero.prototype, {
+    addAbility: function (ability) {
+        this.habilities.push(ability);
+        this.habilities = _.uniq(this.habilities);
+    },
+    setSuperStrengh: function () {
+        this.addAbility('superStrength');
+    },
+    setInvisibility: function () {
+        this.addAbility('invisibility');
+    }
+});
+
+/**
+ * Decorator
+ */
+TragicHero = {
+    setInvisibility: function () {
+        this.addAbility('invisibility');
+        this.addAbility('omnipresent');
+    },
+    setDistortion: function () {
+        this.addAbility('elasticity');
     }
 };
 
-// recursive merging (overriding properties)
-decoratoApp.settings = $.extend(true, {}, decoratoApp.defaults, decoratoApp.options);
-decoratoApp.printObj(decoratoApp.settings);
+/**
+ * Decorator
+ */
+AntiHero = {
+    setSuperStrengh: function () {
+        this.addAbility('superStrength');
+        this.addAbility('superflexibility');
+    },
+    setFaster: function () {
+        this.addAbility('superVelocity');
+        this.addAbility('omnipresent');
+    }
+};
+
+module.exports = {
+    getHeroConstructor: Hero,  // only for reasons of testing
+    getTragicHero: _.partial(extendHero, TragicHero),
+    getAntiHero: _.partial(extendHero, AntiHero)
+};
