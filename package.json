@@ -10,8 +10,8 @@
     "lodash": "^4.14.1"
   },
   "scripts": {
-    "unittest": "grunt build test",
-    "coverage": "grunt build test coverage"
+    "unittest": "grunt bundle test",
+    "coverage": "grunt bundle test coverage"
   },
   "devDependencies": {
     "browserify": "^13.1.0",

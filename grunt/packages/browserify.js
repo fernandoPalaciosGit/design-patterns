@@ -1,11 +1,16 @@
+'use strict';
+
 /*
  * options.external: external modules that don't need to be constantly re-compiled
  * options.require: expose dependencies with alias
+ * options.browserifyOptions.debug: Source mapping
  */
 module.exports = {
-    browserifyOptions: {
-        debug: false,
-        transform: ['browserify-shim']
+    setBrowserifyOptions: function (options) {
+        return require('util')._extend({
+            debug: false,
+            transform: ['browserify-shim']
+        }, options);
     },
     vendorLibraries: {
         app: ['lodash', 'jquery'],
@@ -21,7 +26,7 @@ module.exports = {
     },
     'dev-test': {
         options: {
-            browserifyOptions: '<%= browserify.browserifyOptions %>',
+            browserifyOptions: '<% browserify.setBrowserifyOptions({debug: true}) %>',
             external: '<%= browserify.vendorLibraries.test %>'
         },
         files: [
@@ -45,7 +50,7 @@ module.exports = {
     },
     'dev-app-widget': {
         options: {
-            browserifyOptions: '<%= browserify.browserifyOptions %>',
+            browserifyOptions: '<% browserify.setBrowserifyOptions({debug: true}) %>',
             external: '<%= browserify.vendorLibraries.app %>'
         },
         files: [
