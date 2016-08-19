@@ -10,13 +10,14 @@
     "lodash": "^4.14.1"
   },
   "scripts": {
-    "unittest": "grunt bundle test",
-    "coverage": "grunt bundle test coverage"
+    "unittest": "grunt bundle test --reporter=spec --mask=spec",
+    "coverage": "npm run unittest && grunt coverage"
   },
   "devDependencies": {
     "browserify": "^13.1.0",
     "browserify-shim": "^3.8.12",
     "chai": "^3.5.0",
+    "colors": "^1.1.2",
     "eslint-tap": "~1.1.0",
     "grunt": "~0.4.5",
     "grunt-browserify": "^5.0.0",

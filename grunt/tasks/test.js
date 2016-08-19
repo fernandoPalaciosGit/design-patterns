@@ -4,14 +4,18 @@ module.exports = function (grunt) {
     var _ = require('lodash'),
         utilsTask = require('../UtilsTask'),
         gruntTask = require('../GruntTask'),
-        newTask = _.partial(gruntTask, grunt),
+        newTask = gruntTask(grunt), configTask,
         listReporter = grunt.config.get('mochaListReporter'),
-        reporter = grunt.option('reporter') || 'spec',
-        reporterPath = utilsTask.getMochaReporter(listReporter, reporter);
+        maskReporter = grunt.config.get('mochaMaskReporter'),
+        reporter = grunt.option('reporter'),
+        mask = grunt.option('mask');
 
-    grunt.config.set('mochaReporter', reporterPath);
+    configTask = function (grunt) {
+        grunt.config.set('mochaReporterOutput', utilsTask.validateMochaReporter(listReporter, reporter));
+        grunt.config.set('mochaReporterMask', utilsTask.validateMochaReporter(maskReporter, mask));
+    };
 
-    newTask()
+    newTask
         .setName(utilsTask.getPath(__filename))
         .setDescription('Unit test for js modules with mocha.')
         .setTaskEvironment('dev')
@@ -19,5 +23,6 @@ module.exports = function (grunt) {
             'mocha:dev',
             'verifyOutput:force'
         ])
+        .setConfigTask(_.partial(_.bind(configTask, newTask), grunt))
         .register();
 };

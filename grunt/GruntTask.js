@@ -1,6 +1,7 @@
 'use strict';
 
 var GruntTask,
+    logger = require('./UtilsTask').logger,
     _ = require('lodash');
 
 /**
@@ -46,6 +47,17 @@ _.assign(GruntTask.prototype, {
 
         return _.includes(valid, env) ? env : defaultEnvironment;
     },
+    setConfigTask: function (callbackConfig) {
+        if (_.isFunction(callbackConfig)) {
+            this.setConfigTask = callbackConfig;
+
+        } else if (_.isNull(callbackConfig)) {
+            this.setConfigTask();
+            delete this.setConfigTask;
+        }
+
+        return this;
+    },
     verifyTask: function (grunt) {
         try {
             if (_.isNull(this.name)) {
@@ -59,8 +71,8 @@ _.assign(GruntTask.prototype, {
             grunt.fail.fatal(error.message, 3);
         }
     },
-    callbackTask: function (grunt) {
-        grunt.log.writeln(this.description);
+    runTask: function (grunt) {
+        logger.info(this.description);
 
         if (_.isFunction(this.tasks)) {
             this.tasks(grunt);
@@ -71,10 +83,11 @@ _.assign(GruntTask.prototype, {
     },
     register: function (grunt) {
         this.verifyTask(grunt);
-        grunt.registerTask(this.name, this.description, _.partial(function (grunt) {
+        grunt.registerTask(this.name, this.description, _.bind(function () {
             grunt.config.set('taskEnvironment', this.environment);
-            this.callbackTask(grunt);
-        }.bind(this), grunt));
+            this.setConfigTask(null);
+            this.runTask(grunt);
+        }, this));
     }
 });
 

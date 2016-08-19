@@ -4,9 +4,9 @@ module.exports = {
             'test/platzi.html',
             'test/osmani-oreilly.html'
         ],
-        dest: '<%= mochaReporter %>',
+        dest: '<%= mochaReporterOutput %>',
         options: {
-            reporter: 'spec',
+            reporter: '<%= mochaReporterMask %>',
             run: true,
             logErrors: true,
             log: true

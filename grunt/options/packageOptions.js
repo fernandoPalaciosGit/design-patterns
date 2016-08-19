@@ -14,6 +14,8 @@ var _ = require('lodash'),
             'test/html.out',
             'test/xunit.out'
         ],
+        mochaMaskReporter: ['spec', 'dot', 'nyan', 'TAP', 'landing', 'list',
+            'progress', 'JSON', 'JSON stream', 'min', 'doc'],
         coverageReporter: 'test/coverage',
         linterJs: [
             'Gruntfile.js',

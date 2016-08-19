@@ -2,6 +2,7 @@
 
 var verifyOutput, newTask,
     _ = require('lodash'),
+    logger = require('./../UtilsTask').logger,
     utilsTask = require('../UtilsTask'),
     gruntTask = require('../GruntTask');
 
@@ -18,7 +19,7 @@ verifyOutput = function (grunt) {
         grunt.file.delete(reporter);
 
     } else {
-        grunt.log.ok('Reporter output non-empty for: %s', reporter);
+        logger.info('Reporter output available on : ' + reporter);
     }
 };
 
