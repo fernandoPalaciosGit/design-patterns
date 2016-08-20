@@ -11,7 +11,7 @@
   },
   "scripts": {
     "unittest": "grunt bundle test --reporter=spec --mask=Spec",
-    "coverage": "npm run unittest && grunt coverage"
+    "coverage": "grunt coverage --reporter=spec --mask=Spec"
   },
   "devDependencies": {
     "browserify": "^13.1.0",
@@ -25,7 +25,6 @@
     "grunt-contrib-clean": "~0.7.0",
     "grunt-contrib-jshint": "~0.11.3",
     "grunt-eslint": "~17.3.1",
-    "grunt-istanbul": "^0.7.1",
     "grunt-jscs": "~2.4.0",
     "grunt-mocha-phantom-istanbul": "^0.2.1",
     "grunt-newer": "~1.1.1",

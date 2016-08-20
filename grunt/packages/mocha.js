@@ -4,26 +4,37 @@ module.exports = {
         'test/html.out',
         'test/xunit.out'
     ],
+    coverageReporter: 'test/coverage',
     masks: ['Spec', 'Dot', 'Nyan', 'Landing', 'List', 'Progress', 'Min', 'Html'],
+    phantomResources: [
+        'test/platzi.html',
+        'test/osmani-oreilly.html'
+    ],
     mochaOptions: {
         reporter: '<%= mochaReporterMask %>',
         run: true,
         logErrors: true,
         log: true
-        /*coverage: {
-         htmlReport: 'example/test/results/coverage.out/html',
-         coberturaReport: 'example/test/results/coverage.out/cobertura',
-         lcovReport: 'example/test/results/coverage.out/lcov',
-         cloverReport: 'example/test/results/coverage.out/clover',
-         jsonReport: 'example/test/results/coverage.out/json'
-         }*/
+    },
+    mochaOptionsWithCoverage: {
+        reporter: '<%= mochaReporterMask %>',
+        run: true,
+        coverage: {
+            htmlReport: '<%= mocha.coverageReporter %>/html',
+            coberturaReport: '<%= mocha.coverageReporter %>/cobertura',
+            lcovReport: '<%= mocha.coverageReporter %>/lcov',
+            cloverReport: '<%= mocha.coverageReporter %>/clover',
+            jsonReport: '<%= mocha.coverageReporter %>/json'
+        }
     },
     dev: {
         options: '<%= mocha.mochaOptions %>',
-        src: [
-            'test/platzi.html',
-            'test/osmani-oreilly.html'
-        ],
+        src: '<%= mocha.phantomResources %>',
+        dest: '<%= mochaReporterOutput %>'
+    },
+    coverage: {
+        options: '<%= mocha.mochaOptionsWithCoverage %>',
+        src: '<%= mocha.phantomResources %>',
         dest: '<%= mochaReporterOutput %>'
     }
 };

@@ -13,6 +13,8 @@ module.exports = function (grunt) {
         .setTasks([
             'mocha:dev',
             'verifyOutput:force'
+            //'verifyOutput:mocha',
+            //'clean:mocha'
         ])
         .setConfigTask(function (grunt) {
             var listReporter = grunt.config.get('mocha.reporters'),
