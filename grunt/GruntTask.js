@@ -16,7 +16,7 @@ var GruntTask,
 GruntTask = function (options) {
     this.name = options.name || null;
     this.description = options.description || 'Unknown definition task.';
-    this.tasks = options.tasks || null;
+    this.tasks = options.tasks || [];
     this.environment = options.environment;
     this.runConfig = options.runConfig || _.identity;
 };
@@ -32,8 +32,8 @@ _.assign(GruntTask.prototype, {
 
         return this;
     },
-    setTasks: function (plugin) {
-        this.tasks = plugin;
+    setTasks: function (tasks) {
+        this.tasks = tasks;
 
         return this;
     },
@@ -51,7 +51,7 @@ _.assign(GruntTask.prototype, {
         if (_.isNull(this.name)) {
             throw new Error('Could not initialize grunt task without \'name\' property.');
 
-        } else if (_.isNull(this.tasks) || (!_.isFunction(this.tasks) & !_.isArray(this.tasks))) {
+        } else if (!_.isArray(this.tasks)) {
             throw new Error('Not valid task from object type: ' +
                 Object.prototype.toString.call(this.tasks) + ' for task ' + this.name + '.js');
 
@@ -62,13 +62,9 @@ _.assign(GruntTask.prototype, {
     },
     runTask: function (grunt) {
         logger.info(this.description);
-
-        if (_.isFunction(this.tasks)) {
-            this.tasks(grunt);
-
-        } else if (_.isArray(this.tasks)) {
-            grunt.task.run(this.tasks);
-        }
+        grunt.config.set('taskEnvironment', this.environment);
+        this.runConfig(grunt);
+        grunt.task.run(this.tasks);
     },
     register: function (grunt) {
         try {
@@ -79,11 +75,7 @@ _.assign(GruntTask.prototype, {
             global.process.exit(0);
 
         } finally {
-            grunt.registerTask(this.name, this.description, _.bind(function () {
-                grunt.config.set('taskEnvironment', this.environment);
-                this.runConfig(grunt);
-                this.runTask(grunt);
-            }, this));
+            grunt.registerTask(this.name, this.description, _.bindKey(this, 'runTask', grunt));
         }
     }
 });

@@ -10,7 +10,7 @@
     "lodash": "^4.14.1"
   },
   "scripts": {
-    "unittest": "grunt bundle test --reporter=spec --mask=spec",
+    "unittest": "grunt bundle test --reporter=spec --mask=Spec",
     "coverage": "npm run unittest && grunt coverage"
   },
   "devDependencies": {
@@ -27,7 +27,7 @@
     "grunt-eslint": "~17.3.1",
     "grunt-istanbul": "^0.7.1",
     "grunt-jscs": "~2.4.0",
-    "grunt-mocha": "^1.0.2",
+    "grunt-mocha-phantom-istanbul": "^0.2.1",
     "grunt-newer": "~1.1.1",
     "jshint-stylish": "~2.1.0",
     "load-grunt-configs": "~0.4.3",

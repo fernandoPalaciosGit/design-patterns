@@ -36,7 +36,7 @@ describe('Design patterns', function () {
         });
 
         it('should avoid construct instance from a non valid builders', function (next) {
-            expect(_.partial(carDirector.createCar.bind(carDirector), Object.prototype.constructor))
+            expect(_.bindKey(carDirector, 'createCar', Object.prototype.constructor))
                 .to.throw(TypeError);
             next();
         });

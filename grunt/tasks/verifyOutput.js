@@ -21,6 +21,29 @@ verifyOutput = function (grunt) {
     } else {
         logger.info('Reporter output available on : ' + reporter);
     }
+
+    // Check for Coverage Reports.
+    /*
+    var expectedCoverage = [
+        'cobertura/cobertura-coverage.xml',
+        'lcov/lcov.info',
+        'clover/clover.xml',
+        'json/coverage.json',
+        'html/index.html'
+    ];
+
+    expectedCoverage.forEach(function (reporter) {
+        var output = 'example/test/results/coverage.out/' + reporter;
+
+        if (!grunt.file.read(output, 'utf8')) {
+            grunt.fatal('Empty reporter output: ' + reporter);
+        }
+
+        grunt.log.ok('Reporter output non-empty for %s', reporter);
+    });
+
+    // clean up
+    grunt.file.delete('example/test/results/coverage.out');*/
 };
 
 module.exports = function (grunt) {
@@ -29,6 +52,6 @@ module.exports = function (grunt) {
         .setName(utilsTask.getPath(__filename))
         .setDescription('Verify file output mocha tests.')
         .setTaskEvironment('dev')
-        .setTasks(verifyOutput)
+        .setConfigTask(verifyOutput)
         .register();
 };
