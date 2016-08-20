@@ -14,21 +14,17 @@ module.exports = {
         return path.basename(filename, '.js');
     },
     validateMochaReporter: function (list, selected) {
-        try {
-            if (_.isString(selected) && _.isArray(list) && !_.isEmpty(list)) {
-                return _.find(list, function (reporter) {
-                        return _.includes(reporter, selected);
-                    }) || list[0];
+        var valid = _.isString(selected) && _.isArray(list) && !_.isEmpty(list) &&
+            _.find(list, function (reporter) {
+                return _.includes(reporter, selected);
+            });
 
-            } else {
-                throw new Error('Has\'nt specified mocha list reporter, ' +
-                    'or selected target reporter for unit test.');
-            }
-
-        } catch (err) {
-            this.logger.alert(err.message);
-            global.process.exit(0);
+        if (!_.isString(valid)) {
+            throw new Error('Has\'nt specified mocha list reporter (--reporter), ' +
+                'or not valid selected target reporter (--mask) for task test.js');
         }
+
+        return valid;
     },
     logger: {
         alert: _.partial(_logMessage, colors.red.underline),

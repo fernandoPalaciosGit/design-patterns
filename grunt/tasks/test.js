@@ -1,19 +1,10 @@
 module.exports = function (grunt) {
     'use strict';
 
-    var _ = require('lodash'),
-        utilsTask = require('../UtilsTask'),
+    var utilsTask = require('../UtilsTask'),
         gruntTask = require('../GruntTask'),
-        newTask = gruntTask(grunt), configTask,
-        listReporter = grunt.config.get('mochaListReporter'),
-        maskReporter = grunt.config.get('mochaMaskReporter'),
-        reporter = grunt.option('reporter'),
-        mask = grunt.option('mask');
-
-    configTask = function (grunt) {
-        grunt.config.set('mochaReporterOutput', utilsTask.validateMochaReporter(listReporter, reporter));
-        grunt.config.set('mochaReporterMask', utilsTask.validateMochaReporter(maskReporter, mask));
-    };
+        logger = utilsTask.logger,
+        newTask = gruntTask(grunt);
 
     newTask
         .setName(utilsTask.getPath(__filename))
@@ -23,6 +14,19 @@ module.exports = function (grunt) {
             'mocha:dev',
             'verifyOutput:force'
         ])
-        .setConfigTask(_.partial(_.bind(configTask, newTask), grunt))
+        .setConfigTask(function (grunt) {
+            var listReporter = grunt.config.get('mocha.reporters'),
+                maskReporter = grunt.config.get('mocha.masks'),
+                reporter = grunt.option('reporter'),
+                mask = grunt.option('mask');
+
+            try {
+                grunt.config.set('mochaReporterOutput', utilsTask.validateMochaReporter(listReporter, reporter));
+                grunt.config.set('mochaReporterMask', utilsTask.validateMochaReporter(maskReporter, mask));
+            } catch (err) {
+                logger.alert(err.message);
+                global.process.exit(0);
+            }
+        })
         .register();
 };

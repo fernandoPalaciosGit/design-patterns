@@ -17,7 +17,8 @@ GruntTask = function (options) {
     this.name = options.name || null;
     this.description = options.description || 'Unknown definition task.';
     this.tasks = options.tasks || null;
-    this.environment = this.setEnvironment(options.environment);
+    this.environment = options.environment;
+    this.runConfig = options.runConfig || _.identity;
 };
 
 _.assign(GruntTask.prototype, {
@@ -41,34 +42,22 @@ _.assign(GruntTask.prototype, {
 
         return this;
     },
-    setEnvironment: function (env) {
-        var valid = ['dev', 'dist', 'qa'],
-            defaultEnvironment = valid[0];
-
-        return _.includes(valid, env) ? env : defaultEnvironment;
-    },
     setConfigTask: function (callbackConfig) {
-        if (_.isFunction(callbackConfig)) {
-            this.setConfigTask = callbackConfig;
-
-        } else if (_.isNull(callbackConfig)) {
-            this.setConfigTask();
-            delete this.setConfigTask;
-        }
+        this.runConfig = callbackConfig;
 
         return this;
     },
     verifyTask: function (grunt) {
-        try {
-            if (_.isNull(this.name)) {
-                throw new Error('Could not initialize grunt task without \'name\' property.');
+        if (_.isNull(this.name)) {
+            throw new Error('Could not initialize grunt task without \'name\' property.');
 
-            } else if (_.isNull(this.tasks) || (!_.isFunction(this.tasks) & !_.isArray(this.tasks))) {
-                throw new Error('Not valid task from object type: ' +
-                    Object.prototype.toString.call(this.tasks));
-            }
-        } catch (error) {
-            grunt.fail.fatal(error.message, 3);
+        } else if (_.isNull(this.tasks) || (!_.isFunction(this.tasks) & !_.isArray(this.tasks))) {
+            throw new Error('Not valid task from object type: ' +
+                Object.prototype.toString.call(this.tasks) + ' for task ' + this.name + '.js');
+
+        } else if (!_.includes(grunt.config.get('environmentTasks'), this.environment)) {
+            throw new Error('Not valid environment identifier ' +
+                this.environment + ' for task ' + this.name + '.js');
         }
     },
     runTask: function (grunt) {
@@ -82,12 +71,20 @@ _.assign(GruntTask.prototype, {
         }
     },
     register: function (grunt) {
-        this.verifyTask(grunt);
-        grunt.registerTask(this.name, this.description, _.bind(function () {
-            grunt.config.set('taskEnvironment', this.environment);
-            this.setConfigTask(null);
-            this.runTask(grunt);
-        }, this));
+        try {
+            this.verifyTask(grunt);
+
+        } catch (error) {
+            logger.alert(error.message);
+            global.process.exit(0);
+
+        } finally {
+            grunt.registerTask(this.name, this.description, _.bind(function () {
+                grunt.config.set('taskEnvironment', this.environment);
+                this.runConfig(grunt);
+                this.runTask(grunt);
+            }, this));
+        }
     }
 });
 

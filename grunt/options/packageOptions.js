@@ -9,13 +9,7 @@ var _ = require('lodash'),
     options = {
         packageJson: '<% grunt.file.readJSON(\'package.json\') %>',
         gruntRuntimeConfig: 'grunt/runtime-config',
-        mochaListReporter: [
-            'test/spec.out',
-            'test/html.out',
-            'test/xunit.out'
-        ],
-        mochaMaskReporter: ['spec', 'dot', 'nyan', 'TAP', 'landing', 'list',
-            'progress', 'JSON', 'JSON stream', 'min', 'doc'],
+        environmentTasks: ['dev', 'dist', 'qa'],
         coverageReporter: 'test/coverage',
         linterJs: [
             'Gruntfile.js',

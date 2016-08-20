@@ -1,12 +1,11 @@
 module.exports = function (grunt) {
     'use strict';
 
-    var _ = require('lodash'),
-        utilsTask = require('../UtilsTask'),
+    var utilsTask = require('../UtilsTask'),
         gruntTask = require('../GruntTask'),
-        newTask = _.partial(gruntTask, grunt);
+        newTask = gruntTask(grunt);
 
-    newTask()
+    newTask
         .setName(utilsTask.getPath(__filename))
         .setDescription('JavaScript code coverage.')
         .setTaskEvironment('dev')
