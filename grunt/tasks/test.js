@@ -30,8 +30,7 @@ module.exports = function (grunt) {
         .setTaskEvironment('dev')
         .setTasks([
             'mocha:dev',
-            'verifyOutput'
-            //'clean:mocha'
+            'verifyOutput:force'
         ])
         .setConfigTask(configTask)
         .register();

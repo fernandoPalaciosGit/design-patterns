@@ -4,5 +4,7 @@ node_modules
 npm-debug.log
 build
 test/*.out
-test/coverage
+!test/coverage/
+test/coverage/*
+!test/coverage/html/
 bower_components

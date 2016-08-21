@@ -17,8 +17,7 @@ module.exports = function (grunt) {
         .setTasks([
             'clean:coverage',
             'mocha:coverage',
-            'verifyOutput'
-            // 'readmeCoverage' // copy coverage.html report to readme
+            'verifyOutput:force'
         ])
         .setConfigTask(configTask)
         .register();
