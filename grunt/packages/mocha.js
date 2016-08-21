@@ -17,7 +17,6 @@ module.exports = {
         log: true
     },
     mochaOptionsWithCoverage: {
-        reporter: '<%= mochaReporterMask %>',
         run: true,
         coverage: {
             htmlReport: '<%= mocha.coverageReporter %>/html',
@@ -28,13 +27,12 @@ module.exports = {
         }
     },
     dev: {
-        options: '<%= mocha.mochaOptions %>',
         src: '<%= mocha.phantomResources %>',
-        dest: '<%= mochaReporterOutput %>'
+        dest: '<%= mochaReporterOutput %>',
+        options: '<%= mocha.mochaOptions %>'
     },
     coverage: {
-        options: '<%= mocha.mochaOptionsWithCoverage %>',
         src: '<%= mocha.phantomResources %>',
-        dest: '<%= mochaReporterOutput %>'
+        options: '<%= mocha.mochaOptionsWithCoverage %>'
     }
 };

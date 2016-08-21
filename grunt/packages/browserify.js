@@ -6,11 +6,11 @@
  * options.browserifyOptions.debug: Source mapping
  */
 module.exports = {
-    setBrowserifyOptions: function (options) {
-        return require('util')._extend({
-            debug: false,
-            transform: ['browserify-shim']
-        }, options);
+    options: {
+        transform: ['browserify-shim'],
+        browserifyOptions: {
+            debug: true
+        }
     },
     vendorLibraries: {
         app: ['lodash', 'jquery'],
@@ -26,8 +26,8 @@ module.exports = {
     },
     'dev-test': {
         options: {
-            browserifyOptions: '<% browserify.setBrowserifyOptions({debug: true}) %>',
-            external: '<%= browserify.vendorLibraries.test %>'
+            external: '<%= browserify.vendorLibraries.test %>',
+            transform: ['browserify-istanbul']
         },
         files: [
             {
@@ -50,7 +50,6 @@ module.exports = {
     },
     'dev-app-widget': {
         options: {
-            browserifyOptions: '<% browserify.setBrowserifyOptions({debug: true}) %>',
             external: '<%= browserify.vendorLibraries.app %>'
         },
         files: [

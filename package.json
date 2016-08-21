@@ -10,11 +10,14 @@
     "lodash": "^4.14.1"
   },
   "scripts": {
-    "unittest": "grunt bundle test --reporter=spec --mask=Spec",
-    "coverage": "grunt coverage --reporter=spec --mask=Spec"
+    "test": "grunt bundle test --reporter=spec --mask=Spec",
+    "testdebug": "node-debug /usr/local/lib/node_modules/grunt/bin/grunt test --reporter=spec --mask=Spec",
+    "coverage": "grunt coverage --reporter=spec --mask=Spec",
+    "app": "npm run test && npm run coverage && xdg-open test/coverage/html/index.html"
   },
   "devDependencies": {
     "browserify": "^13.1.0",
+    "browserify-istanbul": "^2.0.0",
     "browserify-shim": "^3.8.12",
     "chai": "^3.5.0",
     "colors": "^1.1.2",
@@ -28,6 +31,7 @@
     "grunt-jscs": "~2.4.0",
     "grunt-mocha-phantom-istanbul": "^0.2.1",
     "grunt-newer": "~1.1.1",
+    "istanbul": "^0.4.4",
     "jshint-stylish": "~2.1.0",
     "load-grunt-configs": "~0.4.3",
     "load-grunt-tasks": "~3.3.0",

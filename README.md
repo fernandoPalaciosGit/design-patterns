@@ -1,11 +1,7 @@
 ## Design patterns examples
 
-- Mocha test
+- Run Mocha test and istanbul coverage
 ```bash
-$npm run unittest
-```
-
-- istanbul coverage
-```bash
-$npm run coverage
+$npm install
+$npm run app # open coverage into: test/coverage/html
 ```
