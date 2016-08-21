@@ -10,6 +10,13 @@ module.exports = {
         'test/platzi.html',
         'test/osmani-oreilly.html'
     ],
+    coverageTarget: [
+        '<%= mocha.coverageReporter %>/cobertura/cobertura-coverage.xml',
+        '<%= mocha.coverageReporter %>/lcov/lcov.info',
+        '<%= mocha.coverageReporter %>/clover/clover.xml',
+        '<%= mocha.coverageReporter %>/json/coverage.json',
+        '<%= mocha.coverageReporter %>/html/index.html'
+    ],
     mochaOptions: {
         reporter: '<%= mochaReporterMask %>',
         run: true,

@@ -58,6 +58,10 @@ _.assign(GruntTask.prototype, {
         } else if (!_.includes(grunt.config.get('environmentTasks'), this.environment)) {
             throw new Error('Not valid environment identifier ' +
                 this.environment + ' for task ' + this.name + '.js');
+
+        } else if (!_.isFunction(this.runConfig)) {
+            throw new Error('this.runConfig callback for task configuration is not a function closure, ' +
+                'instead get: ' + this.runConfig);
         }
     },
     runTask: function (grunt) {

@@ -1,17 +1,21 @@
 'use strict';
 
-var verifyOutput, newTask,
+var newTask, configTask,
     _ = require('lodash'),
     logger = require('./../UtilsTask').logger,
     utilsTask = require('../UtilsTask'),
-    gruntTask = require('../GruntTask');
+    gruntTask = require('../GruntTask'),
+    verifyOuptputByTarget = {
+        unittest: _.identity,
+        coverage: _.identity
+    };
 
 /**
  * Check if the file is non-empty since verifying if the output is
  * correct based on the spec is kind of hard due to changing test running
  * times and different ways to report this time in reporters.
  */
-verifyOutput = function (grunt) {
+verifyOuptputByTarget.unittest = function (grunt) {
     var reporter = grunt.config.get('mocha.dev.dest');
 
     if (!grunt.file.read(reporter, 'utf8')) {
@@ -21,29 +25,29 @@ verifyOutput = function (grunt) {
     } else {
         logger.info('Reporter output available on : ' + reporter);
     }
+};
 
-    // Check for Coverage Reports.
-    /*
-    var expectedCoverage = [
-        'cobertura/cobertura-coverage.xml',
-        'lcov/lcov.info',
-        'clover/clover.xml',
-        'json/coverage.json',
-        'html/index.html'
-    ];
+/**
+ * Check for Coverage Reports.
+ */
+verifyOuptputByTarget.coverage = function (grunt) {
+    var expectedCoverage = grunt.config.get('mocha.coverageTarget');
 
     expectedCoverage.forEach(function (reporter) {
-        var output = 'example/test/results/coverage.out/' + reporter;
+        if (!grunt.file.read(reporter, 'utf8')) {
+            grunt.fail.fatal('Empty reporter output: ' + reporter, 4);
+            grunt.file.delete(reporter);
 
-        if (!grunt.file.read(output, 'utf8')) {
-            grunt.fatal('Empty reporter output: ' + reporter);
+        } else {
+            logger.info('Reporter output available on : ' + reporter);
         }
-
-        grunt.log.ok('Reporter output non-empty for %s', reporter);
     });
+};
 
-    // clean up
-    grunt.file.delete('example/test/results/coverage.out');*/
+configTask = function (grunt) {
+    var verifyTarget = grunt.config.get('verifyTest');
+
+    return verifyOuptputByTarget[verifyTarget](grunt);
 };
 
 module.exports = function (grunt) {
@@ -52,6 +56,6 @@ module.exports = function (grunt) {
         .setName(utilsTask.getPath(__filename))
         .setDescription('Verify file output mocha tests.')
         .setTaskEvironment('dev')
-        .setConfigTask(verifyOutput)
+        .setConfigTask(configTask)
         .register();
 };
