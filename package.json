@@ -21,7 +21,7 @@
     "chai": "^3.5.0",
     "colors": "^1.1.2",
     "eslint-tap": "~1.1.0",
-    "grunt": "~1.0",
+    "grunt": "1.0",
     "grunt-browserify": "^5.0.0",
     "grunt-concurrent": "~2.1.0",
     "grunt-contrib-clean": "~0.7.0",
