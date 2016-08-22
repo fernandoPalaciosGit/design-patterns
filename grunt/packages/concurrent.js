@@ -4,7 +4,11 @@ module.exports = {
     },
     jsLinters: {
         tasks: [
-            'newer:jshint:<%= taskEnvironment %>'
+            'yaml_validator:<%= taskEnvironment %>',
+            'jsonlint:<%= taskEnvironment %>',
+            'jshint:<%= taskEnvironment %>'
+            //'jscs:<%= taskEnvironment %>'
+            //'eslint:<%= taskEnvironment %>'
         ]
     },
     jsAppCompile: {

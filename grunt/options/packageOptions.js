@@ -15,6 +15,20 @@ var _ = require('lodash'),
             'grunt/**/*.js',
             '<%= bundleJS.dirDev %>'
         ],
+        linterYaml: [
+            '.travis.yml',
+            'grunt/**/.*yml',
+            '<%= projectPaths.appOsmaniOreilly.application %>/**/*.yml',
+            '<%= projectPaths.appPlatzi.application %>/**/*.yml'
+        ],
+        linterJson: [
+            'package.json',
+            'bower.json',
+            'grunt/**/*.json',
+            'grunt/**/.*rc',
+            '<%= projectPaths.appOsmaniOreilly.application %>/**/*.json',
+            '<%= projectPaths.appPlatzi.application %>/**/*.json'
+        ],
         bundleJS: {
             dirDev: [
                 '<%= projectPaths.appOsmaniOreilly.application %>/**/*.js',

@@ -1,0 +1,17 @@
+# Editorconfig files will stop at this path
+root = true
+
+[*]
+charset = utf-8
+trim_trailing_whitespace = true
+
+# Unix-style newlines with a newline ending every file
+end_of_line = lf
+insert_final_newline = true
+
+# 4 space indentation
+indent_style = tab
+tab_width = 2
+
+[*.md]
+trim_trailing_whitespace = false
