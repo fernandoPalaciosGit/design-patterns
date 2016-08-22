@@ -11,9 +11,8 @@
 <div id="mocha"></div>
 
 <!-- mocha -->
-<script src="../node_modules/grunt-mocha-phantom-istanbul/node_modules/mocha/mocha.js"
-        type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" charset="utf-8">
+<script src="../node_modules/grunt-mocha-phantom-istanbul/node_modules/mocha/mocha.js"></script>
+<script>
     mocha.setup({
         // The BDD interface provides describe() == context(), it() == specify(), before(), after(), beforeEach(), and afterEach()
         ui: 'bdd',
@@ -23,13 +22,13 @@
 </script>
 
 <!-- Include your lib of choice -->
-<script src="../build/vendors/vendors.test.bundle.js" type="text/javascript" charset="utf-8"></script>
+<script src="../build/vendors/vendors.test.bundle.js"></script>
 
 <!-- Spec test files -->
-<script src="../build/mocha/osmani-oreilly/mocha.spec.bundle.js" type="text/javascript" charset="utf-8"></script>
+<script src="../build/mocha/osmani-oreilly/mocha.spec.bundle.js"></script>
 
 <!-- run mocha -->
-<script type="text/javascript" charset="utf-8">
+<script>
     // Only tests run in real browser, injected script run if options.run == true
     if (navigator.userAgent.indexOf('PhantomJS') < 0) {
         mocha.run();
