@@ -9,6 +9,7 @@ module.exports = {
     options: {
         transform: ['browserify-shim'],
         browserifyOptions: {
+            global: true,
             debug: true
         }
     },
