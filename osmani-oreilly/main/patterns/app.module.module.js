@@ -66,7 +66,7 @@ bascketModule.addItem({price: 25, itemName: 'jam'});
 
 // ERROR : cannot access private members from outsite
 bascketModule.getItemName = function (indexItem) {
-    /* jshint undef: false */
+    /* globals _bascket */
     return _bascket[indexItem].itemName;
 };
 
