@@ -19,6 +19,7 @@
     "browserify-istanbul": "^2.0.0",
     "browserify-shim": "^3.8.12",
     "chai": "^3.5.0",
+    "chai-jquery": "^2.0.0",
     "colors": "^1.1.2",
     "eslint-tap": "~1.1.0",
     "grunt": "^0.4.5",

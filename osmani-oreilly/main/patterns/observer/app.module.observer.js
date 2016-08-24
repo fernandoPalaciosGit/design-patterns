@@ -1,17 +1,5 @@
 'use strict';
 
-var $ = require('jquery');
-
-// PUBLISHER - BROADCASTING
-$(window.obj).trigger('channel', [{arg1: 1, arg2: 2}, 'arg3']);
-
-// SUBSCRIBE - LISTEN
-$(window.obj).on('channel.namespace', 'delegate', window.alert);
-$(window.obj).off('channel.namespace');
-
-// SAMPLE PUB/SUBS IMPLEMENTATION
-var pubsub = {};
-
 ( function observerInterface(pb) {
 
     var channels = {},
@@ -71,28 +59,3 @@ var pubsub = {};
         }
     };
 }(pubsub) );
-
-// TEST : publish and subscribe events
-var eventHandler = function (channel, data) {
-    console.log(channel, data);
-};
-
-// subscribe ~~ listen
-// once they have been notificated, functions are invoked
-var testSubsTokenChannel = pubsub.subscribe('testSubscribe', eventHandler);
-
-
-// publish notifications about events
-pubsub.publish('testSubscribe', 'hello world');
-pubsub.publish('testSubscribe', ['test', 'a', 'b']);
-pubsub.publish('testSubscribe', [{
-    'color': 'colorTest'
-}, {
-    'tets': 'testing'
-}]);
-
-// unsubscribe if you no longet notfication about this action
-pubsub.unsubscribe(testSubsTokenChannel);
-
-// now tere is no publish action to testSubscribe
-pubsub.publish('testSubscribe', 'Nooooo failed.');
