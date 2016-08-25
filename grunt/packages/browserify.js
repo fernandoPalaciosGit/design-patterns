@@ -9,7 +9,7 @@ module.exports = {
     options: {
         transform: ['browserify-shim'],
         browserifyOptions: {
-            debug: true
+            debug: false
         }
     },
     vendorLibraries: {
@@ -27,7 +27,10 @@ module.exports = {
     'dev-test': {
         options: {
             external: '<%= browserify.vendorLibraries.test %>',
-            transform: ['browserify-istanbul']
+            transform: ['browserify-istanbul'],
+            browserifyOptions: {
+                debug: true
+            }
         },
         files: [
             {
@@ -50,7 +53,10 @@ module.exports = {
     },
     'dev-app-widget': {
         options: {
-            external: '<%= browserify.vendorLibraries.app %>'
+            external: '<%= browserify.vendorLibraries.app %>',
+            browserifyOptions: {
+                debug: true
+            }
         },
         files: [
             {
