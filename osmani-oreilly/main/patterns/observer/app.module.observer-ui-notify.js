@@ -29,21 +29,17 @@ var Grid = function (options) {
 
 _.assign(Grid.prototype, {
     refreshData: function (state) {
-        console.log('AAAAAAAAAAAAAAAAAAAAA');
         Schema.state = buildModel(
             !_.isUndefined(state) ? state : 'Last updated ',
             'Update grid component with new pull data',
             getCurrentime()
         );
-        console.log(Schema.state);
     },
     updateCounter: function (timer) {
         Schema.timer = buildModel(
             'Data updated : ',
             _.isDate(timer) ? timer : getCurrentime()
         );
-        console.log('BBBBBBBBBBBBBBBBBBBBBBB');
-        console.log(Schema.timer);
     },
     update: function (model) {
         var data = _.isUndefined(model) ? {} : model;

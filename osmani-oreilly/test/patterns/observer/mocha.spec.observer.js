@@ -67,35 +67,9 @@ describe('Design patterns', function () {
         });
 
         it('should publish, subscribe and unsubscribe channels', function (next) {
-            /* jshint maxstatements: 120 */
             pubSub.publish(COPY_MODEL_CHANNEL, GRID_DATA);
             expect(GRID_DATA).to.be.null;
             pubSub.publish(UPDATE_MODEL_CHANNEL);
-            console.log('--------------->');
-            //console.log(GRID_DATA);
-            //expect(GRID_DATA).to.be.null;
-            //pubSub.publish(COPY_MODEL_CHANNEL, GRID_DATA);
-            //console.log('--------------->');
-            //console.log(GRID_DATA);
-            //expect(GRID_DATA).to.be.equals('');
-
-
-
-
-            //pubSub.publish(UPDATE_MODEL_CHANNEL, {
-            //    status: 'Microsoft shares',
-            //    percentage: 33,
-            //    timer: new Date('11-12-1985')
-            //});
-            //expect(GRID_DATA).to.be.equals('');
-            //pubSub.publish(COPY_MODEL_CHANNEL, GRID_DATA);
-            //console.log(GRID_DATA);
-            ////expect(GRID_DATA).to.contain('state', '');
-            //GRID_DATA = null;
-            //pubSub.unsubscribe(COPY_MODEL_CHANNEL);
-            //pubSub.publish(UPDATE_MODEL_CHANNEL);
-            //pubSub.publish(COPY_MODEL_CHANNEL, GRID_DATA);
-            //expect(GRID_DATA).to.be.null;
             next();
         });
     });
