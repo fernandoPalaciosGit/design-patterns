@@ -91,5 +91,13 @@ describe('Design patterns', function () {
             expect(grid.model).to.contain(new Date(1985, 12, 11));
             next();
         });
+
+        it('should stop publish data propagation', function (next) {
+            pubSub.unsubscribe(UPDATE_MODEL_CHANNEL);
+            pubSub.publish(UPDATE_SCHEMA_CHANNEL);
+            pubSub.publish(UPDATE_MODEL_CHANNEL);
+            expect(grid.model).to.be.null;
+            next();
+        });
     });
 });
