@@ -56,6 +56,7 @@ describe('Design patterns', function () {
         var pubSub = require('./../../../main/patterns/observer/app.module.observer'),
             createUiLayout = require('./../../../main/patterns/observer/app.module.observer-ui-notify'),
             timer = require('./../../../main/utils/Timer'),
+            trimEndDataFromCurrentTimer = _.replace(timer.getCurrentime(), /\/\w*$/, ''),
             grid, UPDATE_SCHEMA_CHANNEL = 'updategrid', UPDATE_MODEL_CHANNEL = 'copycat';
 
         beforeEach(function () {
@@ -70,9 +71,7 @@ describe('Design patterns', function () {
         });
 
         it('should connect module properties by subscribe handlers and publish data', function (next) {
-            /* jshint maxstatements: 14 */
-            var trimEndDataFromCurrentTimer = _.replace(timer.getCurrentime(), /\/\w*$/, '');
-
+            /* jshint maxstatements: 13 */
             expect(grid).to.have.property('model').to.be.null;
             pubSub.publish(UPDATE_MODEL_CHANNEL);
             expect(grid.model).to.be.null;
@@ -97,6 +96,10 @@ describe('Design patterns', function () {
             pubSub.publish(UPDATE_SCHEMA_CHANNEL);
             pubSub.publish(UPDATE_MODEL_CHANNEL);
             expect(grid.model).to.be.null;
+            pubSub.subscribe(UPDATE_MODEL_CHANNEL, _.bind(grid.copyModel, grid));
+            pubSub.publish(UPDATE_MODEL_CHANNEL);
+            expect(grid.model).to.contain('Last updated<-->');
+            expect(grid.model).to.contain(trimEndDataFromCurrentTimer);
             next();
         });
     });

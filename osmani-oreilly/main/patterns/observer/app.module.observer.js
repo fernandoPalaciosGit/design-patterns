@@ -2,8 +2,7 @@
 
 var _ = require('lodash'),
     observer = {},
-    channels = [],
-    subUid = -1;
+    channels = [];
 
 observer.publish = function (channel, data) {
     var subscriber = channels[channel],
@@ -20,25 +19,23 @@ observer.publish = function (channel, data) {
 
 
 observer.subscribe = function (channel, handler) {
-    var subscriber = channels[channel],
-        tokenChannel = (++subUid).toString();
+    var subscriber = channels[channel];
 
     if (!subscriber) {
         channels[channel] = [];
     }
 
     channels[channel].push({
-        tokenChannel: tokenChannel,
+        tokenChannel: channel,
         func: handler
     });
-
-    return tokenChannel;
 };
 
 observer.unsubscribe = function (token) {
     _.forOwn(channels, function (subscribers, channel) {
         _.each(subscribers, function (subscriber) {
             if (subscriber.tokenChannel === token) {
+                console.log(token);
                 delete channels[channel];
                 return token;
             }
