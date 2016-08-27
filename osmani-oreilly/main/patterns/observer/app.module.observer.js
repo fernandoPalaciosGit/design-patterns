@@ -5,13 +5,13 @@ var _ = require('lodash'),
     channels = [],
     subUid = -1;
 
-observer.publish = function (channel, args) {
+observer.publish = function (channel, data) {
     var subscriber = channels[channel],
         nextChannel = subscriber ? subscriber.length : null;
 
     if (!_.isNull(nextChannel)) {
         while (nextChannel-- > 0) {
-            channels[channel][nextChannel].func(channel, args);
+            channels[channel][nextChannel].func(data);
         }
 
         return this;

@@ -26,6 +26,13 @@ module.exports = {
 
         return valid;
     },
+    getPlatformCommands: function () {
+        var isWindowsOS = /^win/.test(process.platform),
+            windowsOS = './commands/windows',
+            unixOS = './commands/unix';
+
+        return isWindowsOS ? require(windowsOS) : require(unixOS);
+    },
     logger: {
         alert: _.partial(_logMessage, colors.red.underline),
         warning: _.partial(_logMessage, colors.yellow.underline),

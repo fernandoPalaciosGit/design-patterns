@@ -53,6 +53,7 @@ var _ = require('lodash'),
             ]
         },
         projectPaths: {
+            git: '.git/hooks',
             appOsmaniOreilly: {
                 host: '127.0.0.1',
                 port: '80',

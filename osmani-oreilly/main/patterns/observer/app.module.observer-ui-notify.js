@@ -9,8 +9,11 @@ var _ = require('lodash'),
             t = date.toLocaleTimeString().toLowerCase();
         return (m + '/' + d + '/' + y + '/' + t);
     },
+    checkEsquemaPopulate = function (args) {
+        return _.chain(args).compact().isEmpty().value();
+    },
     buildModel = function () {
-        return '\n' + _.join(arguments, '<->');
+        return checkEsquemaPopulate(arguments) ? '\n' + _.join(arguments, '<->') : null;
     },
     Schema = {
         state: null,
@@ -18,23 +21,29 @@ var _ = require('lodash'),
     };
 
 var Grid = function (options) {
-    Schema.state = options.state;
-    Schema.timer = options.timer;
+    if (checkEsquemaPopulate(arguments)) {
+        Schema.state = options.state;
+        Schema.timer = options.timer;
+    }
 };
 
 _.assign(Grid.prototype, {
     refreshData: function (state) {
+        console.log('AAAAAAAAAAAAAAAAAAAAA');
         Schema.state = buildModel(
             !_.isUndefined(state) ? state : 'Last updated ',
             'Update grid component with new pull data',
             getCurrentime()
         );
+        console.log(Schema.state);
     },
     updateCounter: function (timer) {
         Schema.timer = buildModel(
             'Data updated : ',
             _.isDate(timer) ? timer : getCurrentime()
         );
+        console.log('BBBBBBBBBBBBBBBBBBBBBBB');
+        console.log(Schema.timer);
     },
     update: function (model) {
         var data = _.isUndefined(model) ? {} : model;
