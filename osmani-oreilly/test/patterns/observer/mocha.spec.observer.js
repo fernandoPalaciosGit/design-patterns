@@ -55,21 +55,40 @@ describe('Design patterns', function () {
     context('observer interface test interfaces', function () {
         var pubSub = require('./../../../main/patterns/observer/app.module.observer'),
             createUiLayout = require('./../../../main/patterns/observer/app.module.observer-ui-notify'),
-            grid, GRID_DATA = {},
-            UPDATE_MODEL_CHANNEL = 'updategrid',
-            COPY_MODEL_CHANNEL = 'copycat';
+            timer = require('./../../../main/utils/Timer'),
+            grid, UPDATE_SCHEMA_CHANNEL = 'updategrid', UPDATE_MODEL_CHANNEL = 'copycat';
 
-        before(function () {
+        beforeEach(function () {
             grid = createUiLayout();
-            GRID_DATA = null;
-            pubSub.subscribe(COPY_MODEL_CHANNEL, grid.copyModel);
-            pubSub.subscribe(UPDATE_MODEL_CHANNEL, _.bind(grid.update, grid));
+            pubSub.subscribe(UPDATE_MODEL_CHANNEL, _.bind(grid.copyModel, grid));
+            pubSub.subscribe(UPDATE_SCHEMA_CHANNEL, _.bind(grid.update, grid));
         });
 
-        it('should publish, subscribe and unsubscribe channels', function (next) {
-            pubSub.publish(COPY_MODEL_CHANNEL, GRID_DATA);
-            expect(GRID_DATA).to.be.null;
+        afterEach(function () {
+            pubSub.unsubscribe(UPDATE_MODEL_CHANNEL);
+            pubSub.unsubscribe(UPDATE_SCHEMA_CHANNEL);
+        });
+
+        it('should connect module properties by subscribe handlers and publish data', function (next) {
+            /* jshint maxstatements: 14 */
+            var trimEndDataFromCurrentTimer = _.replace(timer.getCurrentime(), /\/\w*$/, '');
+
+            expect(grid).to.have.property('model').to.be.null;
             pubSub.publish(UPDATE_MODEL_CHANNEL);
+            expect(grid.model).to.be.null;
+            pubSub.publish(UPDATE_SCHEMA_CHANNEL);
+            expect(grid.model).to.be.null;
+            pubSub.publish(UPDATE_MODEL_CHANNEL);
+            expect(grid.model).to.contain('Last updated<-->');
+            expect(grid.model).to.contain(trimEndDataFromCurrentTimer);
+            pubSub.publish(UPDATE_SCHEMA_CHANNEL, {
+                status: 'Microsoft shares',
+                percentage: 33,
+                timer: new Date(1985, 12, 11)
+            });
+            pubSub.publish(UPDATE_MODEL_CHANNEL);
+            expect(grid.model).to.contain('Microsoft shares<-->');
+            expect(grid.model).to.contain(new Date(1985, 12, 11));
             next();
         });
     });
