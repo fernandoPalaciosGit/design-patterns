@@ -22,8 +22,9 @@ git checkout gh-pages
 git fetch
 git rebase origin/master
 #on Merge conflict: solve and continuous with git status instructions
-git commit -am "merge with local"
 npm run coverage
 git commit -am "new coverage report"
+git pull origin gh-pages
+git commit -am "merge with local"
 git push origin -u gh-pages
 ```
