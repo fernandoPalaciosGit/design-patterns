@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for platzi/main/patterns/builder/app.module.CarDirector.js</title>
+    <title>Code coverage report for osmani-oreilly/main/patterns/</title>
     <meta charset="utf-8">
 
-    <link rel="stylesheet" href="../../../../prettify.css">
+    <link rel="stylesheet" href="../../../prettify.css">
 
     <style>
         body, html {
@@ -196,101 +196,63 @@
 </head>
 <body>
 <div class="header high">
-    <h1>Code coverage report for <span class="entity">platzi/main/patterns/builder/app.module.CarDirector.js</span></h1>
+    <h1>Code coverage report for <span class="entity">osmani-oreilly/main/patterns/</span></h1>
     <h2>
         
-        Statements: <span class="metric">100% <small>(9 / 9)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">88.24% <small>(15 / 17)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">100% <small>(2 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">100% <small>(10 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class="metric">100% <small>(2 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">66.67% <small>(4 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">100% <small>(9 / 9)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">88.24% <small>(15 / 17)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
-    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">platzi/main/patterns/builder/</a> &#187; app.module.CarDirector.js</div>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; osmani-oreilly/main/patterns/</div>
 </div>
 <div class="body">
-<pre><table class="coverage">
-<tr><td class="line-count">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10</span>
-<span class="cline-any cline-yes">8</span>
-<span class="cline-any cline-yes">8</span>
-<span class="cline-any cline-yes">8</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
-&nbsp;
-var CarDirector,
-    isValidBuilder = require('./app.module.CarBuilder').isValidBuilder,
-    _ = require('lodash');
-&nbsp;
-CarDirector = function () {
-};
-&nbsp;
-_.assign(CarDirector.prototype, {
-    createCar: function (builderCar) {
-        if (isValidBuilder(builderCar)) {
-            builderCar.assemble();
-            builderCar.addAssets();
-            return builderCar.getResultCar();
-&nbsp;
-        } else {
-            throw new TypeError('Invalid Car builder type.');
-        }
-    }
-});
-&nbsp;
-module.exports = CarDirector;</pre></td></tr>
-</table></pre>
+<div class="coverage-summary">
+<table>
+<thead>
+<tr>
+   <th data-col="file" data-fmt="html" data-html="true" class="file">File</th>
+   <th data-col="pic" data-type="number" data-fmt="html" data-html="true" class="pic"></th>
+   <th data-col="statements" data-type="number" data-fmt="pct" class="pct">Statements</th>
+   <th data-col="statements_raw" data-type="number" data-fmt="html" class="abs"></th>
+   <th data-col="branches" data-type="number" data-fmt="pct" class="pct">Branches</th>
+   <th data-col="branches_raw" data-type="number" data-fmt="html" class="abs"></th>
+   <th data-col="functions" data-type="number" data-fmt="pct" class="pct">Functions</th>
+   <th data-col="functions_raw" data-type="number" data-fmt="html" class="abs"></th>
+   <th data-col="lines" data-type="number" data-fmt="pct" class="pct">Lines</th>
+   <th data-col="lines_raw" data-type="number" data-fmt="html" class="abs"></th>
+</tr>
+</thead>
+<tbody><tr>
+	<td class="file high" data-value="app.module.basic-inherit.js"><a href="app.module.basic-inherit.js.html">app.module.basic-inherit.js</a></td>
+	<td data-value="88.24" class="pic high"><span class="cover-fill" style="width: 88px;"></span><span class="cover-empty" style="width:12px;"></span></td>
+	<td data-value="88.24" class="pct high">88.24%</td>
+	<td data-value="17" class="abs high">(15&nbsp;/&nbsp;17)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="10" class="abs high">(10&nbsp;/&nbsp;10)</td>
+	<td data-value="66.67" class="pct medium">66.67%</td>
+	<td data-value="6" class="abs medium">(4&nbsp;/&nbsp;6)</td>
+	<td data-value="88.24" class="pct high">88.24%</td>
+	<td data-value="17" class="abs high">(15&nbsp;/&nbsp;17)</td>
+	</tr>
 
+</tbody>
+</table>
+</div>
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sun Aug 28 2016 19:05:56 GMT+0200 (CEST)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Aug 29 2016 19:12:10 GMT+0200 (CEST)</div>
 </div>
 
-<script src="../../../../prettify.js"></script>
+<script src="../../../prettify.js"></script>
 
 <script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
 <script>
