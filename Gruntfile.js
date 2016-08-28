@@ -7,6 +7,7 @@ module.exports = function (grunt) {
         packageOptions = require('./grunt/options/packageOptions'),
         loadPackages = require('load-grunt-configs')(grunt, packageOptions);
 
+  console.log('testing from here');
     loadTimer(grunt);
     initTasks(grunt, taskOptions);
     grunt.initConfig(loadPackages);
