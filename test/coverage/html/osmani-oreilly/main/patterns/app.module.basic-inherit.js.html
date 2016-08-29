@@ -199,16 +199,16 @@
     <h1>Code coverage report for <span class="entity">osmani-oreilly/main/patterns/app.module.basic-inherit.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">88.24% <small>(15 / 17)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">94.12% <small>(16 / 17)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Branches: <span class="metric">100% <small>(10 / 10)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class="metric">66.67% <small>(4 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">83.33% <small>(5 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">88.24% <small>(15 / 17)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">94.12% <small>(16 / 17)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
@@ -261,36 +261,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2</span>
-<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">4</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
 &nbsp;
@@ -299,12 +299,13 @@
  * @constructor
  */
 var Vehicle = function (options) {
+    this.model = options.model || null;
     this.distributor = options.distributor || null;
     this.aviableLicence = options.isAviableLicence || false;
 };
 &nbsp;
-Vehicle.prototype.enableLicence = <span class="fstat-no" title="function not covered" >function (isValid) {</span>
-<span class="cstat-no" title="statement not covered" >    this.aviableLicence = isValid;</span>
+Vehicle.prototype.setModel = function (model) {
+    this.model = model;
 };
 &nbsp;
 Vehicle.prototype.checkVehicleType = function () {
@@ -318,12 +319,11 @@ Vehicle.prototype.checkVehicleType = function () {
 var Car = function (options) {
     Vehicle.apply(this, arguments);
     this.color = options.color || null;
-    this.model = options.model || null;
 };
 &nbsp;
 Car.prototype = Object.create(Vehicle.prototype);
-Car.prototype.setModel = <span class="fstat-no" title="function not covered" >function (model) {</span>
-<span class="cstat-no" title="statement not covered" >    this.model = model;</span>
+Car.prototype.setColor = <span class="fstat-no" title="function not covered" >function (color) {</span>
+<span class="cstat-no" title="statement not covered" >    this.color = color;</span>
 };
 Car.prototype.constructor = Car;
 &nbsp;
@@ -335,7 +335,7 @@ module.exports.createCar = function (options) {
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Aug 29 2016 19:12:10 GMT+0200 (CEST)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Aug 29 2016 20:23:05 GMT+0200 (CEST)</div>
 </div>
 
 <script src="../../../prettify.js"></script>
