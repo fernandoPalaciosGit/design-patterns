@@ -25,4 +25,5 @@ git pull origin master
 npm run coverage
 git commit -am "new coverage report"
 git push origin -u gh-pages
+git checkout master
 ```
