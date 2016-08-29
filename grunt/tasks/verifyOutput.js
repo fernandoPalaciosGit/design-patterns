@@ -1,3 +1,7 @@
+/**
+ * Verify output reports.
+ */
+
 'use strict';
 
 var newTask, configTask,

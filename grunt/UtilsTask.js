@@ -13,15 +13,14 @@ module.exports = {
     getPath: function (filename) {
         return path.basename(filename, '.js');
     },
-    validateMochaReporter: function (list, selected) {
+    validateOptions: function (list, selected) {
         var valid = _.isString(selected) && _.isArray(list) && !_.isEmpty(list) &&
-            _.find(list, function (reporter) {
-                return _.includes(reporter, selected);
+            _.find(list, function (option) {
+                return _.includes(option, selected);
             });
 
         if (!_.isString(valid)) {
-            throw new Error('Has\'nt specified mocha list reporter (--reporter), ' +
-                'or not valid selected target reporter (--mask) for task test.js');
+            throw new Error('Not valid selected option target (--mask, --reporter, --compile).');
         }
 
         return valid;

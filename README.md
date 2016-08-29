@@ -3,11 +3,21 @@
 
 ## Design patterns examples
 
-- Run Mocha test and istanbul coverage
+- Initialize application
 ```bash
 $npm install
 $bower install
 $npm run app
+```
+
+- Run Mocha test and istanbul coverage
+```bash
+$npm run coverage # ./test/coverage/html/index.html
+```
+
+- Create new examples and design with TDD
+```bash
+$npm run test
 ```
 
 - [**Travis CI report**](https://travis-ci.org/fernandoPalaciosGit/design-patterns)

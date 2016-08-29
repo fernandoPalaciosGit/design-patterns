@@ -1,3 +1,6 @@
+/**
+ * Empty task.
+ */
 module.exports = function (grunt) {
     'use strict';
 

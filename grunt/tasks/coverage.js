@@ -1,3 +1,6 @@
+/**
+ * Export Istanbul coverage report from mocha test.
+ */
 module.exports = function (grunt) {
     'use strict';
 
