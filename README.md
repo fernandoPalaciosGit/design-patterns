@@ -3,21 +3,11 @@
 
 ## Design patterns examples
 
-- Initialize application
+- Run Mocha test and istanbul coverage
 ```bash
 $npm install
 $bower install
 $npm run app
-```
-
-- Run Mocha test and istanbul coverage
-```bash
-$npm run coverage # ./test/coverage/html/index.html
-```
-
-- Create new examples and design with TDD
-```bash
-$npm run test
 ```
 
 - [**Travis CI report**](https://travis-ci.org/fernandoPalaciosGit/design-patterns)
@@ -29,12 +19,10 @@ $npm run test
 
 ```markdown
 git checkout gh-pages
-git fetch
-git rebase origin/master
-#on Merge conflict: solve and continuous with git status instructions
+git add . && git commit -am "new test coverage"
+git pull origin gh-pages
+git pull origin master
 npm run coverage
 git commit -am "new coverage report"
-git pull origin gh-pages
-git commit -am "merge with local"
 git push origin -u gh-pages
 ```
