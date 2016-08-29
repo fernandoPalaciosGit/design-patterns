@@ -17,7 +17,6 @@ observer.publish = function (channel, data) {
     }
 };
 
-
 observer.subscribe = function (channel, handler) {
     var subscriber = channels[channel];
 
@@ -35,7 +34,6 @@ observer.unsubscribe = function (token) {
     _.forOwn(channels, function (subscribers, channel) {
         _.each(subscribers, function (subscriber) {
             if (subscriber.tokenChannel === token) {
-                console.log(token);
                 delete channels[channel];
                 return token;
             }

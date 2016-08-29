@@ -1,36 +1,38 @@
 'use strict';
 
-// SUPERCLASS
-var Vehicle = function (settings) {
-    this.distributor = settings.distributor || 'distributor not prvided';
-    this.aviableLicence = true;
+/**
+ * Vehicle
+ * @constructor
+ */
+var Vehicle = function (options) {
+    this.distributor = options.distributor || null;
+    this.aviableLicence = options.isAviableLicence || false;
 };
 
-Vehicle.prototype.enableLicence = function (enable) {
-    this.aviableLicence = enable;
+Vehicle.prototype.enableLicence = function (isValid) {
+    this.aviableLicence = isValid;
 };
 
+Vehicle.prototype.checkVehicleType = function () {
+    return this instanceof Vehicle;
+};
 
-// SUBCLASS
-var Car = function (settings) {
-    this.color = settings.color || 'color not provided';
-    this.model = settings.model || 'model not provided';
-
-    // Extending from constructor instance properties (this : distributor, aviableLicence, color, model)
+/**
+ * Car
+ * @constructor
+ */
+var Car = function (options) {
     Vehicle.apply(this, arguments);
+    this.color = options.color || null;
+    this.model = options.model || null;
 };
 
-// Extending prototype properties ( prototype : enableLicence )
 Car.prototype = Object.create(Vehicle.prototype);
-Car.prototype.guru = 'yomismo';
+Car.prototype.setModel = function (model) {
+    this.model = model;
+};
+Car.prototype.constructor = Car;
 
-
-// INSTANCE Car type that extends from Vehicle
-var pegasus_21 = new Car({
-    color: 'yellow',
-    model: 'toyota pegasus X654',
-    distributor: 'Toyota'
-});
-pegasus_21.model;
-pegasus_21.distributor;
-pegasus_21.enableLicence(false);
+module.exports.createCar = function (options) {
+    return new Car(options || {});
+};
