@@ -1,3 +1,8 @@
+/**
+ * Lint mocha test on browserify modules.
+ * --reporter=spec,html,xunit
+ * --mask=Spec,Dot,Nyan,Landing,List,Progress,Min,Html
+ */
 module.exports = function (grunt) {
     'use strict';
 
@@ -14,8 +19,8 @@ module.exports = function (grunt) {
             mask = grunt.option('mask');
 
         try {
-            grunt.config.set('mochaReporterOutput', utilsTask.validateMochaReporter(listReporter, reporter));
-            grunt.config.set('mochaReporterMask', utilsTask.validateMochaReporter(maskReporter, mask));
+            grunt.config.set('mochaReporterOutput', utilsTask.validateOptions(listReporter, reporter));
+            grunt.config.set('mochaReporterMask', utilsTask.validateOptions(maskReporter, mask));
             grunt.config.set('verifyTest', 'unittest');
 
         } catch (err) {

@@ -1,15 +1,17 @@
 module.exports = {
+    // --reporter=spec,html,xunit
     reporters: [
         'test/spec.out',
         'test/html.out',
         'test/xunit.out'
     ],
-    coverageReporter: 'test/coverage',
+    // --mask=Spec,Dot,Nyan
     masks: ['Spec', 'Dot', 'Nyan', 'Landing', 'List', 'Progress', 'Min', 'Html'],
     phantomResources: [
         'test/platzi.html',
         'test/osmani-oreilly.html'
     ],
+    coverageReporter: 'test/coverage',
     coverageTarget: [
         '<%= mocha.coverageReporter %>/cobertura/cobertura-coverage.xml',
         '<%= mocha.coverageReporter %>/lcov/lcov.info',

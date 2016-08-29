@@ -10,9 +10,9 @@
     "lodash": "^4.14.1"
   },
   "scripts": {
-    "test": "grunt bundle test --reporter=spec --mask=Spec",
-    "debug": "grunt bundle && node-debug --debug-brk /usr/local/lib/node_modules/grunt/bin/grunt mocha:dev --reporter=spec --mask=Spec",
-    "coverage": "grunt bundle test coverage --reporter=spec --mask=Spec",
+    "test": "grunt compile test --reporter=spec --mask=Spec --compile=test",
+    "debug": "grunt compile && node-debug --debug-brk /usr/local/lib/node_modules/grunt/bin/grunt mocha:dev --reporter=spec --mask=Spec --compile=app",
+    "coverage": "grunt compile test coverage --reporter=spec --mask=Spec --compile=app",
     "app": "grunt shell:installGitHooks && npm run coverage && grunt shell:openCoverageBrowser"
   },
   "devDependencies": {
