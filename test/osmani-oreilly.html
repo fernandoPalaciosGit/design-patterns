@@ -7,34 +7,13 @@
           type="text/css" rel="stylesheet" charset="utf-8"/>
 </head>
 <body>
-<!-- Required for browser reporter -->
-<div id="mocha"></div>
 
+<div id="mocha"></div>
 <div id="coverage-tdd--dom-test">Test</div>
 
-<!-- mocha -->
-<script src="../node_modules/grunt-mocha-phantom-istanbul/node_modules/mocha/mocha.js"></script>
-<script>
-    mocha.setup({
-        // The BDD interface provides describe() == context(), it() == specify(), before(), after(), beforeEach(), and afterEach()
-        ui: 'bdd',
-        ignoreLeaks: true,
-        asyncOnly: true
-    });
-</script>
-
-<!-- Include your lib of choice -->
 <script src="../build/vendors/vendors.test.bundle.js"></script>
-
-<!-- Spec test files -->
+<script src="../node_modules/grunt-mocha-phantom-istanbul/node_modules/mocha/mocha.js"></script>
+<script src="../osmani-oreilly/test/main.js"></script>
 <script src="../build/mocha/osmani-oreilly/mocha.spec.bundle.js"></script>
-
-<!-- run mocha -->
-<script>
-    // Only tests run in real browser, injected script run if options.run == true
-    if (navigator.userAgent.indexOf('PhantomJS') < 0) {
-        mocha.run();
-    }
-</script>
 </body>
 </html>
