@@ -19,11 +19,11 @@ $npm run app
 
 ```markdown
 git checkout gh-pages
-git add . && git commit -am "new test coverage"
+git checkout -- .
 git pull origin gh-pages
 git pull origin master
 npm run coverage
-git commit -am "new coverage report"
+git add . && git commit -m "new coverage report"
 git push origin -u gh-pages
 git checkout master
 ```
