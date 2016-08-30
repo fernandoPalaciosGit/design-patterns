@@ -28,7 +28,7 @@ _.assign(Grid.prototype, {
     updateCounter: function (timer) {
         Schema.timer = printer.joinFields(
             'Data updated',
-            _.isDate(timer) ? timer : dateTimer.getCurrentime()
+            _.isDate(timer) ? timer : dateTimer.getCurrentTime()
         );
     },
     update: function (model) {

@@ -56,7 +56,8 @@ describe('Design patterns', function () {
         var pubSub = require('./../../../main/patterns/observer/app.module.observer'),
             createUiLayout = require('./../../../main/patterns/observer/app.module.observer-ui-notify'),
             timer = require('./../../../main/utils/Timer'),
-            trimEndDataFromCurrentTimer = _.replace(timer.getCurrentime(), /\/\w*$/, ''),
+            localTime = timer.getCurrentTime(),
+            trimLocalTime = localTime.substring(0, localTime.lastIndexOf('/')),
             grid, UPDATE_SCHEMA_CHANNEL = 'updategrid', UPDATE_MODEL_CHANNEL = 'copycat';
 
         beforeEach(function () {
@@ -79,7 +80,7 @@ describe('Design patterns', function () {
             expect(grid.model).to.be.null;
             pubSub.publish(UPDATE_MODEL_CHANNEL);
             expect(grid.model).to.contain('Last updated<-->');
-            expect(grid.model).to.contain(trimEndDataFromCurrentTimer);
+            expect(grid.model).to.contain(trimLocalTime);
             pubSub.publish(UPDATE_SCHEMA_CHANNEL, {
                 status: 'Microsoft shares',
                 percentage: 33,
@@ -99,7 +100,7 @@ describe('Design patterns', function () {
             pubSub.subscribe(UPDATE_MODEL_CHANNEL, _.bind(grid.copyModel, grid));
             pubSub.publish(UPDATE_MODEL_CHANNEL);
             expect(grid.model).to.contain('Last updated<-->');
-            expect(grid.model).to.contain(trimEndDataFromCurrentTimer);
+            expect(grid.model).to.contain(trimLocalTime);
             next();
         });
     });
