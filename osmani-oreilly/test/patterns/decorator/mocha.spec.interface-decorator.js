@@ -24,7 +24,7 @@ describe('Design patterns', function () {
         });
 
         it('should throw error when try to decorate invalid prototype', function (next) {
-            expect(_.partial(_.bind(decoratorUser.getUserGeolocated, decoratorUser), {})).to.throw(TypeError);
+            expect(_.bindKey(decoratorUser, 'getUserGeolocated', {})).to.throw(TypeError);
             next();
         });
     });
