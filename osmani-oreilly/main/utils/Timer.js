@@ -3,7 +3,7 @@
 var _ = require('lodash');
 
 module.exports = {
-    getCurrentime: function () {
+    getCurrentTime: function () {
         var date = new Date();
 
         return _.join([
