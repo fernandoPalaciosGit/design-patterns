@@ -13,7 +13,16 @@ var _ = require('lodash'),
         linterJs: [
             'Gruntfile.js',
             'grunt/**/*.js',
-            '<%= bundleJS.dirDev %>'
+            '<%= bundleJS.dirDev %>',
+            '!osmani-oreilly/main/patterns/app.module.happy-thoughts.js',
+            '!osmani-oreilly/main/patterns/app.module.creational.js',
+            '!osmani-oreilly/main/patterns/app.module.factory.js',
+            '!osmani-oreilly/main/patterns/app.module.mediator.js',
+            '!osmani-oreilly/main/patterns/app.module.mixin.js',
+            '!osmani-oreilly/main/patterns/app.module.module.js',
+            '!osmani-oreilly/main/patterns/app.module.prototype.js',
+            '!osmani-oreilly/main/patterns/app.module.revealing-module.js',
+            '!osmani-oreilly/main/patterns/app.module.singleton.js'
         ],
         linterYaml: [
             '.travis.yml',

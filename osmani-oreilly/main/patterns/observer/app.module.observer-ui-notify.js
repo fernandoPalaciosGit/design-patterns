@@ -1,6 +1,7 @@
 'use strict';
 
-var _ = require('lodash'),
+var Grid,
+    _ = require('lodash'),
     validation = require('./../../utils/Validation'),
     printer = require('./../../utils/Output').getPrinter,
     dateTimer = require('./../../utils/Timer'),
@@ -9,7 +10,7 @@ var _ = require('lodash'),
         timer: null
     };
 
-var Grid = function (options) {
+Grid = function (options) {
     if (validation.hasEmptyFields(arguments)) {
         Schema.status = options.status;
         Schema.timer = options.timer;

@@ -21,7 +21,6 @@ _.assign(User.prototype, {
     }
 });
 
-
 // Decorator
 UserGeolocate = function (user, options) {
     // ensure that the interface maintains the properties

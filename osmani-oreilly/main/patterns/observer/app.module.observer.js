@@ -35,6 +35,7 @@ observer.unsubscribe = function (token) {
         _.each(subscribers, function (subscriber) {
             if (subscriber.tokenChannel === token) {
                 delete channels[channel];
+
                 return token;
             }
         });

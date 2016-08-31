@@ -16,11 +16,9 @@
     "allowComments": true,
     "allowRegex": true
   },
-  "requirePaddingNewLinesAfterBlocks": true,
-  "requirePaddingNewLinesInObjects": true,
   "requirePaddingNewlinesBeforeKeywords": [ "if", "for", "while", "do", "switch", "} else if", "} else", "return" ],
   "requireSpaceBeforeObjectValues": true,
-  "validateIndentation": "\t",
+  "validateIndentation": 4,
   "disallowMultipleLineStrings": true,
   "disallowMixedSpacesAndTabs": true,
   "disallowTrailingWhitespace": true,

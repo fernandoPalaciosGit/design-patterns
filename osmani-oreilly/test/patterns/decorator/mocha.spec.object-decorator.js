@@ -10,7 +10,9 @@ describe('Design patterns', function () {
 
         it('should extend properties behaviour', function (next) {
             /* jshint maxstatements:15 */
-            var myLaptop = getMacBook({cost: 1250, screenSize: 17});
+            var myLaptop = getMacBook({
+                cost: 1250, screenSize: 17
+            });
 
             expect(myLaptop).to.have.property('screenAviable')
                 .that.is.an('array')

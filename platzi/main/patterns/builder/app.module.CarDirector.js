@@ -12,6 +12,7 @@ _.assign(CarDirector.prototype, {
         if (isValidBuilder(builderCar)) {
             builderCar.assemble();
             builderCar.addAssets();
+
             return builderCar.getResultCar();
 
         } else {

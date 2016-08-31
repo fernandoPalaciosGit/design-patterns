@@ -27,8 +27,8 @@ module.exports = {
         tasks: [
             'yaml_validator:<%= taskEnvironment %>',
             'jsonlint:<%= taskEnvironment %>',
-            'jshint:<%= taskEnvironment %>'
-            //'jscs:<%= taskEnvironment %>'
+            'jshint:<%= taskEnvironment %>',
+            'jscs:<%= taskEnvironment %>'
             //'eslint:<%= taskEnvironment %>'
         ]
     },

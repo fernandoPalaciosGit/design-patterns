@@ -47,7 +47,6 @@ OpelAstra.prototype = _.create(CarBuilder.prototype, {
     }
 });
 
-
 /**
  * Car Builder prototype
  * @constructor

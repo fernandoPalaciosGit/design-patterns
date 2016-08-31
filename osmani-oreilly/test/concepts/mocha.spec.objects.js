@@ -40,7 +40,7 @@ describe('Design patterns', function () {
         });
 
         it('should protect overriding incorrect properties', function (next) {
-            expect(_.bindKey(objectLiteral, 'rewriteConfig', {none: false}))
+            expect(_.bindKey(objectLiteral, 'rewriteConfig', { none: false }))
                 .to.throw(Error, 'Couldn´t find config properties into new option.');
             expect(objectLiteral.rewriteConfig({
                 useCaching: false,
