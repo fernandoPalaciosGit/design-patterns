@@ -6,6 +6,7 @@ var _ = require('lodash'),
     _logMessage;
 
 _logMessage = function (mask, message) {
+    /*eslint no-console: [0] */
     console.log(mask(message));
 };
 

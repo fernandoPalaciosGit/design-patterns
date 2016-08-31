@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     installGitHooks: {
         command: 'xcopy git-hooks <%= projectPaths.git %>'

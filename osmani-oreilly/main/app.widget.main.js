@@ -2,4 +2,4 @@
 
 var _ = require('lodash');
 
-document.addEventListener('DOMContentLoaded', _.bind(console.info, console, 'initialize osmani-oreilly application.'), false);
+document.addEventListener('DOMContentLoaded', _.constant('initialize osmani-oreilly application.'), false);

@@ -1,11 +1,11 @@
+'use strict';
+
 /**
  * Lint mocha test on browserify modules.
  * --reporter=spec,html,xunit
  * --mask=Spec,Dot,Nyan,Landing,List,Progress,Min,Html
  */
 module.exports = function (grunt) {
-    'use strict';
-
     var configTask,
         utilsTask = require('../UtilsTask'),
         gruntTask = require('../GruntTask'),

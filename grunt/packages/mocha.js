@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     // --reporter=spec,html,xunit
     reporters: [

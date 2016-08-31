@@ -7,12 +7,13 @@ cost = (function () {
 
     _getCost = function (cost, percentage) {
         var applyPercentage = cost > 0 ? percentage : 0;
+        applyPercentage *= cost / 100;
 
-        return ((applyPercentage * cost) / 100) + cost;
+        return applyPercentage + cost;
     };
 
     _changeTax = function (cost, tax) {
-        _applyTax = (tax / 100) * cost;
+        _applyTax = tax * cost / 100;
     };
 
     _calculateWithTax = function (cost, percentage, isTaxAviable) {

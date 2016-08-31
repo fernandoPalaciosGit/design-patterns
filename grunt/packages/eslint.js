@@ -1,6 +1,8 @@
+'use strict';
+
 module.exports = {
-    documentation: 'http://eslint.org/docs/rules',
     options: {
+        linterDocumentation: 'http://eslint.org/docs/rules',
         configFile: '<%= gruntRuntimeConfig %>/.eslintrc',
         format: require('eslint-tap')
     },

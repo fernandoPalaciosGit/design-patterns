@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     options: {
         logConcurrentOutput: false
@@ -28,8 +30,8 @@ module.exports = {
             'yaml_validator:<%= taskEnvironment %>',
             'jsonlint:<%= taskEnvironment %>',
             'jshint:<%= taskEnvironment %>',
-            'jscs:<%= taskEnvironment %>'
-            //'eslint:<%= taskEnvironment %>'
+            'jscs:<%= taskEnvironment %>',
+            'eslint:<%= taskEnvironment %>'
         ]
     },
     jsVendorsCompile: {

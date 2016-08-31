@@ -2,4 +2,4 @@
 
 var _ = require('lodash');
 
-document.addEventListener('DOMContentLoaded', _.bind(console.info, console, 'initialize platzi application.'), false);
+document.addEventListener('DOMContentLoaded', _.constant('initialize platzi application.'), false);

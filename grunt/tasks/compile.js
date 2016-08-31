@@ -1,10 +1,10 @@
+'use strict';
+
 /**
  * Compile JS bundles with concurrent tasks.
  * --compile=app,test,vendor
  */
 module.exports = function (grunt) {
-    'use strict';
-
     var _ = require('lodash'),
         utilsTask = require('../UtilsTask'),
         gruntTask = require('../GruntTask'),

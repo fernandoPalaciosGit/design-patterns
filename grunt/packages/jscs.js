@@ -1,5 +1,7 @@
+'use strict';
+
 module.exports = {
-    documentation: 'http://jscs.info/rules',
+    linterDocumentation: 'http://jscs.info/rules',
     options: {
         config: '<%= gruntRuntimeConfig %>/.jscsrc',
         verbose: false,
