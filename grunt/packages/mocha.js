@@ -42,6 +42,15 @@ module.exports = {
         dest: '<%= mochaReporterOutput %>',
         options: '<%= mocha.mochaOptions %>'
     },
+    debug: {
+        src: '<%= mocha.phantomResources %>',
+        dest: 'test/spec.out',
+        options: {
+            reporter: 'Spec',
+            run: true,
+            debug: true
+        }
+    },
     coverage: {
         src: '<%= mocha.phantomResources %>',
         options: '<%= mocha.mochaOptionsWithCoverage %>'

@@ -11,7 +11,7 @@
   },
   "scripts": {
     "test": "grunt compile test --reporter=spec --mask=Spec --compile=test",
-    "debug": "grunt compile && node-debug --debug-brk /usr/local/lib/node_modules/grunt/bin/grunt mocha:dev --reporter=spec --mask=Spec --compile=app",
+    "debug": "grunt compile --compile=test && node-debug --debug-brk /usr/local/lib/node_modules/grunt/bin/grunt mocha:debug --debug",
     "coverage": "grunt compile test coverage --reporter=spec --mask=Spec --compile=app",
     "app": "grunt shell:installGitHooks && npm run coverage && grunt shell:openCoverageBrowser"
   },
