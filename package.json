@@ -11,7 +11,8 @@
   },
   "scripts": {
     "test": "grunt compile test --reporter=spec --mask=Spec --compile=test",
-    "debug": "grunt compile --compile=test && node-debug --debug-brk /usr/local/lib/node_modules/grunt/bin/grunt mocha:debug --debug",
+    "debug-mocha-osmanioreilly": "grunt compile --compile=test && grunt shell:openTestBrowser --testbrowser=osmanioreilly",
+    "debug-mocha-platzi": "grunt compile --compile=test && grunt shell:openTestBrowser --testbrowser=platzi",
     "coverage": "grunt compile test coverage --reporter=spec --mask=Spec --compile=app",
     "app": "grunt shell:installGitHooks && npm run coverage && grunt shell:openCoverageBrowser"
   },

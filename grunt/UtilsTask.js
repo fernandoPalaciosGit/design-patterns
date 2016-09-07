@@ -3,6 +3,7 @@
 var _ = require('lodash'),
     path = require('path'),
     colors = require('colors'),
+    projectPath = require('./options/packageOptions').projectPaths,
     _logMessage;
 
 _logMessage = function (mask, message) {
@@ -32,6 +33,14 @@ module.exports = {
             unixOS = './commands/unix';
 
         return isWindowsOS ? require(windowsOS) : require(unixOS);
+    },
+    getProyectPath: function (resource) {
+        return _.join([
+            projectPath.protocol, '://',
+            projectPath.host, ':',
+            projectPath.port, '/',
+            projectPath.root, '/',
+            resource], '');
     },
     logger: {
         alert: _.partial(_logMessage, colors.red.underline),
