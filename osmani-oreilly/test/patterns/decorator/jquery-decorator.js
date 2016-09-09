@@ -5,7 +5,7 @@ describe('Design patterns', function () {
         var enchantress, joker,
             _ = require('lodash'),
             expect = require('chai').expect,
-            decoratorHero = require('./../../../main/patterns/decorator/app.module.jquery-decorator');
+            decoratorHero = require('./../../../main/patterns/decorator/jquery-decorator');
 
         before(function () {
             enchantress = decoratorHero.getTragicHero({ name: 'enchantress' });

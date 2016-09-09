@@ -53,8 +53,8 @@ describe('Design patterns', function () {
     });
 
     context('observer interface test interfaces', function () {
-        var pubSub = require('./../../../main/patterns/observer/app.module.observer'),
-            createUiLayout = require('./../../../main/patterns/observer/app.module.observer-ui-notify'),
+        var pubSub = require('./../../../main/patterns/observer/observer'),
+            createUiLayout = require('./../../../main/patterns/observer/observer-ui-notify'),
             timer = require('./../../../main/utils/Timer'),
             localTime = timer.getCurrentTime(),
             trimLocalTime = localTime.substring(0, localTime.lastIndexOf('/')),

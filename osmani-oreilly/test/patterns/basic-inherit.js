@@ -5,7 +5,7 @@ describe('Design patterns', function () {
 
     context('Inherit prototype', function () {
         var car,
-            createCar = require('./../../main/patterns/app.module.basic-inherit').createCar;
+            createCar = require('./../../main/patterns/basic-inherit').createCar;
 
         before(function () {
             car = createCar();

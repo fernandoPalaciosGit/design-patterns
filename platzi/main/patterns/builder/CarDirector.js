@@ -1,7 +1,7 @@
 'use strict';
 
 var CarDirector,
-    isValidBuilder = require('./app.module.CarBuilder').isValidBuilder,
+    isValidBuilder = require('./CarBuilder').isValidBuilder,
     _ = require('lodash');
 
 CarDirector = function () {

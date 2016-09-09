@@ -1,7 +1,7 @@
 'use strict';
 describe('Design patterns', function () {
     context('Decorator interface dependency injector', function () {
-        var MacBookDecorator = require('./../../../main/patterns/decorator/app.module.object-decorator'),
+        var MacBookDecorator = require('./../../../main/patterns/decorator/object-decorator'),
             expect = require('chai').expect,
             getMacBook = MacBookDecorator.getMacBook,
             engravingCost = MacBookDecorator.decorateMac.engravingCost,

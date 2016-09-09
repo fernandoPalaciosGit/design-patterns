@@ -4,8 +4,8 @@ describe('Design patterns', function () {
     var user, nandoMacPro, nandoMackRetina,
         _ = require('lodash'),
         expect = require('chai').expect,
-        decoratorMac = require('./../../../main/patterns/decorator/app.module.interface-validate-decorator'),
-        decoratorUser = require('./../../../main/patterns/decorator/app.module.interface-decorator');
+        decoratorMac = require('./../../../main/patterns/decorator/interface-validate-decorator'),
+        decoratorUser = require('./../../../main/patterns/decorator/interface-decorator');
 
     context('decorator objects', function () {
         beforeEach(function () {

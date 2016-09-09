@@ -34,11 +34,11 @@ module.exports = {
         },
         files: [
             {
-                src: '<%= projectPaths.appOsmaniOreilly.application %>/test/**/mocha.spec.*.js',
+                src: '<%= projectPaths.appOsmaniOreilly.application %>/test/**/*.js',
                 dest: '<%= projectPaths.appOsmaniOreilly.test %>/mocha.spec.bundle.js'
             },
             {
-                src: '<%= projectPaths.appPlatzi.application %>/test/**/mocha.spec.*.js',
+                src: '<%= projectPaths.appPlatzi.application %>/test/**/*.js',
                 dest: '<%= projectPaths.appPlatzi.test %>/mocha.spec.bundle.js'
             }
         ]
@@ -60,12 +60,12 @@ module.exports = {
         },
         files: [
             {
-                src: '<%= projectPaths.appOsmaniOreilly.application %>/main/**/app.widget.*.js',
-                dest: '<%= projectPaths.appOsmaniOreilly.publicDir %>/app.widget.bundle.js'
+                src: '<%= projectPaths.appOsmaniOreilly.application %>/main/**/*.js',
+                dest: '<%= projectPaths.appOsmaniOreilly.publicDir %>/app.bundle.js'
             },
             {
-                src: '<%= projectPaths.appPlatzi.application %>/main/**/app.widget.*.js',
-                dest: '<%= projectPaths.appPlatzi.publicDir %>/app.widget.bundle.js'
+                src: '<%= projectPaths.appPlatzi.application %>/main/**/*.js',
+                dest: '<%= projectPaths.appPlatzi.publicDir %>/app.bundle.js'
             }
         ]
     }
