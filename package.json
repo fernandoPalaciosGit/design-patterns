@@ -17,6 +17,8 @@
     "app": "grunt shell:installGitHooks && npm run coverage && grunt shell:openCoverageBrowser"
   },
   "devDependencies": {
+    "babel-preset-es2015": "^6.14.0",
+    "babelify": "^7.3.0",
     "browserify": "^13.1.0",
     "browserify-istanbul": "^2.0.0",
     "browserify-shim": "^3.8.12",
@@ -32,7 +34,7 @@
     "grunt-eslint": "~17.3.1",
     "grunt-jscs": "~2.4.0",
     "grunt-jsonlint": "^1.1.0",
-    "grunt-mocha-phantom-istanbul": "0.2.1",
+    "grunt-mocha-phantom-istanbul": "^0.2.1",
     "grunt-newer": "^1.2.0",
     "grunt-shell": "^1.3.1",
     "grunt-yaml-validator": "0.6.0",

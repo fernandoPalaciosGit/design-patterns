@@ -6,12 +6,6 @@
  * options.browserifyOptions.debug: Source mapping
  */
 module.exports = {
-    options: {
-        transform: ['browserify-shim'],
-        browserifyOptions: {
-            debug: false
-        }
-    },
     vendorLibraries: {
         app: ['lodash', 'jquery'],
         test: ['lodash', 'jquery', 'chai']
@@ -26,11 +20,18 @@ module.exports = {
     },
     'dev-test': {
         options: {
-            external: '<%= browserify.vendorLibraries.test %>',
-            transform: ['browserify-istanbul'],
             browserifyOptions: {
                 debug: true
-            }
+            },
+            external: '<%= browserify.vendorLibraries.test %>',
+            transform: [
+                'browserify-istanbul',
+                'browserify-shim',
+                ['babelify', { 'presets': ['es2015'] }]
+            ],
+            plugins: [
+                ['minifyify', { map: 'bundle.js.map' }]
+            ]
         },
         files: [
             {
@@ -53,10 +54,17 @@ module.exports = {
     },
     'dev-app-widget': {
         options: {
-            external: '<%= browserify.vendorLibraries.app %>',
             browserifyOptions: {
                 debug: true
-            }
+            },
+            external: '<%= browserify.vendorLibraries.app %>',
+            transform: [
+                'browserify-istanbul',
+                ['babelify', { 'presets': ['es2015'] }]
+            ],
+            plugins: [
+                ['minifyify', { map: 'bundle.js.map' }]
+            ]
         },
         files: [
             {

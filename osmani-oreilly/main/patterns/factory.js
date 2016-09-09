@@ -1,6 +1,6 @@
 'use strict';
 
-var Vehicle, Car, Sport, Truck, FactoryVehicle, checkFactory,
+var Vehicle, Car, Sport, Truck, FactoryVehicle,
     _ = require('lodash');
 
 Vehicle = function (options) {
@@ -8,7 +8,7 @@ Vehicle = function (options) {
 };
 
 Car = function (options) {
-    _.defaults(options,  {transport: 'traction'});
+    _.defaults(options, { transport: 'traction' });
     Vehicle.apply(this, options);
     this.paint = options.paint;
     this.doors = options.doors;
@@ -19,7 +19,7 @@ Car.prototype = _.create(Vehicle.prototype, {
 });
 
 Sport = function (options) {
-    _.defaults(options,  {transport: 'injection'});
+    _.defaults(options, { transport: 'injection' });
     Vehicle.apply(this, options);
     this.turbo = options.turbo;
     this.tires = options.tires;
@@ -30,7 +30,7 @@ Sport.prototype = _.create(Vehicle.prototype, {
 });
 
 Truck = function (options) {
-    _.defaults(options,  {transport: '4x4'});
+    _.defaults(options, { transport: '4x4' });
     Vehicle.apply(this, options);
     this.capacity = options.capacity;
     this.tires = options.tires;
@@ -59,19 +59,15 @@ _.assign(FactoryVehicle.prototype, {
             return new this.vehicleType(options || {});
 
         } else {
-            throw TypeError('should initialize factory with own interface');
+            throw new TypeError('should initialize factory with own interface');
         }
     },
-    setCarFactory: function () {
-        this.setFactoryVehicle(Car);
-    },
-    setSportFactory: _.bindKey(this, 'setFactoryVehicle', Sport),
-    setTruckFactory: _.bindKey(this, 'setFactoryVehicle', Truck),
-    isCarFactory: function () {
-        return this.checkVehicleType(Car);
-    },
-    isSportFactory: _.bindKey(this, 'checkFactory', Sport),
-    isTruckFactory: _.bindKey(this, 'checkFactory', Truck)
+    setCarFactory: _.bindKey(FactoryVehicle.prototype, 'setFactoryVehicle', Car),
+    setSportFactory: _.bindKey(FactoryVehicle.prototype, 'setFactoryVehicle', Sport),
+    setTruckFactory: _.bindKey(FactoryVehicle.prototype, 'setFactoryVehicle', Truck),
+    isCarFactory: _.bindKey(FactoryVehicle.prototype, 'checkFactory', Car),
+    isSportFactory: _.bindKey(FactoryVehicle.prototype, 'checkFactory', Sport),
+    isTruckFactory: _.bindKey(FactoryVehicle.prototype, 'checkFactory', Truck)
 });
 
 module.exports.getFactoryVehicle = function (options) {
