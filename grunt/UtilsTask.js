@@ -1,14 +1,24 @@
 'use strict';
 
 var _ = require('lodash'),
+    utils = require('util'),
     path = require('path'),
     colors = require('colors'),
     projectPath = require('./options/packageOptions').projectPaths,
-    _logMessage;
+    _logMessage, _logDebugging;
 
 _logMessage = function (mask, message) {
     /*eslint no-console: [0] */
     console.log(mask(message));
+};
+
+/**
+ * @param object {Object} object to inspect.
+ * @param depth {Number} Specifies the number of times to recurse while formatting the object.
+ */
+_logDebugging = function (object, depth) {
+    /*eslint no-console: [0] */
+    console.log(utils.inspect(object, { showHidden: false, depth: depth }));
 };
 
 module.exports = {
@@ -45,6 +55,8 @@ module.exports = {
     logger: {
         alert: _.partial(_logMessage, colors.red.underline),
         warning: _.partial(_logMessage, colors.yellow.underline),
-        info: _.partial(_logMessage, colors.cyan.underline)
+        info: _.partial(_logMessage, colors.cyan.underline),
+        debug: _.partialRight(_logDebugging, null),
+        shortdebug: _.partialRight(_logDebugging, 2)
     }
 };
