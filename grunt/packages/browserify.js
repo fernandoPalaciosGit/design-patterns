@@ -6,10 +6,15 @@ var getProyectPath = require('./../UtilsTask').getProyectPath,
 getVendorOptions = function (externalLibs) {
     return {
         browserifyOptions: {
-            debug: false
+            debug: true
         },
         external: null,
-        require: externalLibs
+        require: externalLibs,
+        plugin: [
+            ['minifyify', {
+                map: false
+            }]
+        ]
     };
 };
 
@@ -22,7 +27,9 @@ getApplicationtTestOptions = function (pathTest) {
         transform: [
             ['browserify-istanbul'],
             ['browserify-shim'],
-            ['babelify', { 'presets': ['es2015'] }]
+            ['babelify', {
+                'presets': ['es2015']
+            }]
         ],
         plugin: [
             ['minifyify', {
