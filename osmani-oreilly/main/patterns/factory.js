@@ -62,12 +62,24 @@ _.assign(FactoryVehicle.prototype, {
             throw new TypeError('should initialize factory with own interface');
         }
     },
-    setCarFactory: _.bindKey(FactoryVehicle.prototype, 'setFactoryVehicle', Car),
-    setSportFactory: _.bindKey(FactoryVehicle.prototype, 'setFactoryVehicle', Sport),
-    setTruckFactory: _.bindKey(FactoryVehicle.prototype, 'setFactoryVehicle', Truck),
-    isCarFactory: _.bindKey(FactoryVehicle.prototype, 'checkFactory', Car),
-    isSportFactory: _.bindKey(FactoryVehicle.prototype, 'checkFactory', Sport),
-    isTruckFactory: _.bindKey(FactoryVehicle.prototype, 'checkFactory', Truck)
+    setCarFactory: function () {
+        return this.setFactoryVehicle(Car);
+    },
+    setSportFactory: function () {
+        return this.setFactoryVehicle(Sport);
+    },
+    setTruckFactory: function () {
+        return this.setFactoryVehicle(Truck);
+    },
+    isCarFactory: function () {
+        return this.checkVehicleType(Car);
+    },
+    isSportFactory: function () {
+        return this.checkVehicleType(Sport);
+    },
+    isTruckFactory: function () {
+        return this.checkVehicleType(Truck);
+    }
 });
 
 module.exports.getFactoryVehicle = function (options) {

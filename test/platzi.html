@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Example Mocha Test</title>
+    <script src="../node_modules/grunt-mocha-phantom-istanbul/node_modules/mocha/mocha.js"></script>
     <link href="../node_modules/grunt-mocha-phantom-istanbul/node_modules/mocha/mocha.css"
           type="text/css" rel="stylesheet" charset="utf-8"/>
     <style>
@@ -31,9 +32,8 @@
 <div id="mocha"></div>
 <div id="coverage-tdd--dom-test" class="invisible">Test</div>
 
-<script src="../node_modules/grunt-mocha-phantom-istanbul/node_modules/mocha/mocha.js"></script>
-<script src="../platzi/test/main.js"></script>
-<script src="../build/vendors/vendors.test.bundle.js"></script>
-<script src="../build/mocha/platzi/mocha.spec.bundle.js"></script>
+<script src="../platzi/test/index.js"></script>
+<script src="../build/vendors/test.bundle.js"></script>
+<script src="../build/platzi/test/mocha.spec.bundle.js"></script>
 </body>
 </html>

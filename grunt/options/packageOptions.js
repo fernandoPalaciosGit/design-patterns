@@ -67,13 +67,13 @@ var _ = require('lodash'),
             port: process.env.APACHE_PORT || '80',
             root: 'design-patterns',
             appOsmaniOreilly: {
-                publicDir: 'build/osmani-oreilly',
-                test: 'build/mocha/osmani-oreilly',
+                publicDir: 'build/osmani-oreilly/main',
+                test: 'build/osmani-oreilly/test',
                 application: 'osmani-oreilly'
             },
             appPlatzi: {
-                publicDir: 'build/platzi',
-                test: 'build/mocha/platzi',
+                publicDir: 'build/platzi/main',
+                test: 'build/platzi/test',
                 application: 'platzi'
             },
             vendors: {

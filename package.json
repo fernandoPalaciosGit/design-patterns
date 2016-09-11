@@ -42,6 +42,7 @@
     "jshint-stylish": "^2.2.1",
     "load-grunt-configs": "^1.0.0",
     "load-grunt-tasks": "~3.3.0",
+    "minifyify": "^7.3.3",
     "time-grunt": "~1.2.2"
   },
   "browser": {
