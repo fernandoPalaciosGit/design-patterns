@@ -1,6 +1,7 @@
 'use strict';
 
-var getVendorOptions, getApplicationtTestOptions, getApplicationOptions;
+var getProyectPath = require('./../UtilsTask').getProyectPath,
+    getVendorOptions, getApplicationtTestOptions, getApplicationOptions;
 
 getVendorOptions = function (externalLibs) {
     return {
@@ -25,8 +26,8 @@ getApplicationtTestOptions = function (pathTest) {
         ],
         plugin: [
             ['minifyify', {
-                map: './' + pathTest + '/bundle.js.map',
-                output: pathTest + '/bundle.js.map'
+                output: pathTest + '/sourcemap.json',
+                map: getProyectPath(pathTest + '/sourcemap.json')
             }]
         ]
     };
@@ -44,17 +45,19 @@ getApplicationOptions = function (pathApp) {
         ],
         plugin: [
             ['minifyify', {
-                map: './' + pathApp + '/bundle.js.map',
-                output: pathApp + '/bundle.js.map'
+                output: pathApp + '/sourcemap.json',
+                map: getProyectPath(pathApp + '/sourcemap.json')
             }]
         ]
     };
 };
 
 /*
- * options.external: external modules that don't need to be constantly re-compiled
- * options.require: expose dependencies with alias
- * options.browserifyOptions.debug: Source mapping
+ * options.external: external modules that don't need to be constantly re-compiled.
+ * options.require: expose dependencies with alias.
+ * options.browserifyOptions.debug: enable Source mapping, required with minifyify plugin.
+ * options.plugin.minifyify.output: create json with debugging source map.
+ * options.plugin.minifyify.map: append source map url at the end of bundle.
  */
 module.exports = {
     /* VENDOR LIBRARIES */
