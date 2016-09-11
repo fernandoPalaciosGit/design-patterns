@@ -62,7 +62,7 @@ getApplicationOptions = function (pathApp) {
 /*
  * options.external: external modules that don't need to be constantly re-compiled.
  * options.require: expose dependencies with alias.
- * options.browserifyOptions.debug: enable Source mapping, required with minifyify plugin.
+ * options.browserifyOptions.debug: enable inline Source mapping (sourcemap at the end of bundle), required with minifyify plugin.
  * options.plugin.minifyify.output: create json with debugging source map.
  * options.plugin.minifyify.map: append source map url at the end of bundle.
  */
