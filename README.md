@@ -20,7 +20,7 @@ $npm run coverage # ./test/coverage/html/index.html
 $npm run test
 ```
 
-- Debug mocha tests // needs turn on Apache running with environments: APACHE_HOST + APACHE_PORT
+- Debug mocha tests // needs turn on web container, environments enabled: APACHE_HOST + APACHE_PORT
 ```bash
 $npm run debug-mocha-osmanioreilly
 $npm run debug-mocha-platzi
