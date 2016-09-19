@@ -1,5 +1,9 @@
 {
   "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "script"
+  },
   "rules": {
     "camelcase": 1,
     "curly": 2,
@@ -31,6 +35,7 @@
     "browser": true,
     "jquery": true,
     "node": true,
-    "mocha": true
+    "mocha": true,
+    "es6": true
   }
 }

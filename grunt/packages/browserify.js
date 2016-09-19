@@ -1,121 +1,56 @@
 'use strict';
 
-var getProyectPath = require('./../UtilsTask').getProyectPath,
-    getVendorOptions, getApplicationtTestOptions, getApplicationOptions;
+let _ = require('lodash'),
+    browserify = require('./../options/BrowserifyOptions'),
+    browserifyVendorOptions = browserify.getOptions()
+        .disableSourceDebug()
+        .avoidCompileVendors()
+        .addMinifyWithoutSourceMap(),
+    browserifyTestOptions = browserify.getOptions()
+        .requireVendors('<%= browserify.vendorLibraries.test %>')
+        .addTransformTestBundle(),
+    browserifyAppOptions = browserify.getOptions()
+        .requireVendors('<%= browserify.vendorLibraries.app %>')
+        .addTransformAppBundle();
 
-getVendorOptions = function (externalLibs) {
-    return {
-        browserifyOptions: {
-            debug: true
-        },
-        external: null,
-        require: externalLibs,
-        plugin: [
-            ['minifyify', {
-                map: false
-            }]
-        ]
-    };
-};
-
-getApplicationtTestOptions = function (pathTest) {
-    return {
-        browserifyOptions: {
-            debug: true
-        },
-        external: '<%= browserify.vendorLibraries.test %>',
-        transform: [
-            ['browserify-istanbul'],
-            ['browserify-shim'],
-            ['babelify', {
-                'presets': ['es2015']
-            }]
-        ],
-        plugin: [
-            ['minifyify', {
-                output: pathTest + '/sourcemap.json',
-                map: getProyectPath(pathTest + '/sourcemap.json')
-            }]
-        ]
-    };
-};
-
-getApplicationOptions = function (pathApp) {
-    return {
-        browserifyOptions: {
-            debug: true
-        },
-        external: '<%= browserify.vendorLibraries.app %>',
-        transform: [
-            ['browserify-shim'],
-            ['babelify', { 'presets': ['es2015'] }]
-        ],
-        plugin: [
-            ['minifyify', {
-                output: pathApp + '/sourcemap.json',
-                map: getProyectPath(pathApp + '/sourcemap.json')
-            }]
-        ]
-    };
-};
-
-/*
- * options.external: external modules that don't need to be constantly re-compiled.
- * options.require: expose dependencies with alias.
- * options.browserifyOptions.debug: enable inline Source mapping (sourcemap at the end of bundle), required with minifyify plugin.
- * options.plugin.minifyify.output: create json with debugging source map.
- * options.plugin.minifyify.map: append source map url at the end of bundle.
- */
 module.exports = {
-    /* VENDOR LIBRARIES */
-    vendorLibraries: {
-        app: ['lodash', 'jquery'],
-        test: ['lodash', 'jquery', 'chai']
-    },
-    'dev-test-vendors': {
-        options: getVendorOptions('<%= browserify.vendorLibraries.test %>'),
-        src: ['.'],
-        dest: '<%= projectPaths.vendors.publicDir%>/test.bundle.js'
-    },
-    'dev-app-vendors': {
-        options: getVendorOptions('<%= browserify.vendorLibraries.app %>'),
-        src: ['.'],
-        dest: '<%= projectPaths.vendors.publicDir%>/app.bundle.js'
-    },
+    'dev-test-vendors': _.cloneDeep(browserifyVendorOptions)
+        .setDependencies('test')
+        .setAllOriginSource()
+        .addCompiledSource('<%= projectPaths.vendors.publicDir%>/test.bundle.js')
+        .build(),
 
-    /* APPLICATIONS TESTING */
-    'dev-test-platzi': {
-        options: getApplicationtTestOptions('<%= projectPaths.appPlatzi.test %>'),
-        src: [
-            '<%= projectPaths.appPlatzi.application %>/test/**/*.js',
-            '!<%= projectPaths.appPlatzi.application %>/test/index.js'
-        ],
-        dest: '<%= projectPaths.appPlatzi.test %>/mocha.spec.bundle.js'
-    },
-    'dev-test-osmanioreilly': {
-        options: getApplicationtTestOptions('<%= projectPaths.appOsmaniOreilly.test %>'),
-        src: [
-            '<%= projectPaths.appOsmaniOreilly.application %>/test/**/*.js',
-            '!<%= projectPaths.appOsmaniOreilly.application %>/test/index.js'
-        ],
-        dest: '<%= projectPaths.appOsmaniOreilly.test %>/mocha.spec.bundle.js'
-    },
+    'dev-app-vendors': _.cloneDeep(browserifyVendorOptions)
+        .setDependencies('app')
+        .setAllOriginSource()
+        .addCompiledSource('<%= projectPaths.vendors.publicDir%>/app.bundle.js')
+        .build(),
 
-    /* APPLICATIONS */
-    'dev-app-widget-platzi': {
-        options: getApplicationOptions('<%= projectPaths.appPlatzi.publicDir %>'),
-        src: [
-            '<%= projectPaths.appPlatzi.application %>/main/**/*.js',
-            '!<%= projectPaths.appPlatzi.application %>/main/index.js'
-        ],
-        dest: '<%= projectPaths.appPlatzi.publicDir %>/app.bundle.js'
-    },
-    'dev-app-widget-osmanioreilly': {
-        options: getApplicationOptions('<%= projectPaths.appOsmaniOreilly.publicDir %>'),
-        src: [
-            '<%= projectPaths.appOsmaniOreilly.application %>/main/**/*.js',
-            '!<%= projectPaths.appOsmaniOreilly.application %>/main/index.js'
-        ],
-        dest: '<%= projectPaths.appOsmaniOreilly.publicDir %>/app.bundle.js'
-    }
+    'dev-test-platzi': _.cloneDeep(browserifyTestOptions)
+        .addMinifyWithSourceMap('<%= projectPaths.appPlatzi.test %>')
+        .addOriginSource('<%= projectPaths.appPlatzi.application %>/test/**/*.js')
+        .addOriginSource('!<%= projectPaths.appPlatzi.application %>/test/index.js')
+        .addCompiledSource('<%= projectPaths.appPlatzi.test %>/mocha.spec.bundle.js')
+        .build(),
+
+    'dev-test-osmanioreilly': _.cloneDeep(browserifyTestOptions)
+        .addMinifyWithSourceMap('<%= projectPaths.appOsmaniOreilly.test %>')
+        .addOriginSource('<%= projectPaths.appOsmaniOreilly.application %>/test/**/*.js')
+        .addOriginSource('!<%= projectPaths.appOsmaniOreilly.application %>/test/index.js')
+        .addCompiledSource('<%= projectPaths.appOsmaniOreilly.test %>/mocha.spec.bundle.js')
+        .build(),
+
+    'dev-app-widget-platzi': _.cloneDeep(browserifyAppOptions)
+        .addMinifyWithSourceMap('<%= projectPaths.appPlatzi.publicDir %>')
+        .addOriginSource('<%= projectPaths.appPlatzi.application %>/main/**/*.js')
+        .addOriginSource('!<%= projectPaths.appPlatzi.application %>/main/index.js')
+        .addCompiledSource('<%= projectPaths.appPlatzi.publicDir %>/app.bundle.js')
+        .build(),
+
+    'dev-app-widget-osmanioreilly': _.cloneDeep(browserifyAppOptions)
+        .addMinifyWithSourceMap('<%= projectPaths.appOsmaniOreilly.publicDir %>')
+        .addOriginSource('<%= projectPaths.appOsmaniOreilly.application %>/main/**/*.js')
+        .addOriginSource('!<%= projectPaths.appOsmaniOreilly.application %>/main/index.js')
+        .addCompiledSource('<%= projectPaths.appOsmaniOreilly.publicDir %>/app.bundle.js')
+        .build()
 };

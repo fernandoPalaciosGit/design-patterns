@@ -31,6 +31,5 @@
   "node": true,
   "browser": true,
   "mocha": true,
-  "predef": [
-  ]
+  "esversion": 6
 }

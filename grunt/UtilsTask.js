@@ -5,7 +5,7 @@ var _ = require('lodash'),
     path = require('path'),
     colors = require('colors'),
     projectPath = require('./options/packageOptions').projectPaths,
-    _logMessage, _logDebugging;
+    _logMessage, _logDebugging, _parseIterableWithKey;
 
 _logMessage = function (mask, message) {
     /*eslint no-console: [0] */
@@ -18,7 +18,20 @@ _logMessage = function (mask, message) {
  */
 _logDebugging = function (object, depth) {
     /*eslint no-console: [0] */
-    console.log(utils.inspect(object, { showHidden: false, depth: depth }));
+    _logMessage(colors.cyan.underline, '---debug---');
+    console.log(utils.inspect(object, {
+        showHidden: false, depth: depth
+    }));
+};
+
+_parseIterableWithKey = function (hasOutputKey, iterable) {
+    let obj = hasOutputKey ? {} : [];
+
+    for (let entry of iterable.entries()) {
+        hasOutputKey ? obj[entry[0]] = entry[1] : obj.push(entry[1]);
+    }
+
+    return obj;
 };
 
 module.exports = {
@@ -58,5 +71,9 @@ module.exports = {
         info: _.partial(_logMessage, colors.cyan.underline),
         debug: _.partialRight(_logDebugging, null),
         shortdebug: _.partialRight(_logDebugging, 2)
+    },
+    convert: {
+        strSetToObj: _.partial(_parseIterableWithKey, false),
+        strMapToObj: _.partial(_parseIterableWithKey, true)
     }
 };
