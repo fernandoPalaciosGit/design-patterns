@@ -4,17 +4,17 @@ describe('Design patterns', function () {
     var expect = require('chai').expect;
 
     context('Factory (Creational class pattern)', function () {
-        var factory = require('./../../main/patterns/factory'), vehicleFactory/*, turism, corvette, tractor*/;
+        var factory = require('./../../main/patterns/factory'), vehicleFactory, turism, corvette, tractor;
 
         before(function () {
             vehicleFactory = factory.getFactoryVehicle();
         });
 
         it('should create instance from factory listed', function (next) {
+            /*jshint maxstatements:25*/
             expect(vehicleFactory).to.have.property('vehicleType').to.be.null;
             vehicleFactory.setCarFactory();
             expect(vehicleFactory).to.have.property('vehicleType').to.not.be.null;
-            /*
             expect(vehicleFactory.isCarFactory()).to.be.true;
             turism = vehicleFactory.getVehicle({ paint: 'red', doors: 3 });
             expect(turism).to.have.property('transport', 'traction');
@@ -31,7 +31,7 @@ describe('Design patterns', function () {
             tractor = vehicleFactory.getVehicle({ capacity: '3Tons', tires: 'dunlap' });
             expect(tractor).to.have.property('transport', '4x4');
             expect(tractor).to.have.property('capacity', '3Tons');
-            expect(tractor).to.have.property('tires', 'dunlap');*/
+            expect(tractor).to.have.property('tires', 'dunlap');
             next();
         });
 

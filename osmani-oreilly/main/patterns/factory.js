@@ -4,14 +4,15 @@ var Vehicle, Car, Sport, Truck, FactoryVehicle,
     _ = require('lodash');
 
 Vehicle = function (options) {
-    this.trasport = options.transport;
+    this.transport = options.transport;
 };
 
 Car = function (options) {
-    _.defaults(options, { transport: 'traction' });
-    Vehicle.apply(this, options);
-    this.paint = options.paint;
-    this.doors = options.doors;
+    var properties = _.defaults(options, { transport: 'traction' });
+
+    Vehicle.call(this, properties);
+    this.paint = properties.paint || null;
+    this.doors = properties.doors || null;
 };
 
 Car.prototype = _.create(Vehicle.prototype, {
@@ -19,10 +20,11 @@ Car.prototype = _.create(Vehicle.prototype, {
 });
 
 Sport = function (options) {
-    _.defaults(options, { transport: 'injection' });
-    Vehicle.apply(this, options);
-    this.turbo = options.turbo;
-    this.tires = options.tires;
+    var properties = _.defaults(options, { transport: 'injection' });
+
+    Vehicle.call(this, properties);
+    this.turbo = properties.turbo || null;
+    this.tires = properties.tires || null;
 };
 
 Sport.prototype = _.create(Vehicle.prototype, {
@@ -30,10 +32,11 @@ Sport.prototype = _.create(Vehicle.prototype, {
 });
 
 Truck = function (options) {
-    _.defaults(options, { transport: '4x4' });
-    Vehicle.apply(this, options);
-    this.capacity = options.capacity;
-    this.tires = options.tires;
+    var properties = _.defaults(options, { transport: '4x4' });
+
+    Vehicle.call(this, properties);
+    this.capacity = properties.capacity || null;
+    this.tires = properties.tires || null;
 };
 
 Truck.prototype = _.create(Vehicle.prototype, {
@@ -52,11 +55,11 @@ _.assign(FactoryVehicle.prototype, {
         return new this.vehicleType() instanceof Vehicle;
     },
     checkVehicleType: function (type) {
-        return type.prototype.isPrototypeOf(this.vehicleType);
+        return type.prototype.isPrototypeOf(new this.vehicleType());
     },
     getVehicle: function (options) {
         if (this.checkFactory()) {
-            return new this.vehicleType(options || {});
+            return new this.vehicleType(options);
 
         } else {
             throw new TypeError('should initialize factory with own interface');
