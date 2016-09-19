@@ -48,7 +48,7 @@ _.assign(BrowserifyOptions.prototype, {
         return this;
     },
     requireVendors: function (path) {
-        this.options.set('external', path);
+        this.options.set('external', _.get(vendors, path));
 
         return this;
     },
@@ -108,12 +108,6 @@ _.assign(BrowserifyOptions.prototype, {
         return this;
     },
     build: function () {
-        utils.logger.debug({
-            options: utils.convert.strMapToObj(this.options),
-            src: utils.convert.strSetToObj(this.src),
-            dest: this.dest
-        });
-
         return {
             options: utils.convert.strMapToObj(this.options),
             src: utils.convert.strSetToObj(this.src),

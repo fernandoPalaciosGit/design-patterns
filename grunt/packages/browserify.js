@@ -7,10 +7,10 @@ let _ = require('lodash'),
         .avoidCompileVendors()
         .addMinifyWithoutSourceMap(),
     browserifyTestOptions = browserify.getOptions()
-        .requireVendors('<%= browserify.vendorLibraries.test %>')
+        .requireVendors('test')
         .addTransformTestBundle(),
     browserifyAppOptions = browserify.getOptions()
-        .requireVendors('<%= browserify.vendorLibraries.app %>')
+        .requireVendors('app')
         .addTransformAppBundle();
 
 module.exports = {
