@@ -26,7 +26,7 @@
     "no-spaced-func": 2,
     "no-extra-parens": 1,
     "no-warning-comments": [2, {
-      "terms": ["todo", "bug", "fixme", "xxx"],
+      "terms": ["todo", "fix", "related", "fixme", "xxx", "bug"],
       "location": "anywhere"
     }],
     "strict": [2, "global"]

@@ -8,10 +8,12 @@ let _ = require('lodash'),
         .addMinifyWithoutSourceMap(),
     browserifyTestOptions = browserify.getOptions()
         .requireVendors('test')
-        .addTransformTestBundle(),
+        .addTransformTestBundle()
+        .excludeSourceUnBundleScript(),
     browserifyAppOptions = browserify.getOptions()
         .requireVendors('app')
-        .addTransformAppBundle();
+        .addTransformAppBundle()
+        .excludeSourceUnBundleScript();
 
 module.exports = {
     'dev-test-vendors': _.cloneDeep(browserifyVendorOptions)

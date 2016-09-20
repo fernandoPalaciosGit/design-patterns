@@ -15,7 +15,8 @@ let _ = require('lodash'),
             debug: true
         }],
         ['transform', []],
-        ['plugin', []]
+        ['plugin', []],
+        ['exclude', []]
     ],
     SchemaBrowserTransform = [
         ['browserify-shim'],
@@ -44,6 +45,14 @@ _.assign(BrowserifyOptions.prototype, {
     // Reset this here because it's not needed
     avoidCompileVendors: function () {
         this.options.set('external', null);
+
+        return this;
+    },
+    excludeSourceUnBundleScript: function () {
+        let exclude = this.options.get('exclude');
+
+        exclude.push('**/*.html', '**/*.css', '**.*.json');
+        this.options.set('exclude', exclude);
 
         return this;
     },
