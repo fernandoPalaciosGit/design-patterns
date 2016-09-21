@@ -4,12 +4,12 @@ describe('Design patterns', function () {
     var user, nandoMacPro, nandoMackRetina,
         _ = require('lodash'),
         expect = require('chai').expect,
-        decoratorMac = require('./../../../main/patterns/decorator/app.module.interface-validate-decorator'),
-        decoratorUser = require('./../../../main/patterns/decorator/app.module.interface-decorator');
+        decoratorMac = require('./../../../main/patterns/decorator/interface-validate-decorator'),
+        decoratorUser = require('./../../../main/patterns/decorator/interface-decorator');
 
     context('decorator objects', function () {
         beforeEach(function () {
-            user = decoratorUser.getUser({name: 'Fernando'});
+            user = decoratorUser.getUser({ name: 'Fernando' });
         });
 
         it('should extend properties from instance', function (next) {
@@ -17,7 +17,7 @@ describe('Design patterns', function () {
             user.remember();
             expect(user.say()).to.have.string('User: Fernando');
 
-            user = decoratorUser.getUserGeolocated(user, {street: 'La Vileta', city: 'Palma de Mallorca'});
+            user = decoratorUser.getUserGeolocated(user, { street: 'La Vileta', city: 'Palma de Mallorca' });
             user.remember();
             expect(user.say()).to.have.string('User: Fernando, La Vileta, Palma de Mallorca');
             next();

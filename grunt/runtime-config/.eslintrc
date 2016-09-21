@@ -1,5 +1,9 @@
 {
   "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "script"
+  },
   "rules": {
     "camelcase": 1,
     "curly": 2,
@@ -16,23 +20,22 @@
     "no-inner-declarations": [2, "both"],
     "no-unused-vars": [2, {
       "vars": "all",
-      "args": "all"
+      "args": "after-used"
     }],
     "no-floating-decimal": 2,
     "no-spaced-func": 2,
     "no-extra-parens": 1,
     "no-warning-comments": [2, {
-      "terms": ["todo", "bug", "fixme", "xxx"],
+      "terms": ["todo", "fix", "related", "fixme", "xxx", "bug"],
       "location": "anywhere"
     }],
-    "no-underscore-dangle": [2, { "allow": ["_extend"] }],
-    "strict": 2
-  },
-  "globals": {
+    "strict": [2, "global"]
   },
   "env": {
     "browser": true,
     "jquery": true,
-    "node": true
+    "node": true,
+    "mocha": true,
+    "es6": true
   }
 }

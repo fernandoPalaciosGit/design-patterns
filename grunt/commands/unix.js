@@ -1,3 +1,7 @@
+'use strict';
+
+var getProyectPath = require('./../UtilsTask').getProyectPath;
+
 module.exports = {
     installGitHooks: {
         command: [
@@ -9,6 +13,13 @@ module.exports = {
         command: [
             'googlePath=$(which google-chrome)',
             '${googlePath} \"<%= mocha.coverageReporter %>/html/index.html\"',
+            'exit'
+        ].join(' && ')
+    },
+    openTestBrowser: {
+        command: [
+            'googlePath=$(which google-chrome)',
+            '${googlePath} \"' + getProyectPath('<%= mocha.phantomResources[grunt.option(\'testbrowser\')] %>') + '\"',
             'exit'
         ].join(' && ')
     }

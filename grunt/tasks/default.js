@@ -1,9 +1,9 @@
+'use strict';
+
 /**
  * Empty task.
  */
 module.exports = function (grunt) {
-    'use strict';
-
     var utilsTask = require('../UtilsTask'),
         gruntTask = require('../GruntTask'),
         newTask = gruntTask(grunt);

@@ -24,8 +24,10 @@ _.assign(Interface.prototype, {
     },
 
     ensureDecoratorInterface: function (interfaceImplemented) {
+        var invalidMethod = [];
+
         if (!_.isUndefined(this.methods) && !_.isEmpty(this.methods)) {
-            var invalidMethod = _.find(Object.getOwnPropertyNames(interfaceImplemented.prototype), _.bind(function (method) {
+            invalidMethod = _.find(_.keysIn(interfaceImplemented.prototype), _.bind(function (method) {
                 return !_.includes(this.methods, method) && !_.isFunction(interfaceImplemented.prototype[method]);
             }, this));
 

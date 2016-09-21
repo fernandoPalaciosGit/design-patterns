@@ -1,6 +1,6 @@
-module.exports = function () {
-    'use strict';
+'use strict';
 
+module.exports = function () {
     var _ = require('lodash'),
         shellCommands = require('../UtilsTask').getPlatformCommands();
 

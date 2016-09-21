@@ -1,7 +1,7 @@
 'use strict';
 
 var CarDirector,
-    isValidBuilder = require('./app.module.CarBuilder').isValidBuilder,
+    isValidBuilder = require('./CarBuilder').isValidBuilder,
     _ = require('lodash');
 
 CarDirector = function () {
@@ -12,6 +12,7 @@ _.assign(CarDirector.prototype, {
         if (isValidBuilder(builderCar)) {
             builderCar.assemble();
             builderCar.addAssets();
+
             return builderCar.getResultCar();
 
         } else {

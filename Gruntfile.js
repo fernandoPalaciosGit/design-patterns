@@ -1,6 +1,6 @@
-module.exports = function (grunt) {
-    'use strict';
+'use strict';
 
+module.exports = function (grunt) {
     var loadTimer = require('time-grunt'),
         initTasks = require('load-grunt-tasks'),
         taskOptions = require('./grunt/options/taskOptions'),

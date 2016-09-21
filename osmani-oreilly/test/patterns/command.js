@@ -5,7 +5,7 @@ describe('Design patterns', function () {
         _ = require('lodash');
 
     context('Command (Behaviour object pattern)', function () {
-        var getRentCar = require('./../../main/patterns/app.module.command'), concessionaire;
+        var getRentCar = require('./../../main/patterns/command'), concessionaire;
 
         before(function () {
             concessionaire = getRentCar();

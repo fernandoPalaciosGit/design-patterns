@@ -1,3 +1,10 @@
+'use strict';
+var _ = require('lodash'),
+    phantomResources = {
+        platzi: 'test/platzi.html',
+        osmanioreilly: 'test/osmani-oreilly.html'
+    };
+
 module.exports = {
     // --reporter=spec,html,xunit
     reporters: [
@@ -7,10 +14,7 @@ module.exports = {
     ],
     // --mask=Spec,Dot,Nyan
     masks: ['Spec', 'Dot', 'Nyan', 'Landing', 'List', 'Progress', 'Min', 'Html'],
-    phantomResources: [
-        'test/platzi.html',
-        'test/osmani-oreilly.html'
-    ],
+    phantomResources: phantomResources,
     coverageReporter: 'test/coverage',
     coverageTarget: [
         '<%= mocha.coverageReporter %>/cobertura/cobertura-coverage.xml',
@@ -36,12 +40,12 @@ module.exports = {
         }
     },
     dev: {
-        src: '<%= mocha.phantomResources %>',
+        src: _.values(phantomResources),
         dest: '<%= mochaReporterOutput %>',
         options: '<%= mocha.mochaOptions %>'
     },
     coverage: {
-        src: '<%= mocha.phantomResources %>',
+        src: _.values(phantomResources),
         options: '<%= mocha.mochaOptionsWithCoverage %>'
     }
 };

@@ -5,11 +5,13 @@ describe('Design patterns', function () {
         var enchantress, joker,
             _ = require('lodash'),
             expect = require('chai').expect,
-            decoratorHero = require('./../../../main/patterns/decorator/app.module.jquery-decorator');
+            decoratorHero = require('./../../../main/patterns/decorator/jquery-decorator');
 
         before(function () {
-            enchantress = decoratorHero.getTragicHero({name: 'enchantress'});
-            joker = decoratorHero.getAntiHero({name: 'joker'});
+            enchantress = decoratorHero.getTragicHero({ name: 'enchantress' });
+            joker = decoratorHero.getAntiHero({
+                name: 'joker'
+            });
         });
 
         it('should create simple object', function (next) {
@@ -30,12 +32,16 @@ describe('Design patterns', function () {
             enchantress.setInvisibility();
             enchantress.setDistortion();
             enchantress.setSuperStrengh();
-            expect(_.sortBy(enchantress.habilities)).to.deep.equal(_.sortBy(['superSmart', 'invisibility', 'omnipresent', 'elasticity', 'superStrength']));
+            expect(_.sortBy(enchantress.habilities)).to.deep.equal(_.sortBy([
+                'superSmart', 'invisibility', 'omnipresent', 'elasticity', 'superStrength'
+            ]));
 
             expect(_.sortBy(joker.habilities)).to.deep.equal(_.sortBy(['superSmart']));
             joker.setFaster();
             joker.setInvisibility();
-            expect(_.sortBy(joker.habilities)).to.deep.equal(_.sortBy(['superSmart', 'superVelocity', 'omnipresent', 'invisibility']));
+            expect(_.sortBy(joker.habilities)).to.deep.equal(_.sortBy([
+                'superSmart', 'superVelocity', 'omnipresent', 'invisibility'
+            ]));
             next();
         });
     });

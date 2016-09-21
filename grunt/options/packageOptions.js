@@ -13,7 +13,15 @@ var _ = require('lodash'),
         linterJs: [
             'Gruntfile.js',
             'grunt/**/*.js',
-            '<%= bundleJS.dirDev %>'
+            '<%= bundleJS.dirDev %>',
+            '!osmani-oreilly/main/patterns/happy-thoughts.js',
+            '!osmani-oreilly/main/patterns/creational.js',
+            '!osmani-oreilly/main/patterns/mediator.js',
+            '!osmani-oreilly/main/patterns/mixin.js',
+            '!osmani-oreilly/main/patterns/module.js',
+            '!osmani-oreilly/main/patterns/prototype.js',
+            '!osmani-oreilly/main/patterns/revealing-module.js',
+            '!osmani-oreilly/main/patterns/singleton.js'
         ],
         linterYaml: [
             '.travis.yml',
@@ -54,20 +62,18 @@ var _ = require('lodash'),
         },
         projectPaths: {
             git: '.git/hooks',
+            protocol: process.env.APACHE_PROTOCOL || 'http',
+            host: process.env.APACHE_HOST || 'localhost',
+            port: process.env.APACHE_PORT || '80',
+            root: 'design-patterns',
             appOsmaniOreilly: {
-                host: '127.0.0.1',
-                port: '80',
-                root: 'grunt-tasks-boilerplate',
-                publicDir: 'build/osmani-oreilly',
-                test: 'build/mocha/osmani-oreilly',
+                publicDir: 'build/osmani-oreilly/main',
+                test: 'build/osmani-oreilly/test',
                 application: 'osmani-oreilly'
             },
             appPlatzi: {
-                host: '127.0.0.1',
-                port: '80',
-                root: 'grunt-tasks-boilerplate',
-                publicDir: 'build/platzi',
-                test: 'build/mocha/platzi',
+                publicDir: 'build/platzi/main',
+                test: 'build/platzi/test',
                 application: 'platzi'
             },
             vendors: {

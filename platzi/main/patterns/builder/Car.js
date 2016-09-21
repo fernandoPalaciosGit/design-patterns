@@ -3,7 +3,6 @@
 var Car,
     _ = require('lodash');
 
-
 Car = function (options) {
     this.doors = options.doors;
     this.wheels = options.wheels;

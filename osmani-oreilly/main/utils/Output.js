@@ -19,7 +19,7 @@ logger = function () {
 
     return {
         add: function (log) {
-            _accumulateLog += (log + '\n');
+            _accumulateLog += log + '\n';
         },
         printPropertyList: function (context) {
             var log = _.reduce(Object.getOwnPropertyNames(context), _.bind(_printProperty, context), _accumulateLog);

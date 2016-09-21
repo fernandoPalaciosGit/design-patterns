@@ -7,7 +7,7 @@ describe('Design patterns', function () {
 
     context('Object literal Module notation', function () {
         before(function () {
-            objectLiteral = require('./../../main/concepts/app.module.objects');
+            objectLiteral = require('./../../main/concepts/objects');
         });
 
         it('should be an object instance from Object.prototype inheritance', function (next) {
@@ -40,7 +40,7 @@ describe('Design patterns', function () {
         });
 
         it('should protect overriding incorrect properties', function (next) {
-            expect(_.bindKey(objectLiteral, 'rewriteConfig', {none: false}))
+            expect(_.bindKey(objectLiteral, 'rewriteConfig', { none: false }))
                 .to.throw(Error, 'Couldn´t find config properties into new option.');
             expect(objectLiteral.rewriteConfig({
                 useCaching: false,

@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     options: {
         logConcurrentOutput: false
@@ -27,9 +29,9 @@ module.exports = {
         tasks: [
             'yaml_validator:<%= taskEnvironment %>',
             'jsonlint:<%= taskEnvironment %>',
-            'jshint:<%= taskEnvironment %>'
-            //'jscs:<%= taskEnvironment %>'
-            //'eslint:<%= taskEnvironment %>'
+            'jshint:<%= taskEnvironment %>',
+            'jscs:<%= taskEnvironment %>',
+            'eslint:<%= taskEnvironment %>'
         ]
     },
     jsVendorsCompile: {
@@ -40,12 +42,14 @@ module.exports = {
     },
     jsAppCompile: {
         tasks: [
-            'newer:browserify:<%= taskEnvironment %>-app-widget'
+            'newer:browserify:<%= taskEnvironment %>-app-widget-platzi',
+            'newer:browserify:<%= taskEnvironment %>-app-widget-osmanioreilly'
         ]
     },
     jsTestCompile: {
         tasks: [
-            'newer:browserify:<%= taskEnvironment %>-test'
+            'newer:browserify:<%= taskEnvironment %>-test-platzi',
+            'newer:browserify:<%= taskEnvironment %>-test-osmanioreilly'
         ]
     }
 };

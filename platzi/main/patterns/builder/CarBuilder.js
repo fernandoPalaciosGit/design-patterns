@@ -1,7 +1,7 @@
 'use strict';
 
 var OpelAstra, NissanCascais, CarBuilder,
-    Car = require('./app.module.Car'),
+    Car = require('./Car'),
     _ = require('lodash'),
     OPEL_ASTRA_PROPERTIES = {
         body: [2, 4, 'yellow pomello'],
@@ -46,7 +46,6 @@ OpelAstra.prototype = _.create(CarBuilder.prototype, {
         this.car.abs = OPEL_ASTRA_PROPERTIES.abs;
     }
 });
-
 
 /**
  * Car Builder prototype

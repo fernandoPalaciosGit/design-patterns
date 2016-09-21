@@ -3,9 +3,9 @@
 var _ = require('lodash'),
     chai = require('chai'),
     expect = chai.expect,
-    Car = require('./../../../main/patterns/builder/app.module.Car'),
-    CarDirector = require('./../../../main/patterns/builder/app.module.CarDirector'),
-    CarBuilder = require('./../../../main/patterns/builder/app.module.CarBuilder'),
+    Car = require('./../../../main/patterns/builder/Car'),
+    CarDirector = require('./../../../main/patterns/builder/CarDirector'),
+    CarBuilder = require('./../../../main/patterns/builder/CarBuilder'),
     isValidBuilder = CarBuilder.isValidBuilder,
     OpelAstraBuilder = CarBuilder.opelAstra,
     NissanCascaisBuilder = CarBuilder.nissanCascais;
