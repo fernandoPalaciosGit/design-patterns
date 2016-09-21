@@ -20,6 +20,7 @@ $npm run app
 ```markdown
 git checkout gh-pages
 git checkout -- .
+git clean -fx
 git pull origin gh-pages
 git pull origin master
 npm run coverage
