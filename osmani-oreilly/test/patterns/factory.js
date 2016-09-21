@@ -1,12 +1,13 @@
 'use strict';
 
 describe('Design patterns', function () {
-    var expect = require('chai').expect;
+    var _ = require('lodash'),
+        expect = require('chai').expect;
 
     context('Factory (Creational class pattern)', function () {
         var factory = require('./../../main/patterns/factory'), vehicleFactory, turism, corvette, tractor;
 
-        before(function () {
+        beforeEach(function () {
             vehicleFactory = factory.getFactoryVehicle();
         });
 
@@ -36,6 +37,9 @@ describe('Design patterns', function () {
         });
 
         it('should prevent initialize factory out from public scope interfaces', function (next) {
+            expect(_.bindKey(vehicleFactory, 'getVehicle', {})).to.throw(TypeError, 'should initialize factory with own interface');
+            expect(_.bindKey(vehicleFactory, 'vehicleType', {})).to.throw(TypeError);
+            expect(vehicleFactory.vehicleType).to.be.null;
             next();
         });
     });

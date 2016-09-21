@@ -52,7 +52,7 @@ _.assign(FactoryVehicle.prototype, {
         this.vehicleType = type;
     },
     checkFactory: function () {
-        return new this.vehicleType() instanceof Vehicle;
+        return !_.isNull(this.vehicleType) && new this.vehicleType() instanceof Vehicle;
     },
     checkVehicleType: function (type) {
         return type.prototype.isPrototypeOf(new this.vehicleType());
