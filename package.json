@@ -33,6 +33,7 @@
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-eslint": "~17.3.1",
+    "grunt-jscpd": "0.0.12",
     "grunt-jscs": "~2.4.0",
     "grunt-jsonlint": "^1.1.0",
     "grunt-mocha-phantom-istanbul": "git+https://github.com/fernandoPalaciosGit/grunt-mocha-phantom-istanbul.git",
