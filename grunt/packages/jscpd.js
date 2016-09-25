@@ -6,8 +6,8 @@ module.exports = {
         'min-tokens': 50
     },
     dev: {
-        files: {
-            src: '<%= linterJs %>'
-        }
+        path: '.',
+        files: '**/*.js',
+        exclude: '<%= excludelinterJs %>'
     }
 };

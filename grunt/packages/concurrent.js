@@ -31,8 +31,8 @@ module.exports = {
             'jsonlint:<%= taskEnvironment %>',
             'jshint:<%= taskEnvironment %>',
             'jscs:<%= taskEnvironment %>',
-            'eslint:<%= taskEnvironment %>'/*,
-            'jscpd:<%= taskEnvironment %>'*/
+            'eslint:<%= taskEnvironment %>',
+            'jscpd:<%= taskEnvironment %>'
         ]
     },
     jsVendorsCompile: {
