@@ -3,7 +3,7 @@
 /*jshint proto:true*/
 var testObjectDataDescriptor, testDataDescriptor;
 
-testObjectDataDescriptor = Object.create(null);
+testObjectDataDescriptor = Object.create(Object);
 
 Object.defineProperty(testObjectDataDescriptor, 'someKey', {
     __proto__: null,    // no inherited properties // in order to ensure preserve these properties behaveour
@@ -29,16 +29,11 @@ testDataDescriptor = function (name) {
 
     Object.defineProperty(this, 'skills', {
         value: [],
-        configurable: true,
-        enaumerable: true,
         writable: true
     });
 
     Object.defineProperty(this, 'proyects', {
-        __proto__: null,
         value: [],
-        configurable: false,
-        enaumerable: false,
         writable: false
     });
 };
@@ -51,5 +46,5 @@ testDataDescriptor.prototype.addProyects = function (proyect) {
     this.proyects.push(proyect);
 };
 
-module.exports = testDataDescriptor;
-module.exports = testObjectDataDescriptor;
+module.exports.testObjectDataDescriptor = testObjectDataDescriptor;
+module.exports.testDataDescriptor = testDataDescriptor;

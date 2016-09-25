@@ -2,12 +2,13 @@
 
 describe('Design patterns', function () {
     context('Creational (object pattern)', function () {
-        var moduleDescriptor, objectDescriptor, TestDescriptor, test;
+        var expect = require('chai').expect,
+            moduleDescriptor, objectDescriptor, TestDescriptor, test;
 
         before(function () {
             moduleDescriptor = require('./../../main/patterns/creational');
-            objectDescriptor = moduleDescriptor.testDataDescriptor;
-            TestDescriptor = moduleDescriptor.testObjectDataDescriptor;
+            objectDescriptor = moduleDescriptor.testObjectDataDescriptor;
+            TestDescriptor = moduleDescriptor.testDataDescriptor;
         });
 
         beforeEach(function () {
@@ -15,17 +16,32 @@ describe('Design patterns', function () {
         });
 
         it('should create object properties by \'data descriptor\' from \'defineProperty\' Object prototype function', function (next) {
-            objectDescriptor.someAnimal;
+            expect(objectDescriptor).to.have.property('someKey', 'someValue');
+            expect(objectDescriptor).to.have.property('someAnimal', 'somePet');
+            expect(objectDescriptor).to.have.property('anotherAnimal', 'someWild');
+            expect(test).to.have.property('name', 'test descriptor').that.is.a('string');
+            expect(test).to.have.property('skills').that.is.an('array');
+            expect(test).to.have.property('proyects').that.is.an('array');
             next();
         });
 
         it('should create writable properties', function (next) {
-            test.addSkills;
+            expect(test.skills).to.have.members([]);
+            test.addSkills('programmer');
+            expect(test.skills).to.have.members(['programmer']);
             next();
         });
 
         it('should create final properties', function (next) {
-            test.addProyects;
+            expect(test.proyects).to.have.members([]);
+            test.addProyects('database');
+            // wraitable from own prototypes
+            expect(test.proyects).to.have.members(['database']);
+            // not writable from native prototypes
+            expect(function () {
+                objectDescriptor.anotherAnimal = 'non-writable';
+            }).to.throw(TypeError, 'Attempted to assign to readonly property');
+            expect(objectDescriptor).to.have.property('anotherAnimal', 'someWild');
             next();
         });
     });
