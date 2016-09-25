@@ -1,6 +1,7 @@
 'use strict';
 
-var Person, PersonFromScope, Cat, Mammal, Musician, Pianist, Book, CalculateFuntions;
+var _ = require('lodash'),
+    Person, PersonFromScope, Cat, Mammal, Musician, Pianist, Book, CalculateFuntions;
 
 Person = function (name) {
     this.name = name;
@@ -42,7 +43,7 @@ Pianist.prototype.scoreSharpSound = function () {
 /* jshint freeze:false */
 Musician.prototype.surname = 'Magnificent';
 Pianist.prototype.pianoMark = 'Yamaha';
-Object.prototype.aviableInstance = true;
+Object.prototype.isAviableInstance = _.constant(true);
 
 Book = function (idBook) {
     this.ISBN = idBook;

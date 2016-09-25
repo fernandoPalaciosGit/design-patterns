@@ -83,7 +83,7 @@ describe('Design patterns', function () {
                 expect(Object.getPrototypeOf(bobby)).to.have.ownProperty('pianoMark');
                 expect(Object.getPrototypeOf(bobby)).to.have.ownProperty('scoreSharpSound');
                 expect(bobby).not.to.have.ownProperty('surname');
-                expect(bobby).not.to.have.ownProperty('aviableInstance');
+                expect(bobby).not.to.have.ownProperty('isAviableInstance');
                 next();
             });
 
@@ -95,7 +95,7 @@ describe('Design patterns', function () {
                 expect(bobby.name).to.be.equals('Federico');
                 expect(bobby.surname).to.be.equals('Magnificent');
                 expect(bobby.isProgrammer).to.be.equals(false);
-                expect(bobby.aviableInstance).to.be.equals(true);
+                expect(bobby.isAviableInstance()).to.be.equals(true);
                 next();
             });
         });
