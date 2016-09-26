@@ -10,12 +10,6 @@ var _ = require('lodash'),
         packageJson: '<% grunt.file.readJSON(\'package.json\') %>',
         gruntRuntimeConfig: 'grunt/runtime-config',
         environmentTasks: ['dev', 'dist', 'qa'],
-        excludelinterJs: [
-            'node_modules/**',
-            'bower_components/**',
-            'test/**',
-            'build/**'
-        ],
         linterJs: [
             'Gruntfile.js',
             'grunt/**/*.js',

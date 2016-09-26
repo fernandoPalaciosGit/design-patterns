@@ -9,6 +9,7 @@ module.exports = {
         app: [
             'clean:dev-js',
             'concurrent:jsLinters',
+            'concurrent:jsCopyPaste',
             'concurrent:jsVendorsCompile',
             'concurrent:jsAppCompile',
             'concurrent:jsTestCompile'
@@ -31,8 +32,13 @@ module.exports = {
             'jsonlint:<%= taskEnvironment %>',
             'jshint:<%= taskEnvironment %>',
             'jscs:<%= taskEnvironment %>',
-            'eslint:<%= taskEnvironment %>',
-            'jscpd:<%= taskEnvironment %>'
+            'eslint:<%= taskEnvironment %>'
+        ]
+    },
+    jsCopyPaste: {
+        tasks: [
+            'jscpd:<%= taskEnvironment %>-osmani-oreilly',
+            'jscpd:<%= taskEnvironment %>-platzi'
         ]
     },
     jsVendorsCompile: {

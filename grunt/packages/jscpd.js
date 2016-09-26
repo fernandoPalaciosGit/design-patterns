@@ -2,12 +2,15 @@
 
 module.exports = {
     options: {
-        'min-lines': 4,
-        'min-tokens': 50
+        'min-lines': 5,
+        'min-tokens': 70
     },
-    dev: {
-        path: '.',
-        files: '**/*.js',
-        exclude: '<%= excludelinterJs %>'
+    'dev-osmani-oreilly': {
+        path: 'osmani-oreilly',
+        files: '**/*.js'
+    },
+    'dev-platzi': {
+        path: 'platzi',
+        files: '**/*.js'
     }
 };
