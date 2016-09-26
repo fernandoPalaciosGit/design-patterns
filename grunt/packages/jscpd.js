@@ -3,13 +3,14 @@
 module.exports = {
     options: {
         'min-lines': 5,
-        'min-tokens': 70
+        'min-tokens': 70,
+        threshold: 1
     },
-    'dev-osmani-oreilly': {
+    'osmani-oreilly': {
         path: 'osmani-oreilly',
         files: '**/*.js'
     },
-    'dev-platzi': {
+    'platzi': {
         path: 'platzi',
         files: '**/*.js'
     }

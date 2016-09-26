@@ -37,8 +37,8 @@ module.exports = {
     },
     jsCopyPaste: {
         tasks: [
-            'jscpd:<%= taskEnvironment %>-osmani-oreilly',
-            'jscpd:<%= taskEnvironment %>-platzi'
+            'jscpd:osmani-oreilly',
+            'jscpd:platzi'
         ]
     },
     jsVendorsCompile: {

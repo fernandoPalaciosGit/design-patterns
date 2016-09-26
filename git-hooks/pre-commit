@@ -1,5 +1,5 @@
 #!/bin/sh
-grunt concurrent:jsLinters
+grunt concurrent:jsLinters concurrent:jsCopyPaste
 RESULT=$?
 [ $RESULT -ne 0 ] && exit 1
 exit 0
