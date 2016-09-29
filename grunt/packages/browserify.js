@@ -47,6 +47,8 @@ module.exports = {
         .addOriginSource('<%= projectPaths.appPlatzi.application %>/main/**/*.js')
         .addOriginSource('!<%= projectPaths.appPlatzi.application %>/main/index.js')
         .addCompiledSource('<%= projectPaths.appPlatzi.publicDir %>/app.bundle.js')
+        .setFullPathsBundle()
+        .postBundleOutputWithDisc('<%= outputDisc %>', '<%= projectPaths.appPlatzi.application %>.html')
         .build(),
 
     'dev-app-widget-osmanioreilly': _.cloneDeep(browserifyAppOptions)
@@ -54,5 +56,7 @@ module.exports = {
         .addOriginSource('<%= projectPaths.appOsmaniOreilly.application %>/main/**/*.js')
         .addOriginSource('!<%= projectPaths.appOsmaniOreilly.application %>/main/index.js')
         .addCompiledSource('<%= projectPaths.appOsmaniOreilly.publicDir %>/app.bundle.js')
+        .setFullPathsBundle()
+        .postBundleOutputWithDisc('<%= outputDisc %>', '<%= projectPaths.appOsmaniOreilly.application %>.html')
         .build()
 };

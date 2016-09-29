@@ -3,5 +3,6 @@
 module.exports = {
     'dev-js': '<%= cleanBundleJs.dirDev %>',
     'mocha': '<%= mocha.dev.dest %>',
-    'coverage': '<%= mocha.coverageReporter %>'
+    'coverage': '<%= mocha.coverageReporter %>',
+    'disc': '<%= outputDisc %>'
 };

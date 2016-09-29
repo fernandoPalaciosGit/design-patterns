@@ -8,6 +8,7 @@ module.exports = {
         // --compile=app
         app: [
             'clean:dev-js',
+            'clean:disc',
             'concurrent:jsLinters',
             'concurrent:jsCopyPaste',
             'concurrent:jsVendorsCompile',
@@ -17,6 +18,7 @@ module.exports = {
         // --compile=test
         test: [
             'clean:dev-js',
+            'clean:disc',
             'concurrent:jsAppCompile',
             'concurrent:jsTestCompile'
         ],

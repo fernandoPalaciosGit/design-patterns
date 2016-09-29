@@ -16,7 +16,10 @@ let _ = require('lodash'),
         }],
         ['transform', []],
         ['plugin', []],
-        ['exclude', []]
+        ['exclude', []],
+        ['postBundleCB', function (err, src, next) {
+            next(err, src);
+        }]
     ],
     SchemaBrowserTransform = [
         ['browserify-shim'],
@@ -28,8 +31,39 @@ let _ = require('lodash'),
         app: ['lodash', 'jquery'],
         test: ['lodash', 'jquery', 'chai']
     },
+    _createDisc = (err, src, next) => {
+        let fs = require('fs'),
+            grunt = require('grunt'),
+            currentTask = grunt.task.current,
+            discOutput = currentTask.data.options.browserifyOptions.discOutput,
+            createOutput = () => {
+                let disc = require('disc'),
+                    stream = require('stream'),
+                    s = new stream.Readable(),
+                    output = _.join(_.toArray(discOutput), '/');
+
+                s._read = _.noop;
+                s.push(src);
+                s.push(null);
+                s.pipe(disc({
+                    header: 'Ho my god',
+                    footer: 'Ho my goddness'
+                }))
+                    .pipe(fs.createWriteStream(output))
+                    .once('close', () => next(err, src));
+            };
+
+        fs.stat(discOutput.dir, (err) => {
+            if (!_.isEmpty(err)) {
+                fs.mkdir(discOutput.dir, createOutput);
+
+            } else {
+                createOutput();
+            }
+        });
+    },
     BrowserifyOptions = function (options) {
-        this.options = options.options || _.cloneDeep(new Map(SchemaBrowserOptions));
+        this.options = _.cloneDeep(new Map(SchemaBrowserOptions));
         this.src = options.src || new Set();
         this.dest = options.dest || '';
     };
@@ -69,8 +103,26 @@ _.assign(BrowserifyOptions.prototype, {
 
         return this;
     },
+    // when using the command-line interface (like disc profile)
+    setFullPathsBundle: function () {
+        let browser = this.options.get('browserifyOptions');
+
+        browser.fullPaths = true;
+        this.options.set('browserifyOptions', browser);
+
+        return this;
+    },
     setDependencies: function (path) {
         this.options.set('require', _.get(vendors, path));
+
+        return this;
+    },
+    postBundleOutputWithDisc: function (/*dir, file*/) {
+        let browser = this.options.get('browserifyOptions');
+
+        browser.discOutput = _.zipObject(['dir', 'file'], arguments);
+        this.options.set('browserifyOptions', browser);
+        this.options.set('postBundleCB', _createDisc);
 
         return this;
     },
