@@ -77,9 +77,9 @@ Macbook.prototype = _.create(Laptop.prototype, {
  */
 MacbookPro = function (macbook) {
     var macbookInterface = getInterface({
-        name: 'Macbook',
-        methodsImplemented: ['add500GBRam', 'add1TBRam', 'addRetina13', 'addRetina15'],
-        interfaceImplemented: macbook.constructor
+        name: 'MacbookPro',
+        methodsImplemented: _.keys(Object.getPrototypeOf(this)),
+        interfaceImplemented: Object.getPrototypeOf(macbook)
     });
 
     this.interfaceName = macbookInterface.name;
@@ -104,9 +104,9 @@ _.assign(MacbookPro.prototype, {
 
 MacbookRetina = function (macbook) {
     var macbookInterface = getInterface({
-        name: 'Macbook',
-        methodsImplemented: ['duplicatePixelRatio', 'add500GBRam', 'add1TBRam'],
-        interfaceImplemented: macbook.constructor
+        name: 'MacbookRetina',
+        methodsImplemented: _.keys(Object.getPrototypeOf(this)),
+        interfaceImplemented: Object.getPrototypeOf(macbook)
     });
 
     this.interfaceName = macbookInterface.name;

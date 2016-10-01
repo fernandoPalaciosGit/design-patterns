@@ -1,81 +1,50 @@
-/*jshint proto:true*/
-
 'use strict';
 
-var newObject, propObject;
+/*jshint proto:true*/
+var testObjectDataDescriptor, testDataDescriptor;
 
-newObject = Object.create(null);
+testObjectDataDescriptor = Object.create(Object);
 
-//////////////////////
-// ES3 : DOT SINTAX //
-//////////////////////
-newObject.someKey = 'someValue';    //writte propperty
-propObject = newObject.someKey; // access to property
-
-//////////////////////////////////
-// ES3 : SQUARE BRACKETS SYNTAX //
-//////////////////////////////////
-newObject['someKey'] = 'someValue';     //writte propperty
-propObject = newObject['someKey'];  // access to property
-
-////////////////////////////////////////////////
-// ES5 : property create by 'data descriptor' //
-////////////////////////////////////////////////
-Object.defineProperty(newObject, 'someKey', {
-    __proto__: null,   // no inherited properties // in order to ensure preserve these properties behaveour
+Object.defineProperty(testObjectDataDescriptor, 'someKey', {
+    __proto__: null,    // no inherited properties // in order to ensure preserve these properties behaveour
     value: 'someValue', // property value
     configurable: true, // can change typeof && can delete from Object
     enaumerable: true,  // can show by iterate into Object
     writable: true      // can be modified
 });
 
-////////////////////////////////////
-// ES5 : Object define properties //
-////////////////////////////////////
-Object.defineProperties(newObject, {
-    'someKey': {
-        value: 'someValue',
+Object.defineProperties(testObjectDataDescriptor, {
+    'someAnimal': {
+        value: 'somePet',
         writable: true
     },
-    'anotherKey': {
-        value: 'someValue',
+    'anotherAnimal': {
+        value: 'someWild',
         writable: false
     }
 });
 
+testDataDescriptor = function (name) {
+    this.name = name;
 
-//////////////////
-// TEST PATTERN //
-//////////////////
-(function () {
+    Object.defineProperty(this, 'skills', {
+        value: [],
+        writable: true
+    });
 
-    var Developer = function (name) {
-        this.name = name;
+    Object.defineProperty(this, 'proyects', {
+        value: [],
+        writable: false
+    });
+};
 
-        // create writable properties || 'data property descriptor'
-        Object.defineProperty(this, 'skills', {
-            value: [],
-            configurable: true,
-            enaumerable: true,
-            writable: true
-        });
+testDataDescriptor.prototype.addSkills = function (skill) {
+    this.skills.push(skill);
+};
 
-        // create final properties
-        Object.defineProperty(this, 'proyects', {
-            __proto__: null,
-            value: [],
-            configurable: false,
-            enaumerable: false,
-            writable: false
-        });
-    };
+testDataDescriptor.prototype.addProyects = function (proyect) {
+    this.proyects.push(proyect);
+};
 
-    Developer.prototype.addSkills = function (skill) {
-        this.skills.push(skill);
-    };
-
-    Developer.prototype.addProyects = function (proyect) {
-        this.proyects.push(proyect);
-    };
-
-}());
+module.exports.testObjectDataDescriptor = testObjectDataDescriptor;
+module.exports.testDataDescriptor = testDataDescriptor;

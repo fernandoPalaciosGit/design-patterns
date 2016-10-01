@@ -10,13 +10,17 @@
  */
 let _ = require('lodash'),
     utils = require('./../UtilsTask'),
+    discReporter = require('./../DiscReporter'),
     SchemaBrowserOptions = [
         ['browserifyOptions', {
             debug: true
         }],
         ['transform', []],
         ['plugin', []],
-        ['exclude', []]
+        ['exclude', []],
+        ['postBundleCB', function (err, src, next) {
+            next(err, src);
+        }]
     ],
     SchemaBrowserTransform = [
         ['browserify-shim'],
@@ -29,7 +33,7 @@ let _ = require('lodash'),
         test: ['lodash', 'jquery', 'chai']
     },
     BrowserifyOptions = function (options) {
-        this.options = options.options || _.cloneDeep(new Map(SchemaBrowserOptions));
+        this.options = _.cloneDeep(new Map(SchemaBrowserOptions));
         this.src = options.src || new Set();
         this.dest = options.dest || '';
     };
@@ -69,8 +73,27 @@ _.assign(BrowserifyOptions.prototype, {
 
         return this;
     },
+    // when using the command-line interface (like disc profile)
+    setFullPathsBundle: function () {
+        let browser = this.options.get('browserifyOptions');
+
+        browser.fullPaths = true;
+        this.options.set('browserifyOptions', browser);
+
+        return this;
+    },
     setDependencies: function (path) {
         this.options.set('require', _.get(vendors, path));
+
+        return this;
+    },
+    postBundleOutputWithDisc: function (/*dir, file*/) {
+        let browser = this.options.get('browserifyOptions'),
+            disc = discReporter();
+
+        browser.outputDisc = _.zipObject(['dir', 'file'], arguments);
+        this.options.set('browserifyOptions', browser);
+        this.options.set('postBundleCB', _.bind(disc.postBundleCB, disc));
 
         return this;
     },

@@ -27,13 +27,13 @@ _.assign(Interface.prototype, {
         var invalidMethod = [];
 
         if (!_.isUndefined(this.methods) && !_.isEmpty(this.methods)) {
-            invalidMethod = _.find(_.keysIn(interfaceImplemented.prototype), _.bind(function (method) {
-                return !_.includes(this.methods, method) && !_.isFunction(interfaceImplemented.prototype[method]);
+            invalidMethod = _.find(this.methods, _.bind(function (method) {
+                return !_.includes(interfaceImplemented, method) && !_.isFunction(interfaceImplemented[method]);
             }, this));
 
             if (!_.isEmpty(invalidMethod)) {
-                throw new Error('interface does not implement the ' + this.name + ' module.' +
-                    'Method ' + invalidMethod[0] + ' was not found.');
+                throw new Error('interface does not implement the module ' + this.name  +
+                    'Method \'' + invalidMethod + '\' was not found.');
             }
 
         } else {
