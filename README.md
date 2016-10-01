@@ -50,6 +50,7 @@ git pull origin master
 # fix merge conflicts (UU)
 git add . && git commit -m "merge with local"
 npm run coverage
+npm run disc
 git add --ignore-removal --all && git commit -m "new coverage report"
 git push origin -u gh-pages
 git checkout master
