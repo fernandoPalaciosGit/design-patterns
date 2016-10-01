@@ -8,7 +8,6 @@ module.exports = {
         // --compile=app
         app: [
             'clean:dev-js',
-            'clean:disc',
             'concurrent:jsLinters',
             'concurrent:jsCopyPaste',
             'concurrent:jsVendorsCompile',
@@ -18,7 +17,6 @@ module.exports = {
         // --compile=test
         test: [
             'clean:dev-js',
-            'clean:disc',
             'concurrent:jsAppCompile',
             'concurrent:jsTestCompile'
         ],
@@ -26,6 +24,11 @@ module.exports = {
         vendor: [
             'clean:dev-js',
             'concurrent:jsVendorsCompile'
+        ],
+        // --compile=disc
+        disc: [
+            'clean:disc',
+            'concurrent:discAppCompile'
         ]
     },
     jsLinters: {
@@ -59,6 +62,12 @@ module.exports = {
         tasks: [
             'newer:browserify:<%= taskEnvironment %>-test-platzi',
             'newer:browserify:<%= taskEnvironment %>-test-osmanioreilly'
+        ]
+    },
+    discAppCompile: {
+        tasks: [
+            'browserify:disc-app-platzi',
+            'browserify:disc-app-osmanioreilly'
         ]
     }
 };

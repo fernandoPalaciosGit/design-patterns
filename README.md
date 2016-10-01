@@ -15,6 +15,11 @@ $npm run app
 $npm run coverage # ./test/coverage/html/index.html
 ```
 
+- Run disc reporter bundle
+```bash
+$npm run disc # ./disc/[osmani-oreilly/platzi].html
+```
+
 - Create new examples and design with TDD
 ```bash
 $npm run test

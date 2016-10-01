@@ -46,8 +46,8 @@ let _ = require('lodash'),
                 s.push(src);
                 s.push(null);
                 s.pipe(disc({
-                    header: 'Ho my god',
-                    footer: 'Ho my goddness'
+                    header: '<div>' + 'Bundle ' + discOutput.file + '</div>',
+                    footer: `<div><a src="${grunt.options.packageJson.repository.url}">Fork me !!!</a></div>`
                 }))
                     .pipe(fs.createWriteStream(output))
                     .once('close', () => next(err, src));
