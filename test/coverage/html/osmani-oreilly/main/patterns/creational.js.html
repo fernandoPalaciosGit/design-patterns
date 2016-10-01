@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for osmani-oreilly/main/concepts/objects.js</title>
+    <title>Code coverage report for osmani-oreilly/main/patterns/creational.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -16,28 +16,28 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../../index.html">all files</a> / <a href="index.html">osmani-oreilly/main/concepts/</a> objects.js
+      <a href="../../../index.html">all files</a> / <a href="index.html">osmani-oreilly/main/patterns/</a> creational.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>10/10</span>
+        <span class='fraction'>14/14</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">87.5% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>7/8</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>4/4</span>
+        <span class='fraction'>3/3</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>10/10</span>
+        <span class='fraction'>14/14</span>
       </div>
     </div>
   </div>
@@ -79,7 +79,35 @@
 34
 35
 36
-37</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -90,67 +118,81 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
 &nbsp;
-var _patternDescription = 'Object literal Module notation',
-    _privConfig = {
-        useCaching: true,
-        language: 'es'
+/*jshint proto:true*/
+var testObjectDataDescriptor, testDataDescriptor;
+&nbsp;
+testObjectDataDescriptor = Object.create(Object);
+&nbsp;
+Object.defineProperty(testObjectDataDescriptor, 'someKey', {
+    __proto__: null,    // no inherited properties // in order to ensure preserve these properties behaveour
+    value: 'someValue', // property value
+    configurable: true, // can change typeof &amp;&amp; can delete from Object
+    enaumerable: true,  // can show by iterate into Object
+    writable: true      // can be modified
+});
+&nbsp;
+Object.defineProperties(testObjectDataDescriptor, {
+    'someAnimal': {
+        value: 'somePet',
+        writable: true
     },
-    _errorRewritting = {
-        message: 'Couldn´t find config properties into new option.'
-    },
-    _isObjConfig = function (newConfig) {
-        return newConfig.hasOwnProperty('useCaching') &amp;&amp;
-            newConfig.hasOwnProperty('language');
-    };
-&nbsp;
-module.exports = {
-    description: _patternDescription,
-    toogleStatus: function () {
-        _privConfig.useCaching = !_privConfig.useCaching;
-    },
-    printCachingStatus: function () {
-        var msg = _privConfig.useCaching === true ? 'enabled' : 'disabled';
-&nbsp;
-        return 'Caching is ' + msg;
-    },
-    rewriteConfig: fu<span class="branch-1 cbranch-no" title="branch not covered" >nct</span>ion (opt) {
-        opt = opt || {};
-&nbsp;
-        if (!_isObjConfig(opt)) {
-            throw new Error(_errorRewritting.message);
-&nbsp;
-        } else {
-            _privConfig = opt;
-        }
+    'anotherAnimal': {
+        value: 'someWild',
+        writable: false
     }
+});
+&nbsp;
+testDataDescriptor = function (name) {
+    this.name = name;
+&nbsp;
+    Object.defineProperty(this, 'skills', {
+        value: [],
+        writable: true
+    });
+&nbsp;
+    Object.defineProperty(this, 'proyects', {
+        value: [],
+        writable: false
+    });
 };
+&nbsp;
+testDataDescriptor.prototype.addSkills = function (skill) {
+    this.skills.push(skill);
+};
+&nbsp;
+testDataDescriptor.prototype.addProyects = function (proyect) {
+    this.proyects.push(proyect);
+};
+&nbsp;
+module.exports.testObjectDataDescriptor = testObjectDataDescriptor;
+module.exports.testDataDescriptor = testDataDescriptor;
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
