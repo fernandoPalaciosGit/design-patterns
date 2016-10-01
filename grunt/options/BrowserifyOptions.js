@@ -10,6 +10,7 @@
  */
 let _ = require('lodash'),
     utils = require('./../UtilsTask'),
+    discReporter = require('./../DiscReporter'),
     SchemaBrowserOptions = [
         ['browserifyOptions', {
             debug: true
@@ -30,43 +31,6 @@ let _ = require('lodash'),
     vendors = {
         app: ['lodash', 'jquery'],
         test: ['lodash', 'jquery', 'chai']
-    },
-    _createDisc = (err, src, next) => {
-        let fs = require('fs'),
-            grunt = require('grunt'),
-            currentTask = grunt.task.current,
-            discOutput = currentTask.data.options.browserifyOptions.discOutput,
-            createOutput = () => {
-                let disc = require('disc'),
-                    stream = require('stream'),
-                    open = require('opener'),
-                    s = new stream.Readable(),
-                    output = _.join(_.toArray(discOutput), '/'),
-                    bundleName = discOutput.file.split('.')[0],
-                    repositoryUrl = grunt.file.readJSON('package.json').repository.url;
-
-                s._read = _.noop;
-                s.push(src);
-                s.push(null);
-                s.pipe(disc({
-                    header: `<center><h2>Bundle ${bundleName}</h2></center>`,
-                    footer: `<center><a href="${repositoryUrl}">Fork me !!!</a></center>`
-                }))
-                    .pipe(fs.createWriteStream(output))
-                    .once('close', () => {
-                        open(output);
-                        next(err, src);
-                    });
-            };
-
-        fs.stat(discOutput.dir, (err) => {
-            if (!_.isEmpty(err)) {
-                fs.mkdir(discOutput.dir, createOutput);
-
-            } else {
-                createOutput();
-            }
-        });
     },
     BrowserifyOptions = function (options) {
         this.options = _.cloneDeep(new Map(SchemaBrowserOptions));
@@ -124,11 +88,12 @@ _.assign(BrowserifyOptions.prototype, {
         return this;
     },
     postBundleOutputWithDisc: function (/*dir, file*/) {
-        let browser = this.options.get('browserifyOptions');
+        let browser = this.options.get('browserifyOptions'),
+            disc = discReporter();
 
-        browser.discOutput = _.zipObject(['dir', 'file'], arguments);
+        browser.outputDisc = _.zipObject(['dir', 'file'], arguments);
         this.options.set('browserifyOptions', browser);
-        this.options.set('postBundleCB', _createDisc);
+        this.options.set('postBundleCB', _.bind(disc.postBundleCB, disc));
 
         return this;
     },
