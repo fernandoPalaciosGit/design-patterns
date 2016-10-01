@@ -33,7 +33,7 @@ _.assign(DiscReporter.prototype, {
         s.push(null);
         s.pipe(disc(this.templates))
             .pipe(fs.createWriteStream(this.output))
-            .once('close', this.openReportAndContinueBundler.apply(this, arguments));
+            .once('close', () => this.openReportAndContinueBundler.apply(this, arguments));
     },
     openReportAndContinueBundler: function (err, src, next) {
         let open = require('opener');
@@ -57,7 +57,7 @@ _.assign(DiscReporter.prototype, {
 
         this.setOutputDisc(outputSrc);
         this.setHtmlTemplates(outputDisc);
-        this.createDiscFolder(outputDisc.dir, this.createBundleWithReport.apply(this, arguments));
+        this.createDiscFolder(outputDisc.dir, () => this.createBundleWithReport.apply(this, arguments));
     }
 });
 
