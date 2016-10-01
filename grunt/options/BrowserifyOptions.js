@@ -39,18 +39,24 @@ let _ = require('lodash'),
             createOutput = () => {
                 let disc = require('disc'),
                     stream = require('stream'),
+                    open = require('opener'),
                     s = new stream.Readable(),
-                    output = _.join(_.toArray(discOutput), '/');
+                    output = _.join(_.toArray(discOutput), '/'),
+                    bundleName = discOutput.file.split('.')[0],
+                    repositoryUrl = grunt.file.readJSON('package.json').repository.url;
 
                 s._read = _.noop;
                 s.push(src);
                 s.push(null);
                 s.pipe(disc({
-                    header: '<div>' + 'Bundle ' + discOutput.file + '</div>',
-                    footer: `<div><a src="${grunt.options.packageJson.repository.url}">Fork me !!!</a></div>`
+                    header: `<center><h2>Bundle ${bundleName}</h2></center>`,
+                    footer: `<center><a href="${repositoryUrl}">Fork me !!!</a></center>`
                 }))
                     .pipe(fs.createWriteStream(output))
-                    .once('close', () => next(err, src));
+                    .once('close', () => {
+                        open(output);
+                        next(err, src);
+                    });
             };
 
         fs.stat(discOutput.dir, (err) => {

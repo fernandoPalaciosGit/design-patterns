@@ -28,7 +28,8 @@ module.exports = {
         // --compile=disc
         disc: [
             'clean:disc',
-            'concurrent:discAppCompile'
+            'concurrent:discAppCompile',
+            'clean:dev-js'
         ]
     },
     jsLinters: {
