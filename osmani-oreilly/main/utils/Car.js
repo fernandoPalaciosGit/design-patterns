@@ -1,8 +1,6 @@
 'use strict';
 
-var Car,
-    logger = require('./../utils/Output').getLogger,
-    _ = require('lodash');
+let Car, logger = require('./../utils/Output').getLogger;
 
 Car = function (options) {
     this.model = options.model;
@@ -10,10 +8,12 @@ Car = function (options) {
     this.color = options.color;
 };
 
-_.assign(Car.prototype, {
+Car.prototype = {
     getInfo: function () {
         return logger.printPropertyList(this);
     }
-});
+};
+
+Car.prototype.constructor = Car;
 
 module.exports = Car;

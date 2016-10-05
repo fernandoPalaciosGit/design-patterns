@@ -10,7 +10,7 @@ describe('Design patterns', function () {
             };
 
         before(function () {
-            Car = require('./../../main/concepts/classes');
+            Car = require('./../../main/utils/Car');
         });
 
         it('should crearte a Car instance initialized', function (next) {
