@@ -4,14 +4,14 @@ let _ = require('lodash'), overrideMethod = _.noop, overrideObject = _.noop;
 
 // check method extend from givingClass but there is´nt into receiving
 overrideMethod = function (receiving, givingClass, overrideMethodInherit) {
-    let hasFunctionOverriden = !_.isFunction(receiving.prototype[overrideMethodInherit]) &&
+    let hasFunctionOverridden = _.isUndefined(receiving.prototype[overrideMethodInherit]) &&
         _.isFunction(givingClass.prototype[overrideMethodInherit]);
 
-    if (hasFunctionOverriden) {
+    if (hasFunctionOverridden) {
         receiving.prototype[overrideMethodInherit] = givingClass.prototype[overrideMethodInherit];
 
     } else {
-        throw new Error('could not override function');
+        throw new Error('could not override method: ' + overrideMethodInherit);
     }
 };
 
@@ -22,5 +22,6 @@ overrideObject = function (receiving, givingClass) {
 
 // only provide certain methods to extend from prototype properties
 module.exports.augment = function (receiving, givingClass, overrideMethodInherit) {
-    _.isString(overrideMethodInherit) ? overrideMethod(arguments) : overrideObject(arguments);
+    _.isString(overrideMethodInherit) ?
+        overrideMethod.apply({}, arguments) : overrideObject.apply({}, arguments);
 };
