@@ -22,6 +22,7 @@ describe('Design patterns', function () {
             };
 
         it('should override single method from prototype inheritance', function (next) {
+            /*jshint maxstatements:15*/
             mixin.augment(transports.Car, transports.Vehicle, 'changeDistributor');
             sport = new transports.Car(mockSport);
             expect(sport).to.be.instanceof(transports.Car);
@@ -39,6 +40,7 @@ describe('Design patterns', function () {
         });
 
         it('should override all prototype from inheritance', function (next) {
+            /*jshint maxstatements:15*/
             mixin.augment(transports.Car, transports.Vehicle);
             tourist = new transports.Car(mockTourism);
             expect(tourist).to.be.instanceof(transports.Car);

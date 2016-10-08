@@ -1,6 +1,6 @@
 'use strict';
 
-let Vehicle;
+let Vehicle, logger = require('./../utils/Output').getLogger;
 
 Vehicle = function (options) {
     this.distributor = options.distributor || 'distributor not provided';

@@ -19,12 +19,11 @@ _inspectObject = function (object, depth) {
     }));
 };
 
-
 /**
  * @param object {Object} object to inspect.
  * @param depth {Number} Specifies the number of times to recurse while formatting the object.
  */
-_logDebugging = function (object, depth) {
+_logDebugging = function (object) {
     /*eslint no-console: [0] */
     _logMessage(colors.cyan.underline, '---debug---');
 
