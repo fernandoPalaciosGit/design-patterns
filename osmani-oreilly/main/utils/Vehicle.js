@@ -11,8 +11,11 @@ Vehicle.prototype = {
     enableLicence: function (enable) {
         this.aviableLicence = enable;
     },
-    chenageDistributor: function (newDist) {
+    changeDistributor: function (newDist) {
         this.distributor = newDist;
+    },
+    getInfo: function () {
+        return logger.printPropertyList(this);
     }
 };
 
