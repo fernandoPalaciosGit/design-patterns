@@ -5,23 +5,35 @@ var _ = require('lodash'),
     path = require('path'),
     colors = require('colors'),
     projectPath = require('./options/packageOptions').projectPaths,
-    _logMessage, _logDebugging, _parseIterableWithKey;
+    _logMessage, _inspectObject, _logDebugging, _parseIterableWithKey;
 
 _logMessage = function (mask, message) {
     /*eslint no-console: [0] */
     console.log(mask(message));
 };
 
+_inspectObject = function (object, depth) {
+    /*eslint no-console: [0] */
+    console.log(utils.inspect(object, {
+        showHidden: false, depth: depth
+    }));
+};
+
 /**
  * @param object {Object} object to inspect.
  * @param depth {Number} Specifies the number of times to recurse while formatting the object.
  */
-_logDebugging = function (object, depth) {
+_logDebugging = function (object) {
     /*eslint no-console: [0] */
     _logMessage(colors.cyan.underline, '---debug---');
-    console.log(utils.inspect(object, {
-        showHidden: false, depth: depth
-    }));
+
+    if (_.isArguments(object)) {
+        console.log('arguments.length = ' + object.length);
+        _.each(object, _inspectObject);
+
+    } else {
+        _inspectObject.apply({}, arguments);
+    }
 };
 
 _parseIterableWithKey = function (hasOutputKey, iterable) {

@@ -7,7 +7,7 @@ describe('Design patterns', function () {
 
     context('Object literal Module notation', function () {
         before(function () {
-            objectLiteral = require('./../../main/concepts/objects');
+            objectLiteral = require('./../../main/patterns/objects');
         });
 
         it('should be an object instance from Object.prototype inheritance', function (next) {
