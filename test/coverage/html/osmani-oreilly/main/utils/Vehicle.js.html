@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for osmani-oreilly/main/patterns/command.js</title>
+    <title>Code coverage report for osmani-oreilly/main/utils/Vehicle.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -16,32 +16,32 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../../index.html">all files</a> / <a href="index.html">osmani-oreilly/main/patterns/</a> command.js
+      <a href="../../../index.html">all files</a> / <a href="index.html">osmani-oreilly/main/utils/</a> Vehicle.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">70% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>10/10</span>
+        <span class='fraction'>7/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>4/4</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>5/5</span>
+        <span class='fraction'>2/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">70% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>10/10</span>
+        <span class='fraction'>7/10</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -67,72 +67,54 @@
 22
 23
 24
-25
-26
-27
-28
-29
-30
-31</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+25</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+<span class="cline-any cline-yes">2×</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
 &nbsp;
-var _ = require('lodash'),
-    RentCar,
-    validation = require('./../../main/utils/Validation'),
-    printer = require('./../../main/utils/Output').getPrinter;
+let Vehicle, logger = require('./../utils/Output').getLogger;
 &nbsp;
-RentCar = function () {
+Vehicle = function (options) {
+    this.d<span class="fstat-no" title="function not covered" >istributor = options.distri</span>butor || 'distributor not provided';
+<span class="cstat-no" title="statement not covered" >    this.aviableLicence = true;</span>
+};<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+Vehicle.prototype = {
+    enableLicence: function (enable) {
+        this.aviableLicence = enable;
+    },
+    changeDistributor: function (newDist) {
+        this.distributor = newDist;
+    },
+    getInfo: function () {
+        retur<span class="fstat-no" title="function not covered" >n logger.printProper</span>tyList(this);
+    }<span class="cstat-no" title="statement not covered" ></span>
 };
 &nbsp;
-_.assign(RentCar.prototype, {
-    checkBusiness: function (methodName) {
-        if (validation.hasOwnPropertyChain(methodName, this)) {
-            return this[methodName].apply(this, _.drop(arguments));
+Vehicle.prototype.constructor = Vehicle;
 &nbsp;
-        } else {
-            throw Error('invalid method');
-        }
-    },
-    buyCar: function (model, price) {
-        return printer.joinFields('buyCar', model, price);
-    },
-    requestInfo: function (model, description) {
-        return printer.joinFields('requestInfo', model, description);
-    }
-});
-&nbsp;
-module.exports = function (options) {
-    return new RentCar(options || {});
-};
+module.exports = Vehicle;
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for osmani-oreilly/main/patterns/command.js</title>
+    <title>Code coverage report for osmani-oreilly/main/patterns/mixin.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -16,7 +16,7 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../../index.html">all files</a> / <a href="index.html">osmani-oreilly/main/patterns/</a> command.js
+      <a href="../../../index.html">all files</a> / <a href="index.html">osmani-oreilly/main/patterns/</a> mixin.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
@@ -27,12 +27,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>4/4</span>
+        <span class='fraction'>6/6</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>5/5</span>
+        <span class='fraction'>3/3</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -70,10 +70,7 @@
 25
 26
 27
-28
-29
-30
-31</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+28</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -81,57 +78,51 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">6×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">8×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
 &nbsp;
-var _ = require('lodash'),
-    RentCar,
-    validation = require('./../../main/utils/Validation'),
-    printer = require('./../../main/utils/Output').getPrinter;
+let _ = require('lodash'), overrideMethod = _.noop, overrideObject = _.noop;
 &nbsp;
-RentCar = function () {
+// check method extend from givingClass but there is´nt into receiving
+overrideMethod = function (receiving, givingClass, overrideMethodInherit) {
+    let hasFunctionOverridden = _.isUndefined(receiving.prototype[overrideMethodInherit]) &amp;&amp;
+        _.isFunction(givingClass.prototype[overrideMethodInherit]);
+&nbsp;
+    if (hasFunctionOverridden) {
+        receiving.prototype[overrideMethodInherit] = givingClass.prototype[overrideMethodInherit];
+&nbsp;
+    } else {
+        throw new Error('could not override method: ' + overrideMethodInherit);
+    }
 };
 &nbsp;
-_.assign(RentCar.prototype, {
-    checkBusiness: function (methodName) {
-        if (validation.hasOwnPropertyChain(methodName, this)) {
-            return this[methodName].apply(this, _.drop(arguments));
+// augmenting existing class with a method from others
+overrideObject = function (receiving, givingClass) {
+    _.assign(receiving.prototype, givingClass.prototype);
+};
 &nbsp;
-        } else {
-            throw Error('invalid method');
-        }
-    },
-    buyCar: function (model, price) {
-        return printer.joinFields('buyCar', model, price);
-    },
-    requestInfo: function (model, description) {
-        return printer.joinFields('requestInfo', model, description);
-    }
-});
-&nbsp;
-module.exports = function (options) {
-    return new RentCar(options || {});
+// only provide certain methods to extend from prototype properties
+module.exports.augment = function (receiving, givingClass, overrideMethodInherit) {
+    _.isString(overrideMethodInherit) ?
+        overrideMethod.apply({}, arguments) : overrideObject.apply({}, arguments);
 };
 &nbsp;</pre></td></tr>
 </table></pre>
