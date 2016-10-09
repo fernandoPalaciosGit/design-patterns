@@ -1,22 +1,26 @@
 'use strict';
 
-let ConfigConstruct, _singleton, _initInstance;
+let Construct, _singleton, _checkInitializedSingleton;
 
-ConfigConstruct = function (config) {
+Construct = function (config) {
     this.name = config.name || 'singleton tester';
 };
 
-ConfigConstruct.prototype.setName = function (name) {
+Construct.prototype.setName = function (name) {
     this.name = name;
 };
 
-// first instance creation once in execution
-_initInstance = function (opt) {
-    _singleton = new ConfigConstruct(opt);
+_checkInitializedSingleton = function (opt) {
+    var hasInitializedSingleton = _singleton instanceof Construct;
 
-    return _singleton;
+    // first instance creation once in execution
+    if (!hasInitializedSingleton) {
+        _singleton = new Construct(opt || {});
+    }
 };
 
 module.exports.getInstance = (opt) => {
-    return _singleton instanceof ConfigConstruct ? _singleton : _initInstance(opt || {});
+    _checkInitializedSingleton(opt);
+
+    return _singleton;
 };
