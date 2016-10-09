@@ -1,7 +1,8 @@
 'use strict';
 
-// prototype pattern with definition initalize
-var vehiclePrototype = {
+var vehiclePrototype, ObjCreateCar;
+
+vehiclePrototype = {
     getModel: function () {
         return this.model;
     },
@@ -10,25 +11,29 @@ var vehiclePrototype = {
     }
 };
 
-var car = Object.create(vehiclePrototype, {
-    'model': {
-        value: 'Ford',
-        enumerable: true // writable: false, configurable: false
-    }
-});
-car.getModel();
+ObjCreateCar = function (model) {
+    let F, f;
 
-/////////////////////////
-// imimitating pattERN //
-/////////////////////////
-var ObjCreateCar = function (model) {
-    var F = function () {};
+    F = function () {
+        return this;
+    };
     F.prototype = vehiclePrototype;
-
-    var f = new F();
+    F.prototype.constructor = F;
+    f = new F();
     f.setModel(model);
+
     return f;
 };
 
-var car2 = new ObjCreateCar('Ford'); // WRITABLE : TRUE
-car2.model;
+module.exports.getCarFromDescriptor = function (model) {
+    return Object.create(vehiclePrototype, {
+        'model': {
+            value: model,
+            enumerable: true // writable: false, configurable: false
+        }
+    });
+};
+
+module.exports.getCarFromObject = function (model) {
+    return new ObjCreateCar(model);
+};
