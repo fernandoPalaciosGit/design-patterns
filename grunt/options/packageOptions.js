@@ -14,8 +14,7 @@ var _ = require('lodash'),
         linterJs: [
             'Gruntfile.js',
             'grunt/**/*.js',
-            '<%= bundleJS.dirDev %>',
-            '!osmani-oreilly/main/patterns/singleton.js'
+            '<%= bundleJS.dirDev %>'
         ],
         linterYaml: [
             '.travis.yml',

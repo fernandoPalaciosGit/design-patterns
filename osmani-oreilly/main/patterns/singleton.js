@@ -1,52 +1,22 @@
 'use strict';
 
-var Singleton = (function () {
-    var _instance = null,
-        _initInstance;
+let ConfigConstruct, _singleton, _initInstance;
 
-    // first instance creation once in execution 
-    _initInstance = function () {
-        return {
-            publicMethod: function () {
-                return 'function ' + this.publicProperty;
-            },
-            publicProperty: 'property, created once'
-        };
-    };
+ConfigConstruct = function (config) {
+    this.name = config.name || 'singleton tester';
+};
 
-    // public interface
-    return {
-        getInstance: function () {
-            return ( !!_instance ) ? _instance : _initInstance();
-        }
-    };
-}());
-var singleton = Singleton.getInstance();
-singleton.publicProperty;
+ConfigConstruct.prototype.setName = function (name) {
+    this.name = name;
+};
 
-//////////////////
-// TEST PATTERN //
-//////////////////
-var ConfigOptions = (function () {
-    var ConfigConstruct, _instance, _initInstance;
+// first instance creation once in execution
+_initInstance = function (opt) {
+    _singleton = new ConfigConstruct(opt);
 
-    ConfigConstruct = function (config) {
-        config = config || {};
-        this.name = 'singleton tester';
-        this.pointX = config.pointX || 43;
-        this.pointY = config.pointY || 852;
-    };
+    return _singleton;
+};
 
-    _initInstance = function (opt) {
-        return new ConfigConstruct(opt);
-    };
-
-    return {
-        getInstance: function (opt) {
-            return ( !!_instance ) ? _instance : _initInstance(opt);
-        }
-    };
-}());
-
-var singleTest2 = ConfigOptions.getInstance({pointY: 1000000});
-singleTest2.name;
+module.exports.getInstance = (opt) => {
+    return _singleton instanceof ConfigConstruct ? _singleton : _initInstance(opt || {});
+};
