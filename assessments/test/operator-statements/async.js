@@ -2,7 +2,7 @@
 'use strict';
 
 if (typeof window === 'undefined') {
-    require('../../app/async');
+    require('./../../main/operator-statements/async');
     var expect = require('chai').expect;
 }
 

@@ -1,7 +1,7 @@
 'use strict';
 
 if (typeof window === 'undefined') {
-    require('../../app/bestPractices');
+    require('./../../main/operator-statements/bestPractices');
     var expect = require('chai').expect;
 }
 

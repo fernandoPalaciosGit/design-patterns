@@ -2,9 +2,9 @@
 'use strict';
 
 if (typeof window === 'undefined') {
-    require('../../app/recursion');
+    require('./../../main/operator-statements/recursion');
     var expect = require('chai').expect;
-    var _ = require('underscore');
+    var _ = require('lodash');
 }
 
 describe('recursion', function () {

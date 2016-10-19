@@ -2,7 +2,7 @@
 'use strict';
 
 if (typeof window === 'undefined') {
-    require('../../app/arrays');
+    require('./../../main/data-structure/arrays');
     var expect = require('chai').expect;
 }
 

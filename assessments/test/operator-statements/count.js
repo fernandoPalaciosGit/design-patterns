@@ -3,7 +3,7 @@
 'use strict';
 
 if (typeof window === 'undefined') {
-    require('../../app/count');
+    require('./../../main/operator-statements/count');
     var expect = require('chai').expect;
     var sinon = require('sinon');
 }

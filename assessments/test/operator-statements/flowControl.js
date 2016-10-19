@@ -1,7 +1,7 @@
 'use strict';
 
 if (typeof window === 'undefined') {
-    require('../../app/flowControl');
+    require('./../../main/operator-statements/flowControl');
     var expect = require('chai').expect;
 }
 

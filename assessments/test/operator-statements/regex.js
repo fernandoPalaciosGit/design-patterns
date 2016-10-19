@@ -2,7 +2,7 @@
 'use strict';
 
 if (typeof window === 'undefined') {
-    require('../../app/regex');
+    require('./../../main/operator-statements/regex');
     var expect = require('chai').expect;
 }
 

@@ -1,7 +1,7 @@
 'use strict';
 
 if (typeof window === 'undefined') {
-    require('../../app/numbers');
+    require('./../../main/data-structure/numbers');
     var expect = require('chai').expect;
 }
 

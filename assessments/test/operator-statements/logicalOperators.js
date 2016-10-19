@@ -1,7 +1,7 @@
 'use strict';
 
 if (typeof window === 'undefined') {
-    require('../../app/logicalOperators');
+    require('./../../main/operator-statements/logicalOperators');
     var expect = require('chai').expect;
 }
 

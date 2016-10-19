@@ -30,7 +30,7 @@ let _ = require('lodash'),
     ],
     vendors = {
         app: ['lodash', 'jquery'],
-        test: ['lodash', 'jquery', 'chai']
+        test: ['lodash', 'jquery', 'chai', 'sinon']
     },
     BrowserifyOptions = function (options) {
         this.options = _.cloneDeep(new Map(SchemaBrowserOptions));

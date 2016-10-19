@@ -49,6 +49,7 @@
     "load-grunt-tasks": "~3.3.0",
     "minifyify": "^7.3.3",
     "opener": "^1.4.2",
+    "sinon": "^1.17.6",
     "time-grunt": "~1.2.2"
   },
   "browser": {
