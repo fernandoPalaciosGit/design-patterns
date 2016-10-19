@@ -1,6 +1,6 @@
-exports = typeof window === 'undefined' ? global : window;
+'use strict';
 
-exports.flowControlAnswers = {
+module.exports.flowControlAnswers = {
     fizzBuzz: function (num) {
         // write a function that receives a number as its argument;
         // if the number is divisible by 3, the function should return 'fizz';

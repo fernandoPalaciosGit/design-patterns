@@ -1,6 +1,6 @@
-exports = typeof window === 'undefined' ? global : window;
+'use strict';
 
-exports.asyncAnswers = {
+module.exports.asyncAnswers = {
     async: function (value) {
 
     },

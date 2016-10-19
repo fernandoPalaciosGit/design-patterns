@@ -1,6 +1,6 @@
-exports = typeof window === 'undefined' ? global : window;
+'use strict';
 
-exports.functionsAnswers = {
+module.exports.functionsAnswers = {
     argsAsArray: function (fn, arr) {
 
     },

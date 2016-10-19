@@ -2,11 +2,9 @@
 /* eslint-disable no-console */
 'use strict';
 
-if (typeof window === 'undefined') {
-    require('./../../main/operator-statements/count');
-    var expect = require('chai').expect;
-    var sinon = require('sinon');
-}
+var countAnswers = require('./../../main/operator-statements/count').countAnswers;
+var expect = require('chai').expect;
+var sinon = require('sinon');
 
 /**
  * This test describes a function, count, that takes two arguments: a starting number,

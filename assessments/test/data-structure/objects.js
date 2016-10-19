@@ -1,10 +1,8 @@
 /* jscs:disable requireMultipleVarDecl */
 'use strict';
 
-if (typeof window === 'undefined') {
-    require('./../../main/data-structure/objects');
-    var expect = require('chai').expect;
-}
+var objectsAnswers = require('./../../main/data-structure/objects').objectsAnswers;
+var expect = require('chai').expect;
 
 describe('objects and context', function () {
     var a;

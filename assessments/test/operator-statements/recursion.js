@@ -1,11 +1,9 @@
 /* jscs:disable requireMultipleVarDecl */
 'use strict';
 
-if (typeof window === 'undefined') {
-    require('./../../main/operator-statements/recursion');
-    var expect = require('chai').expect;
-    var _ = require('lodash');
-}
+var recursionAnswers = require('./../../main/operator-statements/recursion').recursionAnswers;
+var expect = require('chai').expect;
+var _ = require('lodash');
 
 describe('recursion', function () {
     var fileData = {

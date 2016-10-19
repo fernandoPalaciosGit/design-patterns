@@ -1,9 +1,7 @@
 'use strict';
 
-if (typeof window === 'undefined') {
-    require('./../../main/operator-statements/logicalOperators');
-    var expect = require('chai').expect;
-}
+var logicalOperatorsAnswers = require('./../../main/operator-statements/logicalOperators').logicalOperatorsAnswers;
+var expect = require('chai').expect;
 
 describe('logical operators', function () {
     it.skip('you should be able to work with logical or', function () {

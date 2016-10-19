@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports.arraysAnswers = {
     indexOf: function (arr, item, prototypeTest) {
         var index = -1;

@@ -1,9 +1,7 @@
 'use strict';
 
-if (typeof window === 'undefined') {
-    require('./../../main/operator-statements/bestPractices');
-    var expect = require('chai').expect;
-}
+var bestPracticesAnswers = require('./../../main/operator-statements/bestPractices').bestPracticesAnswers;
+var expect = require('chai').expect;
 
 describe('best practices', function () {
     it.skip('you should avoid global variables', function () {

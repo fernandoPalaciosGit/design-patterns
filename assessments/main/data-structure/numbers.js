@@ -1,6 +1,6 @@
-exports = typeof window === 'undefined' ? global : window;
+'use strict';
 
-exports.numbersAnswers = {
+module.exports.numbersAnswers = {
     valueAtBit: function (num, bit) {
 
     },

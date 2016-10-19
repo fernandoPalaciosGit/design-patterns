@@ -1,6 +1,6 @@
-exports = typeof window === 'undefined' ? global : window;
+'use strict';
 
-exports.logicalOperatorsAnswers = {
+module.exports.logicalOperatorsAnswers = {
     or: function (a, b) {
 
     },

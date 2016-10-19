@@ -1,10 +1,8 @@
 /* jscs:disable requireMultipleVarDecl */
 'use strict';
 
-if (typeof window === 'undefined') {
-    require('./../../main/data-structure/strings');
-    var expect = require('chai').expect;
-}
+var stringsAnswers = require('./../../main/data-structure/strings').stringsAnswers;
+var expect = require('chai').expect;
 
 describe('strings', function () {
     it.skip('you should be able to reduce duplicate characters to a desired minimum', function () {

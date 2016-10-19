@@ -1,6 +1,6 @@
-exports = typeof window === 'undefined' ? global : window;
+'use strict';
 
-exports.modulesAnswers = {
+module.exports.modulesAnswers = {
     createModule: function (str1, str2) {
 
     }

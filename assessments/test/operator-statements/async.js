@@ -1,10 +1,8 @@
 /* jscs:disable requireMultipleVarDecl */
 'use strict';
 
-if (typeof window === 'undefined') {
-    require('./../../main/operator-statements/async');
-    var expect = require('chai').expect;
-}
+var asyncAnswers = require('./../../main/operator-statements/async').asyncAnswers;
+var expect = require('chai').expect;
 
 describe('async behavior', function () {
     it.skip('you should understand how to use promises to handle asynchronicity', function (done) {

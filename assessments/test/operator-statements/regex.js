@@ -1,10 +1,8 @@
 /* jscs:disable requireMultipleVarDecl */
 'use strict';
 
-if (typeof window === 'undefined') {
-    require('./../../main/operator-statements/regex');
-    var expect = require('chai').expect;
-}
+var regexAnswers = require('./../../main/operator-statements/regex').regexAnswers;
+var expect = require('chai').expect;
 
 describe('regular expressions', function () {
     it.skip('you should be able to detect a number in a string', function () {

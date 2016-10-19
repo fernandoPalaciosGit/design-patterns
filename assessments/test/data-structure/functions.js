@@ -1,10 +1,8 @@
 /* jscs:disable requireMultipleVarDecl */
 'use strict';
 
-if (typeof window === 'undefined') {
-    require('./../../main/data-structure/functions');
-    var expect = require('chai').expect;
-}
+var functionsAnswers = require('./../../main/data-structure/functions').functionsAnswers;
+var expect = require('chai').expect;
 
 describe('functions', function () {
     var sayItCalled = false;

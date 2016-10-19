@@ -1,6 +1,6 @@
-exports = typeof window === 'undefined' ? global : window;
+'use strict';
 
-exports.regexAnswers = {
+module.exports.regexAnswers = {
     containsNumber: function (str) {
 
     },

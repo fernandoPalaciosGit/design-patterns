@@ -1,6 +1,6 @@
-exports = typeof window === 'undefined' ? global : window;
+'use strict';
 
-exports.countAnswers = {
+module.exports.countAnswers = {
     count: function (start, end) {
 
     }

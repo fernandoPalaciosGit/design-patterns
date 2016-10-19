@@ -1,6 +1,6 @@
-exports = typeof window === 'undefined' ? global : window;
+'use strict';
 
-exports.recursionAnswers = {
+module.exports.recursionAnswers = {
     listFiles: function (data, dirName) {
 
     },
