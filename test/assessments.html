@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Example Mocha Test</title>
+    <script src="../node_modules/grunt-mocha-phantom-istanbul/node_modules/mocha/mocha.js"></script>
+    <link href="../node_modules/grunt-mocha-phantom-istanbul/node_modules/mocha/mocha.css"
+          type="text/css" rel="stylesheet" charset="utf-8"/>
+    <style>
+        #mocha {
+            margin-top: 20px;
+        }
+
+        .info-debugging {
+            font-size: 20px;
+            text-align: left;
+            margin: 20px 60px 0;
+            color: #2196f3;
+            text-decoration: underline
+        }
+
+        .invisible {
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+
+<div class="info-debugging">
+    Debugging: open devTools, Breakpoint test and Refresh.
+</div>
+<div id="mocha"></div>
+<div id="coverage-tdd--dom-test" class="invisible">Test</div>
+
+<script src="../assessments/test/index.js"></script>
+<script src="../build/vendors/test.bundle.js"></script>
+<script src="../build/assessments/test/mocha.spec.bundle.js"></script>
+</body>
+</html>

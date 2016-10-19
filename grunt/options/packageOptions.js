@@ -20,7 +20,8 @@ var _ = require('lodash'),
             '.travis.yml',
             'grunt/**/.*yml',
             '<%= projectPaths.appOsmaniOreilly.application %>/**/*.yml',
-            '<%= projectPaths.appPlatzi.application %>/**/*.yml'
+            '<%= projectPaths.appPlatzi.application %>/**/*.yml',
+            '<%= projectPaths.appAssessments.application %>/**/*.yml'
         ],
         linterJson: [
             'package.json',
@@ -28,12 +29,14 @@ var _ = require('lodash'),
             'grunt/**/*.json',
             'grunt/**/.*rc',
             '<%= projectPaths.appOsmaniOreilly.application %>/**/*.json',
-            '<%= projectPaths.appPlatzi.application %>/**/*.json'
+            '<%= projectPaths.appPlatzi.application %>/**/*.json',
+            '<%= projectPaths.appAssessments.application %>/**/*.json'
         ],
         bundleJS: {
             dirDev: [
                 '<%= projectPaths.appOsmaniOreilly.application %>/**/*.js',
-                '<%= projectPaths.appPlatzi.application %>/**/*.js'
+                '<%= projectPaths.appPlatzi.application %>/**/*.js',
+                '!<%= projectPaths.appAssessments.application %>/**/*.js'
             ]
         },
         cleanBundleJs: {
@@ -41,7 +44,9 @@ var _ = require('lodash'),
                 '<%= projectPaths.appOsmaniOreilly.publicDir %>/*',
                 '<%= projectPaths.appOsmaniOreilly.test %>/*',
                 '<%= projectPaths.appPlatzi.publicDir %>/*',
-                '<%= projectPaths.appPlatzi.test %>/*'
+                '<%= projectPaths.appPlatzi.test %>/*',
+                '<%= projectPaths.appAssessments.publicDir %>/*',
+                '<%= projectPaths.appAssessments.test %>/*'
             ]
         },
         compileJs: {
@@ -50,6 +55,8 @@ var _ = require('lodash'),
                 '<%= projectPaths.appOsmaniOreilly.test %>/*',
                 '<%= projectPaths.appPlatzi.publicDir %>/*',
                 '<%= projectPaths.appPlatzi.test %>/*',
+                '<%= projectPaths.appAssessments.publicDir %>/*',
+                '<%= projectPaths.appAssessments.test %>/*',
                 '<%= projectPaths.vendors.publicDir %>/*'
             ]
         },
@@ -68,6 +75,11 @@ var _ = require('lodash'),
                 publicDir: 'build/platzi/main',
                 test: 'build/platzi/test',
                 application: 'platzi'
+            },
+            appAssessments: {
+                publicDir: 'build/assessments/main',
+                test: 'build/assessments/test',
+                application: 'assessments'
             },
             vendors: {
                 publicDir: 'build/vendors'

@@ -1,4 +1,6 @@
 /* eslint-disable */
+'use strict';
+
 exports = typeof window === 'undefined' ? global : window;
 
 /**
@@ -8,19 +10,19 @@ exports = typeof window === 'undefined' ? global : window;
  */
 
 exports.bestPracticesAnswers = {
-  globals: function() {
-    myObject = {
-      name: 'Jory'
-    };
+    globals: function () {
+        var myObject = {
+            name: 'Jory'
+        };
 
-    return myObject;
-  },
+        return myObject;
+    },
 
-  parseInt: function(num) {
-    return parseInt(num);
-  },
+    parseInt: function (num) {
+        return parseInt(num);
+    },
 
-  identity: function(val1, val2) {
+    identity: function (val1, val2) {
 
-  }
+    }
 };

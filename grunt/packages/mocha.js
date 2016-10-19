@@ -2,7 +2,8 @@
 var _ = require('lodash'),
     phantomResources = {
         platzi: 'test/platzi.html',
-        osmanioreilly: 'test/osmani-oreilly.html'
+        osmanioreilly: 'test/osmani-oreilly.html',
+        assessments: 'test/assessments.html'
     };
 
 module.exports = {

@@ -44,7 +44,8 @@ module.exports = {
     jsCopyPaste: {
         tasks: [
             'jscpd:osmani-oreilly',
-            'jscpd:platzi'
+            'jscpd:platzi',
+            'jscpd:assessments'
         ]
     },
     jsVendorsCompile: {
@@ -56,19 +57,22 @@ module.exports = {
     jsAppCompile: {
         tasks: [
             'newer:browserify:<%= taskEnvironment %>-app-widget-platzi',
-            'newer:browserify:<%= taskEnvironment %>-app-widget-osmanioreilly'
+            'newer:browserify:<%= taskEnvironment %>-app-widget-osmanioreilly',
+            'newer:browserify:<%= taskEnvironment %>-app-widget-assessments'
         ]
     },
     jsTestCompile: {
         tasks: [
             'newer:browserify:<%= taskEnvironment %>-test-platzi',
-            'newer:browserify:<%= taskEnvironment %>-test-osmanioreilly'
+            'newer:browserify:<%= taskEnvironment %>-test-osmanioreilly',
+            'newer:browserify:<%= taskEnvironment %>-test-assessments'
         ]
     },
     discAppCompile: {
         tasks: [
             'browserify:disc-app-platzi',
-            'browserify:disc-app-osmanioreilly'
+            'browserify:disc-app-osmanioreilly',
+            'browserify:disc-app-assessments'
         ]
     }
 };

@@ -40,6 +40,12 @@ module.exports = {
         .addCompiledSource('<%= projectPaths.appOsmaniOreilly.test %>/mocha.spec.bundle.js')
         .build(),
 
+    'dev-test-assessments': _.cloneDeep(browserifyTestOptions)
+        .addOriginSource('<%= projectPaths.appAssessments.application %>/test/**/*.js')
+        .addOriginSource('!<%= projectPaths.appAssessments.application %>/test/index.js')
+        .addCompiledSource('<%= projectPaths.appAssessments.test %>/mocha.spec.bundle.js')
+        .build(),
+
     'dev-app-widget-platzi': _.cloneDeep(browserifyAppOptions)
         .addOriginSource('<%= projectPaths.appPlatzi.application %>/main/**/*.js')
         .addOriginSource('!<%= projectPaths.appPlatzi.application %>/main/index.js')
@@ -51,6 +57,13 @@ module.exports = {
         .addOriginSource('<%= projectPaths.appOsmaniOreilly.application %>/main/**/*.js')
         .addOriginSource('!<%= projectPaths.appOsmaniOreilly.application %>/main/index.js')
         .addCompiledSource('<%= projectPaths.appOsmaniOreilly.publicDir %>/app.bundle.js')
+        .setFullPathsBundle()
+        .build(),
+
+    'dev-app-widget-assessments': _.cloneDeep(browserifyAppOptions)
+        .addOriginSource('<%= projectPaths.appAssessments.application %>/main/**/*.js')
+        .addOriginSource('!<%= projectPaths.appAssessments.application %>/main/index.js')
+        .addCompiledSource('<%= projectPaths.appAssessments.publicDir %>/app.bundle.js')
         .setFullPathsBundle()
         .build(),
 
@@ -70,5 +83,14 @@ module.exports = {
         .addCompiledSource('<%= projectPaths.appOsmaniOreilly.publicDir %>/app.bundle.js')
         .setFullPathsBundle()
         .postBundleOutputWithDisc('<%= outputDisc %>', '<%= projectPaths.appOsmaniOreilly.application %>.html')
+        .build(),
+
+    'disc-app-assessments': _.cloneDeep(browserifyAppOptions)
+        .addMinifyWithSourceMap('<%= projectPaths.appAssessments.publicDir %>')
+        .addOriginSource('<%= projectPaths.appAssessments.application %>/main/**/*.js')
+        .addOriginSource('!<%= projectPaths.appAssessments.application %>/main/index.js')
+        .addCompiledSource('<%= projectPaths.appAssessments.publicDir %>/app.bundle.js')
+        .setFullPathsBundle()
+        .postBundleOutputWithDisc('<%= outputDisc %>', '<%= projectPaths.appAssessments.application %>.html')
         .build()
 };
