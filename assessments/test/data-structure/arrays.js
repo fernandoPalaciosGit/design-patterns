@@ -1,10 +1,8 @@
 /* jscs:disable requireMultipleVarDecl */
 'use strict';
 
-if (typeof window === 'undefined') {
-    require('./../../main/data-structure/arrays');
-    var expect = require('chai').expect;
-}
+var arraysAnswers = require('./../../main/data-structure/arrays').arraysAnswers;
+var expect = require('chai').expect;
 
 describe('arrays', function () {
     var a;
@@ -13,9 +11,29 @@ describe('arrays', function () {
         a = [1, 2, 3, 4];
     });
 
-    it.skip('you should be able to determine the location of an item in an array', function () {
-        expect(arraysAnswers.indexOf(a, 3)).to.eql(2);
-        expect(arraysAnswers.indexOf(a, 5)).to.eql(-1);
+    context('should be able to determine the location of an item in an array', function () {
+        var prototypeTest;
+
+        afterEach(function () {
+            expect(arraysAnswers.indexOf(a, 0, prototypeTest)).to.eql(-1);
+            expect(arraysAnswers.indexOf(a, 3, prototypeTest)).to.eql(2);
+            expect(arraysAnswers.indexOf(a, 5, prototypeTest)).to.eql(-1);
+        });
+
+        it('should test Array.prototype.indexOf', function (next) {
+            prototypeTest = 'indexOf';
+            next();
+        });
+
+        it('should test Array.prototype.findIndex', function (next) {
+            prototypeTest = 'findIndex';
+            next();
+        });
+
+        it('should test Array.prototype.forEach', function (next) {
+            prototypeTest = 'forEach';
+            next();
+        });
     });
 
     it.skip('you should be able to sum the items of an array', function () {

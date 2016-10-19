@@ -1,8 +1,32 @@
-exports = typeof window === 'undefined' ? global : window;
+module.exports.arraysAnswers = {
+    indexOf: function (arr, item, prototypeTest) {
+        var index = -1;
 
-exports.arraysAnswers = {
-    indexOf: function (arr, item) {
+        if (!!Array.prototype.indexOf && prototypeTest === 'indexOf') {
+            index = arr.indexOf(item);
 
+        } else if (!!Array.prototype.findIndex && prototypeTest === 'findIndex') {
+            index = arr.findIndex(function (val) {
+                return val === item;
+            });
+
+        } else if (!!Array.prototype.forEach && prototypeTest === 'forEach') {
+            arr.forEach(function (val, idx) {
+                if (val === item) {
+                    index = idx;
+                }
+            });
+
+        } else {
+            for (var i = 0, len = arr.length; i < len; i++) {
+                if (arr[i] === item) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+
+        return index;
     },
 
     sum: function (arr) {
