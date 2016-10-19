@@ -32,7 +32,7 @@ testDataDescriptor = function (name) {
         writable: true
     });
 
-    Object.defineProperty(this, 'proyects', {
+    Object.defineProperty(this, 'projects', {
         value: [],
         writable: false
     });
@@ -42,8 +42,8 @@ testDataDescriptor.prototype.addSkills = function (skill) {
     this.skills.push(skill);
 };
 
-testDataDescriptor.prototype.addProyects = function (proyect) {
-    this.proyects.push(proyect);
+testDataDescriptor.prototype.addProjects = function (proyect) {
+    this.projects.push(proyect);
 };
 
 module.exports.testObjectDataDescriptor = testObjectDataDescriptor;

@@ -7,12 +7,12 @@ if (typeof window === 'undefined') {
 }
 
 describe('regular expressions', function () {
-    it('you should be able to detect a number in a string', function () {
+    it.skip('you should be able to detect a number in a string', function () {
         expect(regexAnswers.containsNumber('abc123')).to.eql(true);
         expect(regexAnswers.containsNumber('abc')).to.eql(false);
     });
 
-    it('you should be able to detect a repeating letter in a string', function () {
+    it.skip('you should be able to detect a repeating letter in a string', function () {
         expect(regexAnswers.containsRepeatingLetter('bookkeeping')).to.eql(true);
         expect(regexAnswers.containsRepeatingLetter('rattler')).to.eql(true);
         expect(regexAnswers.containsRepeatingLetter('ZEPPELIN')).to.eql(true);
@@ -20,20 +20,20 @@ describe('regular expressions', function () {
         expect(regexAnswers.containsRepeatingLetter('l33t')).to.eql(false);
     });
 
-    it('you should be able to determine whether a string ends with a vowel (aeiou)', function () {
+    it.skip('you should be able to determine whether a string ends with a vowel (aeiou)', function () {
         expect(regexAnswers.endsWithVowel('cats')).to.eql(false);
         expect(regexAnswers.endsWithVowel('gorilla')).to.eql(true);
         expect(regexAnswers.endsWithVowel('I KNOW KUNG FU')).to.eql(true);
     });
 
-    it('you should be able to capture the first series of three numbers', function () {
+    it.skip('you should be able to capture the first series of three numbers', function () {
         expect(regexAnswers.captureThreeNumbers('abc123')).to.eql('123');
         expect(regexAnswers.captureThreeNumbers('9876543')).to.eql('987');
         expect(regexAnswers.captureThreeNumbers('abcdef')).to.eql(false);
         expect(regexAnswers.captureThreeNumbers('12ab12ab')).to.eql(false);
     });
 
-    it('you should be able to determine whether a string matches a pattern', function () {
+    it.skip('you should be able to determine whether a string matches a pattern', function () {
         // the pattern is XXX-XXX-XXXX where all X's are digits
         expect(regexAnswers.matchesPattern('800-555-1212')).to.eql(true);
         expect(regexAnswers.matchesPattern('451-933-7899')).to.eql(true);
@@ -45,7 +45,7 @@ describe('regular expressions', function () {
         expect(regexAnswers.matchesPattern('800-55-1212')).to.eql(false);
     });
 
-    it('you should be able to detect correctly-formatted monetary amounts in USD', function () {
+    it.skip('you should be able to detect correctly-formatted monetary amounts in USD', function () {
         expect(regexAnswers.isUSD('$132.03')).to.eql(true);
         expect(regexAnswers.isUSD('$32.03')).to.eql(true);
         expect(regexAnswers.isUSD('$2.03')).to.eql(true);
