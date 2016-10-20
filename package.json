@@ -11,13 +11,13 @@
   },
   "scripts": {
     "test": "grunt compile test --compile=test --reporter=spec --mask=Spec",
+    "ci": "grunt compile test --compile=app --reporter=spec --mask=Spec",
+    "app": "grunt shell:installGitHooks && npm run coverage",
     "debug-mocha-osmanioreilly": "grunt compile shell:openTestBrowser --compile=test --testbrowser=osmanioreilly",
     "debug-mocha-platzi": "grunt compile shell:openTestBrowser --compile=test --testbrowser=platzi",
     "debug-mocha-assessments": "grunt compile shell:openTestBrowser --compile=test --testbrowser=assessments",
     "disc": "grunt compile --compile=disc",
-    "coverage": "grunt compile test coverage shell:openCoverageBrowser --compile=app --reporter=spec --mask=Spec",
-    "ci": "grunt compile test coverage --compile=app --reporter=spec --mask=Spec",
-    "app": "grunt shell:installGitHooks && npm run coverage"
+    "coverage": "grunt compile test coverage shell:openCoverageBrowser --compile=app --reporter=spec --mask=Spec"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.14.0",
