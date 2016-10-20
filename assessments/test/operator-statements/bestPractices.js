@@ -1,7 +1,7 @@
 'use strict';
 
-var bestPracticesAnswers = require('./../../main/operator-statements/bestPractices').bestPracticesAnswers;
-var expect = require('chai').expect;
+var bestPracticesAnswers = require('./../../main/operator-statements/bestPractices').bestPracticesAnswers,
+    expect = require('chai').expect;
 
 describe('best practices', function () {
     it.skip('you should avoid global variables', function () {

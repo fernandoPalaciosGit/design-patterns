@@ -1,7 +1,7 @@
 'use strict';
 
-var modulesAnswers = require('./../../main/data-structure/modules').modulesAnswers;
-var expect = require('chai').expect;
+var modulesAnswers = require('./../../main/data-structure/modules').modulesAnswers,
+    expect = require('chai').expect;
 
 describe('the module pattern', function () {
     it.skip('you should be able to create a function that returns a module', function () {

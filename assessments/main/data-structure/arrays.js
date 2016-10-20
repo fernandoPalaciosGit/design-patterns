@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars, no-inner-declarations */
 'use strict';
 
 module.exports.arraysAnswers = {

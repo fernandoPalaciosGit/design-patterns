@@ -1,4 +1,5 @@
 /* jscs:disable requireMultipleVarDecl */
+/* eslint-disable no-warning-comments */
 'use strict';
 
 var regexAnswers = require('./../../main/operator-statements/regex').regexAnswers;

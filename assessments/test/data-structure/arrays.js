@@ -130,5 +130,4 @@ describe('arrays', function () {
 
         expect(result.sort().join(' ')).to.eql('0 6');
     });
-
 });

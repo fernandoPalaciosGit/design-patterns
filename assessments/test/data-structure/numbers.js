@@ -1,7 +1,7 @@
 'use strict';
 
-var numbersAnswers = require('./../../main/data-structure/numbers').numbersAnswers;
-var expect = require('chai').expect;
+var numbersAnswers = require('./../../main/data-structure/numbers').numbersAnswers,
+    expect = require('chai').expect;
 
 describe('numbers', function () {
     describe('binary operations', function () {
