@@ -1,5 +1,5 @@
 /* jscs:disable requireMultipleVarDecl */
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-inner-declarations, no-undef */
 'use strict';
 
 var countAnswers = require('./../../main/operator-statements/count').countAnswers;

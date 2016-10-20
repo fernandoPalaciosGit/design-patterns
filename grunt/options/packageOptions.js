@@ -36,7 +36,7 @@ var _ = require('lodash'),
             dirDev: [
                 '<%= projectPaths.appOsmaniOreilly.application %>/**/*.js',
                 '<%= projectPaths.appPlatzi.application %>/**/*.js',
-                '!<%= projectPaths.appAssessments.application %>/**/*.js'
+                '<%= projectPaths.appAssessments.application %>/**/*.js'
             ]
         },
         cleanBundleJs: {

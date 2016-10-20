@@ -1,4 +1,5 @@
 /* jscs:disable requireMultipleVarDecl */
+/* eslint-disable no-inner-declarations */
 'use strict';
 
 var functionsAnswers = require('./../../main/data-structure/functions').functionsAnswers;

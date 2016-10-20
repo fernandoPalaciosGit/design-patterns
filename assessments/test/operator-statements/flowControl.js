@@ -1,7 +1,7 @@
 'use strict';
 
-var flowControlAnswers = require('./../../main/operator-statements/flowControl').flowControlAnswers;
-var expect = require('chai').expect;
+var flowControlAnswers = require('./../../main/operator-statements/flowControl').flowControlAnswers,
+    expect = require('chai').expect;
 
 describe('flow control', function () {
     it.skip('you should be able to conditionally branch your code', function () {

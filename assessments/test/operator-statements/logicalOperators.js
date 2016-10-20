@@ -1,7 +1,7 @@
 'use strict';
 
-var logicalOperatorsAnswers = require('./../../main/operator-statements/logicalOperators').logicalOperatorsAnswers;
-var expect = require('chai').expect;
+var logicalOperatorsAnswers = require('./../../main/operator-statements/logicalOperators').logicalOperatorsAnswers,
+    expect = require('chai').expect;
 
 describe('logical operators', function () {
     it.skip('you should be able to work with logical or', function () {
