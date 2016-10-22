@@ -120,8 +120,17 @@ module.exports.arraysAnswers = {
         return arr;
     },
 
-    concat: function (arr1, arr2) {
+    concat: function (arr1, arr2, prototypeTest) {
+        if (!!Array.prototype.forEach && prototypeTest === 'forEach') {
+            arr2.forEach(function (val) {
+                arr1.push(val);
+            });
 
+            return arr1;
+
+        } else {
+            return arr1.concat(arr2);
+        }
     },
 
     insert: function (arr, item, index) {

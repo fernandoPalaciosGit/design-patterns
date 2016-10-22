@@ -108,11 +108,13 @@ describe('arrays', function () {
         next();
     });
 
-    it.skip('you should be able to join together two arrays', function (next) {
-        var c = ['a', 'b', 'c', 1];
-        var result = arraysAnswers.concat(a, c);
+    it('you should be able to join together two arrays', function (next) {
+        var c = ['a', 'b', 'c', 1],
+            result = arraysAnswers.concat(a.slice(0), c),
+            resultB = arraysAnswers.concat(a.slice(0), c, 'forEach');
 
         expect(result).to.have.length(8);
+        expect(resultB).to.have.length(8);
         expect(result.join(' ')).to.eql('1 2 3 4 a b c 1');
         next();
     });
