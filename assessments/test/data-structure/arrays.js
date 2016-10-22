@@ -137,7 +137,7 @@ describe('arrays', function () {
     it('you should be able to find uniques in an array', function (next) {
         var result = arraysAnswers.uniques([1, 2, 4, 4, 3, 3, 1, 5, 3]);
 
-        expect(result.sort()).to.eql([ 1, 2, 3, 4, 5 ]);
+        expect(result.sort()).to.eql([1, 2, 3, 4, 5]);
         next();
     });
 
@@ -148,7 +148,7 @@ describe('arrays', function () {
         next();
     });
 
-    it.skip('you should be able to square each number in an array', function (next) {
+    it('you should be able to square each number in an array', function (next) {
         var result = arraysAnswers.square(a);
 
         expect(result).to.have.length(4);

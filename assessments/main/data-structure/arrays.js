@@ -156,7 +156,9 @@ module.exports.arraysAnswers = {
     },
 
     square: function (arr) {
-
+        return arr.map(function (val) {
+            return Math.pow(val, 2);
+        });
     },
 
     findAllOccurrences: function (arr, target) {
