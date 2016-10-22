@@ -55,7 +55,7 @@ describe('arrays', function () {
         next();
     });
 
-    it.skip('you should be able to remove all instances of a value from an array, returning the original array', function (next) {
+    it('you should be able to remove all instances of a value from an array, returning the original array', function (next) {
         a.splice(1, 0, 2);
         a.push(2);
         a.push(2);

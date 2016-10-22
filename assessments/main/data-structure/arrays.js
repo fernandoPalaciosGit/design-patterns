@@ -69,7 +69,16 @@ module.exports.arraysAnswers = {
     },
 
     removeWithoutCopy: function (arr, item) {
+        var copy = arr.slice(0), count = 0;
 
+        copy.forEach(function (val, index) {
+            if (val === item) {
+                arr.splice(index -= count, 1);
+                count++;
+            }
+        });
+
+        return arr;
     },
 
     append: function (arr, item) {
