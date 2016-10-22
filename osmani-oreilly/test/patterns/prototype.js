@@ -10,7 +10,8 @@ describe('Design patterns', function () {
         it('should create an object with prototype descriptor', function (next) {
             car = prototype.getCarFromDescriptor('Opel');
             expect(car.getModel()).to.be.equals('Opel');
-            expect(_.bindKey(car, 'setModel', 'Funky')).to.throw(TypeError, 'Attempted to assign to readonly property');
+            // Cannot assign to read only property 'model'
+            expect(_.bindKey(car, 'setModel', 'Funky')).to.throw(TypeError);
             next();
         });
 

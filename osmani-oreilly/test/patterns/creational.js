@@ -21,7 +21,7 @@ describe('Design patterns', function () {
             expect(objectDescriptor).to.have.property('anotherAnimal', 'someWild');
             expect(test).to.have.property('name', 'test descriptor').that.is.a('string');
             expect(test).to.have.property('skills').that.is.an('array');
-            expect(test).to.have.property('proyects').that.is.an('array');
+            expect(test).to.have.property('projects').that.is.an('array');
             next();
         });
 
@@ -33,14 +33,14 @@ describe('Design patterns', function () {
         });
 
         it('should create final properties', function (next) {
-            expect(test.proyects).to.have.members([]);
-            test.addProyects('database');
+            expect(test.projects).to.have.members([]);
+            test.addProjects('database');
             // wraitable from own prototypes
-            expect(test.proyects).to.have.members(['database']);
-            // not writable from native prototypes
+            expect(test.projects).to.have.members(['database']);
+            // not writable from native prototypes, Cannot assign to read only property 'anotherAnimal'
             expect(function () {
                 objectDescriptor.anotherAnimal = 'non-writable';
-            }).to.throw(TypeError, 'Attempted to assign to readonly property');
+            }).to.throw(TypeError);
             expect(objectDescriptor).to.have.property('anotherAnimal', 'someWild');
             next();
         });

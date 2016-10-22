@@ -30,7 +30,7 @@ let _ = require('lodash'),
     ],
     vendors = {
         app: ['lodash', 'jquery'],
-        test: ['lodash', 'jquery', 'chai']
+        test: ['lodash', 'jquery', 'chai', 'sinon']
     },
     BrowserifyOptions = function (options) {
         this.options = _.cloneDeep(new Map(SchemaBrowserOptions));
@@ -39,14 +39,13 @@ let _ = require('lodash'),
     };
 
 _.assign(BrowserifyOptions.prototype, {
-    // External modules that don't need to be constantly re-compiled
     setAllOriginSource: function () {
         this.src.clear();
         this.src.add('.');
 
         return this;
     },
-    // Reset this here because it's not needed
+    // reset this here because it's not needed
     avoidCompileVendors: function () {
         this.options.set('external', null);
 
@@ -73,7 +72,7 @@ _.assign(BrowserifyOptions.prototype, {
 
         return this;
     },
-    // when using the command-line interface (like disc profile)
+    // when compile files using the command-line interface (like disc profile)
     setFullPathsBundle: function () {
         let browser = this.options.get('browserifyOptions');
 

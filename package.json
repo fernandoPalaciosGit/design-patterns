@@ -11,12 +11,13 @@
   },
   "scripts": {
     "test": "grunt compile test --compile=test --reporter=spec --mask=Spec",
-    "debug-mocha-osmanioreilly": "grunt compile shell:openTestBrowser --compile=test --testbrowser=osmanioreilly",
-    "debug-mocha-platzi": "grunt compile shell:openTestBrowser --compile=test --testbrowser=platzi",
+    "ci": "grunt compile test --compile=app --reporter=spec --mask=Spec",
+    "app": "grunt shell:installGitHooks && npm run coverage",
+    "debug:osmanioreilly": "grunt compile shell:openTestBrowser --compile=test --testbrowser=osmanioreilly",
+    "debug:platzi": "grunt compile shell:openTestBrowser --compile=test --testbrowser=platzi",
+    "debug:assessments": "grunt compile shell:openTestBrowser --compile=test --testbrowser=assessments",
     "disc": "grunt compile --compile=disc",
-    "coverage": "grunt compile test coverage shell:openCoverageBrowser --compile=app --reporter=spec --mask=Spec",
-    "ci": "grunt compile test coverage --compile=app --reporter=spec --mask=Spec",
-    "app": "grunt shell:installGitHooks && npm run coverage"
+    "coverage": "grunt compile test coverage shell:openCoverageBrowser --compile=app --reporter=spec --mask=Spec"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.14.0",
@@ -48,6 +49,7 @@
     "load-grunt-tasks": "~3.3.0",
     "minifyify": "^7.3.3",
     "opener": "^1.4.2",
+    "sinon": "^2.0.0-pre.3",
     "time-grunt": "~1.2.2"
   },
   "browser": {
