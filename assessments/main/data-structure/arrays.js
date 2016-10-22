@@ -81,8 +81,16 @@ module.exports.arraysAnswers = {
         return arr;
     },
 
-    append: function (arr, item) {
+    append: function (arr, item, prototypeTest) {
 
+        if (!!Array.prototype.push && prototypeTest === 'push') {
+            arr.push(item);
+
+        } else {
+            arr[arr.length] = item;
+        }
+
+        return arr;
     },
 
     truncate: function (arr) {

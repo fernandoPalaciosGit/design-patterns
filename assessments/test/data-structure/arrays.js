@@ -70,10 +70,12 @@ describe('arrays', function () {
         next();
     });
 
-    it.skip('you should be able to add an item to the end of an array', function (next) {
-        var result = arraysAnswers.append(a, 10);
+    it('you should be able to add an item to the end of an array', function (next) {
+        var result = arraysAnswers.append(a.slice(0), 10),
+            resultB = arraysAnswers.append(a.slice(0), 10, 'push');
 
         expect(result).to.have.length(5);
+        expect(resultB).to.have.length(5);
         expect(result[result.length - 1]).to.eql(10);
         next();
     });
