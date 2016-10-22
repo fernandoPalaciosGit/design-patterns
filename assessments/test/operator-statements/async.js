@@ -5,7 +5,7 @@ var asyncAnswers = require('./../../main/operator-statements/async').asyncAnswer
 var expect = require('chai').expect;
 
 describe('async behavior', function () {
-    it.skip('you should understand how to use promises to handle asynchronicity', function (done) {
+    it.skip('you should understand how to use promises to handle asynchronous process', function (done) {
         var flag = false;
         var finished = 0;
         var total = 2;
