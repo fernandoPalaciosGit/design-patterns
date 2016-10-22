@@ -119,7 +119,7 @@ describe('arrays', function () {
         next();
     });
 
-    it.skip('you should be able to add an item anywhere in an array', function (next) {
+    it('you should be able to add an item anywhere in an array', function (next) {
         var result = arraysAnswers.insert(a, 'z', 2);
 
         expect(result).to.have.length(5);
@@ -127,14 +127,14 @@ describe('arrays', function () {
         next();
     });
 
-    it.skip('you should be able to count the occurences of an item in an array', function (next) {
+    it('you should be able to count the occurences of an item in an array', function (next) {
         var result = arraysAnswers.count([1, 2, 4, 4, 3, 4, 3], 4);
 
         expect(result).to.eql(3);
         next();
     });
 
-    it.skip('you should be able to find duplicates in an array', function (next) {
+    it('you should be able to find duplicates in an array', function (next) {
         var result = arraysAnswers.duplicates([1, 2, 4, 4, 3, 3, 1, 5, 3]);
 
         expect(result.sort()).to.eql([1, 3, 4]);

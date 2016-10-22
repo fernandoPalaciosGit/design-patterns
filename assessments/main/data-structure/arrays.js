@@ -134,11 +134,15 @@ module.exports.arraysAnswers = {
     },
 
     insert: function (arr, item, index) {
+        arr.splice(index, 0, item);
 
+        return arr;
     },
 
     count: function (arr, item) {
-
+        return arr.filter(function (val) {
+            return val === item;
+        }).length;
     },
 
     duplicates: function (arr) {
