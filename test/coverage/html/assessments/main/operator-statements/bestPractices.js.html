@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for osmani-oreilly/main/patterns/singleton.js</title>
+    <title>Code coverage report for assessments/main/operator-statements/bestPractices.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -16,32 +16,32 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../../index.html">all files</a> / <a href="index.html">osmani-oreilly/main/patterns/</a> singleton.js
+      <a href="../../../index.html">all files</a> / <a href="index.html">assessments/main/operator-statements/</a> bestPractices.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">40% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>12/12</span>
+        <span class='fraction'>2/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>4/6</span>
+        <span class='fraction'>1/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>4/4</span>
+        <span class='fraction'>0/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">40% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>12/12</span>
+        <span class='fraction'>2/5</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line low'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -69,57 +69,60 @@
 24
 25
 26
-27</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+27
+28</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-yes">4×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4×</span>
-<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-yes">4×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4×</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable no-unused-vars, no-warning-comments */
+'use strict';
 &nbsp;
-let Construct, _singleton, _checkInitializedSingleton;
-&nbsp;
-Construct = function (config) {
-    this.name = config.name || 'singleton tester';
-};
+/**
+ * This file defines an object with some methods. Some of these methods are
+ * populated incorrectly; your job is to fix them. Other methods are not
+ * populated at all; your job is to fill them out.
+ */
+var moduleScope = window || global;
 <span class="branch-1 cbranch-no" title="branch not covered" ></span>
-Construct.prototype.setName = function (name) {
-    this.name = name;
-};
+module.exports.bestPracticesAnswers = {
+    globals: function () {
+        modul<span class="fstat-no" title="function not covered" >eScope.myObject = {</span>
+<span class="cstat-no" title="statement not covered" >            name: 'Jory'</span>
+        };
 &nbsp;
-_checkInitializedSingleton = function (opt) {
-    var hasInitializedSingleton = _singleton instanceof Construct;
+        return moduleScope.myObject;
+    },<span class="cstat-no" title="statement not covered" ></span>
 &nbsp;
-    // first instance creation once in execution
-    if (!hasInitializedSingleton) {
-        _singleton = new Construct(opt || {});
+    parseInt: function (num) {
+        return<span class="fstat-no" title="function not covered" > Number.parseInt(num);</span>
+    },<span class="cstat-no" title="statement not covered" ></span>
+&nbsp;
+    identity: function (val1, val2) {
+<span class="fstat-no" title="function not covered" ></span>
     }
-};<span class="branch-1 cbranch-no" title="branch not covered" ></span>
-&nbsp;
-module.exports.getInstance = (opt) =&gt; {
-    _checkInitializedSingleton(opt);
-&nbsp;
-    return _singleton;
 };
 &nbsp;</pre></td></tr>
 </table></pre>
