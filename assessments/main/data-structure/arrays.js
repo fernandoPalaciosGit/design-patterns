@@ -69,7 +69,7 @@ module.exports.arraysAnswers = {
     },
 
     removeWithoutCopy: function (arr, item) {
-        var copy = arr.slice(0), count = 0;
+        let copy = arr.slice(0), count = 0;
 
         copy.forEach(function (val, index) {
             if (val === item) {
@@ -143,6 +143,12 @@ module.exports.arraysAnswers = {
         return arr.filter(function (val) {
             return val === item;
         }).length;
+    },
+
+    uniques: function (arr) {
+        return arr.filter(function (val, index, array) {
+            return array.indexOf(val) === index;
+        });
     },
 
     duplicates: function (arr) {

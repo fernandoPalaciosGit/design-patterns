@@ -134,7 +134,14 @@ describe('arrays', function () {
         next();
     });
 
-    it('you should be able to find duplicates in an array', function (next) {
+    it('you should be able to find uniques in an array', function (next) {
+        var result = arraysAnswers.uniques([1, 2, 4, 4, 3, 3, 1, 5, 3]);
+
+        expect(result.sort()).to.eql([ 1, 2, 3, 4, 5 ]);
+        next();
+    });
+
+    it.skip('you should be able to find duplicates in an array and remove', function (next) {
         var result = arraysAnswers.duplicates([1, 2, 4, 4, 3, 3, 1, 5, 3]);
 
         expect(result.sort()).to.eql([1, 3, 4]);
