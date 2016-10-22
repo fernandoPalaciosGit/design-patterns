@@ -43,12 +43,14 @@ describe('arrays', function () {
         next();
     });
 
-    it.skip('you should be able to remove all instances of a value from an array', function (next) {
-        a.push(2); // Make sure the value appears more than one time
-        a.push(2); // Make sure the value appears more than one time in a row
-        var result = arraysAnswers.remove(a, 2);
+    it('you should be able to remove all instances of a value from an array', function (next) {
+        a.push(2);
+        a.push(2);
+        var result = arraysAnswers.remove(a, 2),
+            resultB = arraysAnswers.remove(a, 2, 'filter');
 
         expect(result).to.have.length(3);
+        expect(resultB).to.have.length(3);
         expect(result.join(' ')).to.eql('1 3 4');
         next();
     });

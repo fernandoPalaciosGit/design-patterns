@@ -49,8 +49,23 @@ module.exports.arraysAnswers = {
         return sum;
     },
 
-    remove: function (arr, item) {
+    remove: function (arr, item, prototypeTest) {
+        if (!!Array.prototype.filter && prototypeTest === 'filter') {
+            return arr.filter(function (val) {
+                return val !== item;
+            });
 
+        } else {
+            let solve = [];
+
+            arr.forEach(function (val) {
+                if (val !== item) {
+                    solve.push(val);
+                }
+            });
+
+            return solve;
+        }
     },
 
     removeWithoutCopy: function (arr, item) {
