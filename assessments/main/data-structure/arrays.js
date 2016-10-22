@@ -3,7 +3,7 @@
 
 module.exports.arraysAnswers = {
     indexOf: function (arr, item, prototypeTest) {
-        var index = -1;
+        let index = -1;
 
         if (!!Array.prototype.indexOf && prototypeTest === 'indexOf') {
             index = arr.indexOf(item);
@@ -21,7 +21,7 @@ module.exports.arraysAnswers = {
             });
 
         } else {
-            for (var i = 0, len = arr.length; i < len; i++) {
+            for (let i = 0, len = arr.length; i < len; i++) {
                 if (arr[i] === item) {
                     index = i;
                     break;
@@ -32,8 +32,21 @@ module.exports.arraysAnswers = {
         return index;
     },
 
-    sum: function (arr) {
+    sum: function (arr, prototypeTest) {
+        let sum = 0;
 
+        if (!!Array.prototype.reduce && prototypeTest === 'reduce') {
+            sum = arr.reduce(function (prev, current) {
+                return prev + current;
+            }, sum);
+
+        } else {
+            arr.forEach(function (val) {
+                sum += val;
+            });
+        }
+
+        return sum;
     },
 
     remove: function (arr, item) {
