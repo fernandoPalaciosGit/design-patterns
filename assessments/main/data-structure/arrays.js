@@ -82,7 +82,6 @@ module.exports.arraysAnswers = {
     },
 
     append: function (arr, item, prototypeTest) {
-
         if (!!Array.prototype.push && prototypeTest === 'push') {
             arr.push(item);
 
@@ -93,7 +92,15 @@ module.exports.arraysAnswers = {
         return arr;
     },
 
-    truncate: function (arr) {
+    truncate: function (arr, prototypeTest) {
+        if (!!Array.prototype.push && prototypeTest === 'pop') {
+            arr.pop();
+
+        } else {
+            arr.splice(arr.length - 1, 1);
+        }
+
+        return arr;
 
     },
 

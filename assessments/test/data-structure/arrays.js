@@ -80,10 +80,12 @@ describe('arrays', function () {
         next();
     });
 
-    it.skip('you should be able to remove the last item of an array', function (next) {
-        var result = arraysAnswers.truncate(a);
+    it('you should be able to remove the last item of an array', function (next) {
+        var result = arraysAnswers.truncate(a.slice(0)),
+            resultB = arraysAnswers.truncate(a.slice(0));
 
         expect(result).to.have.length(3);
+        expect(resultB).to.have.length(3);
         expect(result.join(' ')).to.eql('1 2 3');
         next();
     });
