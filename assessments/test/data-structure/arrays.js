@@ -90,7 +90,7 @@ describe('arrays', function () {
         next();
     });
 
-    it.skip('you should be able to add an item to the beginning of an array', function (next) {
+    it('you should be able to add an item to the beginning of an array', function (next) {
         var result = arraysAnswers.prepend(a, 10);
 
         expect(result).to.have.length(5);
@@ -98,10 +98,12 @@ describe('arrays', function () {
         next();
     });
 
-    it.skip('you should be able to remove the first item of an array', function (next) {
-        var result = arraysAnswers.curtail(a);
+    it('you should be able to remove the first item of an array', function (next) {
+        var result = arraysAnswers.curtail(a.slice(0)),
+            resultB = arraysAnswers.curtail(a.slice(0), 'shift');
 
         expect(result).to.have.length(3);
+        expect(resultB).to.have.length(3);
         expect(result.join(' ')).to.eql('2 3 4');
         next();
     });

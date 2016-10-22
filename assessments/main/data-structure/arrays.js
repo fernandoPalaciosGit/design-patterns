@@ -101,15 +101,23 @@ module.exports.arraysAnswers = {
         }
 
         return arr;
-
     },
 
     prepend: function (arr, item) {
+        arr.unshift(item);
 
+        return arr;
     },
 
-    curtail: function (arr) {
+    curtail: function (arr, prototypeTest) {
+        if (!!Array.prototype.push && prototypeTest === 'shift') {
+            arr.shift();
 
+        } else {
+            arr.splice(0, 1);
+        }
+
+        return arr;
     },
 
     concat: function (arr1, arr2) {
