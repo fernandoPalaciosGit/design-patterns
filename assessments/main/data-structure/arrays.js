@@ -2,18 +2,19 @@
 'use strict';
 
 module.exports.arraysAnswers = {
-    indexOf: function (arr, item, prototypeTest) {
+    polifillArraysAnswers: null,
+    indexOf: function (arr, item) {
         let index = -1;
 
-        if (prototypeTest === 'indexOf' && !!Array.prototype.indexOf) {
+        if (this.polifillArraysAnswers === 'indexOf' && !!Array.prototype.indexOf) {
             index = arr.indexOf(item);
 
-        } else if (prototypeTest === 'findIndex' && !!Array.prototype.findIndex) {
+        } else if (this.polifillArraysAnswers === 'findIndex' && !!Array.prototype.findIndex) {
             index = arr.findIndex(function (val) {
                 return val === item;
             });
 
-        } else if (prototypeTest === 'forEach' && !!Array.prototype.forEach) {
+        } else if (this.polifillArraysAnswers === 'forEach' && !!Array.prototype.forEach) {
             arr.forEach(function (val, idx) {
                 if (val === item) {
                     index = idx;
@@ -32,10 +33,10 @@ module.exports.arraysAnswers = {
         return index;
     },
 
-    sum: function (arr, prototypeTest) {
+    sum: function (arr) {
         let sum = 0;
 
-        if (prototypeTest === 'reduce' && !!Array.prototype.reduce) {
+        if (this.polifillArraysAnswers === 'reduce' && !!Array.prototype.reduce) {
             sum = arr.reduce(function (prev, current) {
                 return prev + current;
             }, sum);
@@ -49,8 +50,8 @@ module.exports.arraysAnswers = {
         return sum;
     },
 
-    remove: function (arr, item, prototypeTest) {
-        if (prototypeTest === 'filter' && !!Array.prototype.filter) {
+    remove: function (arr, item) {
+        if (this.polifillArraysAnswers === 'filter' && !!Array.prototype.filter) {
             return arr.filter(function (val) {
                 return val !== item;
             });
@@ -81,8 +82,8 @@ module.exports.arraysAnswers = {
         return arr;
     },
 
-    append: function (arr, item, prototypeTest) {
-        if (prototypeTest === 'push' && !!Array.prototype.push) {
+    append: function (arr, item) {
+        if (this.polifillArraysAnswers === 'push' && !!Array.prototype.push) {
             arr.push(item);
 
         } else {
@@ -92,8 +93,8 @@ module.exports.arraysAnswers = {
         return arr;
     },
 
-    truncate: function (arr, prototypeTest) {
-        if (prototypeTest === 'pop' && !!Array.prototype.pop) {
+    truncate: function (arr) {
+        if (this.polifillArraysAnswers === 'pop' && !!Array.prototype.pop) {
             arr.pop();
 
         } else {
@@ -109,8 +110,8 @@ module.exports.arraysAnswers = {
         return arr;
     },
 
-    curtail: function (arr, prototypeTest) {
-        if (prototypeTest === 'shift' && !!Array.prototype.shift) {
+    curtail: function (arr) {
+        if (this.polifillArraysAnswers === 'shift' && !!Array.prototype.shift) {
             arr.shift();
 
         } else {
@@ -120,8 +121,8 @@ module.exports.arraysAnswers = {
         return arr;
     },
 
-    concat: function (arr1, arr2, prototypeTest) {
-        if (prototypeTest === 'forEach' && !!Array.prototype.forEach) {
+    concat: function (arr1, arr2) {
+        if (this.polifillArraysAnswers === 'forEach' && !!Array.prototype.forEach) {
             arr2.forEach(function (val) {
                 arr1.push(val);
             });
@@ -161,10 +162,10 @@ module.exports.arraysAnswers = {
         });
     },
 
-    findAllOccurrences: function (arr, target, prototypeTest) {
+    findAllOccurrences: function (arr, target) {
         let occurrences;
 
-        if (prototypeTest === 'reduce' && !!Array.prototype.reduce) {
+        if (this.polifillArraysAnswers === 'reduce' && !!Array.prototype.reduce) {
             occurrences = arr.reduce(function (memo, val, index) {
                 if (val === target) {
                     memo.push(index);
