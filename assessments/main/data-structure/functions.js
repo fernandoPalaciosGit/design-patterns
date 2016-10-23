@@ -3,7 +3,7 @@
 
 module.exports.functionsAnswers = {
     argsAsArray: function (fn, arr) {
-        return fn.apply(this, arr);
+        return fn.apply({}, arr);
     },
 
     speak: function (fn, obj) {
@@ -42,10 +42,35 @@ module.exports.functionsAnswers = {
     },
 
     partialUsingArguments: function (fn) {
+        var partials, args;
 
+        partials = Array.prototype.slice.call(arguments, 1, arguments.length);
+
+        return function () {
+            args = Array.prototype.slice.call(arguments);
+
+            return fn.apply({}, partials.concat(args));
+        };
     },
 
     curryIt: function (fn) {
+        function applyArguments(_fn, args) {
+            return _fn.apply({}, args);
+        }
 
+        function getPartialArguments(accumulatedArgs, expectedArgs) {
+            return function (currentArg) {
+                accumulatedArgs.push(currentArg);
+
+                if (accumulatedArgs.length === expectedArgs) {
+                    return applyArguments(fn, accumulatedArgs);
+
+                } else {
+                    return getPartialArguments(accumulatedArgs, expectedArgs);
+                }
+            };
+        }
+
+        return getPartialArguments([], fn.length);
     }
 };

@@ -110,7 +110,7 @@ describe('functions', function () {
         next();
     });
 
-    it.skip('should be able to create a "partial" function for variable number of applied arguments', function (next) {
+    it('should be able to create a "partial" function for variable number of applied arguments', function (next) {
         var partialMe = function (x, y, z) {
             return x / y * z;
         };
@@ -122,7 +122,7 @@ describe('functions', function () {
         next();
     });
 
-    it.skip('should be able to curry existing functions', function (next) {
+    it('should be able to curry existing functions', function (next) {
         var curryMe = function (x, y, z) {
             return x / y * z;
         };
@@ -130,15 +130,15 @@ describe('functions', function () {
 
         result = functionsAnswers.curryIt(curryMe);
         expect(typeof result).to.eql('function');
-        expect(result.length).to.eql(1);
+        expect(result.length).to.eql(1); // this curry allows to catch one argument at time.
 
         result = functionsAnswers.curryIt(curryMe)(a);
         expect(typeof result).to.eql('function');
-        expect(result.length).to.eql(1);
+        expect(result.length).to.eql(1); // partial with one argument at time.
 
         result = functionsAnswers.curryIt(curryMe)(a)(b);
         expect(typeof result).to.eql('function');
-        expect(result.length).to.eql(1);
+        expect(result.length).to.eql(1); // partial with one argument at time.
 
         result = functionsAnswers.curryIt(curryMe)(a)(b)(c);
         expect(typeof result).to.eql('number');
