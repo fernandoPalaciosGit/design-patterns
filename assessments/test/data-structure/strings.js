@@ -5,7 +5,7 @@ var stringsAnswers = require('./../../main/data-structure/strings').stringsAnswe
 var expect = require('chai').expect;
 
 describe('strings', function () {
-    it.skip('you should be able to reduce duplicate characters to a desired minimum', function (next) {
+    it.skip('should be able to reduce duplicate characters to a desired minimum', function (next) {
         expect(stringsAnswers.reduceString('aaaabbbb', 2)).to.eql('aabb');
         expect(stringsAnswers.reduceString('xaaabbbb', 2)).to.eql('xaabb');
         expect(stringsAnswers.reduceString('aaaabbbb', 1)).to.eql('ab');
@@ -13,7 +13,7 @@ describe('strings', function () {
         next();
     });
 
-    it.skip('you should be able to wrap lines at a given number of columns, without breaking words', function (next) {
+    it.skip('should be able to wrap lines at a given number of columns, without breaking words', function (next) {
         var wrapCol = 5;
         var inputStrings = [
             'abcdef abcde abc def',
@@ -34,7 +34,7 @@ describe('strings', function () {
         next();
     });
 
-    it.skip('you should be able to reverse a string', function (next) {
+    it.skip('should be able to reverse a string', function (next) {
         var inputStrings = [
             'abc',
             'i am a string of characters',

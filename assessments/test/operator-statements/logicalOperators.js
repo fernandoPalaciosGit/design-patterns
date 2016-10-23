@@ -4,7 +4,7 @@ var logicalOperatorsAnswers = require('./../../main/operator-statements/logicalO
     expect = require('chai').expect;
 
 describe('logical operators', function () {
-    it.skip('you should be able to work with logical or', function (next) {
+    it.skip('should be able to work with logical or', function (next) {
         expect(logicalOperatorsAnswers.or(false, true)).to.be.ok;
         expect(logicalOperatorsAnswers.or(true, false)).to.be.ok;
         expect(logicalOperatorsAnswers.or(true, true)).to.be.ok;
@@ -13,7 +13,7 @@ describe('logical operators', function () {
         next();
     });
 
-    it.skip('you should be able to work with logical and', function (next) {
+    it.skip('should be able to work with logical and', function (next) {
         expect(logicalOperatorsAnswers.and(false, true)).not.to.be.ok;
         expect(logicalOperatorsAnswers.and(false, false)).not.to.be.ok;
         expect(logicalOperatorsAnswers.and(true, false)).not.to.be.ok;

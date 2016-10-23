@@ -22,14 +22,14 @@ describe('functions', function () {
         d = Math.random();
     });
 
-    it.skip('you should be able to use an array as arguments when calling a function', function (next) {
+    it('should be able to use an array as arguments when calling a function', function (next) {
         var result = functionsAnswers.argsAsArray(sayIt, ['Hello', 'Ellie', '!']);
         expect(result).to.eql('Hello, Ellie!');
         expect(sayItCalled).to.be.ok;
         next();
     });
 
-    it.skip('you should be able to change the context in which a function is called', function (next) {
+    it('should be able to change the context in which a function is called', function (next) {
         var speak = function () {
             return sayIt(this.greeting, this.name, '!!!');
         };
@@ -44,13 +44,13 @@ describe('functions', function () {
         next();
     });
 
-    it.skip('you should be able to return a function from a function', function (next) {
+    it('should be able to return a function from a function', function (next) {
         expect(functionsAnswers.functionFunction('Hello')('world')).to.eql('Hello, world');
         expect(functionsAnswers.functionFunction('Hai')('can i haz funxtion?')).to.eql('Hai, can i haz funxtion?');
         next();
     });
 
-    it.skip('you should be able to use closures', function (next) {
+    it('should be able to use closures', function (next) {
         var arr = [Math.random(), Math.random(), Math.random(), Math.random()];
         var square = function (x) {
             return x * x;
@@ -65,14 +65,14 @@ describe('functions', function () {
         next();
     });
 
-    it.skip('you should be able to create a "partial" function', function (next) {
+    it('should be able to create a "partial" function', function (next) {
         var partial = functionsAnswers.partial(sayIt, 'Hello', 'Ellie');
         expect(partial('!!!')).to.eql('Hello, Ellie!!!');
         expect(sayItCalled).to.be.ok;
         next();
     });
 
-    it.skip('you should be able to use arguments', function (next) {
+    it('should be able to use arguments', function (next) {
         expect(functionsAnswers.useArguments(a)).to.eql(a);
         expect(functionsAnswers.useArguments(a, b)).to.eql(a + b);
         expect(functionsAnswers.useArguments(a, b, c)).to.eql(a + b + c);
@@ -80,7 +80,7 @@ describe('functions', function () {
         next();
     });
 
-    it.skip('you should be able to apply functions with arbitrary numbers of arguments', function (next) {
+    it('should be able to apply functions with arbitrary numbers of arguments', function (next) {
         (function () {
             var wasITake2ArgumentsCalled = false;
             var iTake2Arguments = function (firstArgument, secondArgument) {
@@ -110,7 +110,7 @@ describe('functions', function () {
         next();
     });
 
-    it.skip('you should be able to create a "partial" function for variable number of applied arguments', function (next) {
+    it.skip('should be able to create a "partial" function for variable number of applied arguments', function (next) {
         var partialMe = function (x, y, z) {
             return x / y * z;
         };
@@ -122,7 +122,7 @@ describe('functions', function () {
         next();
     });
 
-    it.skip('you should be able to curry existing functions', function (next) {
+    it.skip('should be able to curry existing functions', function (next) {
         var curryMe = function (x, y, z) {
             return x / y * z;
         };

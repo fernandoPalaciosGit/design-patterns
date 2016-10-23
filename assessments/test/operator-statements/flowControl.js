@@ -4,7 +4,7 @@ var flowControlAnswers = require('./../../main/operator-statements/flowControl')
     expect = require('chai').expect;
 
 describe('flow control', function () {
-    it.skip('you should be able to conditionally branch your code', function (next) {
+    it.skip('should be able to conditionally branch your code', function (next) {
         var num = 0;
 
         while (num % 3 === 0 || num % 5 === 0) {
