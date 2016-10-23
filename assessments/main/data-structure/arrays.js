@@ -165,10 +165,21 @@ module.exports.arraysAnswers = {
         let occurrences;
 
         if (prototypeTest === 'reduce' && !!Array.prototype.reduce) {
-            occurrences = [0, 6];
+            occurrences = arr.reduce(function (memo, val, index) {
+                if (val === target) {
+                    memo.push(index);
+                }
+
+                return memo;
+            }, []);
 
         } else {
-            occurrences = [0, 6];
+            occurrences = [];
+            arr.forEach(function (val, index) {
+                if (val === target) {
+                    occurrences.push(index);
+                }
+            });
         }
 
         return occurrences;

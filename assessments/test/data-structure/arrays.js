@@ -22,6 +22,7 @@ describe('arrays', function () {
         });
 
         it('should test standalone', function (next) {
+            prototypeTest = null;
             next();
         });
 
@@ -50,6 +51,7 @@ describe('arrays', function () {
         });
 
         it('should test standalone', function (next) {
+            prototypeTest = null;
             next();
         });
 
@@ -72,6 +74,7 @@ describe('arrays', function () {
         });
 
         it('should test standalone', function (next) {
+            prototypeTest = null;
             next();
         });
 
@@ -108,7 +111,7 @@ describe('arrays', function () {
 
     it('should be able to remove the last item of an array', function (next) {
         var resultA = arraysAnswers.truncate(testListA.slice(0)),
-            resultB = arraysAnswers.truncate(testListA.slice(0));
+            resultB = arraysAnswers.truncate(testListA.slice(0), 'pop');
 
         expect(resultA).to.have.length(3);
         expect(resultB).to.have.length(3);
@@ -182,10 +185,22 @@ describe('arrays', function () {
         next();
     });
 
-    it('should be able to find all occurrences of an item in an array, checkout index position', function (next) {
-        var result = arraysAnswers.findAllOccurrences(testListB, 1);
+    context('should be able to find all occurrences of an item in an array, checkout index position', function () {
+        var prototypeTest, result;
 
-        expect(result.sort().join(' ')).to.eql('0 6');
-        next();
+        afterEach(function () {
+            result = arraysAnswers.findAllOccurrences(testListB, 1, prototypeTest);
+            expect(result.sort().join(' ')).to.eql('0 6');
+        });
+
+        it('should test standalone', function (next) {
+            prototypeTest = null;
+            next();
+        });
+
+        it('should test Array.prototype.reduce', function (next) {
+            prototypeTest = 'reduce';
+            next();
+        });
     });
 });
