@@ -153,7 +153,10 @@ module.exports.arraysAnswers = {
     },
 
     duplicates: function (arr) {
-
+        return arr.sort().filter(function (val, index, array) {
+            return (val === array[index - 1] || val === array[index + 1]) &&
+                array.indexOf(val) === index;
+        });
     },
 
     square: function (arr) {

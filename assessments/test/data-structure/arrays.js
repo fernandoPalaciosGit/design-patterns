@@ -204,7 +204,7 @@ describe('arrays', function () {
         next();
     });
 
-    it.skip('should be able to find duplicates in an array and remove', function (next) {
+    it('should be able to find duplicates in an array and remove', function (next) {
         var result = arraysAnswers.duplicates(testListB);
 
         expect(result.sort()).to.eql([1, 3, 4]);
