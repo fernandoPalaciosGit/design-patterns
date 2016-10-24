@@ -4,7 +4,7 @@ var modulesAnswers = require('./../../main/data-structure/modules').modulesAnswe
     expect = require('chai').expect;
 
 describe('the module pattern', function () {
-    it.skip('should be able to create a function that returns a module', function (next) {
+    it('should be able to create a function that returns a module', function (next) {
         var module = modulesAnswers.createModule('hello', 'matt');
 
         expect(module.sayIt).to.be.a('function');
