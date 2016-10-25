@@ -5,7 +5,7 @@ var asyncAnswers = require('./../../main/operator-statements/async').asyncAnswer
 var expect = require('chai').expect;
 
 describe('async behavior', function () {
-    it.skip('should understand how to use promises to handle asynchronous process', function (done) {
+    it('should understand how to use promises to handle asynchronous process', function (done) {
         var flag = false;
         var finished = 0;
         var total = 2;
@@ -31,7 +31,7 @@ describe('async behavior', function () {
         expect(flag).to.eql(false);
     });
 
-    it.skip('should be able to retrieve data from the server and return a sorted array of names', function (done) {
+    it('should be able to retrieve data from the server and return a sorted array of names', function (done) {
         var url = '/data/testdata.json';
 
         asyncAnswers.manipulateRemoteData(url).then(function (result) {
