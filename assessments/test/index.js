@@ -9,7 +9,8 @@ hasLoadedTestWithBrowser = function (browserName) {
 mocha.setup({
     ui: 'bdd',
     ignoreLeaks: true,
-    asyncOnly: true
+    asyncOnly: true,
+    timeout: 5000
 });
 
 initializeTest = function () {
