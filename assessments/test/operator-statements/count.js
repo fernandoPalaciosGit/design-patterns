@@ -6,25 +6,12 @@ var countAnswers = require('./../../main/operator-statements/count').countAnswer
 var expect = require('chai').expect;
 var sinon = require('sinon');
 
-/**
- * This test describes a function, count, that takes two arguments: a starting number,
- * and an ending number. The function should console.log each number from the start
- * number to the end number, one number per 1/10th of a second. The function should
- * return an object with a cancel method, which should cancel the counting.
- */
-
 describe('counter', function () {
     var nums;
     var origConsoleLog;
 
     beforeEach(function () {
         nums = [];
-
-        if (typeof console === 'undefined') {
-            console = {
-                log: null
-            };
-        }
         origConsoleLog = console.log;
         console.log = function (val) {
             nums.push(val);
@@ -39,7 +26,7 @@ describe('counter', function () {
         this.clock.restore();
     });
 
-    it.skip('should count from start number to end number, one per 1/10th of a second', function (next) {
+    it('should count from start number to end number, one per 1/10th of a second', function (next) {
         this.timeout(600);
         countAnswers.count(1, 5);
 
@@ -55,7 +42,7 @@ describe('counter', function () {
         next();
     });
 
-    it.skip('should provide a method to cancel the counting', function (next) {
+    it('should provide a method to cancel the counting', function (next) {
         this.timeout(600);
 
         var counter = countAnswers.count(1, 5);
