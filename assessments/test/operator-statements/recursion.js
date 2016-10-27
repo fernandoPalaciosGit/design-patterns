@@ -35,7 +35,7 @@ describe('recursion', function () {
         ]
     };
 
-    it.skip('should be able to return a list of files from the data', function (next) {
+    it('should be able to return a list of files from the data', function (next) {
         var result = recursionAnswers.listFiles(fileData);
         expect(result.length).to.eql(8);
         expect(result.indexOf('index.html') > -1).to.be.ok;
@@ -44,7 +44,7 @@ describe('recursion', function () {
         next();
     });
 
-    it.skip('should be able to return a list of files in a subdir', function (next) {
+    it('should be able to return a list of files in a subdir', function (next) {
         var result = recursionAnswers.listFiles(fileData, 'js');
         expect(result.length).to.eql(5);
         expect(result.indexOf('main.js') > -1).to.be.ok;
