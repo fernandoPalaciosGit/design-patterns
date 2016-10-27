@@ -32,6 +32,17 @@ module.exports.recursionAnswers = {
         return files;
     },
 
+    factorial: function (num) {
+        var factorial = num,
+            iteration = --num;
+
+        for (; iteration > 0; iteration--) {
+            factorial *= iteration;
+        }
+
+        return factorial;
+    },
+
     permute: function (arr) {
 
     },

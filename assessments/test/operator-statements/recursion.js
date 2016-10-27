@@ -53,6 +53,15 @@ describe('recursion', function () {
     });
 });
 
+describe('factorial', function () {
+    it('should test factorial of a number', function (next) {
+        expect(recursionAnswers.factorial(4)).to.eql(24);
+        expect(recursionAnswers.factorial(6)).to.eql(720);
+        expect(recursionAnswers.factorial(0)).to.eql(0);
+        next();
+    });
+});
+
 describe('permutation', function () {
     var arr = [1, 2, 3, 4];
     var answer = [
