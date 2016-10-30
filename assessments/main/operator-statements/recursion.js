@@ -3,14 +3,14 @@
 
 module.exports.recursionAnswers = {
     listFiles: function (data, dirName) {
-        var getFiles, keyData = 'files',
+        var keyData = 'files',
             files = [],
             checkType = function (obj, type) {
                 return Object.prototype.toString.call(obj).toLowerCase().lastIndexOf(type) > 1;
             },
             extension = checkType(dirName, 'string') ? new RegExp('.' + dirName + '$') : /(\.\w*)$/;
 
-        getFiles = function getFiles (dataList) {
+        (function getFiles (dataList) {
             var metadata;
 
             for (metadata in dataList) {
@@ -27,7 +27,7 @@ module.exports.recursionAnswers = {
                     });
                 }
             }
-        }(data);
+        })(data);
 
         return files;
     },
@@ -44,11 +44,37 @@ module.exports.recursionAnswers = {
     },
 
     permute: function (arr) {
+        var usedChars = [], permArr = [];
 
+        return function permute (input) {
+            var i, ch;
+
+            for (i = 0; i < input.length; i++) {
+                ch = input.splice(i, 1)[0];
+                usedChars.push(ch);
+
+                if (input.length === 0) {
+                    permArr.push(usedChars.slice());
+                }
+
+                permute(input);
+                input.splice(i, 0, ch);
+                usedChars.pop();
+            }
+
+            return permArr;
+        }(arr);
     },
 
     fibonacci: function (n) {
+        var series = [1],
+            i = 1;
 
+        for (; n > 0 && i !== n; i++) {
+            series[i] = series[i - 1] + (series[i - 2] || 0);
+        }
+
+        return series.pop();
     },
 
     validParentheses: function (n) {

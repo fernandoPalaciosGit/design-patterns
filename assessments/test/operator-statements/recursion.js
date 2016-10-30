@@ -91,7 +91,7 @@ describe('permutation', function () {
         [4, 3, 2, 1]
     ];
 
-    it.skip('should be able to return the permutations of an array', function (next) {
+    it('should be able to return the permutations of an array', function (next) {
         var result = recursionAnswers.permute(arr);
         var resultStrings = _.map(result, function (r) {
             return r.join('');
@@ -105,9 +105,12 @@ describe('permutation', function () {
         next();
     });
 
-    it.skip('should be able to return the nth number in a fibonacci sequence', function (next) {
+    it('should be able to return the nth number in a fibonacci sequence', function (next) {
+        expect(recursionAnswers.fibonacci(1)).to.eql(1);
         expect(recursionAnswers.fibonacci(2)).to.eql(1);
         expect(recursionAnswers.fibonacci(6)).to.eql(8);
+        expect(recursionAnswers.fibonacci(11)).to.eql(89);
+        expect(recursionAnswers.fibonacci(12)).to.eql(144);
         next();
     });
 

@@ -20,7 +20,7 @@ module.exports.regexAnswers = {
         return Array.isArray(match) ? match[0] : false;
     },
 
-    // the pattern is XXX-XXX-XXXX where all X's are digits
+    // the pattern is 3X-3X-4X where all X's are digits
     matchesPattern: function (str) {
         return /^\d{3}-\d{3}-\d{4}$/.test(str);
     },
