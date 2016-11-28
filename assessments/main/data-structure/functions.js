@@ -75,5 +75,22 @@ module.exports.functionsAnswers = {
         }
 
         return getPartialArguments([], fn.length);
+    },
+
+    compose: function () {
+        var lastFn = Array.prototype.shift.call(arguments),
+            partialArgs = Array.prototype.slice.call(arguments, 0);
+
+        return function () {
+            var result = lastFn.apply(this, arguments),
+                idxFn = partialArgs.length;
+
+            while (idxFn > 0) {
+                result = partialArgs[idxFn - 1].call(this, result);
+                idxFn--;
+            }
+
+            return result;
+        };
     }
 };

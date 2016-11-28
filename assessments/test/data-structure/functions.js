@@ -145,4 +145,18 @@ describe('functions', function () {
         expect(result).to.eql(curryMe(a, b, c));
         next();
     });
+
+    it('should be able to compose functions combining arguments', function (next) {
+        var nohow = function (sentence) {
+                return sentence + ', nohow!';
+            },
+            contrariwise = function (sentence) {
+                return sentence + ' contrariwise…';
+            },
+            statement = 'Not nothing',
+            nohowContrariwise = functionsAnswers.compose(contrariwise, nohow);
+
+        expect(nohowContrariwise(statement)).to.equals('Not nothing contrariwise…, nohow!');
+        next();
+    });
 });
