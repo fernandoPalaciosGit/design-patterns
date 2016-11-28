@@ -78,11 +78,11 @@ module.exports.functionsAnswers = {
     },
 
     compose: function () {
-        var lastFn = Array.prototype.shift.call(arguments),
+        var firstFn = Array.prototype.shift.call(arguments),
             partialArgs = Array.prototype.slice.call(arguments, 0);
 
         return function () {
-            var result = lastFn.apply(this, arguments),
+            var result = firstFn.apply(this, arguments),
                 idxFn = partialArgs.length;
 
             while (idxFn > 0) {

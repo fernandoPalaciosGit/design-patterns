@@ -146,17 +146,46 @@ describe('functions', function () {
         next();
     });
 
-    it('should be able to compose functions combining arguments', function (next) {
-        var nohow = function (sentence) {
-                return sentence + ', nohow!';
-            },
-            contrariwise = function (sentence) {
-                return sentence + ' contrariwise…';
-            },
-            statement = 'Not nothing',
-            nohowContrariwise = functionsAnswers.compose(contrariwise, nohow);
+    context('should be able to compose functions combining arguments', function () {
 
-        expect(nohowContrariwise(statement)).to.equals('Not nothing contrariwise…, nohow!');
-        next();
+        it('should last function receive arguments from partial', function (next) {
+            var nohow = function (sentence) {
+                    return sentence + ', nohow!';
+                },
+                contrariwise = function (sentence) {
+                    return sentence + ' contrariwise…';
+                },
+                statement = 'Not nothing',
+                nohowContrariwise = functionsAnswers.compose(contrariwise, nohow);
+
+            expect(nohowContrariwise(statement)).to.equal('Not nothing contrariwise…, nohow!');
+            next();
+        });
+
+        it('should compose multiple partial functions', function (next) {
+            var replace = function (find, replacement, str) {
+                    return str.replace(new RegExp(find, 'g'), replacement);
+                },
+                wrapWith = function (tag, str) {
+                    return '<' + tag + '>' + str + '</' + tag + '>';
+                },
+                poem = 'Twas brillig, and the slithy toves\n' +
+                    'Did gyre and gimble in the wabe;\n' +
+                    'All mimsy were the borogoves,\n' +
+                    'And the mome raths outgrabe.',
+                partial = functionsAnswers.partialUsingArguments,
+                addBreaks = partial(replace, '\n', '<br/>'),
+                replaceBrillig = partial(replace, 'brillig', 'four o’clock in the afternoon'),
+                wrapP = partial(wrapWith, 'p'),
+                wrapBlockquote = partial(wrapWith, 'blockquote'),
+                parsePoem = functionsAnswers.compose(wrapP, wrapBlockquote, addBreaks, replaceBrillig),
+                expected = '<blockquote><p>Twas four o’clock in the afternoon, and the slithy toves<br/>' +
+                    'Did gyre and gimble in the wabe;<br/>' +
+                    'All mimsy were the borogoves,<br/>' +
+                    'And the mome raths outgrabe.</p></blockquote>';
+
+            expect(parsePoem(poem)).to.equal(expected);
+            next();
+        });
     });
 });
