@@ -110,19 +110,34 @@ describe('functions', function () {
         next();
     });
 
-    it('should be able to create a "partial" function for variable number of applied arguments', function (next) {
-        var partialMe = function (x, y, z) {
-            return x / y * z;
-        };
+    context('Partial, should be able to combine arguments and return partial closure', function () {
+        it('from variable number of applied arguments', function (next) {
+            var partialMe = function (x, y, z) {
+                return x / y * z;
+            };
 
-        expect(functionsAnswers.partialUsingArguments(partialMe)(a, b, c)).to.eql(partialMe(a, b, c));
-        expect(functionsAnswers.partialUsingArguments(partialMe, a)(b, c)).to.eql(partialMe(a, b, c));
-        expect(functionsAnswers.partialUsingArguments(partialMe, a, b)(c)).to.eql(partialMe(a, b, c));
-        expect(functionsAnswers.partialUsingArguments(partialMe, a, b, c)()).to.eql(partialMe(a, b, c));
-        next();
+            expect(functionsAnswers.partialUsingArguments(partialMe)(a, b, c)).to.eql(partialMe(a, b, c));
+            expect(functionsAnswers.partialUsingArguments(partialMe, a)(b, c)).to.eql(partialMe(a, b, c));
+            expect(functionsAnswers.partialUsingArguments(partialMe, a, b)(c)).to.eql(partialMe(a, b, c));
+            expect(functionsAnswers.partialUsingArguments(partialMe, a, b, c)()).to.eql(partialMe(a, b, c));
+            next();
+        });
+
+        it('from concat strings', function (next) {
+            var formatName = function (first, surname, nickname) {
+                    return [first, nickname, surname].join(' \" ');
+                },
+                currySurname = functionsAnswers.partialUsingArguments(formatName, 'Fernando', 'Palacios'),
+                schooleName = currySurname('fer'),
+                familyName = currySurname('nando');
+
+            expect(schooleName).to.equal('Fernando " fer " Palacios');
+            expect(familyName).to.equal('Fernando " nando " Palacios');
+            next();
+        });
     });
 
-    it('should be able to curry existing functions', function (next) {
+    it('Curry, should be able to combine arguments and return partial closure', function (next) {
         var curryMe = function (x, y, z) {
             return x / y * z;
         };
@@ -146,9 +161,30 @@ describe('functions', function () {
         next();
     });
 
-    context('should be able to compose functions combining arguments', function () {
+    context('Compose, should be able to combining other partial functions with composition', function () {
+        var pipe, curry, partial, replace, wrapWith, poem, expectedPoem;
 
-        it('should last function receive arguments from partial', function (next) {
+        before(function () {
+            pipe = functionsAnswers.compose;
+            curry = functionsAnswers.curryIt;
+            partial = functionsAnswers.partialUsingArguments;
+            replace = function (find, replacement, str) {
+                return str.replace(new RegExp(find, 'g'), replacement);
+            };
+            wrapWith = function (tag, str) {
+                return '<' + tag + '>' + str + '</' + tag + '>';
+            };
+            poem = 'Twas brillig, and the slithy toves\n' +
+                'Did gyre and gimble in the wabe;\n' +
+                'All mimsy were the borogoves,\n' +
+                'And the mome raths outgrabe.';
+            expectedPoem = '<blockquote><p>Twas <em>four o’clock in the afternoon</em>, and the slithy toves<br/>' +
+                'Did gyre and gimble in the wabe;<br/>' +
+                'All mimsy were the borogoves,<br/>' +
+                'And the mome raths outgrabe.</p></blockquote>';
+        });
+
+        it('and the last function receive arguments from partial', function (next) {
             var nohow = function (sentence) {
                     return sentence + ', nohow!';
                 },
@@ -156,35 +192,33 @@ describe('functions', function () {
                     return sentence + ' contrariwise…';
                 },
                 statement = 'Not nothing',
-                nohowContrariwise = functionsAnswers.compose(contrariwise, nohow);
+                nohowContrariwise = pipe(contrariwise, nohow);
 
             expect(nohowContrariwise(statement)).to.equal('Not nothing contrariwise…, nohow!');
             next();
         });
 
-        it('should compose multiple partial functions', function (next) {
-            var replace = function (find, replacement, str) {
-                    return str.replace(new RegExp(find, 'g'), replacement);
-                },
-                wrapWith = function (tag, str) {
-                    return '<' + tag + '>' + str + '</' + tag + '>';
-                },
-                poem = 'Twas brillig, and the slithy toves\n' +
-                    'Did gyre and gimble in the wabe;\n' +
-                    'All mimsy were the borogoves,\n' +
-                    'And the mome raths outgrabe.',
-                partial = functionsAnswers.partialUsingArguments,
-                addBreaks = partial(replace, '\n', '<br/>'),
-                replaceBrillig = partial(replace, 'brillig', 'four o’clock in the afternoon'),
-                wrapP = partial(wrapWith, 'p'),
-                wrapBlockquote = partial(wrapWith, 'blockquote'),
-                parsePoem = functionsAnswers.compose(wrapP, wrapBlockquote, addBreaks, replaceBrillig),
-                expected = '<blockquote><p>Twas four o’clock in the afternoon, and the slithy toves<br/>' +
-                    'Did gyre and gimble in the wabe;<br/>' +
-                    'All mimsy were the borogoves,<br/>' +
-                    'And the mome raths outgrabe.</p></blockquote>';
+        it('and compose with Partials', function (next) {
+            var modifyPoem = pipe(
+                partial(wrapWith, 'p'),
+                partial(wrapWith, 'blockquote'),
+                partial(replace, '\n', '<br/>'),
+                partial(replace, 'brillig', '<em>four o’clock in the afternoon</em>')
+            );
 
-            expect(parsePoem(poem)).to.equal(expected);
+            expect(modifyPoem(poem)).to.equal(expectedPoem);
+            next();
+        });
+
+        it('and compose with Curring', function (next) {
+            var modifyPoem = pipe(
+                curry(wrapWith)('p'),
+                curry(wrapWith)('blockquote'),
+                curry(replace)('\n')('<br/>'),
+                curry(replace)('brillig')('<em>four o’clock in the afternoon</em>')
+            );
+
+            expect(modifyPoem(poem)).to.equal(expectedPoem);
             next();
         });
     });
