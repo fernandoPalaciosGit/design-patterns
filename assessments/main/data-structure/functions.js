@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 'use strict';
 
+var arrayUtils = require('./arrays').arraysAnswers;
+
 module.exports.functionsAnswers = {
     argsAsArray: function (fn, arr) {
         return fn.apply({}, arr);
@@ -41,15 +43,16 @@ module.exports.functionsAnswers = {
         fn.apply({}, arguments);
     },
 
-    partialUsingArguments: function (fn) {
-        var partials, args;
+    partialUsingArguments: function () {
+        var callback, partials, args;
 
-        partials = Array.prototype.slice.call(arguments, 1, arguments.length);
+        partials = arrayUtils.argsToArray(arguments);
+        callback = partials.shift();
 
         return function () {
-            args = Array.prototype.slice.call(arguments);
+            args = arrayUtils.argsToArray(arguments);
 
-            return fn.apply({}, partials.concat(args));
+            return callback.apply(this, partials.concat(args));
         };
     },
 

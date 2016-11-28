@@ -237,4 +237,16 @@ describe('arrays', function () {
             next();
         });
     });
+
+    it('should be able to manipulate object "arguments" into function as an array type', function (next) {
+        var stub = function () {
+                return arraysAnswers.argsToArray(arguments);
+            },
+            expected = [1, 'two', 3],
+            result = stub.apply({}, expected);
+
+        expect(result).to.be.an('array');
+        expect(result).to.eql(expected);
+        next();
+    });
 });
