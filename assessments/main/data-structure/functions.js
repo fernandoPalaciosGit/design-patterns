@@ -56,7 +56,7 @@ module.exports.functionsAnswers = {
         };
     },
 
-    curryIt: function (fn) {
+    currySingleArgument: function (fn) {
         function applyArguments(_fn, args) {
             return _fn.apply({}, args);
         }
@@ -75,6 +75,10 @@ module.exports.functionsAnswers = {
         }
 
         return getPartialArguments([], fn.length);
+    },
+
+    curryMultipleArgument: function () {
+
     },
 
     compose: function () {

@@ -127,37 +127,37 @@ describe('functions', function () {
             var formatName = function (first, surname, nickname) {
                     return [first, nickname, surname].join(' \" ');
                 },
-                currySurname = functionsAnswers.partialUsingArguments(formatName, 'Fernando', 'Palacios'),
-                schooleName = currySurname('fer'),
-                familyName = currySurname('nando');
+                partialNickname = functionsAnswers.partialUsingArguments(formatName, 'Fernando', 'Palacios'),
+                schoolName = partialNickname('fer'),
+                familyName = partialNickname('nando');
 
-            expect(schooleName).to.equal('Fernando " fer " Palacios');
+            expect(schoolName).to.equal('Fernando " fer " Palacios');
             expect(familyName).to.equal('Fernando " nando " Palacios');
             next();
         });
     });
 
     it('Curry, should be able to combine arguments and return partial closure', function (next) {
-        var curryMe = function (x, y, z) {
+        var average = function (x, y, z) {
             return x / y * z;
         };
-        var result;
+        var result, curry = functionsAnswers.currySingleArgument;
 
-        result = functionsAnswers.curryIt(curryMe);
+        result = curry(average);
         expect(typeof result).to.eql('function');
         expect(result.length).to.eql(1); // this curry allows to catch one argument at time.
 
-        result = functionsAnswers.curryIt(curryMe)(a);
+        result = curry(average)(a);
         expect(typeof result).to.eql('function');
         expect(result.length).to.eql(1); // partial with one argument at time.
 
-        result = functionsAnswers.curryIt(curryMe)(a)(b);
+        result = curry(average)(a)(b);
         expect(typeof result).to.eql('function');
         expect(result.length).to.eql(1); // partial with one argument at time.
 
-        result = functionsAnswers.curryIt(curryMe)(a)(b)(c);
+        result = curry(average)(a)(b)(c);
         expect(typeof result).to.eql('number');
-        expect(result).to.eql(curryMe(a, b, c));
+        expect(result).to.eql(average(a, b, c));
         next();
     });
 
@@ -166,7 +166,7 @@ describe('functions', function () {
 
         before(function () {
             pipe = functionsAnswers.compose;
-            curry = functionsAnswers.curryIt;
+            curry = functionsAnswers.currySingleArgument;
             partial = functionsAnswers.partialUsingArguments;
             replace = function (find, replacement, str) {
                 return str.replace(new RegExp(find, 'g'), replacement);
@@ -200,10 +200,10 @@ describe('functions', function () {
 
         it('and compose with Partials', function (next) {
             var modifyPoem = pipe(
-                partial(wrapWith, 'p'),
-                partial(wrapWith, 'blockquote'),
-                partial(replace, '\n', '<br/>'),
-                partial(replace, 'brillig', '<em>four o’clock in the afternoon</em>')
+                partial(wrapWith, 'p'), // wrap to paragraph
+                partial(wrapWith, 'blockquote'), // wrap to blockquote
+                partial(replace, '\n', '<br/>'), // add breaks
+                partial(replace, 'brillig', '<em>four o’clock in the afternoon</em>') // replace brillig
             );
 
             expect(modifyPoem(poem)).to.equal(expectedPoem);
