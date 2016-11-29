@@ -1,22 +1,21 @@
 'use strict';
 
-var arraysAnswers = require('./../../main/ecma2015/template-literal');
-var expect = require('chai').expect;
+var templateLiteral = require('./../../main/ecma2015/template-literal'),
+    expect = require('chai').expect;
 
 describe('Template literals', function () {
+    var room, cutlery, expected;
+
+    before(function () {
+        room = 'kitchen';
+        cutlery = 'spoon';
+        expected = 'im eating on kitchen with spoon';
+    });
 
     context('Default Ecma script 2015 behaviour', function () {
-        var room, cutlery, expected, mainFood;
-
-        before(function () {
-            room = 'kitchen';
-            cutlery = 'spoon';
-            expected = 'im eating on kitchen with spoon';
-        });
 
         it('should interpolate variables into template literal', function (next) {
-            mainFood = `im eating on ${room} with ${cutlery}`;
-            expect(mainFood).to.be.equal(expected);
+            expect(`im eating on ${room} with ${cutlery}`).to.be.equal(expected);
             next();
         });
 
@@ -39,5 +38,10 @@ describe('Template literals', function () {
             expect(template2.interpolate2).to.be.equal('spoon');
             next();
         });
+    });
+
+    it('"getString", should interpolate tag template literal', function (next) {
+        expect(templateLiteral.getString`im eating on ${room} with ${cutlery}`).to.equal(expected);
+        next();
     });
 });
