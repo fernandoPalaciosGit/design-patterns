@@ -56,29 +56,25 @@ module.exports.functionsAnswers = {
         };
     },
 
-    currySingleArgument: function (fn) {
-        function applyArguments(_fn, args) {
-            return _fn.apply({}, args);
-        }
+    curry: function () {
+        var fn = Array.prototype.shift.call(arguments),
+            expectedArgs = fn.length,
+            accumulatedArgs = Array.prototype.slice.call(arguments, 0) || [];
 
-        function getPartialArguments(accumulatedArgs, expectedArgs) {
-            return function (currentArg) {
-                accumulatedArgs.push(currentArg);
+        function getPartialArguments(args) {
+            return function () {
+                accumulatedArgs = args.concat(Array.prototype.slice.call(arguments, 0));
 
                 if (accumulatedArgs.length === expectedArgs) {
-                    return applyArguments(fn, accumulatedArgs);
+                    return fn.apply(this, accumulatedArgs);
 
                 } else {
-                    return getPartialArguments(accumulatedArgs, expectedArgs);
+                    return getPartialArguments(accumulatedArgs);
                 }
             };
         }
 
-        return getPartialArguments([], fn.length);
-    },
-
-    curryMultipleArgument: function () {
-
+        return getPartialArguments(accumulatedArgs);
     },
 
     compose: function () {

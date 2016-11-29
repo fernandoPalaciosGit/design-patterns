@@ -138,22 +138,22 @@ describe('functions', function () {
     });
 
     it('Curry, should be able to combine arguments and return partial closure', function (next) {
-        var average = function (x, y, z) {
-            return x / y * z;
-        };
-        var result, curry = functionsAnswers.currySingleArgument;
+        var result, curry = functionsAnswers.curry,
+            average = function (x, y, z) {
+                return x / y * z;
+            };
 
         result = curry(average);
         expect(typeof result).to.eql('function');
-        expect(result.length).to.eql(1); // this curry allows to catch one argument at time.
+        expect(result(a)(b)(c)).to.eql(average(a, b, c));
 
         result = curry(average)(a);
         expect(typeof result).to.eql('function');
-        expect(result.length).to.eql(1); // partial with one argument at time.
+        expect(result(b)(c)).to.eql(average(a, b, c));
 
         result = curry(average)(a)(b);
         expect(typeof result).to.eql('function');
-        expect(result.length).to.eql(1); // partial with one argument at time.
+        expect(result(c)).to.eql(average(a, b, c));
 
         result = curry(average)(a)(b)(c);
         expect(typeof result).to.eql('number');
@@ -166,7 +166,7 @@ describe('functions', function () {
 
         before(function () {
             pipe = functionsAnswers.compose;
-            curry = functionsAnswers.currySingleArgument;
+            curry = functionsAnswers.curry;
             partial = functionsAnswers.partialUsingArguments;
             replace = function (find, replacement, str) {
                 return str.replace(new RegExp(find, 'g'), replacement);
