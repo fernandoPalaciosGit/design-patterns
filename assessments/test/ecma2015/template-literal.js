@@ -44,4 +44,13 @@ describe('Template literals', function () {
         expect(templateLiteral.getString`im eating on ${room} with ${cutlery}`).to.equal(expected);
         next();
     });
+
+    it('"getHtml", should interpolate tag template literal', function (next) {
+        var badVariable = '<script>deleteEverything()</script>',
+            expected = '<div>&lt;script&gt;deleteEverything()&lt;/script&gt;</div>';
+
+        expect(templateLiteral.getHtml`<div>${badVariable}</div>`).to.equal(expected);
+        next();
+    });
+
 });
