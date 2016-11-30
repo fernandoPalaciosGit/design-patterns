@@ -46,11 +46,42 @@ describe('Template literals', function () {
     });
 
     it('"getHtml", should interpolate tag template literal', function (next) {
-        var badVariable = '<script>deleteEverything()</script>',
-            expected = '<div>&lt;script&gt;deleteEverything()&lt;/script&gt;</div>';
+        var badVariable = '<script>deleteEverything();</script>',
+            expected = '&lt;div&gt;&lt;script&gt;deleteEverything();&lt;/script&gt;&lt;/div&gt;';
 
         expect(templateLiteral.getHtml`<div>${badVariable}</div>`).to.equal(expected);
         next();
     });
 
+    it('should interpolate template with multiple lines', function (next) {
+        var templateListPersons = (persons) => templateLiteral.getHtml`
+                <h1>List of people</h1>
+                <ul>
+                    ${persons.map((person) => `
+                        <li>
+                            <h2>${person.name}</h2>
+                            ${person.isAdmin ? `<button>delete admin</button>` : ''}
+                        </li>
+                    `).join('')}
+                </ul>
+            `,
+            expected = [
+                '&lt;h1&gt;List of people&lt;/h1&gt;',
+                '&lt;ul&gt;',
+                '&lt;li&gt;',
+                '&lt;h2&gt;Fede&lt;/h2&gt;',
+                '&lt;/li&gt;',
+                '&lt;li&gt;',
+                '&lt;h2&gt;Nando&lt;/h2&gt;',
+                '&lt;button&gt;delete admin&lt;/button&gt;',
+                '&lt;/li&gt;',
+                '&lt;/ul&gt;'
+            ].join('');
+
+        expect(templateListPersons([
+            { name: 'Fede', isAdmin: false },
+            { name: 'Nando', isAdmin: true }
+        ])).to.be.equal(expected);
+        next();
+    });
 });
