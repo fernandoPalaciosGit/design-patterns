@@ -24,5 +24,7 @@ parseHtml = function (val) {
 
 module.exports = {
     getString: _.partial(template, _.identity),
-    getHtml: _.partial(template, parseHtml)
+    getHtml: _.partial(template, parseHtml),
+    select: (condition, thenTemplate, elseTemplate = '') => condition ? thenTemplate : elseTemplate,
+    map: (list, cb) => list.map(cb).join('')
 };

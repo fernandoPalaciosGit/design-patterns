@@ -54,15 +54,15 @@ describe('Template literals', function () {
     });
 
     it('should interpolate template with multiple lines', function (next) {
-        var templateListPersons = (persons) => templateLiteral.getHtml`
+        var renderListPersons = (persons) => templateLiteral.getHtml`
                 <h1>List of people</h1>
                 <ul>
-                    ${persons.map((person) => `
+                    ${templateLiteral.map(persons, (person) => `
                         <li>
                             <h2>${person.name}</h2>
-                            ${person.isAdmin ? `<button>delete admin</button>` : ''}
+                            ${templateLiteral.select(person.isAdmin, '<button>delete admin</button>')}
                         </li>
-                    `).join('')}
+                    `)}
                 </ul>
             `,
             expected = [
@@ -78,7 +78,7 @@ describe('Template literals', function () {
                 '&lt;/ul&gt;'
             ].join('');
 
-        expect(templateListPersons([
+        expect(renderListPersons([
             { name: 'Fede', isAdmin: false },
             { name: 'Nando', isAdmin: true }
         ])).to.be.equal(expected);
