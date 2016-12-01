@@ -60,7 +60,7 @@ _.assign(Template.prototype, {
             .replace(new RegExp('<', 'g'), '&lt;')
             .value();
     },
-    render: function (parseTemplate, interpolatedTemplate, ...interpolatedValues) {
+    engine: function (parseTemplate, interpolatedTemplate, ...interpolatedValues) {
         var buildTemplate = (memo, current, index) => {
             if (this.hasToIgnoreBlockTemplate()) {
                 this.cleanBlockSymbols();
@@ -85,11 +85,14 @@ _.assign(Template.prototype, {
     },
 
     // Interfaces
-    getString: function () {
-        return _.partial(this.render, this.parseString).apply(this, arguments);
+    render: function () {
+        return _.partial(this.engine, _.identity).apply(this, arguments);
     },
-    getHtml: function () {
-        return _.partial(this.render, this.parseHtml).apply(this, arguments);
+    renderString: function () {
+        return _.partial(this.engine, this.parseString).apply(this, arguments);
+    },
+    renderHtml: function () {
+        return _.partial(this.engine, this.parseHtml).apply(this, arguments);
     },
     select: function (condition, thenTemplate, elseTemplate = '') {
         return condition ? thenTemplate : elseTemplate;

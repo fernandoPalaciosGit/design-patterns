@@ -46,13 +46,13 @@ describe('Template literals', function () {
             next();
         });
 
-        it('"getString", should interpolate tag template literal', function (next) {
-            expect(template.getString`im eating on ${room} with ${cutlery}.`).to.equal(expectedString);
+        it('"renderString", should interpolate tag template literal', function (next) {
+            expect(template.renderString`im eating on ${room} with ${cutlery}.`).to.equal(expectedString);
             next();
         });
 
-        it('"getHtml", should interpolate tag template literal', function (next) {
-            expect(template.getHtml`<div>${badVariable}</div>`).to.equal(expectedHtml);
+        it('"renderHtml", should interpolate tag template literal', function (next) {
+            expect(template.renderHtml`<div>${badVariable}</div>`).to.equal(expectedHtml);
             next();
         });
     });
@@ -66,7 +66,7 @@ describe('Template literals', function () {
         });
 
         it('then ignore block', function (next) {
-            expect(template.getHtml`
+            expect(template.renderHtml`
                 <div>${badVariable}</div>
 
                 ${template.start(false)}
@@ -78,7 +78,7 @@ describe('Template literals', function () {
 
         it('then take into account block', function (next) {
             expected += '&lt;button&gt;delete admin&lt;/button&gt;';
-            expect(template.getHtml`
+            expect(template.renderHtml`
                 <div>${badVariable}</div>
 
                 ${template.start()}
@@ -89,11 +89,11 @@ describe('Template literals', function () {
         });
     });
 
-    it.skip('should interpolate template with multiple lines', function (next) {
-        var renderListPersons = (persons) => template.getHtml`
+    it('should interpolate template with multiple lines', function (next) {
+        var renderListPersons = (persons) => template.renderHtml`
                 <h1>List of people</h1>
                 <ul>
-                    ${template.map(persons, (person) => `
+                    ${template.map(persons, (person) => template.render`
                         <li>
                             <h2>${person.name}</h2>
                             ${template.start(person.isAdmin)}
