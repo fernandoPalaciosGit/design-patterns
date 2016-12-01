@@ -108,7 +108,4 @@ _.assign(Template.prototype, {
     }
 });
 
-//module.exports = (options = {}) => new Template(options);
-module.exports = function (options = {}) {
-    return new Template(options);
-};
+module.exports = (options = {}) => new Template(options);

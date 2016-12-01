@@ -22,6 +22,7 @@ let _ = require('lodash'),
             next(err, src);
         }]
     ],
+    SchemaBrowserPlugin = [],
     SchemaBrowserTransform = [
         ['browserify-shim'],
         ['babelify', {
@@ -107,29 +108,28 @@ _.assign(BrowserifyOptions.prototype, {
         return this;
     },
     addMinifyWithSourceMap: function (path) {
-        let plugins = this.options.get('plugin');
-
-        plugins.push(['minifyify', {
+        let plugins = SchemaBrowserPlugin.concat(['minifyify', {
             output: path + '/sourcemap.json',
             map: utils.getProyectPath(path + '/sourcemap.json')
         }]);
+
         this.options.set('plugin', plugins);
 
         return this;
     },
     addMinifyWithoutSourceMap: function () {
-        let plugins = this.options.get('plugin');
-
-        plugins.push(['minifyify', {
+        let plugins = SchemaBrowserPlugin.concat(['minifyify', {
             map: false
         }]);
+
         this.options.set('plugin', plugins);
 
         return this;
     },
     addTransformTestBundle: function () {
-        this.options.set('transform',
-            SchemaBrowserTransform.concat(['browserify-istanbul']));
+        let transform = SchemaBrowserTransform.concat(['browserify-istanbul']);
+
+        this.options.set('transform', transform);
 
         return this;
     },
