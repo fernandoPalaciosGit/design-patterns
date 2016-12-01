@@ -1,21 +1,28 @@
 'use strict';
 
-var templateLiteral = require('./../../main/ecma2015/template-literal'),
+var getTemplateLiteral = require('./../../main/ecma2015/template-literal'),
     expect = require('chai').expect;
 
 describe('Template literals', function () {
-    var room, cutlery, expected;
+    var template;
 
     before(function () {
-        room = 'kitchen';
-        cutlery = 'spoon';
-        expected = 'im eating on kitchen with spoon';
+        template = getTemplateLiteral();
     });
 
     context('Default Ecma script 2015 behaviour', function () {
+        var room, cutlery, badVariable, expectedString, expectedHtml;
+
+        before(function () {
+            room = 'kitchen';
+            cutlery = 'spoon';
+            badVariable = '<script>deleteEverything();</script>';
+            expectedString = 'im eating on kitchen with spoon.';
+            expectedHtml = '&lt;div&gt;&lt;script&gt;deleteEverything();&lt;/script&gt;&lt;/div&gt;';
+        });
 
         it('should interpolate variables into template literal', function (next) {
-            expect(`im eating on ${room} with ${cutlery}`).to.be.equal(expected);
+            expect(`im eating on ${room} with ${cutlery}.`).to.be.equal(expectedString);
             next();
         });
 
@@ -27,40 +34,71 @@ describe('Template literals', function () {
                         interpolate2: v2
                     };
                 },
-                template1 = stub(`im eating on ${room} with ${cutlery}`),
-                template2 = stub`im eating on ${room} with ${cutlery}`;
+                template1 = stub(`im eating on ${room} with ${cutlery}.`),
+                template2 = stub`im eating on ${room} with ${cutlery}.`;
 
-            expect(template1.strings).to.be.eql(expected);
+            expect(template1.strings).to.be.eql(expectedString);
             expect(template1.interpolate1).to.be.undefined;
             // TAG TEMPLATE LITERAL
-            expect(template2.strings).to.be.eql(['im eating on ', ' with ', '']);
+            expect(template2.strings).to.be.eql(['im eating on ', ' with ', '.']);
             expect(template2.interpolate1).to.be.equal('kitchen');
             expect(template2.interpolate2).to.be.equal('spoon');
             next();
         });
+
+        it('"getString", should interpolate tag template literal', function (next) {
+            expect(template.getString`im eating on ${room} with ${cutlery}.`).to.equal(expectedString);
+            next();
+        });
+
+        it('"getHtml", should interpolate tag template literal', function (next) {
+            expect(template.getHtml`<div>${badVariable}</div>`).to.equal(expectedHtml);
+            next();
+        });
     });
 
-    it('"getString", should interpolate tag template literal', function (next) {
-        expect(templateLiteral.getString`im eating on ${room} with ${cutlery}`).to.equal(expected);
-        next();
-    });
+    context('should check sentinel with interpolated value', function () {
+        var badVariable, expected;
 
-    it('"getHtml", should interpolate tag template literal', function (next) {
-        var badVariable = '<script>deleteEverything();</script>',
+        beforeEach(function () {
+            badVariable = '<script>deleteEverything();</script>';
             expected = '&lt;div&gt;&lt;script&gt;deleteEverything();&lt;/script&gt;&lt;/div&gt;';
+        });
 
-        expect(templateLiteral.getHtml`<div>${badVariable}</div>`).to.equal(expected);
-        next();
+        it('then ignore block', function (next) {
+            expect(template.getHtml`
+                <div>${badVariable}</div>
+
+                ${template.start(false)}
+                <button>delete admin</button>
+                ${template.end()}
+            `).to.equal(expected);
+            next();
+        });
+
+        it('then take into account block', function (next) {
+            expected += '&lt;button&gt;delete admin&lt;/button&gt;';
+            expect(template.getHtml`
+                <div>${badVariable}</div>
+
+                ${template.start()}
+                <button>delete admin</button>
+                ${template.end()}
+            `).to.equal(expected);
+            next();
+        });
     });
 
-    it('should interpolate template with multiple lines', function (next) {
-        var renderListPersons = (persons) => templateLiteral.getHtml`
+    it.skip('should interpolate template with multiple lines', function (next) {
+        var renderListPersons = (persons) => template.getHtml`
                 <h1>List of people</h1>
                 <ul>
-                    ${templateLiteral.map(persons, (person) => `
+                    ${template.map(persons, (person) => `
                         <li>
                             <h2>${person.name}</h2>
-                            ${templateLiteral.select(person.isAdmin, '<button>delete admin</button>')}
+                            ${template.start(person.isAdmin)}
+                            <button>delete admin</button>
+                            ${template.end()}
                         </li>
                     `)}
                 </ul>
