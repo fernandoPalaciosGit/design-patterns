@@ -1,7 +1,5 @@
 'use strict';
 
-require('babel-polyfill');
-
 var _ = require('lodash'), Template;
 
 Template = function () {

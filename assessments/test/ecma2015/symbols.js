@@ -1,9 +1,7 @@
 'use strict';
 
-require('babel-polyfill');
-
 var expect = require('chai').expect;
 
-describe('Template literals', function () {
+describe('Ecma 2015 - Symbols, reflection', function () {
     expect(true).to.be.true;
 });

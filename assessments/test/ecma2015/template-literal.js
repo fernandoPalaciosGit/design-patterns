@@ -3,7 +3,7 @@
 var getTemplateLiteral = require('./../../main/ecma2015/template-literal'),
     expect = require('chai').expect;
 
-describe('Template literals', function () {
+describe('Ecma 2015 - Template literals', function () {
     var template;
 
     before(function () {

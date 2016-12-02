@@ -11,5 +11,3 @@
  - Reflection through introspection - Reflect (used to discover very low level information about your code)
  - Reflection through intercession - Proxy (wrapping objects and intercepting their behaviours)
  */
-
-require('babel-polyfill');

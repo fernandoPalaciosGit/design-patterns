@@ -6,9 +6,6 @@
     "type": "git",
     "url": "https://github.com/fernandoPalaciosGit/design-patterns.git"
   },
-  "dependencies": {
-    "lodash": "^4.14.1"
-  },
   "scripts": {
     "test": "grunt compile test --compile=test --reporter=spec --mask=Spec",
     "ci": "grunt compile test --compile=app --reporter=spec --mask=Spec",
@@ -54,7 +51,8 @@
     "time-grunt": "~1.2.2"
   },
   "browser": {
-    "jquery": "./bower_components/jquery/dist/jquery.js"
+    "jquery": "./bower_components/jquery/dist/jquery.js",
+    "lodash": "./bower_components/lodash/lodash.js"
   },
   "browserify-shim": "./grunt/runtime-config/shim.js"
 }
