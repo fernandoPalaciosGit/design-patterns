@@ -55,7 +55,7 @@ _.assign(BrowserifyOptions.prototype, {
         return this;
     },
     excludeSourceUnBundleScript: function () {
-        let exclude = this.options.get('exclude');
+        let exclude = this.options.get('exclude').slice(0);
 
         exclude.push('**/*.html', '**/*.css', '**.*.json');
         this.options.set('exclude', exclude);
@@ -110,7 +110,7 @@ _.assign(BrowserifyOptions.prototype, {
         return this;
     },
     addMinifyWithSourceMap: function (path) {
-        let plugins = this.options.get('plugin');
+        let plugins = this.options.get('plugin').slice(0);
 
         plugins.push(['minifyify', {
             output: path + '/sourcemap.json',
@@ -121,7 +121,7 @@ _.assign(BrowserifyOptions.prototype, {
         return this;
     },
     removeMinifySourceMap: function () {
-        let plugins = this.options.get('plugin');
+        let plugins = this.options.get('plugin').slice(0);
 
         _.remove(plugins, function (plugin) {
             return plugin[0] === 'minifyify';
@@ -132,7 +132,7 @@ _.assign(BrowserifyOptions.prototype, {
         return this;
     },
     addCoverage: function () {
-        let transform = this.options.get('transform');
+        let transform = this.options.get('transform').slice(0);
 
         transform.push(['browserify-istanbul']);
         this.options.set('transform', transform);
@@ -140,7 +140,7 @@ _.assign(BrowserifyOptions.prototype, {
         return this;
     },
     addBabelify: function () {
-        let transform = this.options.get('transform');
+        let transform = this.options.get('transform').slice(0);
 
         transform.push(['babelify', {
             'presets': ['es2015']
