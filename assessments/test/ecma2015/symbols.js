@@ -81,4 +81,47 @@ describe('Ecma 2015 - Symbols, reflection', function () {
         expect(Object.getOwnPropertySymbols(testCopy)).to.deep.include.members([beer, foo, bar]);
         next();
     });
+
+    context('should be useful to programming', function () {
+        it('to assign unique values on Schemas', function (next) {
+            let logLevelDebug = Symbol('debug'),
+                logLevels = {
+                    DEBUG: logLevelDebug,
+                    INFO: Symbol('info'),
+                    WARNING: Symbol('warning')
+                };
+
+            expect(logLevels.DEBUG).not.to.be.equals(Symbol('debug'));
+            expect(logLevels.DEBUG).to.be.equals(logLevelDebug);
+            next();
+        });
+
+        it('to put metadata values in an Object', function (next) {
+            let size = Symbol('size');
+
+            class Collection {
+                constructor () {
+                    this[size] = 0;
+                }
+
+                add (item) {
+                    this[this[size]] = item;
+                    this[size]++;
+                }
+
+                static sizeOf (instance) {
+                    return instance[size];
+                }
+            }
+
+            let x = new Collection();
+            expect(Collection.sizeOf(x)).to.be.equals(0);
+            x.add('foo');
+            expect(Collection.sizeOf(x)).to.be.equals(1);
+            expect(Object.keys(x)).to.deep.include.members(['0']);
+            expect(Object.getOwnPropertyNames(x)).to.deep.include.members(['0']);
+            expect(Object.getOwnPropertySymbols(x)).to.deep.include.members([size]);
+            next();
+        });
+    });
 });
