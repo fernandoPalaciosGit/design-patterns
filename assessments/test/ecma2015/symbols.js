@@ -363,6 +363,48 @@ describe('Ecma 2015 - Symbols, reflection', function () {
             expect(beerSplit).to.deep.include.members([string]);
             next();
         });
+
+        context('Symbol.species: drive constructor behaviour', function () {
+            it('creating object, to override prototype', function (next) {
+                Array.prototype.mapSpecies = function (callback) {
+                    let ArraySpecies = this.constructor[Symbol.species],
+                        arrayMap = new ArraySpecies(this.length); // new Array(this.length)
+
+                    this.forEach(function (item, index, array) {
+                        arrayMap[index] = callback.call({}, item, index, array);
+                    });
+
+                    return arrayMap;
+                };
+
+                let array = [1, 2, 3],
+                    arrayExpected = [1, 4, 9];
+
+                expect(array.mapSpecies((val) => val *= val)).to.deep.include.members(arrayExpected);
+                next();
+            });
+
+            // babel not supported
+            it.skip('return context on instance class', function (next) {
+                let noop = () => {};
+
+                class Foo extends Array {
+                    static get [Symbol.species]() {
+                        return this;
+                    }
+                }
+
+                class Bar extends Array {
+                    static get [Symbol.species]() {
+                        return Array;
+                    }
+                }
+
+                expect(new Foo().map(noop)).to.be.an.instanceof(Foo);
+                expect(new Bar().map(noop)).to.be.an.instanceof(Array);
+                next();
+            });
+        });
         // jscs:enable requireSpacesInFunctionExpression
     });
 });
