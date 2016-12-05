@@ -24,12 +24,13 @@
     }],
     "no-floating-decimal": 2,
     "no-spaced-func": 2,
-    "no-extra-parens": 1,
+    "no-extra-parens": [2, "all"],
     "no-warning-comments": [2, {
       "terms": ["todo", "fix", "related", "fixme", "xxx", "bug"],
       "location": "anywhere"
     }],
-    "strict": [2, "global"]
+    "strict": [2, "global"],
+    "no-cond-assign": [2, "except-parens"]
   },
   "env": {
     "browser": true,
