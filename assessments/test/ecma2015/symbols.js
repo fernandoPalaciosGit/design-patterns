@@ -253,6 +253,29 @@ describe('Ecma 2015 - Symbols, reflection', function () {
              */
             next();
         });
+
+        it('Symbol.match: drives the behaviour of String#match', function (next) {
+            class Matcher {
+                constructor (val) {
+                    this.value = val;
+                }
+
+                [Symbol.match](string) {
+                    if (string.indexOf(this.value) !== -1) {
+                        return [this.value];
+                    }
+
+                    return null;
+                }
+            }
+
+            var fooMatch = 'toMyOwnFooBussiness'.match(new Matcher('Foo')),
+                barMatch = 'toMyOwnFooBussiness'.match(new Matcher('Bar'));
+
+            expect(fooMatch).to.deep.include.members(['Foo']);
+            expect(barMatch).to.be.null;
+            next();
+        });
         // jscs:enable requireSpacesInFunctionExpression
     });
 });
