@@ -276,6 +276,39 @@ describe('Ecma 2015 - Symbols, reflection', function () {
             expect(barMatch).to.be.null;
             next();
         });
+
+        it('Symbol.replace: drives the behaviour of String#replace', function (next) {
+            class Replacer {
+                constructor (val) {
+                    this.value = val;
+                }
+
+                [Symbol.replace](string, replacer) {
+                    let targetIndex = string.indexOf(this.value);
+
+                    if (targetIndex === -1) {
+                        return `${string}`;
+                    }
+
+                    if (typeof replacer === 'function') {
+                        replacer = replacer.call({}, string, this.value);
+                    }
+
+                    return `${string.slice(0, targetIndex)}${replacer}${string.slice(targetIndex + this.value.length)}`;
+                }
+            }
+
+            let fooMatch = 'toMyOwnFooBussiness'.replace(new Replacer('Foo'), 'Zoo'),
+                barMatch = 'toMyOwnBarBussiness'.replace(new Replacer('Bar'), function () {
+                    return 'Baz';
+                }),
+                beerMatch = 'toMyOwnFooBarBussiness'.replace(new Replacer('Beer'), 'Cheers');
+
+            expect(fooMatch).to.be.equals('toMyOwnZooBussiness');
+            expect(barMatch).to.be.equals('toMyOwnBazBussiness');
+            expect(beerMatch).to.be.equals('toMyOwnFooBarBussiness');
+            next();
+        });
         // jscs:enable requireSpacesInFunctionExpression
     });
 });
