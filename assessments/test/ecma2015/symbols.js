@@ -335,6 +335,34 @@ describe('Ecma 2015 - Symbols, reflection', function () {
             expect(beerSearch).to.be.equals(-1);
             next();
         });
+
+        it('Symbol.split: drives the behaviour of String#split', function (next) {
+            class Spliter {
+                constructor (val) {
+                    this.value = val;
+                }
+
+                [Symbol.split](string) {
+                    let targetIndex = string.indexOf(this.value);
+
+                    if (targetIndex !== -1) {
+                        return [string.slice(0, targetIndex), string.slice(targetIndex + this.value.length)];
+                    }
+
+                    return [`${string}`];
+                }
+            }
+
+            var string = 'toMyOwnFooBarBussiness',
+                fooSplit = string.split(new Spliter('Foo')),
+                barSplit = string.split(new Spliter('Bar')),
+                beerSplit = string.split(new Spliter('Beer'));
+
+            expect(fooSplit).to.deep.include.members(['toMyOwn', 'BarBussiness']);
+            expect(barSplit).to.deep.include.members(['toMyOwnFoo', 'Bussiness']);
+            expect(beerSplit).to.deep.include.members([string]);
+            next();
+        });
         // jscs:enable requireSpacesInFunctionExpression
     });
 });
