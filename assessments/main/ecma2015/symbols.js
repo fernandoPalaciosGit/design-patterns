@@ -13,3 +13,5 @@
  - las propiedades de los objetos indexados por un symbolo estan ocultas a partes de la aplicacion que acceden de manera habitual a las propiedades miembro del objeto.
  Y esto se consigue a traves de la interfaz "getOwnPropertySymbols", desde la que unicamente se puede acceder a las propiedades almacenadas por un symbolo.
  */
+
+module.exports = {};

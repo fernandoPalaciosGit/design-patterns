@@ -1,8 +1,11 @@
 'use strict';
 
-let expect = require('chai').expect;
+let getSymbols = require('./../../main/ecma2015/symbols'),
+    expect = require('chai').expect;
 
 describe('Ecma 2015 - Symbols, reflection', function () {
+    expect(getSymbols).to.be.an('object');
+
     it('should create symbol primitive type without, only init with its constructor', function (next) {
         expect(typeof Symbol()).to.be.equals('symbol');
         expect(function () {
@@ -126,15 +129,15 @@ describe('Ecma 2015 - Symbols, reflection', function () {
     });
 
     context('Static operators: "well known symbols", which are implemented within other native objects', function () {
-        // Babel not supported
-        it.skip('Symbol.hasInstance, drives the behaviour of instanceof', function (next) {
+        // jscs:disable requireSpacesInFunctionExpression
+        it.skip('Symbol.hasInstance, drives the behaviour of instanceof', function (next) { // babel not supported
             class TestClass {
-                static [Symbol.hasInstance] (instance) { // jscs:ignore requireSpacesInFunctionExpression
+                static [Symbol.hasInstance] (instance) {
                     return Array.isArray(instance);
                 }
             }
 
-            expect([] instanceof TestClass).to.be.false;
+            expect([] instanceof TestClass).to.be.true;
             next();
         });
 
@@ -170,5 +173,41 @@ describe('Ecma 2015 - Symbols, reflection', function () {
             expect(resultIterator).not.to.deep.include.members(resultNonIndexed);
             next();
         });
+
+        it.skip('Symbol.isConcatSpreadable: drives the behaviour of Array#concat', function (next) { // babel not supported
+            let testArray = [1, 2, 3],
+                expectedConcatArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+            // concat behaviour: spreadable / flattened (esparcido, homogeneizado)
+            expect(testArray.concat([4, 5], 6).concat([7, 8], 9)).to.deep.include.members(expectedConcatArray);
+            expect(testArray).not.to.be.equals(expectedConcatArray);
+
+            // on concat behaviour into class when add new indexed property
+            class ArrayTest extends Array {
+                get [Symbol.isConcatSpreadable]() {
+                    return true;
+                }
+            }
+
+            class CollectionTest extends Array {
+                get [Symbol.isConcatSpreadable]() {
+                    return false;
+                }
+            }
+
+            let array = new ArrayTest(),
+                collection = new CollectionTest(),
+                expectedConcatOverrideArray = [1, 2, 3, 4, 5, new CollectionTest(6, 7)];
+
+            array[0] = 4;
+            array[1] = 5;
+            collection[0] = 6;
+            collection[1] = 7;
+            expectedConcatArray = [1, 2, 3, 4, 5, 6, 7];
+            expect(testArray.concat(array).concat(collection)).not.to.be.equals(expectedConcatArray);
+            expect(testArray.concat(array).concat(collection)).to.deep.include.members(expectedConcatOverrideArray);
+            next();
+        });
+        // jscs:enable requireSpacesInFunctionExpression
     });
 });
