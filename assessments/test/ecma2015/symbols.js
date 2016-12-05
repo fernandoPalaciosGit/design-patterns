@@ -269,11 +269,14 @@ describe('Ecma 2015 - Symbols, reflection', function () {
                 }
             }
 
-            var fooMatch = 'toMyOwnFooBussiness'.match(new Matcher('Foo')),
-                barMatch = 'toMyOwnFooBussiness'.match(new Matcher('Bar'));
+            var string = 'toMyOwnFooBarBussiness',
+                fooMatch = string.match(new Matcher('Foo')),
+                barMatch = string.match(new Matcher('Bar')),
+                beerMatch = string.match(new Matcher('Beer'));
 
             expect(fooMatch).to.deep.include.members(['Foo']);
-            expect(barMatch).to.be.null;
+            expect(barMatch).to.deep.include.members(['Bar']);
+            expect(beerMatch).to.be.null;
             next();
         });
 
@@ -298,15 +301,38 @@ describe('Ecma 2015 - Symbols, reflection', function () {
                 }
             }
 
-            let fooMatch = 'toMyOwnFooBussiness'.replace(new Replacer('Foo'), 'Zoo'),
-                barMatch = 'toMyOwnBarBussiness'.replace(new Replacer('Bar'), function () {
+            let string = 'toMyOwnFooBarBussiness',
+                fooReplace = string.replace(new Replacer('Foo'), 'Zoo'),
+                barReplace = string.replace(new Replacer('Bar'), function () {
                     return 'Baz';
                 }),
-                beerMatch = 'toMyOwnFooBarBussiness'.replace(new Replacer('Beer'), 'Cheers');
+                beerReplace = string.replace(new Replacer('Beer'), 'Cheers');
 
-            expect(fooMatch).to.be.equals('toMyOwnZooBussiness');
-            expect(barMatch).to.be.equals('toMyOwnBazBussiness');
-            expect(beerMatch).to.be.equals('toMyOwnFooBarBussiness');
+            expect(fooReplace).to.be.equals('toMyOwnZooBarBussiness');
+            expect(barReplace).to.be.equals('toMyOwnFooBazBussiness');
+            expect(beerReplace).to.be.equals(string);
+            next();
+        });
+
+        it('Symbol.search: drives the behaviour of String#search', function (next) {
+            class Searcher {
+                constructor (val) {
+                    this.value = val;
+                }
+
+                [Symbol.search](string) {
+                    return string.indexOf(this.value);
+                }
+            }
+
+            var string = 'toMyOwnFooBarBussiness',
+                fooSearch = string.search(new Searcher('Foo')),
+                barSearch = string.search(new Searcher('Bar')),
+                beerSearch = string.search(new Searcher('Beer'));
+
+            expect(fooSearch).to.be.equals(7);
+            expect(barSearch).to.be.equals(10);
+            expect(beerSearch).to.be.equals(-1);
             next();
         });
         // jscs:enable requireSpacesInFunctionExpression
