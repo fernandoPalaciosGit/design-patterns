@@ -31,7 +31,7 @@ let _ = require('lodash'),
         ['browserify-shim']
     ],
     vendors = {
-        app: ['lodash', 'jquery'],
+        app: ['lodash', 'jquery'], // proyect dependencies
         test: ['lodash', 'jquery', 'chai', 'sinon']
     },
     BrowserifyOptions = function (options) {
