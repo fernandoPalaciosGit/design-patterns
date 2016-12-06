@@ -445,6 +445,22 @@ describe('Ecma 2015 - Symbols, reflection', function () {
             expect(Boolean(object)).to.be.true;
             next();
         });
+
+        it('Symbol.toStringTag: drives the behaviour Object#toString to check typeof', function (next) {
+            let object = {};
+
+            expect(Object.prototype.toString.call(object)).to.be.equals('[object Object]');
+
+            class Collection {
+                get [Symbol.toStringTag]() {
+                    return 'CollectionTag';
+                }
+            }
+
+            object = new Collection();
+            expect(Object.prototype.toString.call(object)).to.be.equals('[object CollectionTag]');
+            next();
+        });
         // jscs:enable requireSpacesInFunctionExpression
     });
 });
