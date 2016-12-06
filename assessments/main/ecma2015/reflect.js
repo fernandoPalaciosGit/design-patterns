@@ -7,7 +7,7 @@
  - Code generation: eval
  - Reflection: apply, call, bind, name, length (Function), getOwnProperties (Object)
  - Reflection / Introspection: typeof, delete, instanceof
- - Reflection through implementation: Symbols (to change the behaviour of classes and objects)
+ - Reflection through introspection - Reflect (used to discover very low level information about your code)
  */
 
 module.exports = {};

@@ -1,10 +1,10 @@
 'use strict';
 
-let getSymbols = require('./../../main/ecma2015/symbols'),
+let getSymbol = require('./../../main/ecma2015/symbols'),
     expect = require('chai').expect;
 
-describe('Ecma 2015 - Symbols, reflection', function () {
-    expect(getSymbols).to.be.an('object');
+describe('Ecma 2015 - Symbols, reflection through implementation', function () {
+    expect(getSymbol).to.be.an('object');
 
     it('should create symbol primitive type without, only init with its constructor', function (next) {
         expect(typeof Symbol()).to.be.equals('symbol');
