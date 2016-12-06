@@ -21,5 +21,30 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             expect(Reflect.apply(Object.prototype.toString, array, [])).to.be.equals(type);
             next();
         });
+
+        it('Reflect.construct: call a Constructor with a set of arguments.', function (next) {
+            class Greeting {
+                constructor (options) {
+                    this.greet = options.greet || '';
+                }
+
+                say () {
+                    return `Hello ${this.greet}`;
+                }
+            }
+
+            let oldFactoryGreet = (options = {}) => new Greeting(options),
+                newFactoryGreet = (options = {}) => Reflect.construct(Greeting, [options]),
+                testGreet;
+
+            testGreet = oldFactoryGreet({ greet: 'my darling' });
+            expect(testGreet).to.be.an.instanceof(Greeting);
+            expect(testGreet.say()).to.be.equals('Hello my darling');
+
+            testGreet = newFactoryGreet({ greet: 'my darling' });
+            expect(testGreet.say()).to.be.equals('Hello my darling');
+            expect(testGreet).to.be.an.instanceof(Greeting);
+            next();
+        });
     });
 });
