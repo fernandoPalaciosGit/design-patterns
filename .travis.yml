@@ -9,7 +9,7 @@ before_install:
 
 install:
   - npm install
-  - bower install
+  - bower install --save --config.interactive=false
 
 before_script:
   - npm run ci
