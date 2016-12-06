@@ -405,6 +405,46 @@ describe('Ecma 2015 - Symbols, reflection', function () {
                 next();
             });
         });
+
+        /**
+         * expect(testPlainObject[Symbol.toPrimitive]('number')).to.be.equals(+testPlainObject);
+         * expect(testPlainObject[Symbol.toPrimitive]('string')).to.be.equals('' + testPlainObject);
+         * if (testPlainObject[Symbol.toPrimitive]('default') == {}) { }
+         */
+        // babel not supported
+        it.skip('Symbol.toPrimitive: should be able to convert Object into primitive value', function (next) {
+            class ObjectTOPrimitiveTestDouble {
+                constructor () {
+                    this.test = 28.45;
+                }
+
+                [Symbol.toPrimitive](hint) {
+                    if (hint === 'string') {
+                        return `Convert ${this.test} to string`;
+
+                    } else if (hint === 'number') {
+                        return this.test.toFixed();
+
+                    } else if (hint === 'default') {
+                        return true;
+
+                    /*when pushed, most classes (except Date)
+                     default to returning a number primitive*/
+                    } else {
+                        return this.test;
+                    }
+                }
+            }
+
+            let object = new ObjectTOPrimitiveTestDouble();
+
+            expect(object).to.be.an.instanceof(ObjectTOPrimitiveTestDouble);
+            expect(object).to.have.property('test', 28.45);
+            expect(Number(object)).to.be.equals(28);
+            expect(String(object)).to.be.equals('Convet 28.45 to string');
+            expect(Boolean(object)).to.be.true;
+            next();
+        });
         // jscs:enable requireSpacesInFunctionExpression
     });
 });
