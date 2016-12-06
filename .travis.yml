@@ -9,7 +9,7 @@ before_install:
 
 install:
   - bower cache clean
-  - bower install -f --save --config.interactive=false
+  - bower install --config.interactive=false
   - npm install
 
 before_script:
