@@ -8,8 +8,7 @@ before_install:
   - npm install -g grunt-cli
 
 install:
-  - bower cache clean
-  - bower install --config.interactive=false
+  - bower install --save --config.interactive=false
   - npm install
 
 before_script:

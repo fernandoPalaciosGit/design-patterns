@@ -46,6 +46,7 @@
     "jshint-stylish": "^2.2.1",
     "load-grunt-configs": "^1.0.0",
     "load-grunt-tasks": "~3.3.0",
+    "lodash": "^4.17.2",
     "minifyify": "^7.3.4",
     "opener": "^1.4.2",
     "sinon": "^2.0.0-pre.3",
