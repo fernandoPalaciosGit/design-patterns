@@ -154,7 +154,7 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             next();
         });
 
-        context('Reflect.isExtensible', function () {
+        context('Reflect.isExtensible (target)', function () {
             let testObject;
 
             beforeEach(function () {
@@ -182,6 +182,49 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
 
             it('Object.freeze', function (next) {
                 Object.freeze(testObject);
+                next();
+            });
+        });
+
+        context('Reflect.get ( target, propertyKey [ , receiver ])', function () {
+            let testObject, testBindObject;
+
+            before(function () {
+                testObject = {
+                    foo: 1,
+                    bar: 2,
+                    get beer () {
+                        return this.foo + this.bar;
+                    }
+                };
+                testBindObject = {
+                    get beer () {
+                        return `This is ${this.foo + this.bar}`;
+                    }
+                };
+            });
+
+            it('calls target[propertyKey]', function (next) {
+                expect(Reflect.get(testObject, 'foo')).to.equals(1);
+                expect(Reflect.get(testObject, 'bar')).to.equals(2);
+                expect(Reflect.get(testObject, 'beer')).to.equals(3);
+                next();
+            });
+
+            it('third argument binds context', function (next) {
+                expect(Reflect.get(testBindObject, 'beer', testObject)).to.equals('This is 3');
+                next();
+            });
+
+            it('if target is a non-object, the function call will throw TypeError', function (next) {
+                expect(function () {
+                    Reflect.get(1, 'foo');
+                }).to.throw(TypeError);
+                next();
+            });
+
+            it('old style do not throw error', function (next) {
+                expect(1['foo']).to.be.undefined; // eslint-disable-line dot-notation
                 next();
             });
         });
