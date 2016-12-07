@@ -17,6 +17,13 @@
     };
 
     initializeTest = function () {
+        var chai = require('chai'),
+            _ = require('lodash');
+
+        _.extend(chai.config, {
+            includeStack: true
+        });
+
         if (!hasLoadedTestWithBrowser('PhantomJS')) {
             mocha.run();
         }
