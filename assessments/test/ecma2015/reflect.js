@@ -128,5 +128,30 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             }).to.throw(TypeError/*'Reflect.getPrototypeOf called on non-object'*/);
             next();
         });
+
+        // "Object.setPrototypeOf" is @deprecated, easy to manage because not throwing errors only retur boolean on operation
+        /*todo: babel not supported*/
+        it.skip('Reflection.setPrototypeOf: drives the behavior of Object.setPrototypeOf', function (next) {
+            let objectTest;
+
+            class Test {
+            }
+
+            class OtherTest {
+            }
+
+            objectTest = new Test();
+            expect(Reflect.getPrototypeOf(objectTest)).to.deep.equal(Test.prototype);
+            expect(Reflect.setPrototypeOf(objectTest, OtherTest.prototype)).to.be.true;
+            expect(Reflect.getPrototypeOf(objectTest)).to.deep.equal(OtherTest.prototype);
+            expect(function () {
+                Reflect.setPrototypeOf(1, {});
+            }).to.throw(TypeError/*'Reflect.setPrototypeOf called on non-object'*/);
+
+            objectTest = new Test();
+            Object.freeze(objectTest);
+            expect(Reflect.setPrototypeOf(objectTest, OtherTest.prototype)).to.be.false;
+            next();
+        });
     });
 });
