@@ -153,5 +153,37 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             expect(Reflect.setPrototypeOf(objectTest, OtherTest.prototype)).to.be.false;
             next();
         });
+
+        context('Reflect.isExtensible', function () {
+            let testObject;
+
+            beforeEach(function () {
+                testObject = {};
+                expect(Reflect.isExtensible(testObject)).to.equals(true);
+            });
+
+            afterEach(function () {
+                expect(Reflect.isExtensible(testObject)).to.equals(false);
+                expect(function () {
+                    testObject.test = 1;
+                }).to.throw(TypeError/*Can't add property test, object is not extensible, Attempted to assign to readonly property*/);
+                expect(testObject).not.to.have.property('test');
+            });
+
+            it('Reflect.preventExtensions', function (next) {
+                Reflect.preventExtensions(testObject);
+                next();
+            });
+
+            it('Object.seal', function (next) {
+                Object.seal(testObject);
+                next();
+            });
+
+            it('Object.freeze', function (next) {
+                Object.freeze(testObject);
+                next();
+            });
+        });
     });
 });
