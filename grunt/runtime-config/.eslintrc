@@ -25,7 +25,7 @@
     "no-floating-decimal": 2,
     "no-spaced-func": 2,
     "no-extra-parens": [2, "all"],
-    "no-warning-comments": [2, {
+    "no-warning-comments": [1, {
       "terms": ["todo", "fix", "related", "fixme", "xxx", "bug"],
       "location": "anywhere"
     }],

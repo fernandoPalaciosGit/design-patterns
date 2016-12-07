@@ -138,7 +138,7 @@ describe('Ecma 2015 - Symbols, reflection through implementation', function () {
     context('Static operators: "well known symbols", which are implemented within other native objects', function () {
         // jscs:disable requireSpacesInFunctionExpression
 
-        // babel not supported
+        /*todo: babel not supported*/
         it.skip('Symbol.hasInstance, drives the behaviour of instanceof', function (next) {
             class TestClass {
                 static [Symbol.hasInstance] (instance) {
@@ -184,7 +184,7 @@ describe('Ecma 2015 - Symbols, reflection through implementation', function () {
             next();
         });
 
-        // babel not supported
+        /*todo: babel not supported*/
         it.skip('Symbol.isConcatSpreadable: drives the behaviour of Array#concat', function (next) {
             let testArray = [1, 2, 3],
                 expectedConcatArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -216,7 +216,7 @@ describe('Ecma 2015 - Symbols, reflection through implementation', function () {
             collection[1] = 7;
             expectedConcatArray = [1, 2, 3, 4, 5, 6, 7];
             expect(testArray.concat(array).concat(collection)).not.to.be.equals(expectedConcatArray);
-            expect(testArray.concat(array).concat(collection)).to.deep.include.members(expectedConcatOverrideArray);
+            expect(testArray.concat(array).concat(collection)).to.deep.equals(expectedConcatOverrideArray);
             next();
         });
 
@@ -248,7 +248,7 @@ describe('Ecma 2015 - Symbols, reflection through implementation', function () {
             expect((new TestScopable()).foo()).to.be.equals('public function of TestScopable');
             expect((new TestUnScopable()).foo()).to.be.equals('public function of TestUnScopable');
 
-            /*http://stackoverflow.com/questions/34851566/browserify-error-with-in-strict-mode
+            /* todo: http://stackoverflow.com/questions/34851566/browserify-error-with-in-strict-mode
              with (TestScopable.prototype) {
              expect(foo()).to.be.equals('public function of TestScopable');
              }
@@ -372,28 +372,36 @@ describe('Ecma 2015 - Symbols, reflection through implementation', function () {
         });
 
         context('Symbol.species: drive constructor behaviour', function () {
-            it('creating object, to override prototype', function (next) {
-                Array.prototype.mapSpecies = function (callback) {
-                    let ArraySpecies = this.constructor[Symbol.species],
-                        arrayMap = new ArraySpecies(this.length); // new Array(this.length)
+            /*todo: babel not supported*/
+            it.skip('creating object, to override prototype', function (next) {
+                let factorial = (val) => val *= val;
 
-                    this.forEach(function (item, index, array) {
-                        arrayMap[index] = callback.call({}, item, index, array);
-                    });
+                class Foo extends Array {
+                    constructor(a, b, c) {
+                        super(a, b, c);
+                    }
 
-                    return arrayMap;
-                };
+                    mapSpecies(callback) {
+                        let ArraySpecies = this.constructor[Symbol.species],
+                            arrayMap = new ArraySpecies(this.length); // new Array(this.length)
 
-                let array = [1, 2, 3],
-                    arrayExpected = [1, 4, 9];
+                        this.forEach(function (item, index, array) {
+                            arrayMap[index] = callback.call({}, item, index, array);
+                        });
 
-                expect(array.mapSpecies((val) => val *= val)).to.deep.include.members(arrayExpected);
+                        return arrayMap;
+                    }
+                }
+
+                let array = new Foo(1, 4, 9),
+                    arrayExpected = [1, 16, 81];
+
+                expect(array.mapSpecies(factorial)).to.deep.equal(arrayExpected);
                 next();
             });
 
-            // babel not supported
-            it.skip('return context on instance class', function (next) {
-                let noop = () => {};
+            it('return context on instance class', function (next) {
+                let identity = (val) => val;
 
                 class Foo extends Array {
                     static get [Symbol.species]() {
@@ -401,14 +409,7 @@ describe('Ecma 2015 - Symbols, reflection through implementation', function () {
                     }
                 }
 
-                class Bar extends Array {
-                    static get [Symbol.species]() {
-                        return Array;
-                    }
-                }
-
-                expect(new Foo().map(noop)).to.be.an.instanceof(Foo);
-                expect(new Bar().map(noop)).to.be.an.instanceof(Array);
+                expect(new Foo(1, 2, 3).map(identity)).to.be.deep.equals([1, 2, 3]);
                 next();
             });
         });
@@ -418,7 +419,8 @@ describe('Ecma 2015 - Symbols, reflection through implementation', function () {
          * expect(testPlainObject[Symbol.toPrimitive]('string')).to.be.equals('' + testPlainObject);
          * if (testPlainObject[Symbol.toPrimitive]('default') == {}) { }
          */
-        // babel not supported
+
+        /*todo: babel not supported*/
         it.skip('Symbol.toPrimitive: should be able to convert Object into primitive value', function (next) {
             class ObjectTOPrimitiveTestDouble {
                 constructor () {
@@ -448,7 +450,7 @@ describe('Ecma 2015 - Symbols, reflection through implementation', function () {
             expect(object).to.be.an.instanceof(ObjectTOPrimitiveTestDouble);
             expect(object).to.have.property('test', 28.45);
             expect(Number(object)).to.be.equals(28);
-            expect(String(object)).to.be.equals('Convet 28.45 to string');
+            expect(String(object)).to.be.equals('Convert 28.45 to string');
             expect(Boolean(object)).to.be.true;
             next();
         });

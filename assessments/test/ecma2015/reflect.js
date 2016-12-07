@@ -131,7 +131,7 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
 
         // "Object.setPrototypeOf" is @deprecated, easy to manage because not throwing errors only retur boolean on operation
         /*todo: babel not supported*/
-        it.skip('Reflection.setPrototypeOf: drives the behavior of Object.setPrototypeOf', function (next) {
+        it.skip('Reflect.setPrototypeOf: drives the behavior of Object.setPrototypeOf', function (next) {
             let objectTest;
 
             class Test {
