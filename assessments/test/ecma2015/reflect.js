@@ -46,5 +46,29 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             expect(testGreet).to.be.an.instanceof(Greeting);
             next();
         });
+
+        it('Reflect.defineProperty: lets you define metadata about a propert, that it acts on object literals', function (next) {
+            let now = new Date(), myDate;
+
+            expect(function () {
+                Reflect.defineProperty(1, 'test', {});
+            }).to.throw(TypeError/*'Reflect.defineProperty called on non-object'*/);
+
+            class MyDate {
+            }
+
+            Object.defineProperty(MyDate.prototype, 'nowDateByObject', {
+                value: now
+            });
+            // New Style, not weird because Reflect does Reflection.
+            Reflect.defineProperty(MyDate.prototype, 'nowDateByReflection', {
+                value: now
+            });
+            myDate = new MyDate();
+            expect(myDate).to.be.an.instanceof(MyDate);
+            expect(myDate.nowDateByObject).to.be.equals(now);
+            expect(myDate.nowDateByReflection).to.be.equals(now);
+            next();
+        });
     });
 });
