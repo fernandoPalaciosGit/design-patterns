@@ -113,5 +113,20 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             expect(testObject).not.to.have.property('bar');
             next();
         });
+
+        // "Object.getPrototypeOf" is @deprecated
+        it('Reflect.getPrototypeOf: return the prototype reference of an object', function (next) {
+            class Test {
+            }
+
+            let testObject = new Test();
+
+            expect(Object.getPrototypeOf(testObject)).to.deep.equal(Test.prototype);
+            expect(Reflect.getPrototypeOf(testObject)).to.deep.equal(Test.prototype);
+            expect(function () {
+                Reflect.getPrototypeOf(1);
+            }).to.throw(TypeError/*'Reflect.getPrototypeOf called on non-object'*/);
+            next();
+        });
     });
 });
