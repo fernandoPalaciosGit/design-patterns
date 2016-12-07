@@ -47,7 +47,7 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             next();
         });
 
-        // @deprecate for Object.defineProperty
+        // "Object.defineProperty" is @deprecated
         it('Reflect.defineProperty: lets you define metadata about a propert, that it acts on object literals', function (next) {
             let now = new Date(), myDate;
 
@@ -72,9 +72,9 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             next();
         });
 
-        // @deprecate for Object.getOwnPropertyDescriptor
+        // "Object.getOwnPropertyDescriptor" is @deprecated
         it('Reflect.getOwnPropertyDescriptor: getting the descriptor metadata of a property', function (next) {
-            var testObject = {}, testArray = [];
+            let testObject = {}, testArray = [];
 
             expect(function () {
                 Reflect.getOwnPropertyDescriptor(1, 'test', {});
@@ -97,6 +97,20 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
 
             expect(testObjectDescriptor).to.have.property('value', true);
             expect(testObjectDescriptor).to.have.property('enumerable', false);
+            next();
+        });
+
+        // "delete object.property" is @deprecated
+        it('Reflect.deleteProperty: drives the behavior of "delete object.property"', function (next) {
+            let testObject = {
+                foo: 'foo',
+                bar: 'bar'
+            };
+
+            delete testObject.foo;
+            expect(testObject).not.to.have.property('foo');
+            Reflect.deleteProperty(testObject, 'bar');
+            expect(testObject).not.to.have.property('bar');
             next();
         });
     });
