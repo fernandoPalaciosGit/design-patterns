@@ -1,22 +1,27 @@
 'use strict';
 
-var initializeTest, hasLoadedTestWithBrowser;
+(function (window, navigator) {
+    var configurationTest, initializeTest, hasLoadedTestWithBrowser;
 
-hasLoadedTestWithBrowser = function (browserName) {
-    return navigator.userAgent.toLowerCase().indexOf(browserName.toLowerCase()) !== -1;
-};
+    hasLoadedTestWithBrowser = function (browserName) {
+        return typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().indexOf(browserName.toLowerCase()) !== -1;
+    };
 
-mocha.setup({
-    ui: 'bdd',
-    ignoreLeaks: true,
-    asyncOnly: true,
-    timeout: 5000
-});
+    configurationTest = function () {
+        mocha.setup({
+            ui: 'bdd',
+            ignoreLeaks: true,
+            asyncOnly: true,
+            timeout: 5000
+        });
+    };
 
-initializeTest = function () {
-    if (!hasLoadedTestWithBrowser('PhantomJS')) {
-        mocha.run();
-    }
-};
+    initializeTest = function () {
+        if (!hasLoadedTestWithBrowser('PhantomJS')) {
+            mocha.run();
+        }
+    };
 
-window.addEventListener('load', initializeTest);
+    configurationTest();
+    window.addEventListener('load', initializeTest, false);
+})(window, navigator);
