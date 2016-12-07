@@ -47,6 +47,7 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             next();
         });
 
+        // @deprecate for Object.defineProperty
         it('Reflect.defineProperty: lets you define metadata about a propert, that it acts on object literals', function (next) {
             let now = new Date(), myDate;
 
@@ -68,6 +69,34 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             expect(myDate).to.be.an.instanceof(MyDate);
             expect(myDate.nowDateByObject).to.be.equals(now);
             expect(myDate.nowDateByReflection).to.be.equals(now);
+            next();
+        });
+
+        // @deprecate for Object.getOwnPropertyDescriptor
+        it('Reflect.getOwnPropertyDescriptor: getting the descriptor metadata of a property', function (next) {
+            var testObject = {}, testArray = [];
+
+            expect(function () {
+                Reflect.getOwnPropertyDescriptor(1, 'test', {});
+            }).to.throw(TypeError/*'Reflect.getOwnPropertyDescriptor called on non-object'*/);
+
+            Reflect.defineProperty(testObject, 'hidden', {
+                value: true,
+                enumerable: false // not shows up during enumeration of the properties
+            });
+
+            for (let property in testObject) {
+                if (testObject.hasOwnProperty(property)) { // iterate over not prototype (inherit properties)
+                    testArray.push(property);
+                }
+            }
+
+            expect(testArray).not.to.include('hidden');
+
+            let testObjectDescriptor = Reflect.getOwnPropertyDescriptor(testObject, 'hidden');
+
+            expect(testObjectDescriptor).to.have.property('value', true);
+            expect(testObjectDescriptor).to.have.property('enumerable', false);
             next();
         });
     });
