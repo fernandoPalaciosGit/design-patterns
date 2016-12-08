@@ -10,7 +10,7 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
     });
 
     context('Reflection to override internal methods', function () {
-        it('Reflect.apply: drives method of Function#apply', function (next) {
+        it('Reflect.apply ( target, thisArgument [, argumentsList] ) \"Function#apply\"', function (next) {
             let array = [7, 1, 45, 98, 3], min = 1, max = 98, type = '[object Array]';
 
             expect(Math.max.apply(Math, array)).to.be.equals(max);
@@ -22,7 +22,8 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             next();
         });
 
-        it('Reflect.construct: call a Constructor with a set of arguments.', function (next) {
+        it('Reflect.construct ( target, argumentsList [, constructorToCreateThis] ) ' +
+            '\"call a Constructor with a set of arguments\"', function (next) {
             class Greeting {
                 constructor (options) {
                     this.greet = options.greet || '';
@@ -47,8 +48,9 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             next();
         });
 
-        // "Object.defineProperty" is @deprecated
-        it('Reflect.defineProperty: lets you define metadata about a propert, that it acts on object literals', function (next) {
+        // Object#defineProperty is @deprecated
+        it('Reflect.defineProperty ( target, propertyKey, attributes ) ' +
+            '\"define metadata about a properties on on object literals\"', function (next) {
             let now = new Date(), myDate;
 
             expect(function () {
@@ -72,8 +74,9 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             next();
         });
 
-        // "Object.getOwnPropertyDescriptor" is @deprecated
-        it('Reflect.getOwnPropertyDescriptor: getting the descriptor metadata of a property', function (next) {
+        // Object#getOwnPropertyDescriptor is @deprecated
+        it('Reflect.getOwnPropertyDescriptor ( target, propertyKey ) ' +
+            '\"getting the descriptor metadata of a property\"', function (next) {
             let testObject = {}, testArray = [];
 
             expect(function () {
@@ -100,8 +103,9 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             next();
         });
 
-        // "delete object.property" is @deprecated
-        it('Reflect.deleteProperty: drives the behavior of "delete object.property"', function (next) {
+        // delete object.property is @deprecated
+        it('Reflect.deleteProperty ( target, propertyKey ) ' +
+            '\"drives the behavior of delete object.property\"', function (next) {
             let testObject = {
                 foo: 'foo',
                 bar: 'bar'
@@ -114,8 +118,8 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             next();
         });
 
-        // "Object.getPrototypeOf" is @deprecated
-        it('Reflect.getPrototypeOf: return the prototype reference of an object', function (next) {
+        // Object#getPrototypeOf is @deprecated
+        it('Reflect.getPrototypeOf ( target ) \"return the prototype reference of an object\"', function (next) {
             class Test {
             }
 
@@ -129,9 +133,9 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             next();
         });
 
-        // "Object.setPrototypeOf" is @deprecated, easy to manage because not throwing errors only retur boolean on operation
+        // Object#setPrototypeOf is @deprecated, easy to manage because not throwing errors only retur boolean on operation
         /*todo: babel not supported*/
-        it.skip('Reflect.setPrototypeOf: drives the behavior of Object.setPrototypeOf', function (next) {
+        it.skip('Reflect.setPrototypeOf ( target, proto )', function (next) {
             let objectTest;
 
             class Test {
@@ -225,6 +229,51 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
 
             it('old style do not throw error', function (next) {
                 expect(1['foo']).to.be.undefined; // eslint-disable-line dot-notation
+                next();
+            });
+        });
+
+        context('Reflect.set ( target, propertyKey, V [ , receiver ] )', function () {
+            let testSetter, testBindSetter;
+
+            before(function () {
+                class TestSetter {
+                    constructor (val) {
+                        this.foo = val;
+                    }
+
+                    set bar (val) {
+                        this.foo += val;
+                    }
+                }
+
+                class TestBindSetter {
+                    constructor (val) {
+                        this.foo = val;
+                    }
+                }
+
+                testSetter = new TestSetter(1);
+                testBindSetter = new TestBindSetter(4);
+            });
+
+            it('assign to target[propertyKey]', function (next) {
+                Reflect.set(testSetter, 'bar', 2);
+                expect(Reflect.get(testSetter, 'foo')).to.equals(3);
+                next();
+            });
+
+            it('third argument receive context', function (next) {
+                Reflect.set(testSetter, 'bar', 2, testBindSetter);// not bind!!, testBindSetter is the object affected
+                expect(Reflect.get(testSetter, 'foo')).to.equals(3);
+                expect(Reflect.get(testBindSetter, 'foo')).to.equals(6);
+                next();
+            });
+
+            it('if target is a non-object, the function call will throw TypeError', function (next) {
+                expect(function () {
+                    Reflect.set(1, 'foo', 2, {});
+                }).to.throw(TypeError);
                 next();
             });
         });
