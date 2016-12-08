@@ -352,5 +352,24 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
                 next();
             });
         });
+
+        context('Reflect.ownKeys ( target )', function () {
+            let testObject, expectedOwnKeys;
+
+            before(function () {
+                testObject = {
+                    foo: 'foo',
+                    [Symbol.for('bar')]: 'bar'
+                };
+                expectedOwnKeys = ['foo', Symbol.for('bar')];
+            });
+
+            it('combination of Object.getOwnPropertyNames and Object.getOwnPropertySymbols', function (next) {
+                expect(Object.getOwnPropertyNames(testObject).concat(Object.getOwnPropertySymbols(testObject)))
+                    .to.deep.equals(expectedOwnKeys);
+                expect(Reflect.ownKeys(testObject)).to.deep.equals(expectedOwnKeys);
+                next();
+            });
+        });
     });
 });
