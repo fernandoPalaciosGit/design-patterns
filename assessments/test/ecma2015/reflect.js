@@ -133,7 +133,7 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             next();
         });
 
-        // Object#setPrototypeOf is @deprecated, easy to manage because not throwing errors only retur boolean on operation
+        // Object#setPrototypeOf is @deprecated, easy to manage because not throwing errors only return boolean on operation
         /*todo: babel not supported*/
         it.skip('Reflect.setPrototypeOf ( target, proto )', function (next) {
             let objectTest;
@@ -273,6 +273,44 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
             it('if target is a non-object, the function call will throw TypeError', function (next) {
                 expect(function () {
                     Reflect.set(1, 'foo', 2, {});
+                }).to.throw(TypeError);
+                next();
+            });
+        });
+
+        // property in Object is @deprecated
+        context('Reflect.has ( target, propertyKey )', function () {
+            let testObject, prototypeObject;
+
+            before(function () {
+                class TestHas {
+                    constructor (val) {
+                        this.foo = val;
+                    }
+                }
+
+                prototypeObject = {
+                    returnSame (val) {
+                        return val;
+                    },
+                    bar: 3
+                };
+
+                testObject = new TestHas(1);
+                Reflect.setPrototypeOf(testObject, prototypeObject);
+            });
+
+            it('same functionality as the in operator (outside of a loop)', function (next) {
+                expect('foo' in testObject).to.be.true;
+                expect(Reflect.has(testObject, 'bar')).to.be.true;
+                expect(Reflect.has(testObject, 'returnSame')).to.be.true;
+                expect(Reflect.has(testObject, 'beer')).to.be.false;
+                next();
+            });
+
+            it('throw if the target isn’t an object.', function (next) {
+                expect(function () {
+                    Reflect.has(1, 'foo');
                 }).to.throw(TypeError);
                 next();
             });
