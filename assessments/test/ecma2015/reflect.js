@@ -6,7 +6,30 @@ let getReflect = require('./../../main/ecma2015/reflect'),
 describe('Ecma 2015 - Reflect, reflection through introspection', function () {
     expect(getReflect).to.be.an('object');
 
+    // metodos internos: instrucciones que sirven en la configuracion de los objetos
+    // a traves de los metodos propios y de su prototipo: [[Get]], [[Set]], [[HasOwnProperty]].
+    // son codigo nativo, asi que estan ocultos a alto nivel,
     context('Reflection to access internal methods: specs of JS engine', function () {
+        let testObject;
+
+        // pero algunos son expuestos directamente en metodos de utilidad,
+        // como Object.prototype.hasOwnProperty que es una implementation [[HasOwnProperty]].
+        it('[[HasOwnProperty]]', function (next) {
+            testObject = Object.create({});
+            expect(testObject.hasOwnProperty).to.be.instanceof(Function);
+            expect(testObject.hasOwnProperty('foo')).to.be.false;
+
+            testObject = Object.create(null);
+            expect(testObject.hasOwnProperty).to.be.undefined;
+            expect(Object.prototype.hasOwnProperty.call(testObject, 'foo')).to.be.false;
+            next();
+        });
+
+        // otro ejemplo es [[OwnPropertyKeys]], que a alto nivel, la unica manera de acceder a ellos es concatenando los metodos
+        // que dan acceso a la lista de propiedades: Object.prototype.getOwnPropertyNames + Object.prototype.getOwnPropertySymbols
+        it('[[OwnPropertyKeys]]', function (next) {
+            next();
+        });
     });
 
     context('Reflection to override internal methods', function () {
