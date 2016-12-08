@@ -15,6 +15,8 @@
  Is not handy for the usual programming development (Not tested here)
 
  - Reflect to override javascript engine internal methods: Reflect.apply, Reflect.construct, Reflect.defineProperty...
+
+ - you could totally ditch Object.* and Function.* prototype methods and use the new Reflect ones instead.
  */
 
 module.exports = {};
