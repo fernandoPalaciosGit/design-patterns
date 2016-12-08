@@ -28,6 +28,20 @@ describe('Ecma 2015 - Reflect, reflection through introspection', function () {
         // otro ejemplo es [[OwnPropertyKeys]], que a alto nivel, la unica manera de acceder a ellos es concatenando los metodos
         // que dan acceso a la lista de propiedades: Object.prototype.getOwnPropertyNames + Object.prototype.getOwnPropertySymbols
         it('[[OwnPropertyKeys]]', function (next) {
+            let prop1, prop2, propNames, propSymbols;
+
+            prop1 = 'bar';
+            prop2 = Symbol('foo');
+            testObject = {
+                [prop1]: 'bar',
+                [prop2]: 'foo'
+            };
+            propNames = Object.getOwnPropertyNames(testObject);
+            propSymbols = Object.getOwnPropertySymbols(testObject);
+
+            expect(propNames).to.deep.equals([prop1]);
+            expect(propSymbols).to.deep.equals([prop2]);
+            expect(propNames.concat(propSymbols)).to.deep.equals([prop1, prop2]);
             next();
         });
     });
