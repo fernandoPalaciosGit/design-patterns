@@ -1,8 +1,9 @@
 'use strict';
 
 /**
+ * @see concurrent.js
  * Compile JS bundles with concurrent tasks.
- * --compile=app,test,vendor
+ * --compile=app,test,vendor,disc
  */
 module.exports = function (grunt) {
     var _ = require('lodash'),

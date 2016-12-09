@@ -5,7 +5,8 @@ let _ = require('lodash'),
     browserifyVendorOptions = browserifyOptions()
         .initBundle()
         .disableSourceDebug()
-        .avoidCompileVendors(),
+        .avoidCompileVendors()
+        .excludeSourceUnBundleScript(),
     browserifyTestOptions = browserifyOptions()
         .initBundle()
         .requireVendors('test')
@@ -21,8 +22,10 @@ let _ = require('lodash'),
         .excludeSourceUnBundleScript(),
     browserifyReporterOptions = browserifyOptions()
         .initBundle()
-        .setFullPathsBundle()
-        .excludeSourceUnBundleScript();
+        .requireVendors('app')
+        .addBabelify()
+        .excludeSourceUnBundleScript()
+        .setFullPathsBundle();
 
 module.exports = {
     // VENDOR BUNDLES

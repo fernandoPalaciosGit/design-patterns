@@ -12,7 +12,7 @@ module.exports = {
     openCoverageBrowser: {
         command: [
             'googlePath=$(which google-chrome)',
-            '${googlePath} \"<%= mocha.coverageReporter %>/html/index.html\"',
+            '${googlePath} \"<%= outputCoverage %>/html/index.html\"',
             'exit'
         ].join(' && ')
     },
