@@ -49,6 +49,7 @@
     "lodash": "^4.17.2",
     "minifyify": "^7.3.4",
     "opener": "^1.4.2",
+    "proxy-polyfill": "^0.1.6",
     "sinon": "^2.0.0-pre.3",
     "time-grunt": "~1.2.2"
   },
