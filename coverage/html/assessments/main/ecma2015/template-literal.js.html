@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for assessments/main/ecma2015/template-literal.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">assessments/main/ecma2015/</a> template-literal.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">97.22% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>35/36</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">87.5% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>14/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">94.44% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>17/18</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">97.14% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>34/35</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">56×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">48×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">46×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">46×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">42×</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-yes">28×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">46×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+var _ = require('lodash'), Template;
+&nbsp;
+Template = function () {
+    this.BLOCK = {
+        START: Symbol('blockStartSentinel'),
+        IGNORE: Symbol('blockIgnoreSentinel'),
+        END: Symbol('blockEndSentinel')
+    };
+    this.sentinels = [];
+};
+&nbsp;
+_.assign(Template.prototype, {
+    // Template Blocks
+    setSentinels: function (val = []) {
+        this.sentinels = val;
+    },
+    hasToAddBlockSymbol: function (interpolated) {
+        return _.includes([this.BLOCK.START, this.BLOCK.IGNORE], interpolated);
+    },
+    hasToRemoveBlockSymbol: function (interpolated) {
+        return _.includes([this.BLOCK.END], interpolated);
+    },
+    hasToIgnoreBlockTemplate: function () {
+        return _.includes(this.sentinels, this.BLOCK.IGNORE);
+    },
+    buildBlockSymbols: function (interpolated) {
+        if (this.hasToAddBlockSymbol(interpolated)) {
+            this.sentinels.push(interpolated);
+        }
+&nbsp;
+        if (this.hasToRemoveBlockSymbol(interpolated)) {
+            this.sentinels.pop();
+        }
+    },
+    cleanBlockSymbols: function () {
+        _.pull(this.sentinels, this.BLOCK.IGNORE);
+    },
+    getValueWithoutSentinels: function (interpolated) {
+        return this.hasToAddBlockSymbol(interpolated) || this.hasToRemoveBlockSymbol(interpolated) ? '' : interpolated;
+    },
+&nbsp;
+    // Template Render
+    parseString: function (val) {
+        return _.chain(String(val))
+            .trim()
+            .escape()
+            .value();
+    },
+    parseHtml: function (val) {
+        return _.chain(String(val))
+            .trim()
+            // remove Carriage Return, Line Feeds and white spaces in all OS between not words or numbers (special characters)
+            .replace(new RegExp('(\\W)\\s+|\\s+(\\W)', 'g'), '$1')
+            .replace(new RegExp('&amp;', 'g'), '&amp;amp;')
+            .replace(new RegExp('&gt;', 'g'), '&amp;gt;')
+            .replace(new RegExp('&lt;', 'g'), '&amp;lt;')
+            .value();
+    },
+    engine: function (parseTemplate, interpolatedTemplate, ...interpolatedValues) {
+        var buildTemplate = (memo, current, index) =&gt; {
+            if (this.hasToIgnoreBlockTemplate()) {
+                this.cleanBlockSymbols();
+&nbsp;
+            } else if (interpolatedValues.hasOwnProperty(index)) {
+                this.buildBlockSymbols(interpolatedValues[index]);
+                memo += current + this.getValueWithoutSentinels(interpolatedValues[index]);
+&nbsp;
+            } else {
+                memo += current;
+            }
+&nbsp;
+            return memo;
+        };
+&nbsp;
+        this.setSentinels();
+&nbsp;
+        return _.chain(interpolatedTemplate)
+            .reduce(buildTemplate, '')
+            .thru(parseTemplate)
+            .value();
+    },
+&nbsp;
+    // Interfaces
+    render: function () {
+        return _.partial(this.engine, _.identity).apply(this, arguments);
+    },
+    renderString: function () {
+        return _.partial(this.engine, this.parseString).apply(this, arguments);
+    },
+    renderHtml: function () {
+        return _.partial(this.engine, this.parseHtml).apply(this, arguments);
+    },
+    select: <span class="fstat-no" title="function not covered" >function (condition, thenTemplate, elseTemplate = '') {</span>
+<span class="cstat-no" title="statement not covered" >        return condition ? thenTemplate : elseTemplate;</span>
+    },
+    map: function (list, cb) {
+        return list.map(cb).join('');
+    },
+    start: function (condition = true) {
+        return condition ? this.BLOCK.START : this.BLOCK.IGNORE;
+    },
+    end: function () {
+        return this.BLOCK.END;
+    }
+});
+&nbsp;
+module.exports = (options = {}) =&gt; new Template(options);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Dec 10 2016 12:46:48 GMT+0100 (CET)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
