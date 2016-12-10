@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (grunt) {
-    const globJs = '**/*.js';
+    const globJs = '**/*.js'; // only ca search source files inside path
     var projectPaths = grunt.config.get('projectPaths'),
         _ = require('lodash'),
         module = {

@@ -15,7 +15,8 @@
     "test",
     "tests"
   ],
-  "devDependencies": {
-    "jquery": "^3.1.0"
+  "dependencies": {
+    "lodash": "^4.17.2",
+    "jquery": "^3.1.1"
   }
 }

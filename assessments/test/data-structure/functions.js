@@ -22,14 +22,14 @@ describe('functions', function () {
         d = Math.random();
     });
 
-    it.skip('you should be able to use an array as arguments when calling a function', function (next) {
+    it('should be able to use an array as arguments when calling a function', function (next) {
         var result = functionsAnswers.argsAsArray(sayIt, ['Hello', 'Ellie', '!']);
         expect(result).to.eql('Hello, Ellie!');
         expect(sayItCalled).to.be.ok;
         next();
     });
 
-    it.skip('you should be able to change the context in which a function is called', function (next) {
+    it('should be able to change the context in which a function is called', function (next) {
         var speak = function () {
             return sayIt(this.greeting, this.name, '!!!');
         };
@@ -44,13 +44,13 @@ describe('functions', function () {
         next();
     });
 
-    it.skip('you should be able to return a function from a function', function (next) {
+    it('should be able to return a function from a function', function (next) {
         expect(functionsAnswers.functionFunction('Hello')('world')).to.eql('Hello, world');
         expect(functionsAnswers.functionFunction('Hai')('can i haz funxtion?')).to.eql('Hai, can i haz funxtion?');
         next();
     });
 
-    it.skip('you should be able to use closures', function (next) {
+    it('should be able to use closures', function (next) {
         var arr = [Math.random(), Math.random(), Math.random(), Math.random()];
         var square = function (x) {
             return x * x;
@@ -65,14 +65,14 @@ describe('functions', function () {
         next();
     });
 
-    it.skip('you should be able to create a "partial" function', function (next) {
+    it('should be able to create a "partial" function', function (next) {
         var partial = functionsAnswers.partial(sayIt, 'Hello', 'Ellie');
         expect(partial('!!!')).to.eql('Hello, Ellie!!!');
         expect(sayItCalled).to.be.ok;
         next();
     });
 
-    it.skip('you should be able to use arguments', function (next) {
+    it('should be able to use arguments', function (next) {
         expect(functionsAnswers.useArguments(a)).to.eql(a);
         expect(functionsAnswers.useArguments(a, b)).to.eql(a + b);
         expect(functionsAnswers.useArguments(a, b, c)).to.eql(a + b + c);
@@ -80,7 +80,7 @@ describe('functions', function () {
         next();
     });
 
-    it.skip('you should be able to apply functions with arbitrary numbers of arguments', function (next) {
+    it('should be able to apply functions with arbitrary numbers of arguments', function (next) {
         (function () {
             var wasITake2ArgumentsCalled = false;
             var iTake2Arguments = function (firstArgument, secondArgument) {
@@ -110,39 +110,116 @@ describe('functions', function () {
         next();
     });
 
-    it.skip('you should be able to create a "partial" function for variable number of applied arguments', function (next) {
-        var partialMe = function (x, y, z) {
-            return x / y * z;
-        };
+    context('Partial, should be able to combine arguments and return partial closure', function () {
+        it('from variable number of applied arguments', function (next) {
+            var partialMe = function (x, y, z) {
+                return x / y * z;
+            };
 
-        expect(functionsAnswers.partialUsingArguments(partialMe)(a, b, c)).to.eql(partialMe(a, b, c));
-        expect(functionsAnswers.partialUsingArguments(partialMe, a)(b, c)).to.eql(partialMe(a, b, c));
-        expect(functionsAnswers.partialUsingArguments(partialMe, a, b)(c)).to.eql(partialMe(a, b, c));
-        expect(functionsAnswers.partialUsingArguments(partialMe, a, b, c)()).to.eql(partialMe(a, b, c));
+            expect(functionsAnswers.partialUsingArguments(partialMe)(a, b, c)).to.eql(partialMe(a, b, c));
+            expect(functionsAnswers.partialUsingArguments(partialMe, a)(b, c)).to.eql(partialMe(a, b, c));
+            expect(functionsAnswers.partialUsingArguments(partialMe, a, b)(c)).to.eql(partialMe(a, b, c));
+            expect(functionsAnswers.partialUsingArguments(partialMe, a, b, c)()).to.eql(partialMe(a, b, c));
+            next();
+        });
+
+        it('from concat strings', function (next) {
+            var formatName = function (first, surname, nickname) {
+                    return [first, nickname, surname].join(' \" ');
+                },
+                partialNickname = functionsAnswers.partialUsingArguments(formatName, 'Fernando', 'Palacios'),
+                schoolName = partialNickname('fer'),
+                familyName = partialNickname('nando');
+
+            expect(schoolName).to.equal('Fernando " fer " Palacios');
+            expect(familyName).to.equal('Fernando " nando " Palacios');
+            next();
+        });
+    });
+
+    it('Curry, should be able to combine arguments and return partial closure', function (next) {
+        var result, curry = functionsAnswers.curry,
+            average = function (x, y, z) {
+                return x / y * z;
+            };
+
+        result = curry(average);
+        expect(typeof result).to.eql('function');
+        expect(result(a)(b)(c)).to.eql(average(a, b, c));
+
+        result = curry(average)(a);
+        expect(typeof result).to.eql('function');
+        expect(result(b)(c)).to.eql(average(a, b, c));
+
+        result = curry(average)(a)(b);
+        expect(typeof result).to.eql('function');
+        expect(result(c)).to.eql(average(a, b, c));
+
+        result = curry(average)(a)(b)(c);
+        expect(typeof result).to.eql('number');
+        expect(result).to.eql(average(a, b, c));
         next();
     });
 
-    it.skip('you should be able to curry existing functions', function (next) {
-        var curryMe = function (x, y, z) {
-            return x / y * z;
-        };
-        var result;
+    context('Compose, should be able to combining other partial functions with composition', function () {
+        var pipe, curry, partial, replace, wrapWith, poem, expectedPoem;
 
-        result = functionsAnswers.curryIt(curryMe);
-        expect(typeof result).to.eql('function');
-        expect(result.length).to.eql(1);
+        before(function () {
+            pipe = functionsAnswers.compose;
+            curry = functionsAnswers.curry;
+            partial = functionsAnswers.partialUsingArguments;
+            replace = function (find, replacement, str) {
+                return str.replace(new RegExp(find, 'g'), replacement);
+            };
+            wrapWith = function (tag, str) {
+                return '<' + tag + '>' + str + '</' + tag + '>';
+            };
+            poem = 'Twas brillig, and the slithy toves\n' +
+                'Did gyre and gimble in the wabe;\n' +
+                'All mimsy were the borogoves,\n' +
+                'And the mome raths outgrabe.';
+            expectedPoem = '<blockquote><p>Twas <em>four o’clock in the afternoon</em>, and the slithy toves<br/>' +
+                'Did gyre and gimble in the wabe;<br/>' +
+                'All mimsy were the borogoves,<br/>' +
+                'And the mome raths outgrabe.</p></blockquote>';
+        });
 
-        result = functionsAnswers.curryIt(curryMe)(a);
-        expect(typeof result).to.eql('function');
-        expect(result.length).to.eql(1);
+        it('and the last function receive arguments from partial', function (next) {
+            var nohow = function (sentence) {
+                    return sentence + ', nohow!';
+                },
+                contrariwise = function (sentence) {
+                    return sentence + ' contrariwise…';
+                },
+                statement = 'Not nothing',
+                nohowContrariwise = pipe(contrariwise, nohow);
 
-        result = functionsAnswers.curryIt(curryMe)(a)(b);
-        expect(typeof result).to.eql('function');
-        expect(result.length).to.eql(1);
+            expect(nohowContrariwise(statement)).to.equal('Not nothing contrariwise…, nohow!');
+            next();
+        });
 
-        result = functionsAnswers.curryIt(curryMe)(a)(b)(c);
-        expect(typeof result).to.eql('number');
-        expect(result).to.eql(curryMe(a, b, c));
-        next();
+        it('and compose with Partials', function (next) {
+            var modifyPoem = pipe(
+                partial(wrapWith, 'p'), // wrap to paragraph
+                partial(wrapWith, 'blockquote'), // wrap to blockquote
+                partial(replace, '\n', '<br/>'), // add breaks
+                partial(replace, 'brillig', '<em>four o’clock in the afternoon</em>') // replace brillig
+            );
+
+            expect(modifyPoem(poem)).to.equal(expectedPoem);
+            next();
+        });
+
+        it('and compose with Curring', function (next) {
+            var modifyPoem = pipe(
+                curry(wrapWith)('p'),
+                curry(wrapWith)('blockquote'),
+                curry(replace)('\n')('<br/>'),
+                curry(replace)('brillig')('<em>four o’clock in the afternoon</em>')
+            );
+
+            expect(modifyPoem(poem)).to.equal(expectedPoem);
+            next();
+        });
     });
 });

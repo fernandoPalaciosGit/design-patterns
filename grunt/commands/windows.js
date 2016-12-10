@@ -8,7 +8,7 @@ module.exports = {
     },
     openCoverageBrowser: {
         command: [
-            'start chrome \"<%= mocha.coverageReporter %>/html/index.html\"',
+            'start chrome \"<%= outputCoverage %>/html/index.html\"',
             'exit'
         ].join(' && ')
     },

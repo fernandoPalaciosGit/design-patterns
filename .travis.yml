@@ -4,12 +4,15 @@ node_js:
   - "4.5.0"
 
 before_install:
-  - "npm install -g grunt-cli"
-  - "npm install -g bower"
+  - npm install -g bower
+  - npm install -g grunt-cli
+
+install:
+  - bower install --save --config.interactive=false
+  - npm install
 
 before_script:
-  - "npm install"
-  - "bower install"
+  - npm run ci
 
 script:
-  - "npm run ci"
+  - echo -e "run application"

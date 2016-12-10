@@ -16,13 +16,12 @@ module.exports = {
     // --mask=Spec,Dot,Nyan
     masks: ['Spec', 'Dot', 'Nyan', 'Landing', 'List', 'Progress', 'Min', 'Html'],
     phantomResources: phantomResources,
-    coverageReporter: 'test/coverage',
     coverageTarget: [
-        '<%= mocha.coverageReporter %>/cobertura/cobertura-coverage.xml',
-        '<%= mocha.coverageReporter %>/lcov/lcov.info',
-        '<%= mocha.coverageReporter %>/clover/clover.xml',
-        '<%= mocha.coverageReporter %>/json/coverage.json',
-        '<%= mocha.coverageReporter %>/html/index.html'
+        '<%= outputCoverage %>/cobertura/cobertura-coverage.xml',
+        '<%= outputCoverage %>/lcov/lcov.info',
+        '<%= outputCoverage %>/clover/clover.xml',
+        '<%= outputCoverage %>/json/coverage.json',
+        '<%= outputCoverage %>/html/index.html'
     ],
     mochaOptions: {
         reporter: '<%= mochaReporterMask %>',
@@ -33,11 +32,11 @@ module.exports = {
     mochaOptionsWithCoverage: {
         run: true,
         coverage: {
-            htmlReport: '<%= mocha.coverageReporter %>/html',
-            coberturaReport: '<%= mocha.coverageReporter %>/cobertura',
-            lcovReport: '<%= mocha.coverageReporter %>/lcov',
-            cloverReport: '<%= mocha.coverageReporter %>/clover',
-            jsonReport: '<%= mocha.coverageReporter %>/json'
+            htmlReport: '<%= outputCoverage %>/html',
+            coberturaReport: '<%= outputCoverage %>/cobertura',
+            lcovReport: '<%= outputCoverage %>/lcov',
+            cloverReport: '<%= outputCoverage %>/clover',
+            jsonReport: '<%= outputCoverage %>/json'
         }
     },
     dev: {

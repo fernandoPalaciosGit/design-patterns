@@ -22,20 +22,23 @@ let _ = require('lodash'),
             next(err, src);
         }]
     ],
-    SchemaBrowserTransform = [
-        ['browserify-shim'],
-        ['babelify', {
-            'presets': ['es2015']
+    SchemaBrowserPlugin = [
+        ['minifyify', {
+            map: false
         }]
     ],
+    SchemaBrowserTransform = [
+        ['browserify-shim']
+    ],
     vendors = {
-        app: ['lodash', 'jquery'],
+        app: ['lodash', 'jquery'], // proyect dependencies
         test: ['lodash', 'jquery', 'chai', 'sinon']
     },
     BrowserifyOptions = function (options) {
-        this.options = _.cloneDeep(new Map(SchemaBrowserOptions));
+        this.options = new Map(_.cloneDeep(SchemaBrowserOptions));
         this.src = options.src || new Set();
         this.dest = options.dest || '';
+        this.vendors = options.vendors || _.cloneDeep(vendors);
     };
 
 _.assign(BrowserifyOptions.prototype, {
@@ -52,7 +55,7 @@ _.assign(BrowserifyOptions.prototype, {
         return this;
     },
     excludeSourceUnBundleScript: function () {
-        let exclude = this.options.get('exclude');
+        let exclude = this.options.get('exclude').slice(0);
 
         exclude.push('**/*.html', '**/*.css', '**.*.json');
         this.options.set('exclude', exclude);
@@ -60,7 +63,7 @@ _.assign(BrowserifyOptions.prototype, {
         return this;
     },
     requireVendors: function (path) {
-        this.options.set('external', _.get(vendors, path));
+        this.options.set('external', _.get(this.vendors, path));
 
         return this;
     },
@@ -82,7 +85,7 @@ _.assign(BrowserifyOptions.prototype, {
         return this;
     },
     setDependencies: function (path) {
-        this.options.set('require', _.get(vendors, path));
+        this.options.set('require', _.get(this.vendors, path));
 
         return this;
     },
@@ -107,7 +110,7 @@ _.assign(BrowserifyOptions.prototype, {
         return this;
     },
     addMinifyWithSourceMap: function (path) {
-        let plugins = this.options.get('plugin');
+        let plugins = this.options.get('plugin').slice(0);
 
         plugins.push(['minifyify', {
             output: path + '/sourcemap.json',
@@ -117,24 +120,38 @@ _.assign(BrowserifyOptions.prototype, {
 
         return this;
     },
-    addMinifyWithoutSourceMap: function () {
-        let plugins = this.options.get('plugin');
+    removeMinifySourceMap: function () {
+        let plugins = this.options.get('plugin').slice(0);
 
-        plugins.push(['minifyify', {
-            map: false
-        }]);
+        _.remove(plugins, function (plugin) {
+            return plugin[0] === 'minifyify';
+        });
+
         this.options.set('plugin', plugins);
 
         return this;
     },
-    addTransformTestBundle: function () {
-        this.options.set('transform',
-            SchemaBrowserTransform.concat(['browserify-istanbul']));
+    addCoverage: function () {
+        let transform = this.options.get('transform').slice(0);
+
+        transform.push(['browserify-istanbul']);
+        this.options.set('transform', transform);
 
         return this;
     },
-    addTransformAppBundle: function () {
-        this.options.set('transform', SchemaBrowserTransform);
+    addBabelify: function () {
+        let transform = this.options.get('transform').slice(0);
+
+        transform.push(['babelify', {
+            'presets': ['es2015']
+        }]);
+        this.options.set('transform', transform);
+
+        return this;
+    },
+    initBundle: function () {
+        this.options.set('transform', _.cloneDeep(SchemaBrowserTransform));
+        this.options.set('plugin', _.cloneDeep(SchemaBrowserPlugin));
 
         return this;
     },
@@ -147,6 +164,5 @@ _.assign(BrowserifyOptions.prototype, {
     }
 });
 
-module.exports.getOptions = function (options) {
-    return new BrowserifyOptions(options || new Map());
-};
+module.exports.getOptions = (options) => new BrowserifyOptions(options || new Map());
+

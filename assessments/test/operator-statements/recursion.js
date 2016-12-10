@@ -35,7 +35,7 @@ describe('recursion', function () {
         ]
     };
 
-    it.skip('you should be able to return a list of files from the data', function (next) {
+    it('should be able to return a list of files from the data', function (next) {
         var result = recursionAnswers.listFiles(fileData);
         expect(result.length).to.eql(8);
         expect(result.indexOf('index.html') > -1).to.be.ok;
@@ -44,11 +44,20 @@ describe('recursion', function () {
         next();
     });
 
-    it.skip('you should be able to return a list of files in a subdir', function (next) {
+    it('should be able to return a list of files in a subdir', function (next) {
         var result = recursionAnswers.listFiles(fileData, 'js');
         expect(result.length).to.eql(5);
         expect(result.indexOf('main.js') > -1).to.be.ok;
         expect(result.indexOf('underscore.js') > -1).to.be.ok;
+        next();
+    });
+});
+
+describe('factorial', function () {
+    it('should test factorial of a number', function (next) {
+        expect(recursionAnswers.factorial(4)).to.eql(24);
+        expect(recursionAnswers.factorial(6)).to.eql(720);
+        expect(recursionAnswers.factorial(0)).to.eql(0);
         next();
     });
 });
@@ -82,7 +91,7 @@ describe('permutation', function () {
         [4, 3, 2, 1]
     ];
 
-    it.skip('you should be able to return the permutations of an array', function (next) {
+    it('should be able to return the permutations of an array', function (next) {
         var result = recursionAnswers.permute(arr);
         var resultStrings = _.map(result, function (r) {
             return r.join('');
@@ -96,13 +105,16 @@ describe('permutation', function () {
         next();
     });
 
-    it.skip('you should be able to return the nth number in a fibonacci sequence', function (next) {
+    it('should be able to return the nth number in a fibonacci sequence', function (next) {
+        expect(recursionAnswers.fibonacci(1)).to.eql(1);
         expect(recursionAnswers.fibonacci(2)).to.eql(1);
         expect(recursionAnswers.fibonacci(6)).to.eql(8);
+        expect(recursionAnswers.fibonacci(11)).to.eql(89);
+        expect(recursionAnswers.fibonacci(12)).to.eql(144);
         next();
     });
 
-    it.skip('you should be able to return the set of all valid combinations of n pairs of parentheses.', function (next) {
+    it.skip('should be able to return the set of all valid combinations of n pairs of parentheses.', function (next) {
         var expected = ['((()))', '(()())', '(())()', '()(())', '()()()'];
         var result = recursionAnswers.validParentheses(3);
 

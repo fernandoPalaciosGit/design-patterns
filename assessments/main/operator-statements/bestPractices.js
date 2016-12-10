@@ -10,18 +10,20 @@ var moduleScope = window || global;
 
 module.exports.bestPracticesAnswers = {
     globals: function () {
-        moduleScope.myObject = {
+        var myObject = {
             name: 'Jory'
         };
 
-        return moduleScope.myObject;
+        return myObject;
     },
 
     parseInt: function (num) {
-        return Number.parseInt(num);
+        let parse = parseInt || Number.parseInt;
+
+        return parse(num, 10);
     },
 
     identity: function (val1, val2) {
-
+        return val1 === val2;
     }
 };

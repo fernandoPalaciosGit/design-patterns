@@ -1,21 +1,34 @@
 'use strict';
 
 let _ = require('lodash'),
-    browserify = require('./../options/BrowserifyOptions'),
-    browserifyVendorOptions = browserify.getOptions()
+    browserifyOptions = require('./../options/BrowserifyOptions').getOptions,
+    browserifyVendorOptions = browserifyOptions()
+        .initBundle()
         .disableSourceDebug()
         .avoidCompileVendors()
-        .addMinifyWithoutSourceMap(),
-    browserifyTestOptions = browserify.getOptions()
-        .requireVendors('test')
-        .addTransformTestBundle()
         .excludeSourceUnBundleScript(),
-    browserifyAppOptions = browserify.getOptions()
+    browserifyTestOptions = browserifyOptions()
+        .initBundle()
+        .requireVendors('test')
+        .addCoverage()
+        .addBabelify()
+        .removeMinifySourceMap()
+        .excludeSourceUnBundleScript(),
+    browserifyAppOptions = browserifyOptions()
+        .initBundle()
         .requireVendors('app')
-        .addTransformAppBundle()
-        .excludeSourceUnBundleScript();
+        .addBabelify()
+        .removeMinifySourceMap()
+        .excludeSourceUnBundleScript(),
+    browserifyReporterOptions = browserifyOptions()
+        .initBundle()
+        .requireVendors('app')
+        .addBabelify()
+        .excludeSourceUnBundleScript()
+        .setFullPathsBundle();
 
 module.exports = {
+    // VENDOR BUNDLES
     'dev-test-vendors': _.cloneDeep(browserifyVendorOptions)
         .setDependencies('test')
         .setAllOriginSource()
@@ -28,6 +41,7 @@ module.exports = {
         .addCompiledSource('<%= projectPaths.vendors.publicDir%>/app.bundle.js')
         .build(),
 
+    // TEST APPLICATION BUNDLES
     'dev-test-platzi': _.cloneDeep(browserifyTestOptions)
         .addOriginSource('<%= projectPaths.appPlatzi.application %>/test/**/*.js')
         .addOriginSource('!<%= projectPaths.appPlatzi.application %>/test/index.js')
@@ -46,51 +60,47 @@ module.exports = {
         .addCompiledSource('<%= projectPaths.appAssessments.test %>/mocha.spec.bundle.js')
         .build(),
 
+    // APPLICATION BUNDLES
     'dev-app-widget-platzi': _.cloneDeep(browserifyAppOptions)
         .addOriginSource('<%= projectPaths.appPlatzi.application %>/main/**/*.js')
         .addOriginSource('!<%= projectPaths.appPlatzi.application %>/main/index.js')
         .addCompiledSource('<%= projectPaths.appPlatzi.publicDir %>/app.bundle.js')
-        .setFullPathsBundle()
+        .addMinifyWithSourceMap('<%= projectPaths.appPlatzi.publicDir %>')
         .build(),
 
     'dev-app-widget-osmanioreilly': _.cloneDeep(browserifyAppOptions)
         .addOriginSource('<%= projectPaths.appOsmaniOreilly.application %>/main/**/*.js')
         .addOriginSource('!<%= projectPaths.appOsmaniOreilly.application %>/main/index.js')
         .addCompiledSource('<%= projectPaths.appOsmaniOreilly.publicDir %>/app.bundle.js')
-        .setFullPathsBundle()
+        .addMinifyWithSourceMap('<%= projectPaths.appOsmaniOreilly.publicDir %>')
         .build(),
 
     'dev-app-widget-assessments': _.cloneDeep(browserifyAppOptions)
         .addOriginSource('<%= projectPaths.appAssessments.application %>/main/**/*.js')
         .addOriginSource('!<%= projectPaths.appAssessments.application %>/main/index.js')
         .addCompiledSource('<%= projectPaths.appAssessments.publicDir %>/app.bundle.js')
-        .setFullPathsBundle()
+        .addMinifyWithSourceMap('<%= projectPaths.appAssessments.publicDir %>')
         .build(),
 
-    'disc-app-platzi': _.cloneDeep(browserifyAppOptions)
-        .addMinifyWithSourceMap('<%= projectPaths.appPlatzi.publicDir %>')
+    // DISC APPLICATION REPORTER
+    'disc-app-platzi': _.cloneDeep(browserifyReporterOptions)
         .addOriginSource('<%= projectPaths.appPlatzi.application %>/main/**/*.js')
         .addOriginSource('!<%= projectPaths.appPlatzi.application %>/main/index.js')
         .addCompiledSource('<%= projectPaths.appPlatzi.publicDir %>/app.bundle.js')
-        .setFullPathsBundle()
         .postBundleOutputWithDisc('<%= outputDisc %>', '<%= projectPaths.appPlatzi.application %>.html')
         .build(),
 
-    'disc-app-osmanioreilly': _.cloneDeep(browserifyAppOptions)
-        .addMinifyWithSourceMap('<%= projectPaths.appOsmaniOreilly.publicDir %>')
+    'disc-app-osmanioreilly': _.cloneDeep(browserifyReporterOptions)
         .addOriginSource('<%= projectPaths.appOsmaniOreilly.application %>/main/**/*.js')
         .addOriginSource('!<%= projectPaths.appOsmaniOreilly.application %>/main/index.js')
         .addCompiledSource('<%= projectPaths.appOsmaniOreilly.publicDir %>/app.bundle.js')
-        .setFullPathsBundle()
         .postBundleOutputWithDisc('<%= outputDisc %>', '<%= projectPaths.appOsmaniOreilly.application %>.html')
         .build(),
 
-    'disc-app-assessments': _.cloneDeep(browserifyAppOptions)
-        .addMinifyWithSourceMap('<%= projectPaths.appAssessments.publicDir %>')
+    'disc-app-assessments': _.cloneDeep(browserifyReporterOptions)
         .addOriginSource('<%= projectPaths.appAssessments.application %>/main/**/*.js')
         .addOriginSource('!<%= projectPaths.appAssessments.application %>/main/index.js')
         .addCompiledSource('<%= projectPaths.appAssessments.publicDir %>/app.bundle.js')
-        .setFullPathsBundle()
         .postBundleOutputWithDisc('<%= outputDisc %>', '<%= projectPaths.appAssessments.application %>.html')
         .build()
 };

@@ -8,6 +8,7 @@ module.exports = {
         // --compile=app
         app: [
             'clean:dev-js',
+            'clean:vendors-js',
             'concurrent:jsLinters',
             'concurrent:jsCopyPaste',
             'concurrent:jsVendorsCompile',
@@ -22,7 +23,7 @@ module.exports = {
         ],
         // --compile=vendor
         vendor: [
-            'clean:dev-js',
+            'clean:vendors-js',
             'concurrent:jsVendorsCompile'
         ],
         // --compile=disc
@@ -50,7 +51,7 @@ module.exports = {
     },
     jsVendorsCompile: {
         tasks: [
-            'newer:browserify:<%= taskEnvironment %>-app-vendors',
+            //'newer:browserify:<%= taskEnvironment %>-app-vendors',
             'newer:browserify:<%= taskEnvironment %>-test-vendors'
         ]
     },

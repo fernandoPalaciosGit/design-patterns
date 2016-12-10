@@ -6,12 +6,10 @@
     "type": "git",
     "url": "https://github.com/fernandoPalaciosGit/design-patterns.git"
   },
-  "dependencies": {
-    "lodash": "^4.14.1"
-  },
   "scripts": {
     "test": "grunt compile test --compile=test --reporter=spec --mask=Spec",
     "ci": "grunt compile test --compile=app --reporter=spec --mask=Spec",
+    "vendors": "grunt compile --compile=vendor",
     "app": "grunt shell:installGitHooks && npm run coverage",
     "debug:osmanioreilly": "grunt compile shell:openTestBrowser --compile=test --testbrowser=osmanioreilly",
     "debug:platzi": "grunt compile shell:openTestBrowser --compile=test --testbrowser=platzi",
@@ -20,7 +18,8 @@
     "coverage": "grunt compile test coverage shell:openCoverageBrowser --compile=app --reporter=spec --mask=Spec"
   },
   "devDependencies": {
-    "babel-preset-es2015": "^6.14.0",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015": "^6.18.0",
     "babelify": "^7.3.0",
     "browserify": "^13.1.0",
     "browserify-istanbul": "^2.0.0",
@@ -47,13 +46,16 @@
     "jshint-stylish": "^2.2.1",
     "load-grunt-configs": "^1.0.0",
     "load-grunt-tasks": "~3.3.0",
-    "minifyify": "^7.3.3",
+    "lodash": "^4.17.2",
+    "minifyify": "^7.3.4",
     "opener": "^1.4.2",
+    "proxy-polyfill": "^0.1.6",
     "sinon": "^2.0.0-pre.3",
     "time-grunt": "~1.2.2"
   },
   "browser": {
-    "jquery": "./bower_components/jquery/dist/jquery.js"
+    "jquery": "./bower_components/jquery/dist/jquery.js",
+    "lodash": "./bower_components/lodash/lodash.js"
   },
   "browserify-shim": "./grunt/runtime-config/shim.js"
 }
